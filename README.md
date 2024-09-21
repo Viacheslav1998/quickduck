@@ -68,3 +68,11 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
 # quickduck
 ### add .env file
+
+# use Vue3
+## cd public/vue-app/ run command: 
+### npm install
+### npm run format
+### npm run dev
+
+# use it 
