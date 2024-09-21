@@ -10,6 +10,6 @@ class Test extends BaseController
 	
 	public function test(): string 
 	{
-		return view('pages/test');
+		return view('vue_template');
 	}
 }
