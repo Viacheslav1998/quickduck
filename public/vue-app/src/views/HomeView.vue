@@ -3,5 +3,5 @@
 </script>
 
 <template>
-<p>ты уверен что ты тут ?</p>
+<p>Домашняя</p>
 </template>
