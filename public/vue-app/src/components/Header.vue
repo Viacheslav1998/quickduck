@@ -15,7 +15,6 @@
     </div>
   </nav>
   <!-- end navbar  -->
-
 </template>
 
 <script>
