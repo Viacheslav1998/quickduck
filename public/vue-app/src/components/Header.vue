@@ -12,5 +12,7 @@ export default {
 </script>
 
 <style scoped>
-
+.container {
+  background: #2c3e50;
+}
 </style>
