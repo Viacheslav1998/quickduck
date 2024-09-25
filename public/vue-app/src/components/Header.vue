@@ -35,7 +35,7 @@
       </div>
     </div>
   </div>
-
+  <!-- and header content -->
 </template>
 
 <script>
@@ -82,6 +82,4 @@ export default {
 }
 .box-1 { z-index: 5;}
 .box-2 { z-index: 10;}
-
-
 </style>
