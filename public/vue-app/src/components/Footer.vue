@@ -1,5 +1,7 @@
 <template>
-<h1>подвал</h1>
+  <div class="container">
+    <h6>подвал</h6>
+  </div>
 </template>
 
 <script>
