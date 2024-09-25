@@ -26,4 +26,7 @@ export default {
 </script>
 
 <style scoped>
+.navi-box {
+  margin: 10px auto 10px auto;
+}
 </style>
