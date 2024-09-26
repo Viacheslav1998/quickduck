@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <h6>подвал</h6>
+    <div class="custom-footer">
+      <h6>подвал</h6>
+    </div>
   </div>
 </template>
 
@@ -11,5 +13,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .custom-footer {
+    background: #404040;
+  }
 </style>
