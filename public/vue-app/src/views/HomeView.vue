@@ -38,10 +38,22 @@ export default {
         <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
       </div>
     </div>
-    
-    <!--   или найти бутстрап пагинацию  -->
-    <div class="custom-pagination"></div>
-
+    <!-- pagination   -->
+    <div class="box-pagination">
+      <nav aria-label="navigation custom-pagination">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 
@@ -69,4 +81,23 @@ export default {
 .right {
   text-align: right;
 }
+
+.box-pagination .pagination .page-link {
+  background-color: black;
+  color: goldenrod;
+  border-color: #181818;
+}
+
+.box-pagination .pagination .page-link:hover {
+  background-color: goldenrod;
+  color: black;
+  border-color: goldenrod;
+}
+
+.box-pagination .pagination .page-item.disabled .page-link {
+  background-color: #333;
+  color: #777;
+  border-color: #333;
+}
+
 </style>
