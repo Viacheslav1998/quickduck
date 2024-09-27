@@ -38,18 +38,18 @@ export default {
         <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
       </div>
     </div>
-    <!-- pagination   -->
+    <!-- pagination -->
     <div class="box-pagination">
       <nav aria-label="navigation custom-pagination">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
+            <a class="page-link" href="#" tabindex="-1">туда</a>
           </li>
           <li class="page-item"><a class="page-link" href="#">1</a></li>
           <li class="page-item"><a class="page-link" href="#">2</a></li>
           <li class="page-item"><a class="page-link" href="#">3</a></li>
           <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            <a class="page-link" href="#">сюда</a>
           </li>
         </ul>
       </nav>
@@ -58,11 +58,14 @@ export default {
 </template>
 
 <style scoped>
+
 .begin {
-  margin: 10px auto 10px auto;
-  padding: 10px;
+  margin: 20px auto 10px auto;
+  padding: 30px;
   border: 1px solid #666666;
 }
+.begin h2 {
+  font-weight: lighter;}
 .custom-news {
   border: 1px solid #666666;
   padding: 10px;

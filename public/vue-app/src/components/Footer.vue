@@ -2,6 +2,8 @@
   <div class="container">
     <div class="custom-footer">
       <h6>подвал</h6>
+      <b>но здесь пока тихо</b><br>
+      <i>работает над проектом: Вячеслав</i><br> <b style="color: darkorange">Компания: SilentStorm | 2024</b>
     </div>
   </div>
 </template>
@@ -14,6 +16,8 @@ export default {
 
 <style scoped>
   .custom-footer {
+    margin-bottom: 10px;
+    padding: 20px 20px 13px 20px;
     background: #404040;
   }
 </style>

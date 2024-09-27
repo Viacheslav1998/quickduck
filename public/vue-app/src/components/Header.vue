@@ -12,7 +12,7 @@
             <RouterLink class="nav-link" to="/about">О нас </RouterLink>
           </li>
         </nav>
-        <span class="navbar-text">найдет тот кто ищет...</span>
+        <span class="navbar-text" title="Не нажимай это не поиск это просто мысль XD">найдет тот кто ищет...</span>
       </div>
     </nav>
   </div>
