@@ -9,4 +9,6 @@ use CodeIgniter\Router\RouteCollection;
 //$routes->resource('api/test');
 //$routes->resource('test');
 $routes->get('api/test', 'TestController::index');
-$routes->get('/test', 'TestController::getData');
+$routes->get('/', 'TestController::Home');
+
+//
