@@ -49,9 +49,6 @@ class TestController extends BaseController
         //$datas = $model->findAll();
 
         //return $this->respond($datas);
-
-        // you can use it for test
-
-
+        
     }
 }
