@@ -10,3 +10,4 @@ use CodeIgniter\Router\RouteCollection;
 //$routes->resource('test');
 //$routes->get('api/test', 'TestController::index');
 $routes->get('/', 'Test::index');
+$routes->get('/test', 'Test::test');

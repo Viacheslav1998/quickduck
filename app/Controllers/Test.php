@@ -19,6 +19,9 @@ class Test extends BaseController
     public function index()
     {
         $data = $this->model->getData();
+    }
 
+    public function test() {
+        return view('pages/test');
     }
 }
