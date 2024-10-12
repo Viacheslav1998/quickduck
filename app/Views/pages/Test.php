@@ -33,10 +33,15 @@
     </div>
 
     <div class="space">
-        <b>получаем статичный запрос (тоесть с обновлением страницы):</b>
-
-
-
+        <b>получаем статичный запрос (тоесть с обновлением страницы):</b><br>
+        <?php if(!empty($data)): ?>
+          <?php foreach ($data as $item): ?>
+            <li><?= esc($item) ?> </li>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <br>
+          <b style="color: darkred;">Данных не найдено!</b>
+        <?php endif; ?>
     </div>
 
     <div class="space_2">

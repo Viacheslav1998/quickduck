@@ -49,7 +49,7 @@ class TestModel extends Model
     public function getData()
     {
         $db = Database::connect();
-        $query = $db->query('SELECT * FROM test');
+        $query = $db->query("SELECT * FROM test");
         $result = $query->getResult();
         // render
         foreach ($result as $res) {
@@ -60,6 +60,14 @@ class TestModel extends Model
             echo "<div style='border-bottom: 1px solid red;'></div>";
             echo "</pre>";
         }
+    }
+
+    public function getTestData()
+    {
+        $db = Database::connect();
+        $query = $db->query("SELECT * FROM test");
+        $result = $query->getResult();
+        return $result;
     }
 
 }

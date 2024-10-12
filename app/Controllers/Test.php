@@ -22,6 +22,7 @@ class Test extends BaseController
     }
 
     public function test() {
-        return view('pages/test');
+        $data = $this->model->getTestData();
+        return view('pages/test', $data);
     }
 }
