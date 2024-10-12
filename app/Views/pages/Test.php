@@ -11,7 +11,7 @@
             margin: 0;
             font-family: Arial;
         }
-        .space {
+        .space, .space_2 {
             width: 800px;
             padding: 20px;
             margin: 20px auto;
@@ -30,6 +30,19 @@
             тоесть данных, которые получены путем запроса к бд <br><br> <b style="color: orange;"> $query = $db->query('SELECT * FROM test'); </b>
         </p>
         <b style="color: navajowhite;">Эти данные получены путем простого не динамического способа - то-есть без автоматического обновления страницы</b>
+    </div>
+
+    <div class="space">
+        <b>получаем статичный запрос (тоесть с обновлением страницы):</b>
+
+
+
+    </div>
+
+    <div class="space_2">
+        <br>
+        <b>Но нам нужно будет также научиться получать данные динамически</b>
+        <p>Для этого нужно будет обращаться с: <span style="color: darkblue;">ajax/fetch/axios</span></p>
     </div>
 </body>
 </html>
