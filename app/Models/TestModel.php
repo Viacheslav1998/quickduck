@@ -62,12 +62,39 @@ class TestModel extends Model
         }
     }
 
+    /**
+     * @return array
+     * @method getResultArray()
+     */
     public function getTestData()
     {
         $db = Database::connect();
-        $query = $db->query("SELECT * FROM test");
-        $result = $query->getResult();
+        $query = $this->db->table('test')->get();
+        $result = $query->getResultArray();
         return $result;
+    }
+
+    /**
+     * @return array|array[]|object[]|\stdClass[]
+     * @method getResult()
+     */
+    public function getDataExample1()
+    {
+        $db = Database::connect();
+        $query = $db->query("SELECT * FROM test");
+        $tdata = $query->getResult();
+        return $tdata;
+    }
+
+    /**
+     * @return mixed
+     * @format json
+     */
+    public function getJsonTestData()
+    {
+        $db = Database::connect();
+        $query = $db->query("SELECT * FROM test");
+        return $query->getResultArray();
     }
 
 }

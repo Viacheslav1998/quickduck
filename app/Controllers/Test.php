@@ -22,7 +22,15 @@ class Test extends BaseController
     }
 
     public function test() {
-        $data = $this->model->getTestData();
+        $data = [
+            'tdata' => $this->model->getDataExample1()
+        ];
         return view('pages/test', $data);
+    }
+
+    public function testJson()
+    {
+        $data = $this->model->getJsonTestData();
+        return $this->response->setJSON($data);
     }
 }

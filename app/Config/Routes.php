@@ -11,3 +11,4 @@ use CodeIgniter\Router\RouteCollection;
 //$routes->get('api/test', 'TestController::index');
 $routes->get('/', 'Test::index');
 $routes->get('/test', 'Test::test');
+$routes->get('test-data', 'Test::testJson');
