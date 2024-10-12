@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Config\Database;
 
-class Test extends Model
+class TestModel extends Model
 {
-    protected $table            = 'tests';
+    protected $table            = 'test';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
@@ -45,5 +46,20 @@ class Test extends Model
     protected $afterDelete    = [];
 
     // Methods
+    public function getData()
+    {
+        $db = Database::connect();
+        $query = $db->query('SELECT * FROM test');
+        $result = $query->getResult();
+        // render
+        foreach ($result as $res) {
+            echo "<pre>";
+            echo $res->name . "<br>";
+            echo $res->title . "<br>";
+            echo $res->desk . "<br>";
+            echo "<div style='border-bottom: 1px solid red;'></div>";
+            echo "</pre>";
+        }
+    }
 
 }
