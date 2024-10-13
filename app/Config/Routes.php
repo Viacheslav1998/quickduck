@@ -12,3 +12,6 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Test::index');
 $routes->get('/test', 'Test::test');
 $routes->get('test-data', 'Test::testJson');
+// Api CRUD
+$routes->resource('news');
+
