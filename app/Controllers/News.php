@@ -4,13 +4,10 @@ namespace App\Controllers;
 
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
-use App\Models\NewsModel;
-
 
 class News extends ResourceController
 {
-
-    protected $modelName = 'App\Models\UserModel';
+    protected $modelName = 'App\Models\TestModel';
     protected $format = 'json';
 
     /**
@@ -20,8 +17,9 @@ class News extends ResourceController
      */
     public function index()
     {
-        return
-        dd($this->respond($this->modelName->findAll()));
+        return $this->respond($this->model->findAll());
+        // можно сделать проверку
+
     }
 
     /**
@@ -33,7 +31,8 @@ class News extends ResourceController
      */
     public function show($id = null)
     {
-        //
+        return $this->respond($this->model->find($id));
+        // наверно можно сделать проверку если нет данныз вернуть - данных нет
     }
 
     /**
