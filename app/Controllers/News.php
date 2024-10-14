@@ -4,9 +4,15 @@ namespace App\Controllers;
 
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
+use App\Models\NewsModel;
+
 
 class News extends ResourceController
 {
+
+    protected $modelName = 'App\Models\UserModel';
+    protected $format = 'json';
+
     /**
      * Return an array of resource objects, themselves in array format.
      *
@@ -14,7 +20,8 @@ class News extends ResourceController
      */
     public function index()
     {
-        //
+        return
+        dd($this->respond($this->modelName->findAll()));
     }
 
     /**
