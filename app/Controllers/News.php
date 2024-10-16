@@ -17,10 +17,13 @@ class News extends ResourceController
      */
     public function index()
     {
-        return $this->respond($this->model->findAll());
-        // можно сделать проверку
+        $this->response->setHeader('Access-Control-Allow-Origin', '*'); // Разрешить доступ из любого источника
+        $this->response->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); // Разрешенные методы
+        $this->response->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Разрешенные заголовки
 
+        return $this->respond($this->model->findAll());
     }
+
 
     /**
      * Return the properties of a resource object.
@@ -90,4 +93,6 @@ class News extends ResourceController
     {
         //
     }
+
+
 }
