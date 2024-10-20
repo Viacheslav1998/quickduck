@@ -5,13 +5,24 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 
+use App\Models\NewsModel;
+
+/**
+*  получение данных через fetch работает CORS настроен
+ * но сохранение POST не работает хотя тоже много вариантов пробувал с cors где его только нет
+ * ПОлучается что сохраняю я данные через статичный action
+ * сохраняю их url ='news/add' backend
+ * через action="http://quickduck/news/add" frontEnd
+ * данные сейвятся но не сейвятся через ajax
+ * ответ (успех/провал) я просто возвращаю в виде json для отображение
+*/
 class News extends ResourceController
 {
     protected $modelName = 'App\Models\NewsModel';
     protected $format = 'json';
 
     public function __construct() {
-        header("Access-Control-Allow-Origin: http://localhost:5173"); // Ваш фронтенд
+        header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
         header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
@@ -22,14 +33,6 @@ class News extends ResourceController
         }
     }
 
-    public function options($method)
-    {
-        header('Access-Control-Allow-Origin: http://localhost:5173');
-        header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-        header('Access-Control-Allow-Headers: Content-Type');
-        exit;
-    }
-
     /**
      * Return an array of resource objects, themselves in array format.
      *
@@ -37,10 +40,6 @@ class News extends ResourceController
      */
     public function index()
     {
-        $this->response->setHeader('Access-Control-Allow-Origin', '*');
-        $this->response->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-        $this->response->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
         return $this->respond($this->model->findAll());
     }
 
@@ -55,7 +54,6 @@ class News extends ResourceController
     public function show($id = null)
     {
         return $this->respond($this->model->find($id));
-        // наверно можно сделать проверку если нет данныз вернуть - данных нет
     }
 
     /**
@@ -73,20 +71,30 @@ class News extends ResourceController
      *
      * @return ResponseInterface
      */
-    public function create() {
-        $input = $this->request->getJSON(); // Получаем данные из запроса
+    public function create()
+    {
+        $model = new NewsModel();
 
-        // Проверяем, были ли данные получены
-        if ($input) {
-            // Логика сохранения данных в базу
-            // Например, $this->newsModel->save($input);
-            return $this->response->setJSON(['status' => 'success', 'data' => $input]);
+        // Получаем данные из POST-запроса
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'title' => $this->request->getPost('title'),
+            'desk' => $this->request->getPost('desk')
+        ];
+
+        // Вставляем данные в таблицу
+        if ($model->insert($data)) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Данные успешно добавлены.'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Ошибка при добавлении данных.'
+            ]);
         }
-
-        return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'Неверные данные']);
     }
-
-
 
     /**
      * Return the editable properties of a resource object.
@@ -122,6 +130,18 @@ class News extends ResourceController
     public function delete($id = null)
     {
         //
+    }
+
+    public function options()
+    {
+        // Устанавливаем заголовки CORS для preflight-запроса
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
+        header('Access-Control-Max-Age: 86400');
+
+        // Возвращаем успешный ответ
+        return $this->response->setStatusCode(200);
     }
 
 
