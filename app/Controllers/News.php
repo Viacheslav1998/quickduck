@@ -4,18 +4,8 @@ namespace App\Controllers;
 
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
-
 use App\Models\NewsModel;
 
-/**
-*  получение данных через fetch работает CORS настроен
- * но сохранение POST не работает хотя тоже много вариантов пробувал с cors где его только нет
- * ПОлучается что сохраняю я данные через статичный action
- * сохраняю их url ='news/add' backend
- * через action="http://quickduck/news/add" frontEnd
- * данные сейвятся но не сейвятся через ajax
- * ответ (успех/провал) я просто возвращаю в виде json для отображение
-*/
 class News extends ResourceController
 {
     protected $modelName = 'App\Models\NewsModel';
@@ -75,14 +65,14 @@ class News extends ResourceController
     {
         $model = new NewsModel();
 
-        // Получаем данные из POST-запроса
+        // get post data
         $data = [
             'name' => $this->request->getPost('name'),
             'title' => $this->request->getPost('title'),
             'desk' => $this->request->getPost('desk')
         ];
 
-        // Вставляем данные в таблицу
+        // save and response
         if ($model->insert($data)) {
             return $this->response->setJSON([
                 'status' => 'success',
