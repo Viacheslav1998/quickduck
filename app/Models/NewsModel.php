@@ -44,4 +44,10 @@ class NewsModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    // save
+    public function saveNews($data)
+    {
+        return $this->insert($data); // Убедитесь, что это возвращает true
+    }
+
 }

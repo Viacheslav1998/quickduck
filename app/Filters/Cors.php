@@ -49,6 +49,6 @@ class Cors implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        //
+        $response->setHeader('Access-Control-Allow-Origin', '*');
     }
 }

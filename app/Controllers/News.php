@@ -7,8 +7,28 @@ use CodeIgniter\RESTful\ResourceController;
 
 class News extends ResourceController
 {
-    protected $modelName = 'App\Models\TestModel';
+    protected $modelName = 'App\Models\NewsModel';
     protected $format = 'json';
+
+    public function __construct() {
+        header("Access-Control-Allow-Origin: http://localhost:5173"); // Ваш фронтенд
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+        // Обработка preflight запросов
+        if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+            http_response_code(200);
+            exit;
+        }
+    }
+
+    public function options($method)
+    {
+        header('Access-Control-Allow-Origin: http://localhost:5173');
+        header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        exit;
+    }
 
     /**
      * Return an array of resource objects, themselves in array format.
@@ -17,9 +37,9 @@ class News extends ResourceController
      */
     public function index()
     {
-        $this->response->setHeader('Access-Control-Allow-Origin', '*'); // Разрешить доступ из любого источника
-        $this->response->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); // Разрешенные методы
-        $this->response->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Разрешенные заголовки
+        $this->response->setHeader('Access-Control-Allow-Origin', '*');
+        $this->response->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        $this->response->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
         return $this->respond($this->model->findAll());
     }
@@ -53,10 +73,20 @@ class News extends ResourceController
      *
      * @return ResponseInterface
      */
-    public function create()
-    {
-        //
+    public function create() {
+        $input = $this->request->getJSON(); // Получаем данные из запроса
+
+        // Проверяем, были ли данные получены
+        if ($input) {
+            // Логика сохранения данных в базу
+            // Например, $this->newsModel->save($input);
+            return $this->response->setJSON(['status' => 'success', 'data' => $input]);
+        }
+
+        return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'Неверные данные']);
     }
+
+
 
     /**
      * Return the editable properties of a resource object.
