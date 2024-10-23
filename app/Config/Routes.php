@@ -16,4 +16,3 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
 
 
 
-

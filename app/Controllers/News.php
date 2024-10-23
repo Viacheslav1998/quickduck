@@ -122,15 +122,16 @@ class News extends ResourceController
         //
     }
 
+    /**
+    * Config Handlers
+    */
     public function options()
     {
-        // Устанавливаем заголовки CORS для preflight-запроса
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE');
         header('Access-Control-Allow-Headers: Content-Type, Authorization');
         header('Access-Control-Max-Age: 86400');
 
-        // Возвращаем успешный ответ
         return $this->response->setStatusCode(200);
     }
 
