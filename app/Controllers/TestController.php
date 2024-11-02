@@ -7,7 +7,7 @@ use App\Models\TestModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 
-class Test extends BaseController
+class TestController extends BaseController
 {
     private $model;
 

@@ -6,7 +6,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\NewsModel;
 
-class News extends ResourceController
+class NewsController extends ResourceController
 {
     protected $modelName = 'App\Models\NewsModel';
     protected $format = 'json';
