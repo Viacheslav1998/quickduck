@@ -7,9 +7,10 @@ use CodeIgniter\RESTful\ResourceController;
 
 class UploadController extends ResourceController
 {
-  public function uploadImage()
+
+  public function create()
   {
-    $image = $this->request->getFile('img');
+    $image = $this->request->getFile('path_to_image');
 
     if ($image && $image->isValid() && !$image->hasMoved()) {
       $filePath = WRITEPATH . '../public/images';
@@ -18,7 +19,7 @@ class UploadController extends ResourceController
 
       return $this->respond([
         'status' => 'success',
-        'url' => base_url("images/$newName)
+        'url' => base_url("images/$newName")
       ]);
     }
 

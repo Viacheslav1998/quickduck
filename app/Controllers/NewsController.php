@@ -69,7 +69,8 @@ class NewsController extends ResourceController
         $data = [
             'name' => $this->request->getPost('name'),
             'title' => $this->request->getPost('title'),
-            'desk' => $this->request->getPost('desk')
+            'desk' => $this->request->getPost('desk'),
+            'path_to_image' => $this->request->getPost('path_to_image')
         ];
 
         // save and response
