@@ -120,11 +120,27 @@ class NewsController extends ResourceController
      */
     public function delete($id = null)
     {
-        $news = $this->model->fine($id);
+        $news = $this->model->find($id);
 
         if (!$news) {
           return $this->failNotFount('Пост не найден');   
         }
+
+        if ($news['path_to_image']) {
+          $imagePath = WRITEPATH . '../public/images/' . $news['path_to_image'];
+          if (file_exists($imagePath)) {
+            unlink($imagePath);
+          }
+        }
+
+        $news->delete($id);
+
+        return $this->respond(
+          [
+            'status' => 'успешно',
+            'Message' => 'Новость Удалена без проблем!' 
+          ]
+        );
     }
 
     /**
