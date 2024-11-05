@@ -120,7 +120,11 @@ class NewsController extends ResourceController
      */
     public function delete($id = null)
     {
-        //
+        $news = $this->model->fine($id);
+
+        if (!$news) {
+          return $this->failNotFount('Пост не найден');   
+        }
     }
 
     /**
