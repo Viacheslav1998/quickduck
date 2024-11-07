@@ -130,7 +130,10 @@ class NewsController extends ResourceController
         }
 
         if (!empty($news['path_to_image'])) {
-          $imagePath = FCPATH . 'images/' . $news['path_to_image'];
+
+
+          $imageName  = basename($news['path_to_image']);
+          $imagePath = FCPATH . 'images/' . $imageName;
 
           if (file_exists($imagePath)) {
             unlink($imagePath);
