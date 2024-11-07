@@ -129,21 +129,22 @@ class NewsController extends ResourceController
           ], 404);
         }
 
-        if ($news['path_to_image']) {
-          $imagePath = WRITEPATH . '../public/images/' . $news['path_to_image'];
+        if (!empty($news['path_to_image'])) {
+          $imagePath = FCPATH . 'images/' . $news['path_to_image'];
+
           if (file_exists($imagePath)) {
             unlink($imagePath);
+          } else {
+            log_message('error', 'Изображение не найдено: ' . $imagePath);
           }
         }
 
         $this->model->delete($id);
 
-        return $this->respond(
-          [
-            'status' => 'успешно',
-            'Message' => 'Новость Удалена без проблем!' 
-          ]
-        );
+        return $this->respond([
+          'status' => 'success',
+          'message' => 'Новость Удалена без проблем!' 
+        ], 200);
     }
 
 }
