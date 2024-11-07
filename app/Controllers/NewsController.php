@@ -11,16 +11,16 @@ class NewsController extends ResourceController
     protected $modelName = 'App\Models\NewsModel';
     protected $format = 'json';
 
-    public function __construct() {
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-        header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
-        // Обработка preflight запросов
-        if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-            http_response_code(200);
-            exit;
-        }
+    /**
+    * Config CORS
+    */
+    public function handleOptions()
+    {
+        return $this->response
+            ->setHeader('Access-Control-Allow-Origin', '*')
+            ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+            ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+            ->setStatusCode(200);
     }
 
     /**
@@ -123,7 +123,10 @@ class NewsController extends ResourceController
         $news = $this->model->find($id);
 
         if (!$news) {
-          return $this->failNotFount('Пост не найден');   
+          return $this->respond([
+            'status' => 'error',
+            'message' => 'Новость не найдена',
+          ], 404);
         }
 
         if ($news['path_to_image']) {
@@ -133,7 +136,7 @@ class NewsController extends ResourceController
           }
         }
 
-        $news->delete($id);
+        $this->model->delete($id);
 
         return $this->respond(
           [
@@ -142,19 +145,5 @@ class NewsController extends ResourceController
           ]
         );
     }
-
-    /**
-    * Config Handlers
-    */
-    public function options()
-    {
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE');
-        header('Access-Control-Allow-Headers: Content-Type, Authorization');
-        header('Access-Control-Max-Age: 86400');
-
-        return $this->response->setStatusCode(200);
-    }
-
 
 }

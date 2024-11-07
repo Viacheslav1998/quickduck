@@ -29,7 +29,7 @@ class Cors implements FilterInterface
         header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE');
         header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
-        if ($request->getMethod() == 'options') {
+        if ($request->getMethod() == 'OPTIONS') {
             header('HTTP/1.1 200 OK');
             exit;
         }
