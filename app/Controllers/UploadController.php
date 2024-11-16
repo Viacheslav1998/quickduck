@@ -10,7 +10,7 @@ use App\Models\NewsModel;
 class UploadController extends ResourceController
 {
 
-  // public $image = '';
+  public $image = '';
 
   public function create()
   {
@@ -46,7 +46,7 @@ class UploadController extends ResourceController
   		// delete old image
   		// возможно нужно будет использовать WRITEPATH
   		if ($newsItem['path_to_image'] && file_exists(FCPATH . $newsItem['path_to_image'])) {
-  			unlick(FCPATH . $newsItem['path_to_image']);
+  			unlink(FCPATH . $newsItem['path_to_image']);
   		}
 
   		// download new image
