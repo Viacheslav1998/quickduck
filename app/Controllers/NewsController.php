@@ -108,7 +108,27 @@ class NewsController extends ResourceController
      */
     public function update($id = null)
     {
-        //
+        $data = $this->request->getJSON(true);
+        if (!$data) {
+          return $this->response->setStatusCode(400)->setJSON([
+            'error' => 'Неверный запрос'
+          ]);
+        }
+
+        $newsModel = new NewsModel();
+
+        if ($newsModel->update($id, $data)) {
+          return $this->response->setJSON([
+            'message' => 'Новость успешно обновлена'
+          ]);
+        } else {
+           log_message('error', 'Ошибка обновления новости с ID ' . $id . '. Данные: ' . json_encode($data));
+          return $this->response->setStatusCode(500)->setJSON([
+            'error' => 'Ошибки обновления'
+          ]);
+        }
+
+
     }
 
     /**
