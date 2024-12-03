@@ -37,31 +37,53 @@ class UploadController extends ResourceController
 
   	// get current news
   	$newsItem = $model->find($id);
+
+    $this->response->setHeader('Content-Type', 'application/json; charset=utf-8');
+
   	if (!$newsItem) {
-  		return $this->response->setStatusCode(404, 'Новость не найдена');
+  		return $this->response->setJSON([
+        'message' => 'Новость не найдена'
+      ])->setStatusCode(400);
   	}
 
-  	// check download image
-  	if ($this->request->getFile('image')->isValid()) {
-  		// delete old image
-  		// возможно нужно будет использовать WRITEPATH
-  		if ($newsItem['path_to_image'] && file_exists(FCPATH . $newsItem['path_to_image'])) {
-  			unlink(FCPATH . $newsItem['path_to_image']);
-  		}
+    // get old file
+    $file = $this->request->getFile('path_to_file');
+    if ($file && $file->isvalid()) {
+      
+      // rm old file
+      if (!empty($newsItem['path_to_image']) && file_exists(FCPATH . $newsItem['path_to_image'])) {
+        unlink(FCPATH . $newsItem['path_to_image']);
+      }
 
-  		// download new image
-  		$image = $this->request->getFile('image');
-  		$newImagePath = $image->store('uploads/news_images');
-  		$newsItem['path_to_image'] = $newImagePath;
+      // save new file
+      $newImagePath = $file->store('uploads/news_images');
+      $model->update($id, ['path_to_image' => $newImagePath]);
 
-  		// update val
-  		$model->update($id, ['path_to_image' => $newImagePath]);
+      return $this->response->setJSON([
+        'message' => 'изображения успешно обновлено'
+      ])->setStatusCode(200);
+    }
 
-  		return $this->response->setJSON(['message' => 'Изображение обновлено успешно']);
-  	}
-
-  	return $this->response->setStatusCode(400, 'Не удалось обновить изображение');
+    return $this->response->setJSON([
+      'error' => 'Не удалось обновить изображение. Проверьте корректность данных.'
+    ])->setStatusCode(400);
   }
+
+
+  // public function updateImage($id)
+  // {
+  //   log_message('debug', 'FILES: ' . json_encode($_FILES));
+  //   log_message('debug', 'POST: ' . json_encode($this->request->getPost()));
+
+  //   $file = $this->request->getFile('path_to_image');
+  //   if (!$file || !$file->isValid()) {
+  //     log_message('error', 'Файл отсутствует или невалиден.');
+  //     return $this->response->setStatusCode(400, 'Не удалось обновить изображение');
+  //   }
+
+  //   // Остальная логика...
+  // }
+
 
 }
 

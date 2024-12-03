@@ -12,11 +12,14 @@ $routes->get('/test-data', 'TestController::testJson');
 $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $routes): void {
     $routes->resource('news', ['controller' => 'NewsController']);
     $routes->options('news/(:any)', 'NewsController::handleOptions');
+    $routes->options('update-imagen/(:num)', 'UploadController::handleOptions');
 
     $routes->resource('upload-image', [
     	'controller' => 'UploadController',
     	'only' => ['create'],
     ]);
+
+    $routes->post('update-imagen/(:num)', 'UploadController::updateImage/$1');
 });
 
 
