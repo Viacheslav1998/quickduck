@@ -22,6 +22,7 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
     $routes->post('update-imagen/(:num)', 'UploadController::updateImage/$1');
 });
 
-
+//proxy
+$routes->get('/proxy/rates', 'ProxyController::fetchRates');
 
 
