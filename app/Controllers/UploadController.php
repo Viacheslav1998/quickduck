@@ -30,7 +30,7 @@ class UploadController extends ResourceController
     return $this->fail('Ошибка загрузки изображения.');
   }
 
-
+  // currently unused
   public function updateImage($id)
   {
   	$model = new NewsModel();
@@ -70,20 +70,57 @@ class UploadController extends ResourceController
   }
 
 
-  // public function updateImage($id)
-  // {
-  //   log_message('debug', 'FILES: ' . json_encode($_FILES));
-  //   log_message('debug', 'POST: ' . json_encode($this->request->getPost()));
+  // only test method
+  public function customUploadImage() {
+    $file = $this->request->getFile('path_to_image');
 
-  //   $file = $this->request->getFile('path_to_image');
-  //   if (!$file || !$file->isValid()) {
-  //     log_message('error', 'Файл отсутствует или невалиден.');
-  //     return $this->response->setStatusCode(400, 'Не удалось обновить изображение');
-  //   }
+    if ($file && $file->isValid()) {
 
-  //   // Остальная логика...
-  // }
+      // если что проблема может быть в путях сохранения картинки 
+      $newImagePath = $file->store('uploads/news_images');
 
+      return $this->response->setJSON([
+        'message' => 'Успешно загружен',
+        'path_to_image' => $newImagePath,
+      ]);
+    }
+    return $this->response->setStatusCode(400, 'Ошибка при загрузке файла');
+  }
+
+
+  public function currentUpdateImage($id) {
+    $model = new NewsModel();
+
+    //current news 
+    $newsItem = $model->find($id);
+    
+    if (!$newsItem) {
+      return $this->response->setStatusCode(404, 'новость не найдена');
+    }
+
+    $file = $this->request->getFile('path_to_image');
+
+    if ($file && $file->isValid()) {
+      // delete the old file if it exists
+      if (!empty($newsItem['path_to_image']) && file_exists(FCPATH . $newsItem['path_to_image'])) {
+        unlink(FCPATH . $newsItem['path_to_image']);
+      }
+
+      // save new file
+      $newImagePath = $file->store('uploads/news_images');
+      $model->update($id, ['path_to_image' => $newImagePath]);
+
+      return $this->response->setJSON([
+        'message' => 'Изображение успешно обновленно',
+        'path_to_image' => $newImagePath,
+      ]);
+    }
+    
+    return $this->response->setJSON([
+      'message' => 'файл не выбран. Старая картинка сохранена'
+      'path_to_image' => $newsItem['path_to_image'],
+    ]);
+  }
 
 }
 
