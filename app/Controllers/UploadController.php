@@ -88,6 +88,17 @@ class UploadController extends ResourceController
   }
 
 
+
+  // if ($image && $image->isValid() && !$image->hasMoved()) {
+  //   $filePath = WRITEPATH . '../public/images';
+  //   $newName = $image->getRandomName();
+  //   $image->move($filePath, $newName);
+
+  //   return $this->respond([
+  //     'status' => 'success',
+  //     'url' => base_url("images/$newName")
+  //   ]);
+
   public function currentUpdateImage($id) {
     $model = new NewsModel();
 
@@ -100,24 +111,34 @@ class UploadController extends ResourceController
 
     $file = $this->request->getFile('path_to_image');
 
-    if ($file && $file->isValid()) {
+    if ($file && $file->isValid() && !$file->hasMoved()) {
       // delete the old file if it exists
-      if (!empty($newsItem['path_to_image']) && file_exists(FCPATH . $newsItem['path_to_image'])) {
-        unlink(FCPATH . $newsItem['path_to_image']);
+      if (!empty($newsItem['path_to_image'])) {
+        $oldFilePath = str_replace(base_url(), FCPATH, $newsItem['path_to_image']);
+        if (file_exists($oldFilePath)) {
+          unlink($oldFilePath);
+        }
       }
+      // Unique name
+      $newFileName = $file->getRandomName();
 
-      // save new file
-      $newImagePath = $file->store('uploads/news_images');
-      $model->update($id, ['path_to_image' => $newImagePath]);
+      // path images
+      $file->move(FCPATH . 'images', $newFileName);
+
+      // fullPath
+      $absoluteUrl = base_url('images/' . $newFileName);
+
+      // save string
+      $model->update($id, ['path_to_image' => $absoluteUrl]);
 
       return $this->response->setJSON([
-        'message' => 'Изображение успешно обновленно',
-        'path_to_image' => $newImagePath,
+        'message' => 'Изображение успешно обновлено',
+        'path_to_image' => $absoluteUrl,
       ]);
     }
     
     return $this->response->setJSON([
-      'message' => 'файл не выбран. Старая картинка сохранена'
+      'message' => 'файл не выбран. Старая картинка сохранена',
       'path_to_image' => $newsItem['path_to_image'],
     ]);
   }
