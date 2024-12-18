@@ -76,7 +76,6 @@ class UploadController extends ResourceController
 
     if ($file && $file->isValid()) {
 
-      // если что проблема может быть в путях сохранения картинки 
       $newImagePath = $file->store('uploads/news_images');
 
       return $this->response->setJSON([
@@ -86,18 +85,6 @@ class UploadController extends ResourceController
     }
     return $this->response->setStatusCode(400, 'Ошибка при загрузке файла');
   }
-
-
-
-  // if ($image && $image->isValid() && !$image->hasMoved()) {
-  //   $filePath = WRITEPATH . '../public/images';
-  //   $newName = $image->getRandomName();
-  //   $image->move($filePath, $newName);
-
-  //   return $this->respond([
-  //     'status' => 'success',
-  //     'url' => base_url("images/$newName")
-  //   ]);
 
   public function currentUpdateImage($id) {
     $model = new NewsModel();
