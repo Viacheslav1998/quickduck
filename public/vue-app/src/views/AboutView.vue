@@ -20,6 +20,7 @@
       когда ты понимаешь уже очень хорошо определенные технологии. Но в голове все не удержишь и часто приходиться смотреть в документацию или узнавать что то более новое.
         Давайте пожелаем нашим новичкам <span style="color: olivedrab; font-weight: bold">Успехов и радостного Кодинга</span>
       </p>
+      <p>Этот проект конечно <span style="color: deepskyblue; font-weight: bold; font-family: helvetica;">"МОНОЛИТ"</span> но ты удивишься что данные поступаеют совсем с другого ресурса. </p>
     </div>
     <div class="about-img">
       <img src="/images/m4.jpg" class="img-fluid" alt="img">
