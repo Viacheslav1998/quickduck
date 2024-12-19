@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "HomeView.vue"
+  name: "HomeView"
 }
 </script>
 
