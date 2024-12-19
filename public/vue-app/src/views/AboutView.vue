@@ -33,7 +33,7 @@
   border: 1px solid #555555;
   padding: 20px;
   margin: 20px auto 20px auto;
-  color: #666666;
+  color: whitesmoke;
 }
 .about-title h1 {
   font-weight: lighter;
