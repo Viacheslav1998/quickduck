@@ -19,10 +19,12 @@ export default {
       <div class="form-group">
         <label for="password">Пароль</label>
         <input type="password" class="form-control" id="password" placeholder="Пароль - придумай, второй раз спрашивать не стану">
+        <small id="password" class="form-text text-muted">Пароль- способ доступа</small>
       </div>
       <div class="form-group">
-        <label for="email">Пароль</label>
+        <label for="email">Почта</label>
         <input type="email" class="form-control" id="email" placeholder="Введи пожалуйста твою почту">
+        <small id="email" class="form-text text-muted">Почта поможет, восстановить данные или получать рассылку</small>
       </div>
       <div class="form-check">
         <input 
@@ -37,6 +39,11 @@ export default {
       <button type="submit" class="btn btn-primary">Регистрация</button>
     </div>
 
+    <div class="alert alert-warning" role="alert">
+      <h3 style="font-weight: 400;">Внимание</h3>
+      Твои данные не кому не передаються - не ведись на скам (то-есть обман)!
+    </div>
+
   </div>
 </template>
 
@@ -46,4 +53,5 @@ export default {
   padding: 10px;
   margin: 20px auto 20px auto;
 }
+
 </style>
