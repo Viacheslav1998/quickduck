@@ -1,7 +1,16 @@
 <script>
-export default {
-  name: "FormView"
-}
+import { defineComponent , ref } from "vue";
+
+export default defineComponent({
+  name: "FormView",
+  setup() {
+    const isChecked = ref(false);
+
+    return {
+      isChecked,
+    };
+  },
+});
 </script>
 
 <template>
@@ -9,7 +18,6 @@ export default {
     <div class="begin">
       <h2>Регистрация</h2>
     </div>
-    
     <div class="custom-form">
       <div class="form-group">
         <label for="name">Выше имя</label>
@@ -28,13 +36,18 @@ export default {
       </div>
       <div class="form-check">
         <input 
-          class="form-check-input position-static"
+          class="form-check-input"
           type="checkbox"
           id="toogleFieldCheckbox"
-          value="option1"
-          aria-label="тут кто то есть"
+          v-model="isChecked"
+          aria-label="Отметь если есть код от автора"
         >
-        <label for="toogleFieldCheckbox">Отметь если есть код от автора</label>
+        <label for="toogleFieldCheckbox"> Есть специальный код ?</label><br>
+      </div>
+      <div class="form-group" v-if="isChecked">
+        <label for="special">спец код</label>
+        <input type="special" class="form-control" id="special" placeholder="специальный код">
+        <small id="special" class="form-text text-muted">Если тебе дали специальный код - пиши его сюда</small>
       </div>
       <button type="submit" class="btn btn-primary">Регистрация</button>
     </div>
