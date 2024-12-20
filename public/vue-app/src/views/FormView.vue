@@ -4,10 +4,20 @@ import { defineComponent , ref } from "vue";
 export default defineComponent({
   name: "FormView",
   setup() {
-    const isChecked = ref(false);
+    const special = ref(false);
+    const name = ref('');
+    // form elems must have а не по отдельности
+    // const form = new FormData();
+
+    const f1 = () => {
+      console.log(special.value);
+      console.log(name.value);
+    }
 
     return {
-      isChecked,
+      special,
+      f1,
+      name
     };
   },
 });
@@ -21,17 +31,17 @@ export default defineComponent({
     <div class="custom-form">
       <div class="form-group">
         <label for="name">Выше имя</label>
-        <input type="name" class="form-control" id="name" aria-describedby="name" placeholder="Введите ваше имя">
+        <input v-model="name" type="name" class="form-control" id="name" aria-describedby="name" placeholder="Введите ваше имя">
         <small id="name" class="form-text text-muted">Имя важно - куда же без него</small>
       </div>
       <div class="form-group">
         <label for="password">Пароль</label>
-        <input type="password" class="form-control" id="password" placeholder="Пароль - придумай, второй раз спрашивать не стану">
+        <input v-model="password" type="password" class="form-control" id="password" placeholder="Пароль - придумай, второй раз спрашивать не стану">
         <small id="password" class="form-text text-muted">Пароль- способ доступа</small>
       </div>
       <div class="form-group">
         <label for="email">Почта</label>
-        <input type="email" class="form-control" id="email" placeholder="Введи пожалуйста твою почту">
+        <input v-model="email" type="email" class="form-control" id="email" placeholder="Введи пожалуйста твою почту">
         <small id="email" class="form-text text-muted">Почта поможет, восстановить данные или получать рассылку</small>
       </div>
       <div class="form-check">
@@ -39,17 +49,17 @@ export default defineComponent({
           class="form-check-input"
           type="checkbox"
           id="toogleFieldCheckbox"
-          v-model="isChecked"
+          v-model="special"
           aria-label="Отметь если есть код от автора"
         >
         <label for="toogleFieldCheckbox"> Есть специальный код ?</label><br>
       </div>
-      <div class="form-group" v-if="isChecked">
+      <div class="form-group" v-if="special">
         <label for="special">спец код</label>
         <input type="special" class="form-control" id="special" placeholder="специальный код">
         <small id="special" class="form-text text-muted">Если тебе дали специальный код - пиши его сюда</small>
       </div>
-      <button type="submit" class="btn btn-primary">Регистрация</button>
+      <button type="submit" @click="f1" class="btn btn-primary">Регистрация</button>
     </div>
 
     <div class="alert alert-warning" role="alert">
