@@ -57,7 +57,7 @@ export default {
   </div>
 </template>
 
-<style scoped>
+<style>
 
 .begin {
   margin: 20px auto 10px auto;
