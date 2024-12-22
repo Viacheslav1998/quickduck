@@ -19,7 +19,7 @@ export default defineComponent({
     const validatePerson = ({name, email, password, specialCode }) => {
       const errors = [];
 
-      if(!name || name.lenght < 3) {
+      if(!name || name.length < 3) {
         errors.push("Имя должно содержать не менее 3 символов");
       }
 
@@ -27,7 +27,7 @@ export default defineComponent({
         errors.push("Необходим ввод корректного email - почты");
       }
 
-      if(!password || password.lenght < 6) {
+      if(!password || password.length <= 6) {
         errors.push("Пароль должен содержать не менее 6 символов.");
       }
 
@@ -50,15 +50,18 @@ export default defineComponent({
       // run validate
       const errors = validatePerson(personData);
 
-      if(errors.lenght > 0) {
+      if(errors.length > 0) {
         alert(errors.join("\n"));
         return;
       }
 
       const person = new FormData();
+
       Object.entries(personData).forEach(([key, value]) => {
         person.append(key, value);
       });
+
+      console.log(person);
 
       try {
         const response = await fetch('...', {
@@ -84,7 +87,8 @@ export default defineComponent({
       email,
       password,
       imagen,
-      specialCode
+      specialCode,
+      validatePerson
     };
   },
 });
