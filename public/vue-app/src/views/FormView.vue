@@ -4,7 +4,7 @@ import { defineComponent , ref } from "vue";
 export default defineComponent({
   name: "FormView",
   setup() {
-    // checkbox
+    // checkbox IsShow
     const special = ref(false);
     
     // person-form
@@ -13,21 +13,78 @@ export default defineComponent({
     const password = ref('');
     const imagen = ref('');
 
-    // test get data
-    const f1 = () => {
-      console.log(special.value);
-      console.log(name.value);
-    }
+    // if there`s special code, it`s not required
+    const specialCode = ref(null);
+
+    const validatePerson = ({name, email, password, specialCode }) => {
+      const errors = [];
+
+      if(!name || name.lenght < 3) {
+        errors.push("Имя должно содержать не менее 3 символов");
+      }
+
+      if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errors.push("Необходим ввод корректного email - почты");
+      }
+
+      if(!password || password.lenght < 6) {
+        errors.push("Пароль должен содержать не менее 6 символов.");
+      }
+
+      if(!specialCode || isNaN(specialCode)) {
+        errors.push("Код должен быть числом.");
+      }
+
+      return errors;
+    };
 
     const createPerson = async () => {
       
-    }
+      const personData = {
+        name: name.value,
+        email: email.value,
+        password: password.value,
+        specialCode: specialCode.value
+      };
+
+      // run validate
+      const errors = validatePerson(personData);
+
+      if(errors.lenght > 0) {
+        alert(errors.join("\n"));
+        return;
+      }
+
+      const person = new FormData();
+      Object.entries(personData).forEach(([key, value]) => {
+        person.append(key, value);
+      });
+
+      try {
+        const response = await fetch('...', {
+          method: "POST",
+          body: person,
+        });
+
+        if(!response.ok) {
+          throw new Error("Ошибка при создании пользователя");
+        }
+
+        const result = await response.json();
+        console.log("Пользователь создан:", result);
+      } catch (error) {
+        console.error("Ошибка: ", error.message);
+      }
+    };
 
     return {
       special,
       createPerson,
-      f1,
-      name
+      name,
+      email,
+      password,
+      imagen,
+      specialCode
     };
   },
 });
@@ -47,7 +104,7 @@ export default defineComponent({
         </div>
         <div class="form-group">
           <label for="name">Твоё изображение</label>
-          <input type="imagen" class="form-control" id="imagen" aria-describedby="imagen">
+          <input type="file" class="form-control" id="imagen" aria-describedby="imagen">
           <small id="imagen" class="form-text text-muted">Выбрать изображение - аватарку.</small>
         </div>
         <div class="form-group">
@@ -71,9 +128,9 @@ export default defineComponent({
           <label for="toogleFieldCheckbox"> Есть специальный код ?</label><br>
         </div>
         <div class="form-group" v-if="special">
-          <label for="special">спец код</label>
-          <input type="text" class="form-control" id="special" placeholder="специальный код">
-          <small id="special" class="form-text text-muted">Если тебе дали специальный код - пиши его сюда</small>
+          <label for="specialCode">спец код</label>
+          <input v-model.number="specialCode" type="text" class="form-control" id="specialCode" placeholder="специальный код">
+          <small id="specialCode" class="form-text text-muted">Если тебе дали специальный код - пиши его сюда</small>
         </div>
         <button type="submit" class="btn btn-primary">Регистрация</button>
       </form>
