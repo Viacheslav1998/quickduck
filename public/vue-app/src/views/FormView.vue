@@ -1,5 +1,6 @@
 <script>
 import { defineComponent , ref } from "vue";
+import Swal from 'sweetalert2';
 
 export default defineComponent({
   name: "FormView",
@@ -50,12 +51,17 @@ export default defineComponent({
       // run validate
       const errors = validatePerson(personData);
 
-
-      // тут можно также кастом алерт в место стандартного алерта
+      // attention to errors
       if(errors.length > 0) {
-        alert(errors.join("\n"));
+        Swal.fire({
+          title: "Уведомления об допущенных ошибках",
+          text: errors.join("\n"),
+          icon: "question"
+        });
         return;
       }
+
+      
 
       const person = new FormData();
 
