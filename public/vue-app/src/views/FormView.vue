@@ -16,7 +16,7 @@ export default defineComponent({
     // if there`s special code, it`s not required
     const specialCode = ref(null);
 
-    const validatePerson = ({name, email, password, specialCode }) => {
+    const validatePerson = ({ name, email, password, specialCode }) => {
       const errors = [];
 
       if(!name || name.length < 3) {
@@ -50,6 +50,8 @@ export default defineComponent({
       // run validate
       const errors = validatePerson(personData);
 
+
+      // тут можно также кастом алерт в место стандартного алерта
       if(errors.length > 0) {
         alert(errors.join("\n"));
         return;
@@ -71,6 +73,7 @@ export default defineComponent({
 
         if(!response.ok) {
           throw new Error("Ошибка при создании пользователя");
+          // тут можно также кастом алерт
         }
 
         const result = await response.json();
@@ -78,6 +81,7 @@ export default defineComponent({
       } catch (error) {
         console.error("Ошибка: ", error.message);
       }
+
     };
 
     return {
@@ -88,7 +92,7 @@ export default defineComponent({
       password,
       imagen,
       specialCode,
-      validatePerson
+      validatePerson,
     };
   },
 });
