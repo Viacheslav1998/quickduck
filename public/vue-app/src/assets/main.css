@@ -1,1 +1,9 @@
 @import './base.css';
+@font-face {
+  font-family: 'razed-galerie';
+  src: url('./public/fonts/razed-galerie.ttf');
+}
+@font-face {
+  font-family: 'razed-light';
+  src: url('./public/fonts/razed-light.ttf');
+}

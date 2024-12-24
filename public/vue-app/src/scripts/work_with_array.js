@@ -13,7 +13,7 @@ for(let i = 0; i < lengthNum; i++) {
 
 // another axample work with pop/push
 const space = [];
-const spb = {name: 'SanktPeterBug'};
+const spb = { name: 'SanktPeterBug' };
 const arrbox = ['name', 'age', 'city']; 
 
 space.push(arrbox);
