@@ -24,7 +24,8 @@
         <i>работает над проектом: Вячеслав</i><br> <b style="color: darkorange">Компания: SilentStorm | 2024</b>
       </div>
       <div class="c-block">
-        <h1>hello-<span style="color: deeppink;">world</span></h1>
+        <h1>&lt;hello-<span style="color: deeppink;">world
+          /></span></h1>
         <p>you're in the knowledge resource</p>
         <p style="font-size: 18px; color: aqua; padding: 0;">you'll learn how technology works</p>
         <p style="font-size: 18px; color: darkgoldenrod; padding: 0; border-bottom: 1px solid silver; border-color: darkgoldenrod; border-radius: 0;">here is high technology</p>
