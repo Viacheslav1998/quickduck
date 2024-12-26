@@ -59,9 +59,7 @@ export default defineComponent({
           icon: "question"
         });
         return;
-      }
-
-      
+      }      
 
       const person = new FormData();
 
