@@ -15,9 +15,9 @@ export default defineComponent({
     const imagen = ref('');
 
     // if there`s special code, it`s not required
-    const specialCode = ref(null);
+    const secret = ref(1010);
 
-    const validatePerson = ({ name, email, password, specialCode }) => {
+    const validatePerson = ({ name, email, password, secret }) => {
       const errors = [];
 
       if(!name || name.length < 3) {
@@ -32,7 +32,7 @@ export default defineComponent({
         errors.push("Пароль должен содержать не менее 6 символов.");
       }
 
-      if(!specialCode || isNaN(specialCode)) {
+      if(!secret || isNaN(secret)) {
         errors.push("Код должен быть числом.");
       }
 
@@ -45,7 +45,7 @@ export default defineComponent({
         name: name.value,
         email: email.value,
         password: password.value,
-        specialCode: specialCode.value
+        secret: secret.value
       };
 
       // run validate
@@ -95,7 +95,7 @@ export default defineComponent({
       email,
       password,
       imagen,
-      specialCode,
+      secret,
       validatePerson,
     };
   },
@@ -140,9 +140,9 @@ export default defineComponent({
           <label for="toogleFieldCheckbox"> Есть специальный код ?</label><br>
         </div>
         <div class="form-group" v-if="special">
-          <label for="specialCode">спец код</label>
-          <input v-model.number="specialCode" type="text" class="form-control" id="specialCode" placeholder="специальный код">
-          <small id="specialCode" class="form-text text-muted">Если тебе дали специальный код - пиши его сюда</small>
+          <label for="secret">спец код</label>
+          <input v-model.number="secret" type="text" class="form-control" id="secret" placeholder="специальный код">
+          <small id="secret" class="form-text text-muted">Если тебе дали специальный код - пиши его сюда</small>
         </div>
         <button type="submit" class="btn btn-primary">Регистрация</button>
       </form>
