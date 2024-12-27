@@ -1,6 +1,6 @@
 <script>
 import { defineComponent , ref } from "vue";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export default defineComponent({
   name: "FormView",
@@ -67,25 +67,39 @@ export default defineComponent({
         person.append(key, value);
       });
 
-      console.log(person);
+      // console.log(person);
 
       try {
-        const response = await fetch('...', {
+        const response = await fetch('http://quickduck.com/api/', {
           method: "POST",
           body: person,
         });
 
         if(!response.ok) {
+          Swal.fire({
+            title: "Ошибка - пользователь не зарегестрирован",
+            text: "что то пошшло не так!",
+            icon: "error"
+          });
           throw new Error("Ошибка при создании пользователя");
-          // тут можно также кастом алерт
         }
 
         const result = await response.json();
+        Swal.fire({
+          title: "Успех!",
+          text: "Пользователь Зарегестрирован!",
+          icon: "success"
+        });        
+
         console.log("Пользователь создан:", result);
       } catch (error) {
         console.error("Ошибка: ", error.message);
+        Swal.fire({
+          title: "Ошибка:",
+          text: error.message,
+          icon: "error"
+        });
       }
-
     };
 
     return {
