@@ -8,7 +8,7 @@ export default {
   <div class="container">
 
     <div class="begin">
-      <h2>Какие то новости</h2>
+      <h1>Какие то новости</h1>
     </div>
 
     <div class="custom-news">
@@ -64,7 +64,7 @@ export default {
   padding: 30px;
   border: 1px solid #666666;
 }
-.begin h2 {
+.begin h1 {
   font-weight: lighter;}
 .custom-news {
   border: 1px solid #666666;

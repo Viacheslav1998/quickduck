@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="about-title">
-      <h1>Страница о нас</h1>
+      <h1>Страница обо мне</h1>
     </div>
     <div class="custom-description">
       <h2>Это проект Славика</h2>

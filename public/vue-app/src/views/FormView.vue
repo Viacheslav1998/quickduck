@@ -70,7 +70,7 @@ export default defineComponent({
       // console.log(person);
 
       try {
-        const response = await fetch('http://quickduck.com/api/', {
+        const response = await fetch('http://quickduck.com/api/person', {
           method: "POST",
           body: person,
         });
