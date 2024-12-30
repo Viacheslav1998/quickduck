@@ -12,8 +12,8 @@ class NewsController extends ResourceController
     protected $format = 'json';
 
     /**
-    * Config CORS
-    */
+     * Config CORS
+     */
     public function handleOptions()
     {
         return $this->response
@@ -65,7 +65,7 @@ class NewsController extends ResourceController
     {
         $model = new NewsModel();
 
-        // get post data
+        // post data
         $data = [
             'name' => $this->request->getPost('name'),
             'title' => $this->request->getPost('title'),

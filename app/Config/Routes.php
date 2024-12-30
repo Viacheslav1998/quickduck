@@ -12,8 +12,6 @@ $routes->get('/test-data', 'TestController::testJson');
 $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $routes): void {
     // news
     $routes->resource('news', ['controller' => 'NewsController']);
-    $routes->options('news/(:any)', 'NewsController::handleOptions');
-    $routes->options('update-imagen/(:num)', 'UploadController::handleOptions');
 
     // imagen news
     $routes->resource('upload-image', [
