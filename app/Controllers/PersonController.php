@@ -43,12 +43,22 @@ public function create()
 {
 	$model = new PersonModel;
 
+	$password = $this->request->getPost('password');
+
+	// return JSON answer
+	if (!$password) {
+		return $this->response->setJSON([
+			'status' => 'error',
+			'message' => 'Пароль не может быть пустым.'
+		]);
+	}
+
 	// Person data
 	$data = [
-		'name' => $this->request->getPost('name'),
-		'email' => $this->request->getPost('email'),
-		'password' => $this->request->getPost('password'),
-		'secret' => $this->request->getPost('secret')
+		'name' => esc($this->request->getPost('name')),
+		'email' => esc($this->request->getPost('email')),
+		'password' => password_hash($password, PASSWORD_DEFAULT),
+		'secret' => esc($this->request->getPost('secret')),
 	];
 
 	// save and response
@@ -63,8 +73,6 @@ public function create()
 			'message' => 'Ошибка при регистрации.'
 		]);
 	}
-
-	// created_at изза колонок возможно их нет в таблице потому что а в model указано. пока мысли
 }
   
 
