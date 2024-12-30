@@ -39,6 +39,17 @@ export default defineComponent({
       return errors;
     };
 
+    const showAlert = (response) => {
+      let icon = response.status === 'error' ? 'error' : 'success';
+      let title = response.status === 'error' ? 'Ошибка': 'успех';
+
+      Swal.fire({
+        title: title, 
+        text: response.message,
+        icon: icon
+      });
+    };
+
     const createPerson = async () => {
       
       const personData = {
@@ -67,37 +78,31 @@ export default defineComponent({
         person.append(key, value);
       });
 
-      // console.log(person);
-
       try {
         const response = await fetch('http://quickduck.com/api/person', {
           method: "POST",
           body: person,
         });
 
+        
         if(!response.ok) {
-          Swal.fire({
-            title: "Ошибка - пользователь не зарегестрирован",
-            text: "что то пошшло не так!",
-            icon: "error"
+          showAlert({
+            status: 'error',
+            message: 'Что то пошло не так!'
           });
-          throw new Error("Ошибка при создании пользователя");
+          throw new Error(result.message || "Ошибка при создании пользователя");
         }
 
         const result = await response.json();
-        Swal.fire({
-          title: "Успех!",
-          text: "Пользователь Зарегестрирован!",
-          icon: "success"
-        });        
+        showAlert({
+          status: 'success',
+          message: 'Пользователь зарегестрирован!'
+        });
 
-        console.log("Пользователь создан:", result);
       } catch (error) {
-        console.error("Ошибка: ", error.message);
-        Swal.fire({
-          title: "Ошибка:",
-          text: error.message,
-          icon: "error"
+        showAlert({
+          status: 'error',
+          message: 'Произошла ошибка при связи с сервером.'
         });
       }
     };
