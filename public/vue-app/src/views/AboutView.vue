@@ -34,10 +34,13 @@
   padding: 20px;
   margin: 20px auto 20px auto;
   color: whitesmoke;
+  border-right: 15px solid orange;
 }
 .about-title h1 {
-  font-weight: lighter;
-}
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  font-weight: lighter;}
 .custom-description {
   padding: 20px;
   margin-bottom: 20px;

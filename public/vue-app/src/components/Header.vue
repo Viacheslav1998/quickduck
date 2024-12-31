@@ -9,7 +9,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <nav class="navbar-nav mr-auto">
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/about">О нас </RouterLink>
+            <RouterLink class="nav-link" to="/about">Автор</RouterLink>
           </li>
           <li class="nav-item">
             <RouterLink class="nav-link" to="/form">Регистрация</RouterLink>
@@ -18,7 +18,7 @@
             <RouterLink class="nav-link" to="/login">Войти</RouterLink>
           </li>
         </nav>
-        <span class="navbar-text" title="Не нажимай это не поиск это просто мысль XD">найдет тот кто ищет...</span>
+        <span class="navbar-text" title="вопросы или знания">Questions-Or-Knowledge</span>
       </div>
     </nav>
   </div>
@@ -60,6 +60,16 @@ export default {
 .custom-button {
   display: flex;
   margin: 0 auto;
+}
+.navbar-text {
+  font-family: razed-light;
+  font-size: 18px;
+  border-bottom: 1px solid darkorange;
+  padding: 0;
+}
+.navbar-text:hover {
+  cursor: default;
+  color: orangered;
 }
 .f {
   margin: 50px;

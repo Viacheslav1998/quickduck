@@ -124,7 +124,7 @@ export default defineComponent({
 <template>
   <div class="container">
     <div class="begin">
-      <h2>Регистрация</h2>
+      <h1>Регистрация</h1>
     </div>
     <div class="custom-form">
       <form @submit.prevent="createPerson">
@@ -176,10 +176,22 @@ export default defineComponent({
 </template>
 
 <style scoped>
+
+
+.begin {
+  padding: 20px;
+  border-right: 15px solid deepskyblue;
+}
+.begin h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  font-weight: lighter;}
 .custom-form {
   border: 1px solid #666666;
   padding: 10px;
   margin: 20px auto 20px auto;
 }
+
 
 </style>
