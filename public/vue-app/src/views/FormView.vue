@@ -41,7 +41,7 @@ export default defineComponent({
 
     const showAlert = (response) => {
       let icon = response.status === 'error' ? 'error' : 'success';
-      let title = response.status === 'error' ? 'Ошибка': 'успех';
+      let title = response.status === 'error' ? 'Ошибка' : 'успех';
 
       Swal.fire({
         title: title, 
