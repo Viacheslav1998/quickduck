@@ -6,7 +6,6 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <nav class="navbar-nav mr-auto">
           <li class="nav-item">
@@ -14,6 +13,9 @@
           </li>
           <li class="nav-item">
             <RouterLink class="nav-link" to="/form">Регистрация</RouterLink>
+          </li>
+          <li class="nav-item">
+            <RouterLink class="nav-link" to="/login">Войти</RouterLink>
           </li>
         </nav>
         <span class="navbar-text" title="Не нажимай это не поиск это просто мысль XD">найдет тот кто ищет...</span>
@@ -49,6 +51,9 @@ export default {
 </script>
 
 <style scoped>
+.nav-link:hover {
+  color: white!important;
+}
 .navi-box {
   margin: 10px auto 10px auto;
 }
