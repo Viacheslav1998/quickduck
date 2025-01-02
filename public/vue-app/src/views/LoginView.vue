@@ -1,14 +1,33 @@
 <script>
 
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted, onUnmounted } from "vue";
 
 export default defineComponent({
   name: "LoginView",
   setup() {
-    const ready = ref(true);
-  }
+    const wolf = ref(null);
+    
+    const handleMouseOver = (e) => {
+      if(wolf.value) {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        wolf.value.style.transform = `translate(-${x * 150}px, -${y * 150}px)`;
+      }
+    };
 
-})
+    onMounted(() => {
+      window.addEventListener("mousemove", handleMouseOver);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener("mousemove", handleMouseOver);
+    });
+
+    return {
+      wolf
+    };
+  },
+});
 </script>
 
 <template>
@@ -38,6 +57,19 @@ export default defineComponent({
           </div>
           <button type="submit" class="btn btn-warning">Входи!</button>
         </form>
+      </div>
+    </div>
+    <div class="wrapper-box-poppup">
+      <div class="close">
+        <img src="/poppup/close.png">
+      </div>
+      <div class="box-elems">
+        <div class="custom-fone">
+          <img src="/poppup/fone.png">
+        </div>
+        <div class="custom-wolf wolf-parallax" ref="wolf">
+          <img src="/poppup/wolf.png">
+        </div>
       </div>
     </div>
   </div>
@@ -78,7 +110,6 @@ export default defineComponent({
   background-color: deepskyblue;
   border-radius: 50px;
 }
-
 .begin {
   padding: 20px;
   border-right: 15px solid deeppink;
@@ -88,5 +119,48 @@ export default defineComponent({
   padding: 0;
   font-size: 30px;
   font-weight: lighter;}
+
+.wrapper-box-poppup {
+  display: inline;
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 800px;
+  transform: translate(-50%, -50%);
+}
+.close {
+  cursor: pointer;
+  position: relative;
+  z-index: 15;
+}
+.custom-fone  {
+  overflow: hidden;
+  margin: 20px;
+  border-radius: 150px;
+  background-color: snow;
+}
+.custom-fone img {
+  width: 100%;
+  background-size: cover;
+}
+.custom-wolf {background-color: brown;}
+.custom-wolf img {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -150%);
+  width: 300px;
+  height: 300px;
+}
+.wolf-parallax {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 110%;
+  height: 110%;
+  transition: all 0.1s ease;  
+}
 
 </style>

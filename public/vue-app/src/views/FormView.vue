@@ -83,7 +83,6 @@ export default defineComponent({
           method: "POST",
           body: person,
         });
-
         
         if(!response.ok) {
           showAlert({
@@ -192,6 +191,4 @@ export default defineComponent({
   padding: 10px;
   margin: 20px auto 20px auto;
 }
-
-
 </style>
