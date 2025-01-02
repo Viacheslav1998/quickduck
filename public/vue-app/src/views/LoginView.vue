@@ -6,7 +6,16 @@ export default defineComponent({
   name: "LoginView",
   setup() {
     const wolf = ref(null);
-    
+    const isPopupVisible = ref(false);
+
+    const closePopup = () => {
+      isPopupVisible.value  = false;
+    }
+
+    const openPopup = () => {
+      isPopupVisible.value = true;
+    } 
+
     const handleMouseOver = (e) => {
       if(wolf.value) {
         const x = e.clientX / window.innerWidth;
@@ -24,7 +33,10 @@ export default defineComponent({
     });
 
     return {
-      wolf
+      wolf,
+      isPopupVisible, 
+      closePopup,
+      openPopup
     };
   },
 });
@@ -42,7 +54,7 @@ export default defineComponent({
           <div>
             <p> <span style="color: darkorange; font-weight: bold;">Ну</span> ты заходи - если что</p>
           </div>
-          <div class="custom-icon">
+          <div class="custom-icon" @click="openPopup">
             <img src="/icons/wolf.png">
           </div>
         </div>
@@ -59,8 +71,11 @@ export default defineComponent({
         </form>
       </div>
     </div>
-    <div class="wrapper-box-poppup">
-      <div class="close">
+    <div 
+      class="wrapper-box-poppup"
+      :class="{ 'popup-hidden' : !isPopupVisible }"
+    >
+      <div class="close" @click="closePopup">
         <img src="/poppup/close.png">
       </div>
       <div class="box-elems">
@@ -109,7 +124,12 @@ export default defineComponent({
   margin-left: 10px;
   background-color: deepskyblue;
   border-radius: 50px;
+  cursor: pointer;
 }
+.custom-icon img:hover {
+  background-color: orangered;
+}
+
 .begin {
   padding: 20px;
   border-right: 15px solid deeppink;
@@ -129,7 +149,14 @@ export default defineComponent({
   width: 800px;
   height: 800px;
   transform: translate(-50%, -50%);
+  transition: all 1s ease;
 }
+.wrapper-box-poppup.popup-hidden {
+  opacity: 0;
+  transform: translate(-50%, -55%);
+  pointer-events: none;
+}
+
 .close {
   cursor: pointer;
   position: relative;
