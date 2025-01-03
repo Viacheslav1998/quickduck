@@ -17,11 +17,19 @@ export default {
       <span>11.02.2024</span>
       <p>время: 22:30</p>
       <img src="/images/m2.jpg" class="custom-images" alt="img">
-      <div class="custom-text">
+      <div class="custom-text pt-3">
         <p>Есть над чем задуматься: многие известные личности призывают нас к новым свершениям, которые, в свою очередь, должны быть в равной степени предоставлены сами себе. Равным образом, современная методология разработки не оставляет шанса для дальнейших направлений развития.</p>
       </div>
-      <div class="custom-text right">
-        <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
+      <div class="wrapper-soc-content d-flex justify-content-between">
+        <div class="box-info d-flex align-items-center" style="color: whtie;">
+          <div class="px-2">Просмотры: 892</div>
+          <div class="pr-2">Комментарии: 200</div>
+          <div class="pr-2">реакции</div>
+          <!-- реакции показать последние 3 реакции  -->
+        </div>
+        <div class="custom-text d-flex align-items-end">
+          <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
+        </div>
       </div>
     </div>
 
@@ -31,7 +39,7 @@ export default {
       <span>11.02.2024</span>
       <p>время: 22:30</p>
       <img src="/images/m3.jpg" class="custom-images" alt="img">
-      <div class="custom-text">
+      <div class="custom-text pt-3">
         <p>Есть над чем задуматься: многие известные личности призывают нас к новым свершениям, которые, в свою очередь, должны быть в равной степени предоставлены сами себе. Равным образом, современная методология разработки не оставляет шанса для дальнейших направлений развития.</p>
       </div>
       <div class="custom-text right">
@@ -63,6 +71,7 @@ export default {
   margin: 20px auto 10px auto;
   padding: 30px;
   border: 1px solid #666666;
+  border-right:20px solid rgb(2, 201, 62);
 }
 .begin h1 {
   font-weight: lighter;}
@@ -76,6 +85,9 @@ export default {
   width: 100%;
   object-fit: cover;
 }
+.box-info {
+  border: 1px solid #28a745;
+}
 .custom-text > p {
   font-size: 18px;
   padding: 20px;
@@ -84,6 +96,10 @@ export default {
 .right {
   text-align: right;
 }
+
+/* .wrapper-soc-content { */
+  /* background-color: orange; */
+/* } */
 
 .box-pagination .pagination .page-link {
   background-color: black;
