@@ -1,7 +1,21 @@
 <script>
-export default {
-  name: "HomeView"
-}
+import { defineComponent, ref } from "vue";
+
+export default defineComponent ({
+  name: "HomeView",
+  setup() {
+    const images = ref([
+      { src: "/images/image1.jpg", alt: "Image 1" },
+      { src: "/images/image2.jpg", alt: "Image 2" },
+      { src: "/images/image3.jpg", alt: "Image 3" },
+      { src: "/images/image4.jpg", alt: "Image 4" },
+      { src: "/images/image5.jpg", alt: "Image 5" },
+    ]);
+    return {
+      images,
+    };
+  },
+});
 </script>
 
 <template>
@@ -13,10 +27,10 @@ export default {
 
     <div class="custom-news">
       <h1>какая то новость</h1>
-      <span>публикация: -  </span>
+      <span>публикация: - </span>
       <span>11.02.2024</span>
       <p>время: 22:30</p>
-      <img src="/images/m2.jpg" class="custom-images" alt="img">
+      <img src="/images/m2.jpg" class="custom-images">
       <div class="custom-text pt-3">
         <p>Есть над чем задуматься: многие известные личности призывают нас к новым свершениям, которые, в свою очередь, должны быть в равной степени предоставлены сами себе. Равным образом, современная методология разработки не оставляет шанса для дальнейших направлений развития.</p>
       </div>
@@ -24,8 +38,19 @@ export default {
         <div class="box-info d-flex align-items-center" style="color: whtie;">
           <div class="px-2">Просмотры: 892</div>
           <div class="pr-2">Комментарии: 200</div>
-          <div class="pr-2">реакции</div>
-          <!-- реакции показать последние 3 реакции  -->
+          <div class="box-reaction p-2 d-flex">
+            <div class="box-icons">
+              <img src="/soc-icons/sm1.png" class="rounded-circle" style="background-color: rebeccapurple; padding: 3px">
+            </div>
+            <div class="box-icons">
+              <img src="/soc-icons/sm2.png" class="rounded-circle" style="background-color: rebeccapurple; padding: 3px">
+            </div>
+            <div class="box-icons">
+              <img src="/soc-icons/sm3.png" class="rounded-circle" style="background-color: rebeccapurple; padding: 3px">
+            </div>
+          
+          </div>
+          <!-- реакции показать последние 3 либо ...  реакции  -->
         </div>
         <div class="custom-text d-flex align-items-end">
           <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
@@ -97,9 +122,19 @@ export default {
   text-align: right;
 }
 
-/* .wrapper-soc-content { */
-  /* background-color: orange; */
-/* } */
+.box-reaction {
+  background-image: url('/images/fn2.jpg');
+  background-size: contain;
+}
+.box-icons {
+  position: relative;
+}
+.box-icons img:nth-child(n+1) {
+  position: relative;
+  z-index: 8;
+  left: -10px;
+}
+
 
 .box-pagination .pagination .page-link {
   background-color: black;
