@@ -25,10 +25,21 @@ export default defineComponent ({
     </div>
 
     <div class="custom-news">
-      <h1>какая то новость</h1>
-      <span>публикация: - </span>
-      <span>11.02.2024</span>
-      <p>время: 22:30</p>
+      <div class="main-news">
+        <h1>какая то новость</h1>
+      </div>
+      <div class="wrapper-main-box d-flex justify-content-between">
+        <div class="box-date-time">
+          <span>публикация: </span>
+          <span>11.02.2024</span>
+          <p>время: 22:30</p>
+        </div>
+        <div class="tags">
+          <a href="#">#news</a>
+          <a href="#">#игры</a>
+          <a href="#">#интерессное</a>
+        </div>
+      </div>
       <img src="/images/m2.jpg" class="custom-images">
       <div class="custom-text pt-3">
         <p>Есть над чем задуматься: многие известные личности призывают нас к новым свершениям, которые, в свою очередь, должны быть в равной степени предоставлены сами себе. Равным образом, современная методология разработки не оставляет шанса для дальнейших направлений развития.</p>
@@ -55,20 +66,7 @@ export default defineComponent ({
         </div>
       </div>
     </div>
-
-    <div class="custom-news">
-      <h1>какая то новость</h1>
-      <span>публикация: -  </span>
-      <span>11.02.2024</span>
-      <p>время: 22:30</p>
-      <img src="/images/m3.jpg" class="custom-images" alt="img">
-      <div class="custom-text pt-3">
-        <p>Есть над чем задуматься: многие известные личности призывают нас к новым свершениям, которые, в свою очередь, должны быть в равной степени предоставлены сами себе. Равным образом, современная методология разработки не оставляет шанса для дальнейших направлений развития.</p>
-      </div>
-      <div class="custom-text right">
-        <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
-      </div>
-    </div>
+    
     <!-- pagination -->
     <div class="box-pagination">
       <nav aria-label="navigation custom-pagination">
@@ -96,8 +94,10 @@ export default defineComponent ({
   border: 1px solid #666666;
   border-right:20px solid rgb(2, 201, 62);
 }
-.begin h1 {
-  font-weight: lighter;}
+.begin h1 { font-weight: lighter; }
+.tags a { padding-left: 5px; color: grey; }
+.tags a:hover { color: deepskyblue; }
+.box-date-time { color: grey;}
 .custom-news {
   border: 1px solid #666666;
   padding: 10px;
@@ -108,6 +108,10 @@ export default defineComponent ({
   width: 100%;
   object-fit: cover;
 }
+.main-news {
+  border-bottom: 1px solid grey;
+  margin-bottom: 5px;
+}
 .box-info {
   border: 1px solid #49494a;
 }
@@ -116,9 +120,7 @@ export default defineComponent ({
   padding: 20px;
   background: #343434;
 }
-.right {
-  text-align: right;
-}
+.right { text-align: right; }
 
 .box-reaction {
   background-color: #2e323684;
