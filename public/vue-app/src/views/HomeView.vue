@@ -5,12 +5,11 @@ export default defineComponent ({
   name: "HomeView",
   setup() {
     const images = ref([
-      { src: "/images/image1.jpg", alt: "Image 1" },
-      { src: "/images/image2.jpg", alt: "Image 2" },
-      { src: "/images/image3.jpg", alt: "Image 3" },
-      { src: "/images/image4.jpg", alt: "Image 4" },
-      { src: "/images/image5.jpg", alt: "Image 5" },
+      { src: "/soc-icons/sm1.png", alt: "ico 1" },
+      { src: "/soc-icons/sm2.png", alt: "ico 2" },
+      { src: "/soc-icons/sm3.png", alt: "ico 3" },
     ]);
+
     return {
       images,
     };
@@ -39,18 +38,17 @@ export default defineComponent ({
           <div class="px-2">Просмотры: 892</div>
           <div class="pr-2">Комментарии: 200</div>
           <div class="box-reaction p-2 d-flex">
-            <div class="box-icons">
-              <img src="/soc-icons/sm1.png" class="rounded-circle" style="background-color: rebeccapurple; padding: 3px">
+            <div class="image-stack">
+              <img
+                v-for="(image, index) in images" 
+                :key="index"
+                :src="image.src"
+                :alt="image.alt"
+                class="stacked-image"
+                :style="{ left: `${index * 28}px` }"
+              />
             </div>
-            <div class="box-icons">
-              <img src="/soc-icons/sm2.png" class="rounded-circle" style="background-color: rebeccapurple; padding: 3px">
-            </div>
-            <div class="box-icons">
-              <img src="/soc-icons/sm3.png" class="rounded-circle" style="background-color: rebeccapurple; padding: 3px">
-            </div>
-          
           </div>
-          <!-- реакции показать последние 3 либо ...  реакции  -->
         </div>
         <div class="custom-text d-flex align-items-end">
           <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
@@ -111,7 +109,7 @@ export default defineComponent ({
   object-fit: cover;
 }
 .box-info {
-  border: 1px solid #28a745;
+  border: 1px solid #49494a;
 }
 .custom-text > p {
   font-size: 18px;
@@ -123,18 +121,25 @@ export default defineComponent ({
 }
 
 .box-reaction {
-  background-image: url('/images/fn2.jpg');
+  background-color: #2e323684;
   background-size: contain;
 }
-.box-icons {
+
+.image-stack {  
   position: relative;
-}
-.box-icons img:nth-child(n+1) {
-  position: relative;
-  z-index: 8;
-  left: -10px;
+  width: 120px;
+  height: 64px;
 }
 
+.stacked-image {
+  position: absolute;
+  transition: transform 0.3 ease;
+  cursor: pointer;
+}
+.stacked-image:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
 
 .box-pagination .pagination .page-link {
   background-color: black;
