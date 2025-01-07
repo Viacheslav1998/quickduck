@@ -46,8 +46,8 @@ export default defineComponent ({
       </div>
       <div class="wrapper-soc-content d-flex justify-content-between">
         <div class="box-info d-flex align-items-center" style="color: whtie;">
-          <div class="px-2">Просмотры: 892</div>
-          <div class="pr-2">Комментарии: 200</div>
+          <div class="px-2 box-icons"><img src="/icons/views.png" alt="просмотры"> 825</div>
+          <div class="pr-2 box-icons"><img src="/icons/comments.png" alt="комментарии"> 200</div>
           <div class="box-reaction p-2 d-flex">
             <div class="image-stack">
               <img
@@ -56,7 +56,7 @@ export default defineComponent ({
                 :src="image.src"
                 :alt="image.alt"
                 class="stacked-image"
-                :style="{ left: `${index * 28}px` }"
+                :style="{ left: `${index * 27}px` }"
               />
             </div>
           </div>
@@ -115,6 +115,11 @@ export default defineComponent ({
 .box-info {
   border: 1px solid #49494a;
 }
+.box-icons { font-size: 19px; color: grey;}
+.box-icons img {
+  width: 35px;
+  height: 35px;
+}
 .custom-text > p {
   font-size: 18px;
   padding: 20px;
@@ -129,8 +134,12 @@ export default defineComponent ({
 
 .image-stack {  
   position: relative;
-  width: 120px;
-  height: 64px;
+  width: 95px;
+  height: 40px;
+}
+.image-stack img {
+  width: 40px;
+  height: 40px;
 }
 
 .stacked-image {
