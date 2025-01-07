@@ -127,10 +127,7 @@ export default defineComponent ({
 }
 .right { text-align: right; }
 
-.box-reaction {
-  background-color: #2e323684;
-  background-size: contain;
-}
+.box-reaction { background-color: rgba(46, 50, 54, 0.518);}
 
 .image-stack {  
   position: relative;
