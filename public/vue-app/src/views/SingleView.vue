@@ -24,6 +24,15 @@ export default defineComponent({
       <h1>это какая то новость</h1>
     </div>
 
+    <nav aria-label="breadcrumb" class="pt-2">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Домой</a></li>
+        <li class="breadcrumb-item"><a href="#">Рубрика</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Тег</li>
+      </ol>
+    </nav>
+
+
     <div class="custom-news">
       <div class="wrapper-main-box d-flex justify-content-between">
         <div class="box-date-time">
@@ -112,55 +121,74 @@ export default defineComponent({
    <!-- comments -->
     <div class="wrapper-comment my-2">
 
-      <div class="background-transparent">
+      <div class="comment-moment pb-1 pt-2 px-2 mb-4">
+        <h5>Оставь свой комментарий:</h5>
+      </div>
 
-        <div class="comment-moment pb-1 pt-2 px-2 mb-4">
-          <h5>Оставь свой комментарий:</h5>
-        </div>
-
-        <div class="space-comment-area">
-          <form @submit.prevent="createPerson">
-            <input type="radio">
-
-            <div class="form-group">
-              <label for="justCommentPerson">Пиши свой комментарий</label>
-              <textarea class="form-control" id="justCommentPerson" rows="3"></textarea>
-            </div>
-
-            <button type="button" class="btn btn-info">Отправить комментарий</button>
-          </form>
-        </div>
-
-        <div class="comment-moment pb-1 pt-2 px-2 mb-4">
-          <h5>Блок для комментариев:</h5>
-        </div>
-        
-        <div class="wrapper-comments-persons">
-
-          <div class="media">
-            <img class="mr-3" src="..." alt="Generic placeholder image">
-            <div class="media-body">
-              <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
-              я считаю, что это отличная статья
-            </div>
+      <div class="space-comment-area">
+        <form @submit.prevent="createPerson">
+          <div class="image-radio-group">
+            <label>
+              <input type="radio" name="smiley" value="/soc-icons/sm1.png" />
+              <img src="/soc-icons/sm1.png" alt="Smiley 1">
+            </label>
+            <label>
+              <input type="radio" name="smiley" value="/soc-icons/sm2.png" />
+              <img src="/soc-icons/sm2.png" alt="Smiley 2">
+            </label>
+            <label>
+              <input type="radio" name="smiley" value="/soc-icons/sm3.png" />
+              <img src="/soc-icons/sm3.png" alt="Smiley 3">
+            </label>
+            <label>
+              <input type="radio" name="smiley" value="/soc-icons/sm4.png" />
+              <img src="/soc-icons/sm4.png" alt="Smiley 4">
+            </label>
+            <label>
+              <input type="radio" name="smiley" value="/soc-icons/sm5.png" />
+              <img src="/soc-icons/sm5.png" alt="Smiley 5">
+            </label>
           </div>
 
-          <div class="media">
-            <img class="mr-3" src="..." alt="Generic placeholder image">
-            <div class="media-body">
-              <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
-              я считаю, что это отличная статья
-            </div>
+          <div class="form-group">
+            <label for="justCommentPerson">Пиши свой комментарий</label>
+            <textarea class="form-control" id="justCommentPerson" rows="3"></textarea>
           </div>
 
-          <div class="media">
-            <img class="mr-3" src="..." alt="Generic placeholder image">
-            <div class="media-body">
-              <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
-              я считаю, что это отличная статья
-            </div>
-          </div>
+          <button type="button" class="btn btn-info">Отправить комментарий</button>
+        </form>
+      </div>
 
+      <div class="line"></div><br>
+
+      <div class="comment-moment pb-1 pt-2 px-2 mb-4">
+        <h5>Блок для комментариев:</h5>
+      </div>
+
+      <div class="wrapper-comments-persons">
+
+        <div class="media">
+          <img class="mr-3" src="..." alt="Generic placeholder image">
+          <div class="media-body">
+            <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
+            я считаю, что это отличная статья
+          </div>
+        </div>
+
+        <div class="media">
+          <img class="mr-3" src="..." alt="Generic placeholder image">
+          <div class="media-body">
+            <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
+            я считаю, что это отличная статья
+          </div>
+        </div>
+
+        <div class="media">
+          <img class="mr-3" src="..." alt="Generic placeholder image">
+          <div class="media-body">
+            <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
+            я считаю, что это отличная статья
+          </div>
         </div>
 
       </div>
@@ -176,29 +204,42 @@ export default defineComponent({
   border: 1px solid #666666;
   border-right:20px solid rgb(255, 51, 61);
 }
+
 .begin-news h1 {  font-weight: lighter; }
+.breadcrumb { background-color: #232222; border: 1px solid #666666;}
+.breadcrumb-item a { color: darkturquoise; }
+.breadcrumb-item { color: white; }
+
 .custom-comments {
   border: 1px solid #666666;
   padding: 10px;
   margin: 20px auto 20px auto;
 }
 
-.space-comment-area { padding: 20px; }
+.line { height: 1px; background-color: deepskyblue;}
+.space-comment-area, .wrapper-comments-persons { padding: 20px; }
+.comment-moment { background-color: darkslateblue;}
+.wrapper-comment { background-color: #232222;}
 
-.comment-moment {
-  background-color: darkslateblue;
+label > input {
+  visibility: hidden;
+  position: absolute;;
 }
 
-.wrapper-comment {
-  overflow-y: scroll;
-  height: 400px;
-  /* background-color: #232222; */
-  background-image: url('../images/space1.jpg');
-  background-size: cover;
-}
-.background-transparent {
-  background-color: rgba(0, 0, 0, 0.815);
+label > input + img {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  background-color: rgba(153, 50, 204, 0.158)
 }
 
+label > input:checked + img {
+  border-radius: 50px;
+  background-color: yellow;
+}
+
+label > input:hover + img {
+  background-color: darkorchid;
+}
 
 </style>
