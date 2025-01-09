@@ -4,6 +4,7 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   name: "SingleView",
   setup() {
+    // screening of the last three Reaction
     const images = ref([
       { src: "/soc-icons/sm1.png", alt: "ico 1" },
       { src: "/soc-icons/sm2.png", alt: "ico 2" },
@@ -121,12 +122,16 @@ export default defineComponent({
    <!-- comments -->
     <div class="wrapper-comment my-2">
 
-      <div class="comment-moment pb-1 pt-2 px-2 mb-4">
+      <div class="comment-moment pb-1 pt-2 px-2">
         <h5>Оставь свой комментарий:</h5>
       </div>
 
       <div class="space-comment-area">
         <form @submit.prevent="createPerson">
+          <div class="reactions d-flex">
+            <div class="pr-2"><img src="/icons/box.gif" alt="imagen-box"></div>
+            <div class="pt-1"><p>Поставь свою реакцию на данную статью:</p></div> 
+          </div>
           <div class="image-radio-group">
             <label>
               <input type="radio" name="smiley" value="/soc-icons/sm1.png" />
@@ -150,13 +155,24 @@ export default defineComponent({
             </label>
           </div>
 
-          <div class="form-group">
+          <div class="form-group pt-4">
             <label for="justCommentPerson">Пиши свой комментарий</label>
             <textarea class="form-control" id="justCommentPerson" rows="3"></textarea>
           </div>
 
           <button type="button" class="btn btn-info">Отправить комментарий</button>
+
+          <br>
+          <br>
+          <div style="height: 1px; background-color: silver;"></div><br>
+
+          <blockquote class="blockquote text-right">
+            <p class="mb-0">Не стоит переживать о своих данных:</p>
+            <footer class="blockquote-footer">Конечно твоё имя будет видно, <cite title="Source Title" style="color: darkorange;">но не почта.</cite></footer>
+          </blockquote>
         </form>
+
+        <!-- 451f + books -->
       </div>
 
       <div class="line"></div><br>
@@ -205,6 +221,13 @@ export default defineComponent({
   border-right:20px solid rgb(255, 51, 61);
 }
 
+.reactions p { font-size: 20px; color: goldenrod;} 
+.reactions img {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+
 .begin-news h1 {  font-weight: lighter; }
 .breadcrumb { background-color: #232222; border: 1px solid #666666;}
 .breadcrumb-item a { color: darkturquoise; }
@@ -216,7 +239,7 @@ export default defineComponent({
   margin: 20px auto 20px auto;
 }
 
-.line { height: 1px; background-color: deepskyblue;}
+.line { height: 20px; background-color: #181818;}
 .space-comment-area, .wrapper-comments-persons { padding: 20px; }
 .comment-moment { background-color: darkslateblue;}
 .wrapper-comment { background-color: #232222;}
@@ -230,7 +253,7 @@ label > input + img {
   cursor: pointer;
   border: 2px solid transparent;
   transition: all 0.3s ease;
-  background-color: rgba(153, 50, 204, 0.158)
+  background-color: rgba(153, 50, 204, 0.158);
 }
 
 label > input:checked + img {
