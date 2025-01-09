@@ -109,8 +109,61 @@ export default defineComponent({
         </div>
       </div>
     </div>
-    <div class="custom-comments">
-      asd
+   <!-- comments -->
+    <div class="wrapper-comment my-2">
+
+      <div class="background-transparent">
+
+        <div class="comment-moment pb-1 pt-2 px-2 mb-4">
+          <h5>Оставь свой комментарий:</h5>
+        </div>
+
+        <div class="space-comment-area">
+          <form @submit.prevent="createPerson">
+            <input type="radio">
+
+            <div class="form-group">
+              <label for="justCommentPerson">Пиши свой комментарий</label>
+              <textarea class="form-control" id="justCommentPerson" rows="3"></textarea>
+            </div>
+
+            <button type="button" class="btn btn-info">Отправить комментарий</button>
+          </form>
+        </div>
+
+        <div class="comment-moment pb-1 pt-2 px-2 mb-4">
+          <h5>Блок для комментариев:</h5>
+        </div>
+        
+        <div class="wrapper-comments-persons">
+
+          <div class="media">
+            <img class="mr-3" src="..." alt="Generic placeholder image">
+            <div class="media-body">
+              <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
+              я считаю, что это отличная статья
+            </div>
+          </div>
+
+          <div class="media">
+            <img class="mr-3" src="..." alt="Generic placeholder image">
+            <div class="media-body">
+              <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
+              я считаю, что это отличная статья
+            </div>
+          </div>
+
+          <div class="media">
+            <img class="mr-3" src="..." alt="Generic placeholder image">
+            <div class="media-body">
+              <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
+              я считаю, что это отличная статья
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
     
   </div>
@@ -129,5 +182,23 @@ export default defineComponent({
   padding: 10px;
   margin: 20px auto 20px auto;
 }
+
+.space-comment-area { padding: 20px; }
+
+.comment-moment {
+  background-color: darkslateblue;
+}
+
+.wrapper-comment {
+  overflow-y: scroll;
+  height: 400px;
+  /* background-color: #232222; */
+  background-image: url('../images/space1.jpg');
+  background-size: cover;
+}
+.background-transparent {
+  background-color: rgba(0, 0, 0, 0.815);
+}
+
 
 </style>

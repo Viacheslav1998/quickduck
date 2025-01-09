@@ -18,7 +18,7 @@
             <img src="/icons/sql.png" alt="sql" title="sql">
           </div>
           <div class="ico">
-            <img src="/icons/vue.png" alt="vue" title="vue">
+            <img  style="background-color: #fff; border-radius: 7px; " src="/icons/vue.png" alt="vue" title="vue">
           </div>
         </div>
         <i>работает над проектом: Вячеслав</i><br> <b style="color: darkorange">Компания: SilentStorm | 2024-2025</b><br>
