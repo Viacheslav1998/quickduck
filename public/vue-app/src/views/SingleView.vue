@@ -129,8 +129,7 @@ export default defineComponent({
       <div class="space-comment-area">
         <form @submit.prevent="createPerson">
           <div class="reactions d-flex">
-            <div class="pr-2"><img src="/icons/box.gif" alt="imagen-box"></div>
-            <div class="pt-1"><p>Поставь свою реакцию на данную статью:</p></div> 
+            <div class="pt-1"><p>Среагировать:</p></div> 
           </div>
           <div class="image-radio-group">
             <label>
@@ -155,9 +154,12 @@ export default defineComponent({
             </label>
           </div>
 
-          <div class="form-group pt-4">
-            <label for="justCommentPerson">Пиши свой комментарий</label>
-            <textarea class="form-control" id="justCommentPerson" rows="3"></textarea>
+          <div class="person py-2">
+            <label>комментарий от: Николай</label>
+          </div>
+
+          <div class="form-group">
+            <textarea class="form-control" id="justCommentPerson" rows="3" placeholder="Например: Отличная статья, здесь много полезного"></textarea>
           </div>
 
           <button type="button" class="btn btn-info">Отправить комментарий</button>
@@ -166,13 +168,26 @@ export default defineComponent({
           <br>
           <div style="height: 1px; background-color: silver;"></div><br>
 
-          <blockquote class="blockquote text-right">
-            <p class="mb-0">Не стоит переживать о своих данных:</p>
-            <footer class="blockquote-footer">Конечно твоё имя будет видно, <cite title="Source Title" style="color: darkorange;">но не почта.</cite></footer>
-          </blockquote>
-        </form>
+          <div class="desk-for-person d-flex">
 
-        <!-- 451f + books -->
+            <div class="d-flex w-50">
+              <div><img class="ico-flames" src="/icons/flames.png"></div>
+              <div class="text-flames">
+                <p>451</p>
+              </div>
+            </div>
+
+            <div class="blockq-wrapper w-50">
+              <blockquote class="blockquote text-right">
+                <p class="mb-0">Не стоит переживать о своих данных:</p>
+                <footer class="blockquote-footer">Конечно твоё имя будет видно, <cite title="Source Title" style="color: darkorange;">но не почта.</cite></footer>
+              </blockquote>
+            </div>
+
+          </div>
+
+          
+        </form>
       </div>
 
       <div class="line"></div><br>
@@ -221,7 +236,7 @@ export default defineComponent({
   border-right:20px solid rgb(255, 51, 61);
 }
 
-.reactions p { font-size: 20px; color: goldenrod;} 
+.reactions p { font-size: 14px; color: rgb(153, 141, 110);} 
 .reactions img {
   width: 40px;
   height: 40px;
@@ -243,6 +258,30 @@ export default defineComponent({
 .space-comment-area, .wrapper-comments-persons { padding: 20px; }
 .comment-moment { background-color: darkslateblue;}
 .wrapper-comment { background-color: #232222;}
+.person {
+  font-size: 20px;
+}
+.ico-flames  { height: 30px; width: 30px; }
+.text-flames > p { 
+  font-weight:lighter;
+  font-family: razed-light;
+  font-size: 21px;
+  animation-iteration-count: infinite;
+  animation-name: flames;
+  animation-duration: 10s;
+}
+
+@keyframes flames {
+  0% { color: #d10028; }
+  10% { color: #b7022d; }
+  20% { color: #ef7816; }
+  30% { color: #f79219; }
+  40% { color: #ffa91a; }
+  50% { color: #f79219; }
+  60% { color: #ef7816; }
+  90% { color: #d10028; }
+  100% { color: #b7022d; } 
+}
 
 label > input {
   visibility: hidden;
