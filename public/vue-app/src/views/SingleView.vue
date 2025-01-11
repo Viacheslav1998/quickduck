@@ -119,7 +119,17 @@ export default defineComponent({
         </div>
       </div>
     </div>
-   <!-- comments -->
+    <div class="wrapper-navi mb-4">
+      <div class="fone-space d-flex justify-content-between p-4">
+        <div>
+          <button type="button" class="btn btn-warning">Прошлая страница</button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-warning">Следующая страница</button> 
+        </div>
+      </div>
+    </div> 
+    <!-- comments -->
     <div class="wrapper-comment my-2">
 
       <div class="comment-moment pb-1 pt-2 px-2">
@@ -183,10 +193,7 @@ export default defineComponent({
                 <footer class="blockquote-footer">Конечно твоё имя будет видно, <cite title="Source Title" style="color: darkorange;">но не почту.</cite></footer>
               </blockquote>
             </div>
-
           </div>
-
-          
         </form>
       </div>
 
@@ -206,7 +213,7 @@ export default defineComponent({
         <div class="media">
           <img class="mr-3" src="/icons/user.png" alt="user">
           <div class="media-body">
-            <i>дата создания: 2021-01-02</i>
+            <i>дата комментария: 2021-01-02</i>
             <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis quaerat explicabo esse. Labore fuga eligendi incidunt ea officia sapiente, deserunt aliquam ad laborum soluta unde harum obcaecati repellendus perferendis aliquid!
           </div>
@@ -215,7 +222,7 @@ export default defineComponent({
         <div class="media">
           <img class="mr-3" src="/icons/avatar.png" alt="user">
           <div class="media-body">
-            <i>дата создания: 2021-01-02</i>
+            <i>дата комментария: 2021-01-02</i>
             <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
             я считаю, что это отличная статья
           </div>
@@ -224,7 +231,7 @@ export default defineComponent({
         <div class="media">
           <img class="mr-3" src="/icons/user.png" alt="user">
           <div class="media-body">
-            <i>дата создания: 2021-01-02</i>
+            <i>дата комментария: 2021-01-02</i>
             <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
             я считаю, что это отличная статья
           </div>
@@ -255,6 +262,15 @@ export default defineComponent({
 .breadcrumb { background-color: #232222; border: 1px solid #666666;}
 .breadcrumb-item a { color: darkturquoise; }
 .breadcrumb-item { color: white; }
+
+.wrapper-navi {
+  background: url('../images/space3.jpg');
+  background-size: cover;
+  border: 1px solid rgb(95, 95, 95);
+}
+.fone-space {
+  background-color: rgba(26, 24, 24, 0.966);
+}
 
 .custom-comments {
   border: 1px solid #666666;
