@@ -260,7 +260,7 @@ export default defineComponent({
 
 .begin-news h1 {  font-weight: lighter; }
 .breadcrumb { background-color: #232222; border: 1px solid #666666;}
-.breadcrumb-item a { color: darkturquoise; }
+.breadcrumb-item a { color: goldenrod; }
 .breadcrumb-item { color: white; }
 
 .wrapper-navi {
