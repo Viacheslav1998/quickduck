@@ -180,7 +180,7 @@ export default defineComponent({
             <div class="blockq-wrapper w-50">
               <blockquote class="blockquote text-right">
                 <p class="mb-0">Не стоит переживать о своих данных:</p>
-                <footer class="blockquote-footer">Конечно твоё имя будет видно, <cite title="Source Title" style="color: darkorange;">но не почта.</cite></footer>
+                <footer class="blockquote-footer">Конечно твоё имя будет видно, <cite title="Source Title" style="color: darkorange;">но не почту.</cite></footer>
               </blockquote>
             </div>
 
@@ -197,26 +197,34 @@ export default defineComponent({
       </div>
 
       <div class="wrapper-comments-persons">
+        <!-- показать последние 10 новостей -->
+
+        <div>
+          <p>Показаны последние 10 комментариев:</p>
+        </div>
 
         <div class="media">
-          <img class="mr-3" src="..." alt="Generic placeholder image">
+          <img class="mr-3" src="/icons/user.png" alt="user">
           <div class="media-body">
+            <i>дата создания: 2021-01-02</i>
+            <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis quaerat explicabo esse. Labore fuga eligendi incidunt ea officia sapiente, deserunt aliquam ad laborum soluta unde harum obcaecati repellendus perferendis aliquid!
+          </div>
+        </div>
+
+        <div class="media">
+          <img class="mr-3" src="/icons/avatar.png" alt="user">
+          <div class="media-body">
+            <i>дата создания: 2021-01-02</i>
             <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
             я считаю, что это отличная статья
           </div>
         </div>
 
         <div class="media">
-          <img class="mr-3" src="..." alt="Generic placeholder image">
+          <img class="mr-3" src="/icons/user.png" alt="user">
           <div class="media-body">
-            <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
-            я считаю, что это отличная статья
-          </div>
-        </div>
-
-        <div class="media">
-          <img class="mr-3" src="..." alt="Generic placeholder image">
-          <div class="media-body">
+            <i>дата создания: 2021-01-02</i>
             <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
             я считаю, что это отличная статья
           </div>
@@ -258,14 +266,18 @@ export default defineComponent({
 .space-comment-area, .wrapper-comments-persons { padding: 20px; }
 .comment-moment { background-color: darkslateblue;}
 .wrapper-comment { background-color: #232222;}
-.person {
-  font-size: 20px;
+.person { font-size: 20px; }
+.media img { width: 32px; height: 32px; }
+.media {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #a8b1e16c;
 }
 .ico-flames  { height: 30px; width: 30px; }
 .text-flames > p { 
   font-weight:lighter;
   font-family: razed-light;
-  font-size: 21px;
+  font-size: 24px;
   animation-iteration-count: infinite;
   animation-name: flames;
   animation-duration: 10s;
