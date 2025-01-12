@@ -1,17 +1,40 @@
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 
 export default defineComponent ({
   name: "HomeView",
   setup() {
+    const news = ref([]);
     const images = ref([
       { src: "/soc-icons/sm1.png", alt: "ico 1" },
       { src: "/soc-icons/sm2.png", alt: "ico 2" },
       { src: "/soc-icons/sm3.png", alt: "ico 3" },
     ]);
 
+    async function getNews() {
+      const url = "http://quickduck.com/api/news";
+      try { 
+        const response = await fetch(url);
+        if(!response.ok) {
+          throw new Error(`Статус ответа: ${response.status}`);
+        }
+
+        const news = await response.json();
+        return news;
+
+      } catch (error) {
+        console.error('Ошибка: ', error.message)
+      }
+    }
+
+    onMounted(async() => {
+      news.value = await getNews();
+      console.log(news);
+    });
+
     return {
       images,
+      news,
     };
   },
 });
@@ -24,65 +47,80 @@ export default defineComponent ({
       <h1>Какие то новости</h1>
     </div>
 
-    <div class="custom-news">
-      <div class="main-news">
-        <h1>какая то новость</h1>
-      </div>
-      <div class="wrapper-main-box d-flex justify-content-between">
-        <div class="box-date-time">
-          <span>публикация: </span>
-          <span>11.02.2024</span>
-          <p>время: 22:30</p>
+    <div class="preloader d-flex justify-content-center">
+      <div class="wrapper-preloader">
+        <div class="preloader-gif">
+          <img src="/icons/anobus.gif" alt="загрузка">
         </div>
-        <div class="tags">
-          <a href="#">#news</a>
-          <a href="#">#игры</a>
-          <a href="#">#интерессное</a>
+        <div style="text-align: center; color: burlywood;">
+          <h3>Загрузка . . . </h3>
         </div>
       </div>
-      <img src="/images/m2.jpg" class="custom-images">
-      <div class="custom-text pt-3">
-        <p>Есть над чем задуматься: многие известные личности призывают нас к новым свершениям, которые, в свою очередь, должны быть в равной степени предоставлены сами себе. Равным образом, современная методология разработки не оставляет шанса для дальнейших направлений развития.</p>
-      </div>
-      <div class="wrapper-soc-content d-flex justify-content-between">
-        <div class="box-info d-flex align-items-center" style="color: whtie;">
-          <div class="px-2 box-icons"><img src="/icons/views.png" alt="просмотры"> 825</div>
-          <div class="pr-2 box-icons"><img src="/icons/comments.png" alt="комментарии"> 200</div>
-          <div class="box-reaction p-2 d-flex">
-            <div class="image-stack">
-              <img
-                v-for="(image, index) in images" 
-                :key="index"
-                :src="image.src"
-                :alt="image.alt"
-                class="stacked-image"
-                :style="{ left: `${index * 27}px` }"
-              />
-            </div>
+    </div>
+
+    <div class="wrapper-news">
+
+      <div class="custom-news">
+        <div class="main-news">
+          <h1>какая то новость</h1>
+        </div>
+        <div class="wrapper-main-box d-flex justify-content-between">
+          <div class="box-date-time">
+            <span>публикация: </span>
+            <span>11.02.2024</span>
+            <p>время: 22:30</p>
+          </div>
+          <div class="tags">
+            <a href="#">#news</a>
+            <a href="#">#игры</a>
+            <a href="#">#интерессное</a>
           </div>
         </div>
-        <div class="custom-text d-flex align-items-end">
-          <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
+        <img src="/images/m2.jpg" class="custom-images">
+        <div class="custom-text pt-3">
+          <p>Есть над чем задуматься: многие известные личности призывают нас к новым свершениям, которые, в свою очередь, должны быть в равной степени предоставлены сами себе. Равным образом, современная методология разработки не оставляет шанса для дальнейших направлений развития.</p>
+        </div>
+        <div class="wrapper-soc-content d-flex justify-content-between">
+          <div class="box-info d-flex align-items-center" style="color: whtie;">
+            <div class="px-2 box-icons"><img src="/icons/views.png" alt="просмотры"> 825</div>
+            <div class="pr-2 box-icons"><img src="/icons/comments.png" alt="комментарии"> 200</div>
+            <div class="box-reaction p-2 d-flex">
+              <div class="image-stack">
+                <img
+                  v-for="(image, index) in images" 
+                  :key="index"
+                  :src="image.src"
+                  :alt="image.alt"
+                  class="stacked-image"
+                  :style="{ left: `${index * 27}px` }"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="custom-text d-flex align-items-end">
+            <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
+          </div>
         </div>
       </div>
+
+      <!-- pagination -->
+      <div class="box-pagination">
+        <nav aria-label="navigation custom-pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">туда</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">сюда</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
-    
-    <!-- pagination -->
-    <div class="box-pagination">
-      <nav aria-label="navigation custom-pagination">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">туда</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">сюда</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+
   </div>
 </template>
 
@@ -98,6 +136,10 @@ export default defineComponent ({
 .tags a { padding-left: 5px; color: grey; }
 .tags a:hover { color: deepskyblue; }
 .box-date-time { color: grey;}
+.preloader-gif {
+  background-color: rgba(10, 225, 171, 0.537);
+  border-radius: 50%;
+}
 .custom-news {
   border: 1px solid #666666;
   padding: 10px;

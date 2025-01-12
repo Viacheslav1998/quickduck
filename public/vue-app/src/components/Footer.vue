@@ -23,7 +23,8 @@
         </div>
         <i>работает над проектом: Вячеслав</i><br> <b style="color: darkorange">Компания: SilentStorm | 2024-2025</b><br>
         <i>ресурсы взяты с:</i><br>
-        <b style="color: deepskyblue; font-family: Calibri;">www.flaticon.com</b>
+        <b style="color: deepskyblue; font-family: Calibri;">www.flaticon.com</b><br>
+        <b style="color: tomato; font-family: Calibri;">www.lottiefiles.com</b>
       </div>
       <div class="c-block">
         <h1>&lt;hello-<span style="color: deeppink;">world
