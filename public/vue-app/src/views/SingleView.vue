@@ -26,11 +26,13 @@ export default defineComponent({
     </div>
 
     <nav aria-label="breadcrumb" class="pt-2">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Домой</a></li>
-        <li class="breadcrumb-item"><a href="#">Рубрика</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Тег</li>
-      </ol>
+      <div class="breacrumb-fone">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Домой</a></li>
+          <li class="breadcrumb-item"><a href="#">Рубрика</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Тег</li>
+        </ol>
+      </div>
     </nav>
 
 
@@ -259,7 +261,8 @@ export default defineComponent({
 }
 
 .begin-news h1 {  font-weight: lighter; }
-.breadcrumb { background-color: #232222; border: 1px solid #666666;}
+.breadcrumb { background-color: rgba(26, 24, 24, 0.966); border: 1px solid #666666;}
+.breacrumb-fone { background: url('../images/space3.jpg'); }
 .breadcrumb-item a { color: goldenrod; }
 .breadcrumb-item { color: white; }
 
@@ -268,9 +271,7 @@ export default defineComponent({
   background-size: cover;
   border: 1px solid rgb(95, 95, 95);
 }
-.fone-space {
-  background-color: rgba(26, 24, 24, 0.966);
-}
+.fone-space { background-color: rgba(26, 24, 24, 0.966); }
 
 .custom-comments {
   border: 1px solid #666666;
