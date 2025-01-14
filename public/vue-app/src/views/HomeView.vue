@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref, onMounted} from "vue";
 
 export default defineComponent ({
   name: "HomeView",
@@ -26,18 +26,24 @@ export default defineComponent ({
       } catch (error) {
         console.error('Ошибка: ', error.message)
       }
-      
     }
+
+    const formatDate = (date) => {
+      if(!date) return 'данных нет';
+      return new Date(date).toLocaleDateString('ru-RU');
+    };
 
     onMounted(async() => {
       news.value = await getNews();
       preloader.value = false;
+      console.log(news);
     });
 
     return {
       images,
       news,
       preloader,
+      formatDate
     };
   },
 });
@@ -63,14 +69,17 @@ export default defineComponent ({
 
     <div class="wrapper-news" v-else>
 
-      <div class="custom-news" >
+      <div 
+        class="custom-news"
+        v-for="item in news"
+      >
         <div class="main-news">
-          <h1>какая то новость</h1>
+          <h1>{{ item.name }}</h1>
         </div>
         <div class="wrapper-main-box d-flex justify-content-between">
           <div class="box-date-time">
             <span>публикация: </span>
-            <span>11.02.2024</span>
+            <span>{{ formatDate(item.created_at || item.updated_at) }}</span>
             <p>время: 22:30</p>
           </div>
           <div class="tags">
