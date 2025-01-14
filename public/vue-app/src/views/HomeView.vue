@@ -99,7 +99,7 @@ export default defineComponent ({
         </div>
         <img src="/images/m2.jpg" class="custom-images">
         <div class="custom-text pt-3">
-          <p>Есть над чем задуматься: многие известные личности призывают нас к новым свершениям, которые, в свою очередь, должны быть в равной степени предоставлены сами себе. Равным образом, современная методология разработки не оставляет шанса для дальнейших направлений развития.</p>
+          <p v-html="item.desk"></p>
         </div>
         <div class="wrapper-soc-content d-flex justify-content-between">
           <div class="box-info d-flex align-items-center" style="color: whtie;">
