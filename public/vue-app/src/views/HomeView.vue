@@ -29,8 +29,16 @@ export default defineComponent ({
     }
 
     const formatDate = (date) => {
-      if(!date) return 'данных нет';
+      if(!date) return "данных нет";
       return new Date(date).toLocaleDateString('ru-RU');
+    };
+
+    const formatTime = (date) => {
+      if(!date) return "данных нет";
+      return new Date(date).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
     };
 
     onMounted(async() => {
@@ -43,7 +51,8 @@ export default defineComponent ({
       images,
       news,
       preloader,
-      formatDate
+      formatDate,
+      formatTime
     };
   },
 });
@@ -80,7 +89,7 @@ export default defineComponent ({
           <div class="box-date-time">
             <span>публикация: </span>
             <span>{{ formatDate(item.created_at || item.updated_at) }}</span>
-            <p>время: 22:30</p>
+            <p>опублитковано в: {{ formatTime(item.created_at || item.updated_at ) }}</p>
           </div>
           <div class="tags">
             <a href="#">#news</a>
