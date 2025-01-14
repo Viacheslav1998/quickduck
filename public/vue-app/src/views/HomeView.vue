@@ -5,6 +5,7 @@ export default defineComponent ({
   name: "HomeView",
   setup() {
     const news = ref([]);
+    const preloader = ref(true);
     const images = ref([
       { src: "/soc-icons/sm1.png", alt: "ico 1" },
       { src: "/soc-icons/sm2.png", alt: "ico 2" },
@@ -25,16 +26,18 @@ export default defineComponent ({
       } catch (error) {
         console.error('Ошибка: ', error.message)
       }
+      
     }
 
     onMounted(async() => {
       news.value = await getNews();
-      console.log(news);
+      preloader.value = false;
     });
 
     return {
       images,
       news,
+      preloader,
     };
   },
 });
@@ -47,7 +50,7 @@ export default defineComponent ({
       <h1>Какие то новости</h1>
     </div>
 
-    <div class="preloader d-flex justify-content-center">
+    <div class="preloader d-flex justify-content-center" v-if="preloader">
       <div class="wrapper-preloader">
         <div class="preloader-gif">
           <img src="/icons/anobus.gif" alt="загрузка">
@@ -58,9 +61,9 @@ export default defineComponent ({
       </div>
     </div>
 
-    <div class="wrapper-news">
+    <div class="wrapper-news" v-else>
 
-      <div class="custom-news">
+      <div class="custom-news" >
         <div class="main-news">
           <h1>какая то новость</h1>
         </div>
@@ -136,10 +139,7 @@ export default defineComponent ({
 .tags a { padding-left: 5px; color: grey; }
 .tags a:hover { color: deepskyblue; }
 .box-date-time { color: grey;}
-.preloader-gif {
-  background-color: rgba(10, 225, 171, 0.537);
-  border-radius: 50%;
-}
+.preloader-gif {height: 150px; width: 150px; background-color: rgba(46, 109, 66, 0.429); border-radius: 50%;}
 .custom-news {
   border: 1px solid #666666;
   padding: 10px;

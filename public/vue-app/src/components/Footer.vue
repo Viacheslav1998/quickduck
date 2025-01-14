@@ -27,7 +27,7 @@
         <b style="color: tomato; font-family: Calibri;">www.lottiefiles.com</b>
       </div>
       <div class="c-block">
-        <h1>&lt;hello-<span style="color: deeppink;">world
+        <h1>&lt;<span style="color: #99afc9;">hell</span>o-<span style="color: deeppink;">world
           /></span></h1>
         <p>you're in the knowledge resource</p>
         <p style="font-size: 18px; color: aqua; padding: 0;">you'll learn how technology works</p>
