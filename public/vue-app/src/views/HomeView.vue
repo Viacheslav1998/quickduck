@@ -97,7 +97,7 @@ export default defineComponent ({
             <a href="#">#интерессное</a>
           </div>
         </div>
-        <img src="/images/m2.jpg" class="custom-images">
+        <img :src="item.path_to_image || '/images/notFoundImg.jpg'"  class="custom-images">
         <div class="custom-text pt-3">
           <p v-html="item.desk"></p>
         </div>
