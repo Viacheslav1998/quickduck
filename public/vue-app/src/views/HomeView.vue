@@ -21,7 +21,7 @@ export default defineComponent ({
         }
 
         const news = await response.json();
-        return news;
+        return news || [];
 
       } catch (error) {
         console.error('Ошибка: ', error.message)
@@ -78,68 +78,76 @@ export default defineComponent ({
 
     <div class="wrapper-news" v-else>
 
-      <div 
-        class="custom-news"
-        v-for="item in news"
-      >
-        <div class="main-news">
-          <h1>{{ item.name }}</h1>
-        </div>
-        <div class="wrapper-main-box d-flex justify-content-between">
-          <div class="box-date-time">
-            <span>публикация: </span>
-            <span>{{ formatDate(item.created_at || item.updated_at) }}</span>
-            <p>опублитковано в: {{ formatTime(item.created_at || item.updated_at ) }}</p>
+      <!-- если данных нет ничего не показывать -->
+      <div v-if="news.length === 0">
+        <h1>Данных нет</h1>
+      </div>
+
+      <div v-else>
+        <div 
+          class="custom-news"
+          v-for="item in news"
+        >
+          <div class="main-news">
+            <h1>{{ item.name }}</h1>
           </div>
-          <div class="tags">
-            <a href="#">#news</a>
-            <a href="#">#игры</a>
-            <a href="#">#интерессное</a>
-          </div>
-        </div>
-        <img :src="item.path_to_image || '/images/notFoundImg.jpg'"  class="custom-images">
-        <div class="custom-text pt-3">
-          <p v-html="item.desk"></p>
-        </div>
-        <div class="wrapper-soc-content d-flex justify-content-between">
-          <div class="box-info d-flex align-items-center" style="color: whtie;">
-            <div class="px-2 box-icons"><img src="/icons/views.png" alt="просмотры"> 825</div>
-            <div class="pr-2 box-icons"><img src="/icons/comments.png" alt="комментарии"> 200</div>
-            <div class="box-reaction p-2 d-flex">
-              <div class="image-stack">
-                <img
-                  v-for="(image, index) in images" 
-                  :key="index"
-                  :src="image.src"
-                  :alt="image.alt"
-                  class="stacked-image"
-                  :style="{ left: `${index * 27}px` }"
-                />
-              </div>
+          <div class="wrapper-main-box d-flex justify-content-between">
+            <div class="box-date-time">
+              <span>публикация: </span>
+              <span>{{ formatDate(item.created_at || item.updated_at) }}</span>
+              <p>опублитковано в: {{ formatTime(item.created_at || item.updated_at ) }}</p>
+            </div>
+            <div class="tags">
+              <a href="#">#news</a>
+              <a href="#">#игры</a>
+              <a href="#">#интерессное</a>
             </div>
           </div>
-          <div class="custom-text d-flex align-items-end">
-            <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
+          <img :src="item.path_to_image || '/images/notFoundImg.jpg'"  class="custom-images">
+          <div class="custom-text pt-3">
+            <p v-html="item.desk"></p>
           </div>
+          <div class="wrapper-soc-content d-flex justify-content-between">
+            <div class="box-info d-flex align-items-center" style="color: whtie;">
+              <div class="px-2 box-icons"><img src="/icons/views.png" alt="просмотры"> 825</div>
+              <div class="pr-2 box-icons"><img src="/icons/comments.png" alt="комментарии"> 200</div>
+              <div class="box-reaction p-2 d-flex">
+                <div class="image-stack">
+                  <img
+                    v-for="(image, index) in images" 
+                    :key="index"
+                    :src="image.src"
+                    :alt="image.alt"
+                    class="stacked-image"
+                    :style="{ left: `${index * 27}px` }"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="custom-text d-flex align-items-end">
+              <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- pagination -->
+        <div class="box-pagination">
+          <nav aria-label="navigation custom-pagination">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">туда</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">сюда</a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
 
-      <!-- pagination -->
-      <div class="box-pagination">
-        <nav aria-label="navigation custom-pagination">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">туда</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">сюда</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
     </div>
 
   </div>
