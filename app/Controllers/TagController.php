@@ -7,6 +7,10 @@ use CodeIgniter\RESTful\ResourceController;
 
 class TagController extends ResourceController
 {
+
+    protected $modelName = 'App\Models\TagsModel';
+    protected $format = 'json';
+
     /**
      * Return an array of resource objects, themselves in array format.
      *
@@ -46,7 +50,15 @@ class TagController extends ResourceController
      */
     public function create()
     {
-        //
+        $data = $this->request->getPost();
+
+        if (!$this->model->insert($data)) {
+            return $this->fail($this->model->errors());
+        }
+
+        return $this->respondCreated([
+            'message' => 'Тег успешно добавлен!'
+        ]);
     }
 
     /**
