@@ -5,6 +5,8 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\NewsModel;
+use App\Models\TagModel;
+use App\Models\NewsTagsModel;
 
 class NewsController extends ResourceController
 {
@@ -64,27 +66,40 @@ class NewsController extends ResourceController
     public function create()
     {
         $model = new NewsModel();
+        $tagModel = new TagModel();
+        $newsTagsModel = new NewsTagsModel();
 
         // post data
         $data = [
             'name' => $this->request->getPost('name'),
             'title' => $this->request->getPost('title'),
             'desk' => $this->request->getPost('desk'),
+            'tags_name' => $this->request->getPost('tags_name');
             'path_to_image' => $this->request->getPost('path_to_image')
         ];
 
-        // save and response
-        if ($model->insert($data)) {
-            return $this->response->setJSON([
-                'status' => 'success',
-                'message' => 'Данные успешно добавлены.'
-            ]);
-        } else {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'Ошибка при добавлении данных.'
-            ]);
+        $tagsString = $this->request->getPost('tags_name');
+        $tags = array_map('trim', explode(',', $tagsString));
+
+        // save
+
+        if ($newsId = $newsModel->insert($newsModel)) {
+          $tagsId = [];
         }
+
+
+        // save and response
+        // if ($model->insert($data)) {
+        //     return $this->response->setJSON([
+        //         'status' => 'success',
+        //         'message' => 'Данные успешно добавлены.'
+        //     ]);
+        // } else {
+        //     return $this->response->setJSON([
+        //         'status' => 'error',
+        //         'message' => 'Ошибка при добавлении данных.'
+        //     ]);
+        // }
     }
 
     /**

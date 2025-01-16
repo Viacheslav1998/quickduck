@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class NewsTagsModel extends Model
 {
     protected $table            = 'news_tags';
-    protected $primaryKey       = ['news_id', 'tag_id'];
+    protected $primaryKey       = 'false';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
