@@ -24,6 +24,10 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
     
     // persons
     $routes->resource('person', ['controller' => 'PersonController']);
+
+    //tags and news
+    $routes->resource('tags');
+    $routes->resource('tags-news');
 });
 
 //proxy
