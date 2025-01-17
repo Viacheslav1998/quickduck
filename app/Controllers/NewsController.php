@@ -60,46 +60,79 @@ class NewsController extends ResourceController
 
     /**
      * Create a new resource object, from "posted" parameters.
+     * Create News with tags
      *
      * @return ResponseInterface
      */
     public function create()
     {
-        $model = new NewsModel();
-        $tagModel = new TagModel();
-        $newsTagsModel = new NewsTagsModel();
+      $newsModel = new NewsModel();
+      $tagModel = new TagModel();
+      $newsTagsModel = new NewsTagsModel();
 
-        // post data
-        $data = [
-            'name' => $this->request->getPost('name'),
-            'title' => $this->request->getPost('title'),
-            'desk' => $this->request->getPost('desk'),
-            'tags_name' => $this->request->getPost('tags_name');
-            'path_to_image' => $this->request->getPost('path_to_image')
-        ];
+      // данные новости
+      $newsData = [
+          'name' => $this->request->getPost('name'),
+          'title' => $this->request->getPost('title'),
+          'desk' => $this->request->getPost('desk'),
+          'path_to_image' => $this->request->getPost('path_to_image')
+      ];
 
-        $tagsString = $this->request->getPost('tags_name');
-        $tags = array_map('trim', explode(',', $tagsString));
+      // строка с тегами
+      $tagsString = $this->request->getPost('tags_name');
+      $tags = array_map('trim', explode(',', $tagsString));
 
-        // save
-
-        if ($newsId = $newsModel->insert($newsModel)) {
+      // сохранить новость
+      if ($newsId = $newsModel->insert($newsData)) {
           $tagsId = [];
-        }
 
+          // обработка тегов
+          foreach ($tags as $tagName) {
+              if (empty($tagName)) continue;
 
-        // save and response
-        // if ($model->insert($data)) {
-        //     return $this->response->setJSON([
-        //         'status' => 'success',
-        //         'message' => 'Данные успешно добавлены.'
-        //     ]);
-        // } else {
-        //     return $this->response->setJSON([
-        //         'status' => 'error',
-        //         'message' => 'Ошибка при добавлении данных.'
-        //     ]);
-        // }
+              // проверка на существование тега
+              $existingTag = $tagModel->where('name', $tagName)->first();
+
+              if ($existingTag) {
+                  $tagsId[] = $existingTag['id'];
+              } else {
+                  // создание нового тега
+                  $tagId = $tagModel->insert(['name' => $tagName]);
+
+                  if (!$tagId) {
+                      return $this->response->setJSON([
+                          'status' => 'error',
+                          'message' => 'Ошибка при сохранении тега',
+                          'tag_name' => $tagName,
+                          'errors' => $tagModel->errors(),
+                      ]);
+                  }
+
+                  $tagsId[] = $tagId;
+              }
+          }
+
+          // связываем новости с тегами
+          foreach ($tagsId as $tagId) {
+              $newsTagsModel->insert([
+                  'news_id' => $newsId,
+                  'tag_id' => $tagId,
+              ]);
+          }
+
+          // успешный ответ
+          return $this->response->setJSON([
+              'status' => 'success',
+              'message' => 'Новость и теги успешно добавлены',
+              'news_id' => $newsId,
+          ]);
+      } else {
+          // ошибка при добавлении новости
+          return $this->response->setJSON([
+              'status' => 'error',
+              'message' => 'Ошибка при добавлении новости',
+          ]);
+      }
     }
 
     /**
