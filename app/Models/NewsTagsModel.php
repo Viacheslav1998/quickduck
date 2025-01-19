@@ -11,7 +11,6 @@ class NewsTagsModel extends Model
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
     protected $allowedFields    = ['news_id', 'tag_id'];
 
     protected bool $allowEmptyInserts = false;

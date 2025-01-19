@@ -120,6 +120,11 @@ class NewsController extends ResourceController
               ]);
           }
 
+          log_message('debug', 'Создана новость с ID: ' . $newsId);
+          log_message('debug', 'Добавлен тег с ID: ' . $tagId);
+
+
+
           // успешный ответ
           return $this->response->setJSON([
               'status' => 'success',
