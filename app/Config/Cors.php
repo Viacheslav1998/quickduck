@@ -35,9 +35,7 @@ class Cors extends BaseConfig
          *   - ['https://www.example.com']
          */
         'allowedOrigins' => [
-            'http://localhost:8080',
-            'http://localhost:5173',
-            'http://quickduck.com'
+            '*'
         ],
 
         /**

@@ -12,6 +12,7 @@ $routes->get('/test-data', 'TestController::testJson');
 $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $routes): void {
     // news
     $routes->resource('news', ['controller' => 'NewsController']);
+    $routes->options('news/(:num)', 'NewsController::preflight');
 
     // imagen news
     $routes->resource('upload-image', [
@@ -24,10 +25,6 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
     
     // persons
     $routes->resource('person', ['controller' => 'PersonController']);
-
-    //tags and news
-    $routes->resource('tags');
-    $routes->resource('tags-news');
 });
 
 //proxy

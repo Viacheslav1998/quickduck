@@ -5,8 +5,6 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\NewsModel;
-use App\Models\TagModel;
-use App\Models\NewsTagsModel;
 
 class NewsController extends ResourceController
 {
@@ -23,6 +21,15 @@ class NewsController extends ResourceController
             ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
             ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
             ->setStatusCode(200);
+    }
+
+    public function preflight($id = null)
+    {
+      return $this->response->setHeader('Access-Control-Allow-Origin', '*')
+            ->setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+            ->setStatusCode(200)
+            ->setJSON([]);
     }
 
     /**
@@ -64,81 +71,38 @@ class NewsController extends ResourceController
      *
      * @return ResponseInterface
      */
-    public function create()
-    {
-      $newsModel = new NewsModel();
-      $tagModel = new TagModel();
-      $newsTagsModel = new NewsTagsModel();
+   public function create()
+   {
+     $newsModel = new NewsModel();
 
-      // данные новости
-      $newsData = [
-          'name' => $this->request->getPost('name'),
-          'title' => $this->request->getPost('title'),
-          'desk' => $this->request->getPost('desk'),
-          'path_to_image' => $this->request->getPost('path_to_image')
-      ];
+     $newsData = [
+       'name' => $this->request->getPost('name'),
+       'title' => $this->request->getPost('title'),
+       'desk' => $this->request->getPost('desk'),
+       'path_to_image' => $this->request->getPost('path_to_image'),
+       'tags' => $this->request->getPost('tags')
+     ];
+    
+     $news = $newsModel->insert($newsData);
 
-      // строка с тегами
-      $tagsString = $this->request->getPost('tags_name');
-      $tags = array_map('trim', explode(',', $tagsString));
-
-      // сохранить новость
-      if ($newsId = $newsModel->insert($newsData)) {
-          $tagsId = [];
-
-          // обработка тегов
-          foreach ($tags as $tagName) {
-              if (empty($tagName)) continue;
-
-              // проверка на существование тега
-              $existingTag = $tagModel->where('name', $tagName)->first();
-
-              if ($existingTag) {
-                  $tagsId[] = $existingTag['id'];
-              } else {
-                  // создание нового тега
-                  $tagId = $tagModel->insert(['name' => $tagName]);
-
-                  if (!$tagId) {
-                      return $this->response->setJSON([
-                          'status' => 'error',
-                          'message' => 'Ошибка при сохранении тега',
-                          'tag_name' => $tagName,
-                          'errors' => $tagModel->errors(),
-                      ]);
-                  }
-
-                  $tagsId[] = $tagId;
-              }
-          }
-
-          // связываем новости с тегами
-          foreach ($tagsId as $tagId) {
-              $newsTagsModel->insert([
-                  'news_id' => $newsId,
-                  'tag_id' => $tagId,
-              ]);
-          }
-
-          log_message('debug', 'Создана новость с ID: ' . $newsId);
-          log_message('debug', 'Добавлен тег с ID: ' . $tagId);
-
-
-
-          // успешный ответ
-          return $this->response->setJSON([
-              'status' => 'success',
-              'message' => 'Новость и теги успешно добавлены',
-              'news_id' => $newsId,
-          ]);
-      } else {
-          // ошибка при добавлении новости
-          return $this->response->setJSON([
-              'status' => 'error',
-              'message' => 'Ошибка при добавлении новости',
-          ]);
-      }
+     if ($news) {
+       // success
+       return $this->response->setJSON([
+         'status' => 'success',
+         'message' => 'Новость успешно добавлена',
+         'news_id' => $news,
+      ]);
+     } else {
+       // error
+       return $this->response->setJSON([
+         'status' => 'error',
+         'message' => 'Ошибка при добавлении новости',
+         'errors' => $newsModel->errors(),
+       ]);
+     }
     }
+
+
 
     /**
      * Return the editable properties of a resource object.
@@ -161,27 +125,25 @@ class NewsController extends ResourceController
      */
     public function update($id = null)
     {
-        $data = $this->request->getJSON(true);
-        if (!$data) {
-          return $this->response->setStatusCode(400)->setJSON([
-            'error' => 'Неверный запрос'
-          ]);
-        }
+      $data = $this->request->getJSON(true);
+      if (!$data) {
+        return $this->response->setStatusCode(400)->setJSON([
+          'error' => 'Неверный запрос'
+        ]);
+      }
 
-        $newsModel = new NewsModel();
+      $newsModel = new NewsModel();
 
-        if ($newsModel->update($id, $data)) {
-          return $this->response->setJSON([
-            'message' => 'Новость успешно обновлена'
-          ]);
-        } else {
-           log_message('error', 'Ошибка обновления новости с ID ' . $id . '. Данные: ' . json_encode($data));
-          return $this->response->setStatusCode(500)->setJSON([
-            'error' => 'Ошибки обновления'
-          ]);
-        }
-
-
+      if ($newsModel->update($id, $data)) {
+        return $this->response->setJSON([
+          'message' => 'Новость успешно обновлена'
+        ]);
+      } else {
+         log_message('error', 'Ошибка обновления новости с ID ' . $id . '. Данные: ' . json_encode($data));
+        return $this->response->setStatusCode(500)->setJSON([
+          'error' => 'Ошибки обновления'
+        ]);
+      }
     }
 
     /**
@@ -193,33 +155,52 @@ class NewsController extends ResourceController
      */
     public function delete($id = null)
     {
-        $news = $this->model->find($id);
 
-        if (!$news) {
-          return $this->respond([
-            'status' => 'error',
-            'message' => 'Новость не найдена',
-          ], 404);
-        }
+      log_message('debug', 'Удаление новости с ID: ' . $id);
 
-        if (!empty($news['path_to_image'])) {
-          
-          $imageName  = basename($news['path_to_image']);
-          $imagePath = FCPATH . 'images/' . $imageName;
+      $newsModel = new NewsModel();
 
-          if (file_exists($imagePath)) {
-            unlink($imagePath);
-          } else {
-            log_message('error', 'Изображение не найдено: ' . $imagePath);
+      // Поиск новости
+      $news = $newsModel->find($id);
+
+      if (!$news) {
+        return $this->response->setJSON([
+          'status' => 'error',
+          'message' => 'Новость не найдена',
+        ], 404);
+      }
+
+      // Удаление изображения, если оно существует
+      if (!empty($news['path_to_image'])) {
+        $imageName = basename($news['path_to_image']);
+        $imagePath = FCPATH . 'images/' . $imageName;
+
+        if (file_exists($imagePath)) {
+          if (!unlink($imagePath)) {
+            log_message('error', 'Не удалось удалить изображение: ' . $imagePath);
+            return $this->response->setJSON([
+              'status' => 'error',
+              'message' => 'Не удалось удалить изображение',
+            ], 500);
           }
+        } else {
+          log_message('error', 'Изображение не найдено: ' . $imagePath);
         }
+      }
 
-        $this->model->delete($id);
-
-        return $this->respond([
+      // Удаление новости
+      if ($newsModel->delete($id)) {
+        return $this->response->setJSON([
           'status' => 'success',
-          'message' => 'Новость Удалена без проблем!' 
+          'message' => 'Новость успешно удалена',
         ], 200);
+      } else {
+        return $this->response->setJSON([
+          'status' => 'error',
+          'message' => 'Ошибка при удалении новости',
+        ], 500);
+      }
     }
+
 
 }
