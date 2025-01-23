@@ -25,6 +25,7 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
     
     // persons
     $routes->resource('person', ['controller' => 'PersonController']);
+    // $routes->options('person/(:num)', ['controller' => 'PersonController::preflight']);
 });
 
 //proxy

@@ -11,18 +11,6 @@ class NewsController extends ResourceController
     protected $modelName = 'App\Models\NewsModel';
     protected $format = 'json';
 
-    /**
-     * Config CORS
-     */
-    public function handleOptions()
-    {
-        return $this->response
-            ->setHeader('Access-Control-Allow-Origin', '*')
-            ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
-            ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-            ->setStatusCode(200);
-    }
-
     public function preflight($id = null)
     {
       return $this->response->setHeader('Access-Control-Allow-Origin', '*')
