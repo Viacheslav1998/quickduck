@@ -28,19 +28,26 @@ export default defineComponent ({
     }
 
     async function getTags() {
-
       try {
         const news = await getNews();
+
+        // handle tags, and string to array conversion
+        const newsWithTags = news.map(item => {
+          return {
+            ...item,
+            tagsArray: item.tags ? item.tags.split(",").map(tag => tag.trim()) : []
+          };
+        });
+        return newsWithTags;
       } catch (error) {
-
+        console.error("Ошибка при форматировании данных", error.message);
+        return [];
       }
-
-      /// получить данные и преобразовать в массив - 
-      // повесить туда динам кнопку. которая будет 
-      // вызывать событие и делать поиск по маршруту с 
-      // определенным клучем - он будет искать типо показать все новости по ключу php и т д.
-      // 
     }
+
+    getTags().then(newsWithTags => {
+      console.log(newsWithTags);
+    });
 
     const formatDate = (date) => {
       if(!date) return "данных нет";
