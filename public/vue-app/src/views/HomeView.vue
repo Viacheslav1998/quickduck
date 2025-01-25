@@ -63,7 +63,6 @@ export default defineComponent ({
 
     onMounted(async() => {
       news.value = await getNews();
-      this.tags = await this.getTags();
       preloader.value = false;
     });
 
@@ -108,6 +107,9 @@ export default defineComponent ({
           class="custom-news"
           v-for="item in news"
         >
+
+  
+
           <div class="main-news">
             <h1>{{ item.name }}</h1>
           </div>
@@ -118,12 +120,16 @@ export default defineComponent ({
               <p>опублитковано в: {{ formatTime(item.created_at || item.updated_at ) }}</p>
             </div>
             <div class="tags">
-              <a href="">{{ item.tags }}</a> 
-
-              <!-- <a href="#">#news</a>
-              <a href="#">#игры</a>
-              <a href="#">#интерессное</a> -->
-
+              <div class="tags">
+                <span v-if="item.tags">Теги: </span>
+                <a 
+                  v-for="(tag, index) in item.tags.split(',').map(t => t.trim())" 
+                  :key="index" 
+                  href="#" 
+                >
+                  {{ tag }}
+                </a>
+              </div>
             </div>
           </div>
           <img :src="item.path_to_image || '/images/notFoundImg.jpg'"  class="custom-images">
