@@ -32,22 +32,20 @@ export default defineComponent ({
         const news = await getNews();
 
         // handle tags, and string to array conversion
-        const newsWithTags = news.map(item => {
-          return {
-            ...item,
-            tagsArray: item.tags ? item.tags.split(",").map(tag => tag.trim()) : []
-          };
-        });
-        return newsWithTags;
+        const AllTags = news.flatMap(item => 
+          item.tags ? item.tags.split(",").map(tag => tag.trim) : []
+        );
+        const uniqueTags = [...new Set(allTags)];
+        return uniqueTags;
       } catch (error) {
         console.error("Ошибка при форматировании данных", error.message);
         return [];
       }
     }
 
-    getTags().then(newsWithTags => {
-      console.log(newsWithTags);
-    });
+   getTags.then(tags => {
+    comsole.log(tags);
+   });
 
     const formatDate = (date) => {
       if(!date) return "данных нет";
