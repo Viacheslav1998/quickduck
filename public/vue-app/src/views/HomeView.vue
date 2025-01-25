@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, ref, onMounted} from "vue";
+import { defineComponent, ref, onMounted, TrackOpTypes} from "vue";
 
 export default defineComponent ({
   name: "HomeView",
@@ -26,6 +26,21 @@ export default defineComponent ({
       } catch (error) {
         console.error('Ошибка: ', error.message)
       }
+    }
+
+    async function getTags() {
+
+      try {
+        const news = await getNews();
+      } catch (error) {
+
+      }
+
+      /// получить данные и преобразовать в массив - 
+      // повесить туда динам кнопку. которая будет 
+      // вызывать событие и делать поиск по маршруту с 
+      // определенным клучем - он будет искать типо показать все новости по ключу php и т д.
+      // 
     }
 
     const formatDate = (date) => {
@@ -98,9 +113,12 @@ export default defineComponent ({
               <p>опублитковано в: {{ formatTime(item.created_at || item.updated_at ) }}</p>
             </div>
             <div class="tags">
-              <a href="#">#news</a>
+              <a href="">{{ item.tags }}</a> 
+
+              <!-- <a href="#">#news</a>
               <a href="#">#игры</a>
-              <a href="#">#интерессное</a>
+              <a href="#">#интерессное</a> -->
+
             </div>
           </div>
           <img :src="item.path_to_image || '/images/notFoundImg.jpg'"  class="custom-images">
