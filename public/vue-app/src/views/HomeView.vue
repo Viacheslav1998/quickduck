@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, ref, onMounted, TrackOpTypes} from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 
 export default defineComponent ({
   name: "HomeView",
@@ -19,12 +19,11 @@ export default defineComponent ({
         if(!response.ok) {
           throw new Error(`Статус ответа: ${response.status}`);
         }
-
         const news = await response.json();
         return news || [];
-
       } catch (error) {
-        console.error('Ошибка: ', error.message)
+        console.error('Ошибка: ', error.message);
+        return [];
       }
     }
 
