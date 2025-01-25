@@ -32,9 +32,10 @@ export default defineComponent ({
         const news = await getNews();
 
         // handle tags, and string to array conversion
-        const AllTags = news.flatMap(item => 
-          item.tags ? item.tags.split(",").map(tag => tag.trim) : []
+        const allTags = news.flatMap(item => 
+          item.tags ? item.tags.split(",").map(tag => tag.trim()) : []
         );
+
         const uniqueTags = [...new Set(allTags)];
         return uniqueTags;
       } catch (error) {
@@ -43,9 +44,9 @@ export default defineComponent ({
       }
     }
 
-   getTags.then(tags => {
-    comsole.log(tags);
-   });
+    getTags().then(tags => {
+      console.log(tags); // Выводим список уникальных тегов
+    });
 
     const formatDate = (date) => {
       if(!date) return "данных нет";
@@ -62,8 +63,8 @@ export default defineComponent ({
 
     onMounted(async() => {
       news.value = await getNews();
+      this.tags = await this.getTags();
       preloader.value = false;
-      console.log(news);
     });
 
     return {
