@@ -27,27 +27,6 @@ export default defineComponent ({
       }
     }
 
-    async function getTags() {
-      try {
-        const news = await getNews();
-
-        // handle tags, and string to array conversion
-        const allTags = news.flatMap(item => 
-          item.tags ? item.tags.split(",").map(tag => tag.trim()) : []
-        );
-
-        const uniqueTags = [...new Set(allTags)];
-        return uniqueTags;
-      } catch (error) {
-        console.error("Ошибка при форматировании данных", error.message);
-        return [];
-      }
-    }
-
-    getTags().then(tags => {
-      console.log(tags); // Выводим список уникальных тегов
-    });
-
     const formatDate = (date) => {
       if(!date) return "данных нет";
       return new Date(date).toLocaleDateString('ru-RU');
@@ -107,9 +86,6 @@ export default defineComponent ({
           class="custom-news"
           v-for="item in news"
         >
-
-  
-
           <div class="main-news">
             <h1>{{ item.name }}</h1>
           </div>
