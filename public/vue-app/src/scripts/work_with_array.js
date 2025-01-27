@@ -108,7 +108,25 @@ const arrBoxNum14 = [1,2,3];
 const first = arrBoxNum14.shift();
 // console.log(first);
 // console.log(arrBoxNum14);
- 
+
+// =================================
+// unshift = добавляет элементы в начало массива. Изменяет массив и возвращает его длинну
+const arrBoxNum15 = [2,3];
+const sumElems = arrBoxNum15.unshift(1,2,3,4,5,6);
+// console.log(arrBoxNum15);
+
+// =================================
+// join обьединяет элементы массива в строку. используя указанный разделитель
+const arrBoxNum16 = [1,2,3,4];
+const str = arrBoxNum16.join("-");
+// console.log(str);
+
+// =================================
+// at возвращает элемент массива по индексу. Поддерживает отрицательные индексы
+const arrBoxNum17 = [1,2,34];
+// console.log(arrBoxNum17.at(-1)); // 34
+
+
 
 
 
