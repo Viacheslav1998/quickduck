@@ -68,6 +68,47 @@ const resultSort = arrBoxNum9.sort((a, b) => a - b);
 // console.log(resultSort);
 // console.log(arrBoxNum9);
 
+// =================================
+// reverse переворачивает массив на месте
+const arrBoxNum10 = [1,2,'3',4,5,6,'7',8,9,10];
+arrBoxNum10.reverse();
+// console.log(arrBoxNum10);
+
+// =================================
+// concat объединяет 2 или более массивов в новый
+const testBox1 = [1,2,3];
+const testBox2 = [4,5,6];
+const combined = testBox1.concat(testBox2);
+// console.log(combined) 1,2,3,4,5,6;
+
+// =================================
+// splice - удаляет или добавляет элементы в массив на месте
+// вероятно функционал больше чем в примере....
+const arrBoxNum11 = [1,2,3,4,5,6];
+arrBoxNum11.splice(1,2,99);
+// console.log(arrBoxNum11);
+
+// =================================
+// push добовляем элементы в конец массива - изменяет массив и возвращает его длинну
+const arrBoxNum12 = [1,2];
+arrBoxNum12.push(3);
+console.log(arrBoxNum12); // 1,2,3
+
+// =================================
+// pop удаляет последний элемент массива.
+// Изменяет массив и возвращает удалённый элемент
+const arrBoxNum13 = [1,2,3,4, 150];
+const last = arrBoxNum13.pop();
+// console.log(last);
+// console.log(arrBoxNum13);
+
+// =================================
+// shift - удаляет первый элемент массива. Изменяет массив и возвращает удаленный эл.
+const arrBoxNum14 = [1,2,3];
+const first = arrBoxNum14.shift();
+// console.log(first);
+// console.log(arrBoxNum14);
+ 
 
 
 
