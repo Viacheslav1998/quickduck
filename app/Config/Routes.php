@@ -8,6 +8,11 @@ $routes->get('/', 'TestController::index');
 $routes->get('/test', 'TestController::test');
 $routes->get('/test-data', 'TestController::testJson');
 
+//proxy
+$routes->get('/proxy/rates', 'ProxyController::fetchRates');
+// tagsFilter
+$routes->get('/tags/(:num)', 'TagsController::tagsFilter/$1');
+
 // Api CRUD
 $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $routes): void {
     // news
@@ -27,12 +32,7 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
     // persons
     $routes->resource('person', ['controller' => 'PersonController']);
     // $routes->options('person/(:num)', ['controller' => 'PersonController::preflight']);
-
-    // tags
-    $routes->resource('tags', ['controller' => 'TagsController']);
 });
 
-//proxy
-$routes->get('/proxy/rates', 'ProxyController::fetchRates');
 
 
