@@ -5,7 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 
-class TagController extends ResourceController
+class TagsController extends ResourceController
 {
 
     protected $modelName = 'App\Models\TagsModel';

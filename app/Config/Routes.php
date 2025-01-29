@@ -20,12 +20,16 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
     	'only' => ['create'],
     ]);
 
+    // upload
     $routes->post('update-imagen/(:num)', 'UploadController::updateImage/$1');
     $routes->post('current-update-image/(:num)', 'UploadController::currentUpdateImage/$1');
     
     // persons
     $routes->resource('person', ['controller' => 'PersonController']);
     // $routes->options('person/(:num)', ['controller' => 'PersonController::preflight']);
+
+    // tags
+    $routes->resource('tags', ['controller' => 'TagsController']);
 });
 
 //proxy

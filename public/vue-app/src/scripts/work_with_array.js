@@ -128,5 +128,9 @@ const arrBoxNum17 = [1,2,34];
 
 
 
+// const cars_1 = new Array(["Saab", "Audi", "BMW"]);
+// const cars_2 = ["AUDI", "BMW", "Nissan"];
+
+
 
 
