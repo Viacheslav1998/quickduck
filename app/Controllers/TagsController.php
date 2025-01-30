@@ -7,6 +7,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class TagsController extends BaseController
 {
+
    /**
     * Get news by tags
 	* return json
@@ -17,6 +18,9 @@ class TagsController extends BaseController
 			"name" => $id,
 			"desk" => "Just description"
 		];
-		return $data;
+
+		return $this->response->setJSON($data);
+		// return $this->response->setStatusCode(404)->setJSON($data);
+
 	}
 }
