@@ -143,9 +143,6 @@ class NewsController extends ResourceController
      */
     public function delete($id = null)
     {
-
-      log_message('debug', 'Удаление новости с ID: ' . $id);
-
       $newsModel = new NewsModel();
 
       // Поиск новости
