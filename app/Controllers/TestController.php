@@ -18,19 +18,17 @@ class TestController extends BaseController
 
     public function index()
     {
-        $data = $this->model->getData();
-    }
+        // Заголовок
+        $title = "Тут нет никакой графической информации";
 
-    public function test() {
-        $data = [
-            'tdata' => $this->model->getDataExample1()
-        ];
-        return view('pages/test', $data);
-    }
+        // Текст для параграфа
+        $text = "Получайте данные через REST API";
 
-    public function testJson()
-    {
-        $data = $this->model->getJsonTestData();
-        return $this->response->setJSON($data);
+        // Формируем строку с контентом
+        $content = "<h1 style='text-align: center;'>{$title}</h1>";
+        $content .= "<p style='text-align: center;'>{$text}</p>";
+
+        // Выводим контент
+        echo $content;
     }
 }
