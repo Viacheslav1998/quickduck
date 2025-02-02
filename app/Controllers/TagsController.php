@@ -8,39 +8,46 @@ use App\Models\NewsModel;
 class TagsController extends BaseController
 {
 
-	protected $newsModel;
+	protected $db;
 
   /**
    * get a model anywhere
    */ 
   public function __construct() 
   {
-  	$this->newsModel = new NewsModel();
+  	$this->db = \Config\Database::connect();
   }
 
   /**
    * Get news by tags
 	 * return json
 	 */
-	public function tagsFilter($id = null) 
+	public function tagsFilter($tag = '') 
 	{
-		
-
+		$builder = $this->db->table('news');
+		$query = $builder->like('tags', $tag, 'both')->get();
+		$articles = $query->getResult();
+		dd($articles);
 	}
 
 	/**
-   * return: 
-   * @param JSON
+   * Filter tags = $tags
+   * return  
+   * @param Array
    */
 	public function getTestTags()
 	{
-		$query = $db->query("SELECT * FROM WHERE tags LIKE `%php%`");
-		$results = $query->getResults();
-
-		return $results;
-
-		/// вот тут что то использовать что бы можно было like %php%
-		// либо builder db либо object db
+		
 	}    
+
+	/**
+   * return  
+   * @param JSON
+   */
+	public function getFilter()
+	{
+
+	}
+
 
 }
