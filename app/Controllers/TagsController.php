@@ -3,24 +3,44 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\NewsModel;
 
 class TagsController extends BaseController
 {
 
-   /**
-    * Get news by tags
-	* return json
-	*/
+	protected $newsModel;
+
+  /**
+   * get a model anywhere
+   */ 
+  public function __construct() 
+  {
+  	$this->newsModel = new NewsModel();
+  }
+
+  /**
+   * Get news by tags
+	 * return json
+	 */
 	public function tagsFilter($id = null) 
 	{
-		$data = [
-			"name" => $id,
-			"desk" => "Just description"
-		];
-
-		return $this->response->setJSON($data);
-		// return $this->response->setStatusCode(404)->setJSON($data);
+		
 
 	}
+
+	/**
+   * return: 
+   * @param JSON
+   */
+	public function getTestTags()
+	{
+		$query = $db->query("SELECT * FROM WHERE tags LIKE `%php%`");
+		$results = $query->getResults();
+
+		return $results;
+
+		/// вот тут что то использовать что бы можно было like %php%
+		// либо builder db либо object db
+	}    
+
 }

@@ -11,7 +11,9 @@ $routes->get('/test-data', 'TestController::testJson');
 //proxy
 $routes->get('/proxy/rates', 'ProxyController::fetchRates');
 // tagsFilter
-$routes->get('/tags/(:num)', 'TagsController::tagsFilter/$1');
+$routes->get('/tags/(:segments)', 'TagsController::tagsFilter/$1');
+// test tags
+$routes->get('/get-tags/', 'TagsController::getTestTags');
 
 // Api CRUD
 $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $routes): void {
