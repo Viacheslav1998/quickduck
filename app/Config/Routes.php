@@ -11,7 +11,7 @@ $routes->get('/test-data', 'TestController::testJson');
 //proxy
 $routes->get('/proxy/rates', 'ProxyController::fetchRates');
 // tagsFilter
-$routes->get('/tags/(:any)', 'TagsController::tagsFilter/$1');
+$routes->get('/tags/(:any)', 'TagsController::getFilter/$1');
 // test tags
 $routes->get('/get-tags/', 'TagsController::getTestTags');
 

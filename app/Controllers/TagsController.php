@@ -20,33 +20,34 @@ class TagsController extends BaseController
 
   /**
    * Get news by tags
-	 * return json
+	 * return 
+	 * @param Array
 	 */
 	public function tagsFilter($tag = '') 
 	{
 		$builder = $this->db->table('news');
+
 		$query = $builder->like('tags', $tag, 'both')->get();
 		$articles = $query->getResult();
-		dd($articles);
-	}
+
+		if (empty($articles)) {
+			return $errors = [
+				"Ошибка", "Не найдено новостей по тегу $tag"
+			];
+		}
+
+		return $articles;
+	} 
 
 	/**
-   * Filter tags = $tags
-   * return  
-   * @param Array
-   */
-	public function getTestTags()
-	{
-		
-	}    
-
-	/**
+	 * Get news by tags
    * return  
    * @param JSON
    */
-	public function getFilter()
+	public function getFilter($tag)
 	{
-
+		$news = $this->tagsFilter($tag);
+		return $this->response->setJSON($news);
 	}
 
 
