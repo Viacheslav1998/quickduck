@@ -1,5 +1,6 @@
 <script>
 import { defineComponent, ref, onMounted } from "vue";
+import { RouterLink } from "vue-router";
 
 export default defineComponent ({
   name: "HomeView",
@@ -98,13 +99,13 @@ export default defineComponent ({
             <div class="tags">
               <div class="tags">
                 <span v-if="item.tags">Теги: </span>
-                <a 
+                <RouterLink
                   v-for="(tag, index) in item.tags.split(',').map(t => t.trim())" 
-                  :key="index" 
-                  href="#" 
+                  :key="index"
+                  :to="{ name: 'tagNews', params: { tag } }"
                 >
                   {{ tag }}
-                </a>
+                </RouterLink>
               </div>
             </div>
           </div>
