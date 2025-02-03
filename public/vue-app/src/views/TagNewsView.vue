@@ -12,8 +12,8 @@ export default defineComponent ({
       { src: "/soc-icons/sm3.png", alt: "ico 3" },
     ]);
 
-    async function getNews() {
-      const url = "http://quickduck.com/api/news";
+    async function getTagNews() {
+      const url = "http://quickduck.com/tags/js";
       try { 
         const response = await fetch(url);
         if(!response.ok) {
@@ -41,7 +41,7 @@ export default defineComponent ({
     };
 
     onMounted(async() => {
-      news.value = await getNews();
+      news.value = await getTagNews();
       preloader.value = false;
     });
 

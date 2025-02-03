@@ -35,7 +35,6 @@ export default defineComponent({
       </div>
     </nav>
 
-
     <div class="custom-news">
       <div class="wrapper-main-box d-flex justify-content-between">
         <div class="box-date-time">
