@@ -60,7 +60,7 @@ export default defineComponent ({
   <div class="container">
 
     <div class="begin">
-      <h1>Новости по фильтру: $filter</h1>
+      <h1>Новости по тегу: $filter</h1>
     </div>
 
     <div class="preloader d-flex justify-content-center" v-if="preloader">

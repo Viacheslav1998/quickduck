@@ -5,7 +5,7 @@ import FormView from '../views/FormView.vue'
 import LoginView from '../views/LoginView.vue'
 import SingleView from '../views/SingleView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
-import FilterView from '../views/FilterView.vue'
+import TagView from '../views/TagView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,9 +42,9 @@ const router = createRouter({
       component: NotFoundView,
     },
     {
-      path: '/filter',
-      name: 'filter',
-      component: FilterView,
+      path: '/tag',
+      name: 'tag',
+      component: TagView,
     },
   ]
 })
