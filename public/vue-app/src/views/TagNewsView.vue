@@ -1,9 +1,11 @@
 <script>
 import { defineComponent, ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
 
 export default defineComponent ({
   name: "HomeView",
   setup() {
+    const route = useRoute();
     const news = ref([]);
     const preloader = ref(true);
     const images = ref([
@@ -12,8 +14,8 @@ export default defineComponent ({
       { src: "/soc-icons/sm3.png", alt: "ico 3" },
     ]);
 
-    async function getTagNews() {
-      const url = "http://quickduck.com/tags/js";
+    async function getTagNews(tag) {
+      const url = `http://quickduck.com/tags/${tag}`;
       try { 
         const response = await fetch(url);
         if(!response.ok) {
@@ -41,7 +43,7 @@ export default defineComponent ({
     };
 
     onMounted(async() => {
-      news.value = await getTagNews();
+      news.value = await getTagNews(route.params.tag);
       preloader.value = false;
     });
 
@@ -60,7 +62,7 @@ export default defineComponent ({
   <div class="container">
 
     <div class="begin">
-      <h1>Новости по тегу: $filter</h1>
+      <h1>Новости по тегу: теги</h1>
     </div>
 
     <div class="preloader d-flex justify-content-center" v-if="preloader">
