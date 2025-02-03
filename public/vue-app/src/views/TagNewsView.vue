@@ -1,12 +1,12 @@
 <script>
-import { defineComponent, ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { defineComponent, ref, onMounted, watch } from "vue";
+import { useRoute, RouterLink } from "vue-router";
 
 export default defineComponent ({
   name: "HomeView",
   setup() {
     const route = useRoute();
-    const tag = route.params.tag;
+    const tag = ref(route.params.tag);
     const news = ref([]);
     const preloader = ref(true);
     const images = ref([
@@ -44,7 +44,14 @@ export default defineComponent ({
     };
 
     onMounted(async() => {
-      news.value = await getTagNews(route.params.tag);
+      news.value = await getTagNews(tag.value);
+      preloader.value = false;
+    });
+
+    watch(() => route.params.tag, async (newTag) => {
+      tag.value = newTag;
+      preloader.value = true;
+      news.value = await getTagNews(newTag);
       preloader.value = false;
     });
 
@@ -102,13 +109,13 @@ export default defineComponent ({
             <div class="tags">
               <div class="tags">
                 <span v-if="item.tags">Теги: </span>
-                <a 
+                <RouterLink
                   v-for="(tag, index) in item.tags.split(',').map(t => t.trim())" 
-                  :key="index" 
-                  href="#" 
+                  :key="index"
+                  :to="{ name: 'tagNews', params: { tag } }"
                 >
                   {{ tag }}
-                </a>
+                </RouterLink>
               </div>
             </div>
           </div>
