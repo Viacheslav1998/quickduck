@@ -9,9 +9,7 @@ $routes->get('/', 'TestController::index');
 //proxy
 $routes->get('/proxy/rates', 'ProxyController::fetchRates');
 // tagsFilter
-$routes->get('/tags/(:any)', 'TagsController::getFilter/$1');
-// test tags
-$routes->get('/get-tags/', 'TagsController::getTestTags');
+$routes->get('/tags/(:any)', 'TagsController::getTag/$1');
 
 // Api CRUD
 $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $routes): void {

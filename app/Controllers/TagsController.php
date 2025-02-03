@@ -44,7 +44,7 @@ class TagsController extends BaseController
    * return  
    * @param JSON
    */
-	public function getFilter($tag)
+	public function getTag($tag)
 	{
 		$news = $this->tagsFilter($tag);
 		return $this->response->setJSON($news);
