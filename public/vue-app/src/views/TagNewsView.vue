@@ -6,6 +6,7 @@ export default defineComponent ({
   name: "HomeView",
   setup() {
     const route = useRoute();
+    const tag = route.params.tag;
     const news = ref([]);
     const preloader = ref(true);
     const images = ref([
@@ -52,7 +53,8 @@ export default defineComponent ({
       news,
       preloader,
       formatDate,
-      formatTime
+      formatTime,
+      tag
     };
   },
 });
@@ -62,7 +64,7 @@ export default defineComponent ({
   <div class="container">
 
     <div class="begin">
-      <h1>Новости по тегу: теги</h1>
+      <h1>Новости по тегу: <span style="color: greenyellow; font-weight: bold; text-transform: uppercase;">{{ tag }}</span></h1>
     </div>
 
     <div class="preloader d-flex justify-content-center" v-if="preloader">
