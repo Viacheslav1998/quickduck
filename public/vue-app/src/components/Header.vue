@@ -29,7 +29,10 @@
         <img src="/images/m1.jpg" class="img-fluid" alt="img">
       </div>
       <div class="box-2">
-        <h1 class="font-base display-5"><span style="color: coral;">QuickDuck.com</span> <br> добро пожаловать в мир технологий</h1>
+        <h1 class="font-base display-5"><span style="color: darkorange;">QuickDuck.com</span>
+          <br>
+          <span style="font-family: tahoma; font-size: 21px;">Добро пожаловать</span>
+        </h1>
         <p class="f h5">
           Тут вы узнаете многое о языках программирования, какие  то <span style="font-style: italic; color: coral;">хуки, правила, подсказки и другие интерессные вещи</span>
           <br><br>
@@ -85,6 +88,7 @@ export default {
   text-align: center;
   color: antiquewhite;
   font-weight: bold;
+  font-family: razed-light;
   border-radius: 5px;
   padding: 50px;
   margin: 50px;
