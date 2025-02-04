@@ -119,8 +119,11 @@ export default defineComponent ({
               </div>
             </div>
           </div>
-          <img :src="item.path_to_image || '/images/notFoundImg.jpg'"  class="custom-images">
-          <div class="custom-text pt-3">
+          <img :src="item.path_to_image || '/images/notFoundImg.jpg'" class="custom-images">
+          <div class="pt-3" style="color: silver;">
+            <span>Короткое описание новости: </span>
+          </div>
+          <div class="custom-text">
             <p v-html="item.desk"></p>
           </div>
           <div class="wrapper-soc-content d-flex justify-content-between">
@@ -206,7 +209,6 @@ export default defineComponent ({
 }
 .custom-text > p {
   font-size: 18px;
-  padding: 20px;
   background: #343434;
 }
 .right { text-align: right; }
