@@ -39,8 +39,8 @@ export default defineComponent({
       <div class="wrapper-main-box d-flex justify-content-between">
         <div class="box-date-time">
           <span>публикация: </span>
-          <span>11.02.2024</span>
-          <p>время: 22:30</p>
+          <span style="color: orange;">11.02.2024</span>
+          <p>опублитковано в: <span style="color: orangered">22:30</span></p>
         </div>
         <div class="tags">
           <a href="#">#news</a>

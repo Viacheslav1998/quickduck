@@ -103,8 +103,8 @@ export default defineComponent ({
           <div class="wrapper-main-box d-flex justify-content-between">
             <div class="box-date-time">
               <span>публикация: </span>
-              <span>{{ formatDate(item.created_at || item.updated_at) }}</span>
-              <p>опублитковано в: {{ formatTime(item.created_at || item.updated_at ) }}</p>
+              <span style="color: orange;">{{ formatDate(item.created_at || item.updated_at) }}</span>
+              <p>опублитковано в: <span style="color: orangered;">{{ formatTime(item.created_at || item.updated_at ) }}</span></p>
             </div>
             <div class="tags">
               <div class="tags">
