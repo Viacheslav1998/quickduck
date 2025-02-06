@@ -1,13 +1,13 @@
 <script>
-import { defineComponent, ref, onMounted } from "vue";
-import { useRoute, RouterLink } from "vue-router";
+import { defineComponent, ref, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   name: "SingleView",
   setup() {
+    const item = ref(null);
+    const preloader = ref(true);
     const route = useRoute();
-    const id = ref(route.params.id);
-    const news = ref([]);
 
     // screening of the last three Reaction
     const images = ref([
@@ -24,20 +24,29 @@ export default defineComponent({
         if(!response.ok) {
           throw new Error(`Статус ответа: ${response.status}`);
         }
-        const item = await response.json();
-        return item || [];
+        return await response.json(); 
       } catch (error) {
         console.error('Ошибка: ', error.message);
-        return [];
+        return null;
       }
     }
 
-    onMounted(async() => {
-      news.value = await getItem(id.value);
+    async function fetchItem(id) {
+      preloader.value = true;
+      item.value = await getItem(id);
+      preloader.value = false;
+    }
+
+    onMounted(() => {
+      fetchItem(route.params.id);
     });
+
+    watch(() => route.params.id, fetchItem, {immediate: true});
 
     return {
       images,
+      item,
+      preloader
     };
   },
 });
@@ -45,10 +54,22 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="container">
-    <div class="begin-news">
-      <h1>это какая то новость</h1>
+
+  <div class="preloader d-flex justify-content-center" v-if="preloader">
+    <div class="wrapper-preloader">
+      <div class="preloader-gif">
+        <img src="/icons/anobus.gif" alt="загрузка">
+      </div>
+      <div style="text-align: center; color: burlywood;">
+        <h3>Загрузка . . . </h3>
+      </div>
     </div>
+  </div>
+
+  <div class="container" v-if="item">
+    <div class="begin-news">
+      <h1>{{ item.name }}</h1>
+    </div>    
 
     <nav aria-label="breadcrumb" class="pt-2">
       <div class="breacrumb-fone">
@@ -155,6 +176,8 @@ export default defineComponent({
         </div>
       </div>
     </div> 
+
+    
     <!-- comments -->
     <div class="wrapper-comment my-2">
 
@@ -266,7 +289,11 @@ export default defineComponent({
       </div>
     </div>
     
-  </div>
+  </div>  <!-- end container -->
+  <div v-else>
+    <h1>Новость не найдена</h1>
+  </div> 
+
 </template>
 
 <style scoped>
