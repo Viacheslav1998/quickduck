@@ -1,15 +1,40 @@
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, onMounted } from "vue";
+import { useRoute, RouterLink } from "vue-router";
 
 export default defineComponent({
   name: "SingleView",
   setup() {
+    const route = useRoute();
+    const id = ref(route.params.id);
+    const news = ref([]);
+
     // screening of the last three Reaction
     const images = ref([
       { src: "/soc-icons/sm1.png", alt: "ico 1" },
       { src: "/soc-icons/sm2.png", alt: "ico 2" },
       { src: "/soc-icons/sm3.png", alt: "ico 3" },
     ]);
+
+    async function getItem(id)
+    {
+      const url = `http://quickduck.com/api/news/${id}`;
+      try {
+        const response = await fetch(url);
+        if(!response.ok) {
+          throw new Error(`Статус ответа: ${response.status}`);
+        }
+        const item = await response.json();
+        return item || [];
+      } catch (error) {
+        console.error('Ошибка: ', error.message);
+        return [];
+      }
+    }
+
+    onMounted(async() => {
+      news.value = await getItem(id.value);
+    });
 
     return {
       images,
