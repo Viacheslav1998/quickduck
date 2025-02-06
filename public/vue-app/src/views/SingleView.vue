@@ -31,6 +31,19 @@ export default defineComponent({
       }
     }
 
+    const formatDate = (date) => {
+      if(!date) return "данных нет";
+      return new Date(date).toLocaleDateString('ru-RU');
+    };
+
+    const formatTime = (date) => {
+      if(!date) return "данных нет";
+      return new Date(date).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    };
+
     async function fetchItem(id) {
       preloader.value = true;
       item.value = await getItem(id);
@@ -46,7 +59,9 @@ export default defineComponent({
     return {
       images,
       item,
-      preloader
+      preloader,
+      formatDate,
+      formatTime
     };
   },
 });
@@ -66,7 +81,7 @@ export default defineComponent({
     </div>
   </div>
 
-  <div class="container" v-if="item">
+  <div class="container" v-else-if="item">
     <div class="begin-news">
       <h1>{{ item.name }}</h1>
     </div>    
@@ -85,8 +100,8 @@ export default defineComponent({
       <div class="wrapper-main-box d-flex justify-content-between">
         <div class="box-date-time">
           <span>публикация: </span>
-          <span style="color: orange;">11.02.2024</span>
-          <p>опублитковано в: <span style="color: orangered">22:30</span></p>
+          <span style="color: orange;">{{ formatDate(item.created_at || item.updated_at) }}</span>
+          <p>опублитковано в: <span style="color: orangered">{{ formatTime(item.created_at || item.updated_at ) }}</span></p>
         </div>
         <div class="tags">
           <a href="#">#news</a>
@@ -177,9 +192,9 @@ export default defineComponent({
       </div>
     </div> 
 
-    
+
     <!-- comments -->
-    <div class="wrapper-comment my-2">
+    <div class="wrapper-comment my-2 pt-4">
 
       <div class="comment-moment pb-1 pt-2 px-2">
         <h5>Оставь свой комментарий:</h5>
@@ -262,7 +277,8 @@ export default defineComponent({
         <div class="media">
           <img class="mr-3" src="/icons/user.png" alt="user">
           <div class="media-body">
-            <i>дата комментария: 2021-01-02</i>
+            <i>дата комментария: 2021-01-02</i> 
+            <hr class="new1">
             <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis quaerat explicabo esse. Labore fuga eligendi incidunt ea officia sapiente, deserunt aliquam ad laborum soluta unde harum obcaecati repellendus perferendis aliquid!
           </div>
@@ -272,6 +288,7 @@ export default defineComponent({
           <img class="mr-3" src="/icons/avatar.png" alt="user">
           <div class="media-body">
             <i>дата комментария: 2021-01-02</i>
+            <hr class="new1">
             <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
             я считаю, что это отличная статья
           </div>
@@ -281,15 +298,15 @@ export default defineComponent({
           <img class="mr-3" src="/icons/user.png" alt="user">
           <div class="media-body">
             <i>дата комментария: 2021-01-02</i>
+            <hr class="new1">
             <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
             я считаю, что это отличная статья
           </div>
         </div>
-
-      </div>
-    </div>
-    
+      </div> <!-- end comments box -->
+    </div> <!-- end wrapper content comments -->
   </div>  <!-- end container -->
+
   <div v-else>
     <h1>Новость не найдена</h1>
   </div> 
@@ -310,6 +327,8 @@ export default defineComponent({
   height: 40px;
   border-radius: 12px;
 }
+
+hr.new1 {border-top: 1px solid rgb(209, 209, 209);}
 
 .begin-news h1 {  font-weight: lighter; }
 .breadcrumb { background-color: rgba(26, 24, 24, 0.966); border: 1px solid #666666;}
@@ -332,7 +351,7 @@ export default defineComponent({
 
 .line { height: 20px; background-color: #181818;}
 .space-comment-area, .wrapper-comments-persons { padding: 20px; }
-.comment-moment { background-color: darkslateblue;}
+.comment-moment { background-color: darkslateblue; margin-left: 20px; margin-right: 20px;}
 .wrapper-comment { background-color: #232222;}
 .person { font-size: 20px; }
 .media img { width: 32px; height: 32px; }
