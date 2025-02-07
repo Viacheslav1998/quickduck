@@ -89,9 +89,9 @@ export default defineComponent({
     <nav aria-label="breadcrumb" class="pt-2">
       <div class="breacrumb-fone">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Домой</a></li>
-          <li class="breadcrumb-item"><a href="#">Рубрика</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Тег</li>
+          <li class="breadcrumb-item"><a href="/">Домой</a></li>
+          <li class="breadcrumb-item"><a href="/">Рубрика</a></li>
+          <li class="breadcrumb-item active" aria-current="page">новости | игры | природа</li>
         </ol>
       </div>
     </nav>
@@ -104,9 +104,16 @@ export default defineComponent({
           <p>опублитковано в: <span style="color: orangered">{{ formatTime(item.created_at || item.updated_at ) }}</span></p>
         </div>
         <div class="tags">
-          <a href="#">#news</a>
-          <a href="#">#игры</a>
-          <a href="#">#интерессное</a>
+          <div class="tags">
+            <span v-if="item.tags">Теги: </span>
+            <RouterLink
+              v-for="(tag, index) in item.tags.split(',').map(t => t.trim())" 
+              :key="index"
+              :to="{ name: 'tagNews', params: { tag } }"
+            >
+              {{ tag }}
+            </RouterLink>
+          </div>
         </div>
       </div>
       <img :src="item.path_to_image || '/images/notFoundImg.jpg'" class="custom-images">
