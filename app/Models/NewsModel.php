@@ -46,16 +46,20 @@ class NewsModel extends Model
 
     public function getNext($currentId)
     {
-        return $this->where('id' > $currentId)
-                    ->orderBy('id', 'ASC')
-                    ->first();
+      $next = $this->where('id' > $currentId)
+           ->orderBy('id', 'ASC')
+           ->first();
+
+      return $next ? $next : null;
     }
 
     public function getPrevious($currentId)
     {
-        return $this->where('id' < $currendId)
-               ->orderBy('id', 'DESC')
-               ->first();
+       $prev = $this->where('id' < $currendId)
+            ->orderBy('id', 'DESC')
+            ->first();
+            
+       return $prev ? $prev : null;
     }
 
 }

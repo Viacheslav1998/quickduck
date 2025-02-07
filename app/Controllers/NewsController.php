@@ -8,57 +8,57 @@ use App\Models\NewsModel;
 
 class NewsController extends ResourceController
 {
-    protected $modelName = 'App\Models\NewsModel';
-    protected $format = 'json';
+  protected $modelName = 'App\Models\NewsModel';
+  protected $format = 'json';
 
-    public function preflight($id = null)
-    {
-      return $this->response->setHeader('Access-Control-Allow-Origin', '*')
-            ->setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-            ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
-            ->setStatusCode(200)
-            ->setJSON([]);
-    }
+  public function preflight($id = null)
+  {
+    return $this->response->setHeader('Access-Control-Allow-Origin', '*')
+          ->setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+          ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+          ->setStatusCode(200)
+          ->setJSON([]);
+  }
 
-    /**
-     * Return an array of resource objects, themselves in array format.
-     *
-     * @return ResponseInterface
-     */
-    public function index()
-    {
-        return $this->respond($this->model->findAll());
-    }
+  /**
+   * Return an array of resource objects, themselves in array format.
+   *
+   * @return ResponseInterface
+   */
+  public function index()
+  {
+      return $this->respond($this->model->findAll());
+  }
 
 
-    /**
-     * Return the properties of a resource object.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function show($id = null)
-    {
-        return $this->respond($this->model->find($id));
-    }
+  /**
+   * Return the properties of a resource object.
+   *
+   * @param int|string|null $id
+   *
+   * @return ResponseInterface
+   */
+  public function show($id = null)
+  {
+      return $this->respond($this->model->find($id));
+  }
 
-    /**
-     * Return a new resource object, with default properties.
-     *
-     * @return ResponseInterface
-     */
-    public function new()
-    {
-        //
-    }
+  /**
+   * Return a new resource object, with default properties.
+   *
+   * @return ResponseInterface
+   */
+  public function new()
+  {
+      //
+  }
 
-    /**
-     * Create a new resource object, from "posted" parameters.
-     * Create News with tags
-     *
-     * @return ResponseInterface
-     */
+  /**
+   * Create a new resource object, from "posted" parameters.
+   * Create News with tags
+   *
+   * @return ResponseInterface
+   */
    public function create()
    {
      $newsModel = new NewsModel();

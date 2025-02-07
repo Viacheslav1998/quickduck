@@ -10,19 +10,23 @@ class NavigateNewsController extends BaseController
 {
     
 	/**
-	* get prev | next 
-	* return JSON
-	*/
-    public function getNavigation($id)
-    {
-    	$model = new NewsMode();
+	 * Retrieves the previous and next news posts based on the given ID.
+	 *
+	 * @param int $id The current news post ID.
+	 * @return \CodeIgniter\HTTP\Response JSON response containing:
+	 *         - 'prev' => array|null (Previous post data or null if not found)
+   *         - 'next' => array|null (Next post data or null if not found)
+	 */
+  public function getNavigation($id)
+  {
+  	$model = new NewsMode();
 
-    	$nextNews = $model->getNext($id);
-    	$prevNews = $model->getPrevious($id);
+  	$nextNews = $model->getNext($id);
+  	$prevNews = $model->getPrevious($id);
 
-    	return $this->response->setJSON([
-    		'next' =>  $nextNews ?? null,
-    		'prev' => $prevNews ?? null,
-    	]);
-    }
+  	return $this->response->setJSON([
+  		'next' => $model->$nextNews($id),
+  		'prev' => $model->$prevNews($id)
+  	]);	
+  }
 }
