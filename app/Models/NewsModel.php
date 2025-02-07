@@ -44,4 +44,18 @@ class NewsModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    public function getNext($currentId)
+    {
+        return $this->where('id' > $currentId)
+                    ->orderBy('id', 'ASC')
+                    ->first();
+    }
+
+    public function getPrevious($currentId)
+    {
+        return $this->where('id' < $currendId)
+               ->orderBy('id', 'DESC')
+               ->first();
+    }
+
 }
