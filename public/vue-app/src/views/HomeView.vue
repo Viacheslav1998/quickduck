@@ -135,7 +135,7 @@ export default defineComponent ({
             </div>
             <div class="custom-text d-flex align-items-end">
               <RouterLink
-                :to="{name: 'news', params: { id: item.id } }"
+                :to="{ name: 'news', params: { id: item.id } }"
               >
               <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
               </RouterLink>
