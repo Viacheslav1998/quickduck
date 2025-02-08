@@ -72,10 +72,9 @@ export default defineComponent({
 
     onMounted(() => {
       fetchItem(route.params.id);
-      // newsNavigation(route.params.id);
     });
 
-    watch(() => route.params.id, fetchItem, {immediate: true});
+    watch(() => route.params.id, fetchItem, newsNavigation, {immediate: true});
 
     return {
       images,
