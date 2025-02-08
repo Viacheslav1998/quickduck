@@ -46,7 +46,7 @@ class NewsModel extends Model
 
     public function getNext($currentId)
     {
-      $next = $this->where('id' > $currentId)
+      $next = $this->where('id >', $currentId)
            ->orderBy('id', 'ASC')
            ->first();
 
@@ -55,10 +55,10 @@ class NewsModel extends Model
 
     public function getPrevious($currentId)
     {
-       $prev = $this->where('id' < $currendId)
+       $prev = $this->where('id <', $currentId)
             ->orderBy('id', 'DESC')
             ->first();
-            
+
        return $prev ? $prev : null;
     }
 

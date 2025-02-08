@@ -19,14 +19,14 @@ class NavigateNewsController extends BaseController
 	 */
   public function getNavigation($id)
   {
-  	$model = new NewsMode();
+  	$model = new NewsModel();
 
   	$nextNews = $model->getNext($id);
   	$prevNews = $model->getPrevious($id);
 
   	return $this->response->setJSON([
-  		'next' => $model->$nextNews($id),
-  		'prev' => $model->$prevNews($id)
+  		'next' => $nextNews,
+  		'prev' => $prevNews
   	]);	
   }
 }
