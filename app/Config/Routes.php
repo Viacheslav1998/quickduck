@@ -11,7 +11,7 @@ $routes->get('/proxy/rates', 'ProxyController::fetchRates');
 // tagsFilter
 $routes->get('/tags/(:any)', 'TagsController::getTag/$1');
 // newsNavigation
-$routes->get('/news/navigation/(:num)', 'NavigateNewsController::getNavigation/$id');
+$routes->get('/news/navigation/(:num)', 'NavigateNewsController::getNavigation/$1');
 
 // Api CRUD
 $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $routes): void {

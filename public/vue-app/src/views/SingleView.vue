@@ -23,6 +23,9 @@ export default defineComponent({
       nextNews.value = data.next;
       prevNews.value = data.prev;
 
+      console.log(nextNews);
+      console.log(prevNews);
+
       } catch(error) {
         console.log('Ошибка загрузки:', error);
       }

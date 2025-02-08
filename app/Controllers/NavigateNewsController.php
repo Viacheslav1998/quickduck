@@ -29,4 +29,6 @@ class NavigateNewsController extends BaseController
   		'prev' => $prevNews
   	]);	
   }
+
+
 }
