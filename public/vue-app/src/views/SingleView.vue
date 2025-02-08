@@ -6,8 +6,27 @@ export default defineComponent({
   name: "SingleView",
   setup() {
     const item = ref(null);
+    const nav = ref(null);
     const preloader = ref(true);
     const route = useRoute();
+
+    // navigation
+    const nextNews = ref(null);
+    const prevNews = ref(null);
+
+    const newsNavigation = async(id) => {
+      try {
+      const response = await fetch(`http://quickduck.com/news/navigation/${id}`);
+      if(!response.ok) throw new Error("Ошибка загрузки данных навигации");
+
+      const data = await response.json();
+      nextNews.value = data.next;
+      prevNews.value = data.prev;
+
+      } catch(error) {
+        console.log('Ошибка загрузки:', error);
+      }
+    };
 
     // screening of the last three Reaction
     const images = ref([
@@ -47,11 +66,13 @@ export default defineComponent({
     async function fetchItem(id) {
       preloader.value = true;
       item.value = await getItem(id);
+      nav.value = await newsNavigation(id);
       preloader.value = false;
     }
 
     onMounted(() => {
       fetchItem(route.params.id);
+      // newsNavigation(route.params.id);
     });
 
     watch(() => route.params.id, fetchItem, {immediate: true});
@@ -59,9 +80,12 @@ export default defineComponent({
     return {
       images,
       item,
+      nav,
       preloader,
       formatDate,
-      formatTime
+      formatTime,
+      prevNews,
+      nextNews
     };
   },
 });
@@ -142,10 +166,21 @@ export default defineComponent({
     <div class="wrapper-navi mb-4">
       <div class="fone-space d-flex justify-content-between p-4">
         <div>
-          <button type="button" class="btn btn-warning">Прошлая страница</button>
+          <RouterLink
+          v-if="prevNews"
+          :to="'/news/' + prevNews.id"
+          >
+            <button type="button" class="btn btn-warning">Прошлая страница</button>
+          </RouterLink>  
         </div>
+        
         <div>
-          <button type="button" class="btn btn-warning">Следующая страница</button> 
+          <RouterLink
+          v-if="nextNews"
+          :to="'/news/' + nextNews.id"
+          >
+            <button type="button" class="btn btn-warning">Следующая страница</button> 
+          </RouterLink>
         </div>
       </div>
     </div> 
