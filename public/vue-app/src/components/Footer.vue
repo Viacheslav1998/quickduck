@@ -1,47 +1,47 @@
 <template>
   <div class="container">
-    <div class="custom-footer d-flex justify-content-between">
-      <div class="l-block">
-        <h6>подвал</h6>
-        <b>Современные технологии разработки:</b><br>
-        <div class="d-flex custom-box-icons">
-          <div class="ico ci4">
-            <img src="/icons/ci4.png" alt="ci4" title="codeigniter4">
+    <div class="footer-fone p-3">
+      <div class="row custom-footer d-flex justify-content-between">
+        <div class="l-block col-sm m-1">
+          <h6>подвал</h6>
+          <b>Современные технологии разработки:</b><br>
+          <div class="d-flex custom-box-icons">
+            <div class="ico ci4">
+              <img src="/icons/ci4.png" alt="ci4" title="codeigniter4">
+            </div>
+            <div class="ico">
+              <img src="/icons/js.png" alt="js" title="javascript">
+            </div>
+            <div class="ico php">
+              <img src="/icons/php.png" alt="php" title="php">
+            </div>
+            <div class="ico">
+              <img src="/icons/sql.png" alt="sql" title="sql">
+            </div>
+            <div class="ico">
+              <img  style="background-color: #fff; border-radius: 7px; " src="/icons/vue.png" alt="vue" title="vue">
+            </div>
           </div>
-          <div class="ico">
-            <img src="/icons/js.png" alt="js" title="javascript">
-          </div>
-          <div class="ico php">
-            <img src="/icons/php.png" alt="php" title="php">
-          </div>
-          <div class="ico">
-            <img src="/icons/sql.png" alt="sql" title="sql">
-          </div>
-          <div class="ico">
-            <img  style="background-color: #fff; border-radius: 7px; " src="/icons/vue.png" alt="vue" title="vue">
-          </div>
+          <i>работает над проектом: Вячеслав</i><br> <b style="color: darkorange">Компания: SilentStorm | 2024-2025</b><br>
+          <i>ресурсы взяты с:</i><br>
+          <b style="color: deepskyblue; font-family: Calibri;">www.flaticon.com</b><br>
+          <b style="color: tomato; font-family: Calibri;">www.lottiefiles.com</b>
         </div>
-        <i>работает над проектом: Вячеслав</i><br> <b style="color: darkorange">Компания: SilentStorm | 2024-2025</b><br>
-        <i>ресурсы взяты с:</i><br>
-        <b style="color: deepskyblue; font-family: Calibri;">www.flaticon.com</b><br>
-        <b style="color: tomato; font-family: Calibri;">www.lottiefiles.com</b>
-      </div>
-      <div class="c-block">
-        <h1>&lt;<span style="color: #99afc9;">hell</span>o-<span style="color: deeppink;">world
-          /></span></h1>
-        <p>you're in the knowledge resource</p>
-        <p style="font-size: 18px; color: aqua; padding: 0;">you'll learn how technology works</p>
-        <p style="font-size: 18px; color: darkgoldenrod; padding: 0; border-bottom: 1px solid silver; border-color: darkgoldenrod; border-radius: 0;">here is high technology</p>
-      </div>
-      <div class="r-block">
-        <div class="d-flex">
-          <img src="/images/php.png" alt="php">
+        <div class="c-block col-sm m-1">
+          <h1>&lt;<span style="color: #99afc9;">hell</span>o-<span style="color: deeppink;">world
+            /></span></h1>
+          <p>you're in the knowledge resource</p>
+          <p style="font-size: 18px; color: aqua; padding: 0;">you'll learn how technology works</p>
+          <p style="font-size: 18px; color: darkgoldenrod; padding: 0; border-bottom: 1px solid silver; border-color: darkgoldenrod; border-radius: 0;">here is high technology</p>
         </div>
-        <p>Custom-Style-HEre</p>
-        <p>TheCodeclub</p>
+        <div class="r-block col-sm m-1 text-center pt-5">
+          <div class="d-flex justify-content-center">
+            <img src="/images/php.png" alt="php">
+          </div>
+          <p>Custom-Style-HEre</p>
+          <p>TheCodeclub</p>
+        </div>
       </div>
-    </div>
-    <div>
     </div>
   </div>
 </template>
@@ -53,10 +53,10 @@ export default {
 </script>
 
 <style scoped>
+  .footer-fone { background: #262424;}
   .custom-footer {
     margin-bottom: 10px;
     padding: 20px 20px 13px 20px;
-    background: #232222;
   }
   .l-block { background-color: #181818; padding: 20px; border-radius: 15px;}
 
@@ -94,7 +94,6 @@ export default {
   .c-block { 
     border-radius: 20px;
     background-color: #181818;
-    padding: 10px 20px;
   }
   .c-block h1 {
     border-radius: 20px;
