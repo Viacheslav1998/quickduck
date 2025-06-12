@@ -4,11 +4,11 @@ namespace App\Controllers;
 
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
-use App\Models\NewsModel;
+
 
 class NewsController extends ResourceController
 {
-  protected $modelName = 'App\Models\NewsModel';
+  protected $modelName = \App\Models\NewsModel::class;
   protected $format = 'json';
 
   public function preflight($id = null)
@@ -40,69 +40,44 @@ class NewsController extends ResourceController
    */
   public function show($id = null)
   {
-      return $this->respond($this->model->find($id));
+      $news = $this->model->find($id);
+      if (!$news) {
+        return $this->failNotFound('Новость не найдена');
+      }
+
+      return $this->respond($news);
   }
 
-  /**
-   * Return a new resource object, with default properties.
-   *
-   * @return ResponseInterface
-   */
-  public function new()
-  {
-      //
-  }
 
   /**
-   * Create a new resource object, from "posted" parameters.
    * Create News with tags
    *
    * @return ResponseInterface
    */
    public function create()
    {
-     $newsModel = new NewsModel();
-
      $newsData = [
-       'name' => $this->request->getPost('name'),
-       'title' => $this->request->getPost('title'),
-       'desk' => $this->request->getPost('desk'),
-       'path_to_image' => $this->request->getPost('path_to_image'),
-       'tags' => $this->request->getPost('tags')
+         'name' => $this->request->getPost('name'),
+         'title' => $this->request->getPost('title'),
+         'desc' => $this->request->getPost('desc'), 
+         'path_to_image' => $this->request->getPost('path_to_image'),
+         'tags' => $this->request->getPost('tags')
      ];
     
-     $news = $newsModel->insert($newsData);
+     $news = $this->model->insert($newsData);
 
      if ($news) {
-       // success
-       return $this->response->setJSON([
-         'status' => 'success',
-         'message' => 'Новость успешно добавлена',
-         'news_id' => $news,
-      ]);
-     } else {
-       // error
-       return $this->response->setJSON([
-         'status' => 'error',
-         'message' => 'Ошибка при добавлении новости',
-         'errors' => $newsModel->errors(),
-       ]);
-     }
+         return $this->respond([
+           'status' => 'success',
+           'message' => 'Новость успешно добавлена',
+           'news_id' => $news,
+        ]);
+     } 
+
+     return $this->failValidationErrors($this->model->errors());
+
     }
 
-
-
-    /**
-     * Return the editable properties of a resource object.
-     *
-     * @param int|string|null $id
-     *
-     * @return ResponseInterface
-     */
-    public function edit($id = null)
-    {
-        //
-    }
 
     /**
      * Add or update a model resource, from "posted" properties.
@@ -115,22 +90,20 @@ class NewsController extends ResourceController
     {
       $data = $this->request->getJSON(true);
       if (!$data) {
-        return $this->response->setStatusCode(400)->setJSON([
+        return $this->respond([
           'error' => 'Неверный запрос'
-        ]);
+        ], 400);
       }
 
-      $newsModel = new NewsModel();
-
-      if ($newsModel->update($id, $data)) {
-        return $this->response->setJSON([
+      if ($this->model->update($id, $data)) {
+        return $this->respond([
           'message' => 'Новость успешно обновлена'
         ]);
       } else {
          log_message('error', 'Ошибка обновления новости с ID ' . $id . '. Данные: ' . json_encode($data));
-        return $this->response->setStatusCode(500)->setJSON([
+        return $this->respond([
           'error' => 'Ошибки обновления'
-        ]);
+        ], 500);
       }
     }
 
@@ -143,19 +116,12 @@ class NewsController extends ResourceController
      */
     public function delete($id = null)
     {
-      $newsModel = new NewsModel();
-
-      // Поиск новости
-      $news = $newsModel->find($id);
+      $news = $this->model->find($id);
 
       if (!$news) {
-        return $this->response->setJSON([
-          'status' => 'error',
-          'message' => 'Новость не найдена',
-        ], 404);
+        return $this->failNotFound('Новость не найдена');
       }
 
-      // Удаление изображения, если оно существует
       if (!empty($news['path_to_image'])) {
         $imageName = basename($news['path_to_image']);
         $imagePath = FCPATH . 'images/' . $imageName;
@@ -163,7 +129,7 @@ class NewsController extends ResourceController
         if (file_exists($imagePath)) {
           if (!unlink($imagePath)) {
             log_message('error', 'Не удалось удалить изображение: ' . $imagePath);
-            return $this->response->setJSON([
+            return $this->respond([
               'status' => 'error',
               'message' => 'Не удалось удалить изображение',
             ], 500);
@@ -174,13 +140,13 @@ class NewsController extends ResourceController
       }
 
       // Удаление новости
-      if ($newsModel->delete($id)) {
-        return $this->response->setJSON([
+      if ($this->model->delete($id)) {
+        return $this->respond([
           'status' => 'success',
           'message' => 'Новость успешно удалена',
         ], 200);
       } else {
-        return $this->response->setJSON([
+        return $this->respond([
           'status' => 'error',
           'message' => 'Ошибка при удалении новости',
         ], 500);
