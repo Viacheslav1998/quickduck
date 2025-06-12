@@ -114,7 +114,7 @@ export default defineComponent ({
             <span>Короткое описание новости: </span>
           </div>
           <div class="custom-text">
-            <p v-html="item.desk"></p>
+            <p v-html="item.desc"></p>
           </div>
           <div class="wrapper-soc-content d-flex justify-content-between">
             <div class="box-info d-flex align-items-center" style="color: whtie;">
