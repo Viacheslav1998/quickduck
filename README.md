@@ -61,5 +61,5 @@ npm run dev
 По идее — готово!
 
 ## DEMO
-![home](home.png)
+![home1](home1.png)
 ![single](single.png)
