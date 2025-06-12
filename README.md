@@ -59,3 +59,7 @@ npm run dev
 ---
 
 По идее — готово!
+
+## DEMO
+![home](home.png)
+![single](single.png)
