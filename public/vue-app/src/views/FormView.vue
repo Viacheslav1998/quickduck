@@ -12,12 +12,13 @@ export default defineComponent({
     const name = ref('');
     const email = ref('');
     const password = ref('');
+    const pass_confirm = ref('');
     const imagen = ref('');
 
     // if there`s special code, it`s not required
     const secret = ref(1010);
 
-    const validatePerson = ({ name, email, password, secret }) => {
+    const validatePerson = ({ name, email, password, pass_confirm, secret }) => {
       const errors = [];
 
       if(!name || name.length < 3) {
@@ -30,6 +31,10 @@ export default defineComponent({
 
       if(!password || password.length <= 6) {
         errors.push("Пароль должен содержать не менее 6 символов.");
+      }
+
+      if(!pass_confirm === password) {
+        errors.push("Пароли не совпадают.");
       }
 
       if(!secret || isNaN(secret)) {
@@ -56,6 +61,7 @@ export default defineComponent({
         name: name.value,
         email: email.value,
         password: password.value,
+        pass_confirm: pass_confirm.value,
         secret: secret.value
       };
 
@@ -112,6 +118,7 @@ export default defineComponent({
       name,
       email,
       password,
+      pass_confirm,
       imagen,
       secret,
       validatePerson,
@@ -141,6 +148,11 @@ export default defineComponent({
           <label for="password">Пароль</label>
           <input v-model="password" type="password" class="form-control" id="password" placeholder="Пароль - придумай, второй раз спрашивать не стану">
           <small id="password" class="form-text text-muted">Пароль- способ доступа</small>
+        </div>
+        <div class="form-group">
+          <label for="pass_confirm">Повтори пароль</label>
+          <input v-model="pass_confirm" type="pass_confirm" class="form-control" id="pass_confirm" placeholder="Ха-ха спросил.">
+          <small id="pass_confirm" class="form-text text-muted">Нужно сверить пароли !</small>
         </div>
         <div class="form-group">
           <label for="email">Почта</label>
