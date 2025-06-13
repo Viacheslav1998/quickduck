@@ -4,11 +4,11 @@ namespace App\Controllers;
 
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
-use App\Models\PersonModel;
+
 
 class PersonController extends ResourceController 
 {
-  protected $modelName = 'App\Models\PersonModel';
+  protected $modelName = \App\Models\PersonModel::class;
   protected $format = 'json';
 
 	/**
@@ -41,19 +41,8 @@ class PersonController extends ResourceController
 	 */
 	public function create()
 	{
-		$model = new PersonModel;
-
 		$password = $this->request->getPost('password');
 
-		// return JSON answer
-		if (!$password) {
-			return $this->response->setJSON([
-				'status' => 'error',
-				'message' => 'Пароль не может быть пустым.'
-			]);
-		}
-
-		// Person data
 		$data = [
 			'name' => esc($this->request->getPost('name')),
 			'email' => esc($this->request->getPost('email')),
@@ -61,18 +50,20 @@ class PersonController extends ResourceController
 			'secret' => esc($this->request->getPost('secret')),
 		];
 
-		// save and response
-		if ($model->insert($data)) {
-			return $this->response->setJSON([
-				'status' => 'success',
-				'message' => 'Пользователь зарегестрирован.'
-			]);
-		} else {
-			return $this->response->setJSON([
-				'status' => 'error',
-				'message' => 'Ошибка при регистрации.'
-			]);
-		}
+		$person = $this->model->insert($data);
+
+		if ($person) {
+         	return $this->respond([
+	           'status' => 'success',
+	           'message' => 'Пользователь зарегестрирован',
+	        ]);
+        } 
+
+        return $this->respond([
+		    'status' => 'error',
+		    'message' => 'Ошибка: пользователь не зарегистрирован',
+		    'errors' => $this->model->errors(), 
+		], 400);
 	}
 	  
 

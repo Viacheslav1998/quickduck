@@ -56,7 +56,7 @@ class NewsController extends ResourceController
    */
    public function create()
    {
-     $newsData = [
+     $data = [
          'name' => $this->request->getPost('name'),
          'title' => $this->request->getPost('title'),
          'desc' => $this->request->getPost('desc'), 
@@ -64,7 +64,7 @@ class NewsController extends ResourceController
          'tags' => $this->request->getPost('tags')
      ];
     
-     $news = $this->model->insert($newsData);
+     $news = $this->model->insert($data);
 
      if ($news) {
          return $this->respond([
@@ -74,7 +74,11 @@ class NewsController extends ResourceController
         ]);
      } 
 
-     return $this->failValidationErrors($this->model->errors());
+      return $this->respond([
+          'status' => 'error',
+          'message' => 'Ошибка: Новость не добавлена!',
+          'errors' => $this->model->errors(), 
+      ], 400);
 
     }
 
@@ -139,7 +143,6 @@ class NewsController extends ResourceController
         }
       }
 
-      // Удаление новости
       if ($this->model->delete($id)) {
         return $this->respond([
           'status' => 'success',
