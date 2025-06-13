@@ -33,7 +33,7 @@ export default defineComponent({
         errors.push("Пароль должен содержать не менее 6 символов.");
       }
 
-      if(!pass_confirm === password) {
+      if(pass_confirm !== password) {
         errors.push("Пароли не совпадают.");
       }
 
@@ -151,7 +151,7 @@ export default defineComponent({
         </div>
         <div class="form-group">
           <label for="pass_confirm">Повтори пароль</label>
-          <input v-model="pass_confirm" type="pass_confirm" class="form-control" id="pass_confirm" placeholder="Ха-ха спросил.">
+          <input v-model="pass_confirm" type="password" class="form-control" id="pass_confirm" placeholder="Ха-ха спросил.">
           <small id="pass_confirm" class="form-text text-muted">Нужно сверить пароли !</small>
         </div>
         <div class="form-group">

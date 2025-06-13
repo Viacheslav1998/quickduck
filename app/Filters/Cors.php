@@ -2,9 +2,9 @@
 
 namespace App\Filters;
 
-use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Filters\FilterInterface;
 
 class Cors implements FilterInterface
 {
@@ -29,8 +29,8 @@ class Cors implements FilterInterface
         header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE');
         header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
-        if ($request->getMethod() == 'OPTIONS') {
-            header('HTTP/1.1 200 OK');
+        if ($request->getMethod() === 'OPTIONS') {
+            http_response_code(200);
             exit;
         }
     }
@@ -49,6 +49,6 @@ class Cors implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        $response->setHeader('Access-Control-Allow-Origin', '*');
+        return $response;
     }
 }

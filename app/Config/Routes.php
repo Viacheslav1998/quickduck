@@ -4,6 +4,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+$routes->setAutoRoute(false);
+
 $routes->get('/', 'TestController::index');
 
 //proxy
@@ -17,7 +19,6 @@ $routes->get('/news/navigation/(:num)', 'NavigateNewsController::getNavigation/$
 $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $routes): void {
     // news
     $routes->resource('news', ['controller' => 'NewsController']);
-    $routes->options('news/(:num)', 'NewsController::preflight');
 
     // imagen news
     $routes->resource('upload-image', [
@@ -31,7 +32,6 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
     
     // persons
     $routes->resource('person', ['controller' => 'PersonController']);
-    // $routes->options('person/(:num)', ['controller' => 'PersonController::preflight']);
 });
 
 
