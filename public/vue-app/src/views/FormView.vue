@@ -78,6 +78,8 @@ export default defineComponent({
         return;
       }      
 
+      delete personData.pass_confirm;
+
       const person = new FormData();
 
       Object.entries(personData).forEach(([key, value]) => {
