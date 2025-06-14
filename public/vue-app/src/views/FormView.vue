@@ -1,5 +1,5 @@
 <script>
-import { defineComponent , ref } from "vue";
+import { defineComponent, ref } from "vue";
 import Swal from "sweetalert2";
 
 export default defineComponent({
@@ -13,7 +13,7 @@ export default defineComponent({
     const email = ref('');
     const password = ref('');
     const pass_confirm = ref('');
-    const imagen = ref('');
+    const imagen = ref(null);
 
     // if there`s special code, it`s not required
     const secret = ref(1010);
@@ -72,7 +72,7 @@ export default defineComponent({
       if(errors.length > 0) {
         Swal.fire({
           title: "Уведомления об допущенных ошибках",
-          text: errors.join("\n"),
+          text: errors.join("\n "),
           icon: "question"
         });
         return;
@@ -89,16 +89,25 @@ export default defineComponent({
           method: "POST",
           body: person,
         });
-        
-        if(!response.ok) {
-          showAlert({
-            status: 'error',
-            message: 'Что то пошло не так!'
-          });
-          throw new Error(result.message || "Ошибка при создании пользователя");
-        }
 
         const result = await response.json();
+        
+        if(!response.ok) {
+          let fullMessage = result.message || "Ошибка при создании пользователя";
+          if (result.errors) {
+            const details = Object.entries(result.errors).map(
+              ([field, msg]) => `${field}: ${msg}`
+            );
+            fullMessage += "\n " + details.join("\n");
+          }
+
+          showAlert({
+            status: 'error',
+            message: fullMessage,
+          });
+          return;
+        }
+
         showAlert({
           status: 'success',
           message: 'Пользователь зарегестрирован!'
@@ -107,7 +116,7 @@ export default defineComponent({
       } catch (error) {
         showAlert({
           status: 'error',
-          message: 'Произошла ошибка при связи с сервером.'
+          message: 'Произошла ошибка при связи с сервером.' + error.message
         });
       }
     };
