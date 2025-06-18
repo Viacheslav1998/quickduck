@@ -16,15 +16,23 @@ export default defineComponent({
 
     const newsNavigation = async(id) => {
       try {
-      const response = await fetch(`http://quickduck.com/news/navigation/${id}`);
-      if(!response.ok) throw new Error("Ошибка загрузки данных навигации");
+        
+        const response = await fetch(`http://quickduck.com/news/navigation/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
 
-      const data = await response.json();
-      nextNews.value = data.next;
-      prevNews.value = data.prev;
+        if(!response.ok) throw new Error("Ошибка загрузки данных навигации");
 
-      console.log(nextNews);
-      console.log(prevNews);
+        const data = await response.json();
+        nextNews.value = data.next;
+        prevNews.value = data.prev;
+
+        console.log(nextNews);
+        console.log(prevNews);
 
       } catch(error) {
         console.log('Ошибка загрузки:', error);
