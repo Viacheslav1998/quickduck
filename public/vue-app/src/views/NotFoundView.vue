@@ -20,7 +20,7 @@ export default defineComponent ({
           </p>
           <p>И как вы думаете - что я вам могу предложить ?</p>
           <i>ну конечно же:</i><br><br>
-          <button type="button" class="btn btn-secondary">Вернутся</button>
+          <a href="/" type="button" class="btn btn-secondary">Вернутся</a>
         </div>
       </div>
     </div>

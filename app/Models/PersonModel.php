@@ -29,7 +29,7 @@ class PersonModel extends Model
 
     // Validation
    protected $validationRules = [
-        'name'     => 'required|max_length[30]|alpha_numeric_space|min_length[3]',
+        'name'     => 'required|max_length[30]|min_length[3]',
         'email'        => 'required|max_length[254]|valid_email|is_unique[persons.email]',
         'password'     => 'required|max_length[255]|min_length[8]',
         'secret'     => 'max_length[30]|alpha_numeric_space|min_length[3]',
