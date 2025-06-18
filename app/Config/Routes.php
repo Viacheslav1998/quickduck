@@ -6,6 +6,15 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->setAutoRoute(false);
 
+$routes->options('(:any)', function() {
+    $response = service('response');
+    return $response->setStatusCode(200)
+                    ->setHeader('Access-Control-Allow-Origin', '*')
+                    ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+                    ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Request-with')
+                    ->setBody('');
+});
+
 $routes->get('/', 'TestController::index');
 
 //proxy
