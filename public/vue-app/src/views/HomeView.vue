@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, ref, onMounted, watch } from "vue";
+import { defineComponent, ref, onMounted, computed } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 
 export default defineComponent ({
@@ -12,6 +12,27 @@ export default defineComponent ({
       { src: "/soc-icons/sm2.png", alt: "ico 2" },
       { src: "/soc-icons/sm3.png", alt: "ico 3" },
     ]);
+
+    const route = useRoute();
+    const router = useRouter();
+    const totalItems = ref(50);
+    const itemsPerPage = ref(10);
+
+    const currentPage = computed(() => {
+      return Number(route.query.page) || 1;
+    });
+
+    const totalPages = computed(() => {
+      return Math.ceil(totalItems.value / itemsPerPage.value);
+    });
+
+    const pages = computed(() => {
+      const pagesArray = [];
+      for(let i = 1; i <= totalPages.value; i++) {
+        pagesArray.push(i);
+      }
+      return pagesArray;
+    });
 
     async function getNews() {
       const url = "http://quickduck.com/api/news";
@@ -59,7 +80,9 @@ export default defineComponent ({
       news,
       preloader,
       formatDate,
-      formatTime
+      formatTime,
+      currentPage, 
+      pages
     };
   },
 });
@@ -70,6 +93,17 @@ export default defineComponent ({
 
     <div class="begin">
       <h1>Какие то новости</h1>
+    </div>
+
+    <div>
+      <router-link 
+        v-for="pageNumber in pages"
+        :key="pageNumber"
+        :to="`\?page=${pageNumber}`"
+        :class="{ active: pageNumber === currentPage }"
+      >
+      {{ pageNumber }}
+      </router-link>
     </div>
 
     <div class="preloader d-flex justify-content-center" v-if="preloader">
