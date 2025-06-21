@@ -18,7 +18,13 @@ export default defineComponent ({
     async function getTagNews(tag) {
       const url = `http://quickduck.com/tags/${tag}`;
       try { 
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
         if(!response.ok) {
           throw new Error(`Статус ответа: ${response.status}`);
         }
@@ -87,7 +93,6 @@ export default defineComponent ({
 
     <div class="wrapper-news" v-else>
 
-      <!-- если данных нет ничего не показывать -->
       <div v-if="news.length === 0">
         <h1>Данных нет</h1>
       </div>
