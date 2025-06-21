@@ -16,10 +16,18 @@ export default defineComponent ({
     async function getNews() {
       const url = "http://quickduck.com/api/news";
       try { 
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
+
         if(!response.ok) {
           throw new Error(`Статус ответа: ${response.status}`);
         }
+        
         const news = await response.json();
         return news || [];
       } catch (error) {
