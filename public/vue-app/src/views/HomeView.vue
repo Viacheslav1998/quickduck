@@ -1,6 +1,6 @@
 <script>
-import { defineComponent, ref, onMounted } from "vue";
-import { RouterLink } from "vue-router";
+import { defineComponent, ref, onMounted, watch } from "vue";
+import { RouterLink, useRoute, useRouter } from "vue-router";
 
 export default defineComponent ({
   name: "HomeView",
@@ -85,7 +85,6 @@ export default defineComponent ({
 
     <div class="wrapper-news" v-else>
 
-      <!-- если данных нет ничего не показывать -->
       <div v-if="news.length === 0">
         <h1>Данных нет</h1>
       </div>
@@ -167,10 +166,9 @@ export default defineComponent ({
             </ul>
           </nav>
         </div>
+
       </div>
-
     </div>
-
   </div>
 </template>
 
