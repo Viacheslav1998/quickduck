@@ -18,16 +18,12 @@ class NewsController extends ResourceController
    */
   public function index()
   {
-      // return $this->respond($this->model->findAll());
-
     $page = $this->request->getGet('page') ?? 1;
-    $perPage = 10;
+    $perPage = 5;
 
     $data = $this->model->paginate($perPage, 'default', $page);
     $pager = $this->model->pager;
 
-
-    // если не сработает попробуй $model->pager->getCurrent....()
     return $this->respond([
       'data' => $data,
       'pagination' => [

@@ -19,7 +19,7 @@ export default defineComponent ({
     
     async function loadNews(page = 1) {
       try{ 
-        const res = await fetch(`http://quickduck.com/api/news/?page=${page}`, {
+        const res = await fetch(`http://quickduck.com/api/news?page=${page}`, {
           method: 'GET',
           headers: {
             'Accept': 'application/json'
@@ -58,7 +58,6 @@ export default defineComponent ({
 
     onMounted(async() => {
       loadNews();
-      // news.value = await getNews();
       preloader.value = false;
     });
 
