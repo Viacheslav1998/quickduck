@@ -21,7 +21,6 @@ export default defineComponent ({
         const response = await fetch(url, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
             'Accept': 'application/json'
           }
         });

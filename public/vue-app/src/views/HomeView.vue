@@ -1,61 +1,65 @@
 <script>
-import { defineComponent, ref, onMounted, computed } from "vue";
-import { RouterLink, useRoute, useRouter } from "vue-router";
+import { defineComponent, ref, onMounted, watch } from "vue";
+import { RouterLink } from "vue-router";
 
 export default defineComponent ({
   name: "HomeView",
   setup() {
+    const currentPage = ref(1);
     const news = ref([]);
+    const totalPages = ref(0);
+
     const preloader = ref(true);
+
     const images = ref([
       { src: "/soc-icons/sm1.png", alt: "ico 1" },
       { src: "/soc-icons/sm2.png", alt: "ico 2" },
       { src: "/soc-icons/sm3.png", alt: "ico 3" },
     ]);
-
-    const route = useRoute();
-    const router = useRouter();
-    const totalItems = ref(50);
-    const itemsPerPage = ref(10);
-
-    const currentPage = computed(() => {
-      return Number(route.query.page) || 1;
-    });
-
-    const totalPages = computed(() => {
-      return Math.ceil(totalItems.value / itemsPerPage.value);
-    });
-
-    const pages = computed(() => {
-      const pagesArray = [];
-      for(let i = 1; i <= totalPages.value; i++) {
-        pagesArray.push(i);
-      }
-      return pagesArray;
-    });
-
-    async function getNews() {
-      const url = "http://quickduck.com/api/news";
-      try { 
-        const response = await fetch(url, {
+    
+    async function loadNews(page = 1) {
+      try{ 
+        const res = await fetch(`http://quickduck.com/api/news/?page=${page}`, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
             'Accept': 'application/json'
           }
         });
 
-        if(!response.ok) {
-          throw new Error(`Статус ответа: ${response.status}`);
-        }
-        
-        const news = await response.json();
-        return news || [];
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
+        const json = await res.json();
+        news.value = json.data;
+        totalPages.value = json.pagination.pageCount;
+        currentPage.value = json.pagination.currentPage;
       } catch (error) {
-        console.error('Ошибка: ', error.message);
-        return [];
+        console.error('Ошибка загрузка новостей: ', error);
       }
     }
+
+
+    // async function getNews() {
+    //   const url = "http://quickduck.com/api/news";
+    //   try { 
+    //     const response = await fetch(url, {
+    //       method: 'GET',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         'Accept': 'application/json'
+    //       }
+    //     });
+
+    //     if(!response.ok) {
+    //       throw new Error(`Статус ответа: ${response.status}`);
+    //     }
+        
+    //     const news = await response.json();
+    //     return news || [];
+    //   } catch (error) {
+    //     console.error('Ошибка: ', error.message);
+    //     return [];
+    //   }
+    // }
 
     const formatDate = (date) => {
       if(!date) return "данных нет";
@@ -81,8 +85,6 @@ export default defineComponent ({
       preloader,
       formatDate,
       formatTime,
-      currentPage, 
-      pages
     };
   },
 });

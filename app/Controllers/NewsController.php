@@ -23,11 +23,13 @@ class NewsController extends ResourceController
     $page = $this->request->getGet('page') ?? 1;
     $perPage = 10;
 
-    $news = $this->model->paginate($perPage, 'default', $page);
+    $data = $this->model->paginate($perPage, 'default', $page);
     $pager = $this->model->pager;
 
+
+    // если не сработает попробуй $model->pager->getCurrent....()
     return $this->respond([
-      'data' => $news,
+      'data' => $data,
       'pagination' => [
         'currentPage' => $pager->getCurrentPage(),
         'perPage' => $pager->getPerPage(),

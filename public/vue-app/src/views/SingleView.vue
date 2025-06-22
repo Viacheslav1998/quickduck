@@ -20,7 +20,6 @@ export default defineComponent({
         const response = await fetch(`http://quickduck.com/news/navigation/${id}`, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
             'Accept': 'application/json'
           }
         });
