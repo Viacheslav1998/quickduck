@@ -11,15 +11,6 @@ class NewsController extends ResourceController
   protected $modelName = \App\Models\NewsModel::class;
   protected $format = 'json';
 
-  public function preflight($id = null)
-  {
-    return $this->response->setHeader('Access-Control-Allow-Origin', '*')
-          ->setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-          ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
-          ->setStatusCode(200)
-          ->setJSON([]);
-  }
-
   /**
    * Return an array of resource objects, themselves in array format.
    *
@@ -27,7 +18,24 @@ class NewsController extends ResourceController
    */
   public function index()
   {
-      return $this->respond($this->model->findAll());
+      // return $this->respond($this->model->findAll());
+
+    $page = $this->request->getGet('page') ?? 1;
+    $perPage = 10;
+
+    $news = $this->model->paginate($perPage, 'default', $page);
+    $pager = $this->model->pager;
+
+    return $this->respond([
+      'data' => $news,
+      'pagination' => [
+        'currentPage' => $pager->getCurrentPage(),
+        'perPage' => $pager->getPerPage(),
+        'total' => $pager->getTotal(),
+        'pageCount' => $pager->getPageCount()
+      ]
+    ]);
+
   }
 
 
