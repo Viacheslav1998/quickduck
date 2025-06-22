@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, ref, onMounted, watch } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import { RouterLink } from "vue-router";
 
 export default defineComponent ({
@@ -37,6 +37,12 @@ export default defineComponent ({
       }
     }
 
+    function goToPage(page) {
+      if (page >= 1 && page <= totalPages.value) {
+        loadNews(page);
+      }
+    }
+
     const formatDate = (date) => {
       if(!date) return "данных нет";
       return new Date(date).toLocaleDateString('ru-RU');
@@ -51,7 +57,8 @@ export default defineComponent ({
     };
 
     onMounted(async() => {
-      news.value = await getNews();
+      loadNews();
+      // news.value = await getNews();
       preloader.value = false;
     });
 
@@ -61,6 +68,9 @@ export default defineComponent ({
       preloader,
       formatDate,
       formatTime,
+      currentPage,
+      totalPages,
+      goToPage
     };
   },
 });
@@ -71,17 +81,6 @@ export default defineComponent ({
 
     <div class="begin">
       <h1>Какие то новости</h1>
-    </div>
-
-    <div>
-      <router-link 
-        v-for="pageNumber in pages"
-        :key="pageNumber"
-        :to="`\?page=${pageNumber}`"
-        :class="{ active: pageNumber === currentPage }"
-      >
-      {{ pageNumber }}
-      </router-link>
     </div>
 
     <div class="preloader d-flex justify-content-center" v-if="preloader">
@@ -156,29 +155,32 @@ export default defineComponent ({
               <RouterLink
                 :to="{ name: 'news', params: { id: item.id } }"
               >
-              <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
+                <button type="button" class="btn btn-outline-success ">Посмотреть новость</button>
               </RouterLink>
             </div>
           </div>
         </div>
-
         <!-- pagination -->
         <div class="box-pagination">
           <nav aria-label="navigation custom-pagination">
             <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">туда</a>
+
+              <li class="page-item" :class="{ disabled: currentPage === 1 }">
+                <a class="page-link" href="#" @click.prevent="goToPage(currentPage - 1)">туда</a>
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">сюда</a>
+
+              <li v-for="page in totalPages" :key="page" class="page-item" :class="{ active: currentPage === page }">
+                <a class="page-link" href="#" @click.prevent="goToPage(page)">{{ page }}</a>
               </li>
+
+              <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+                <a class="page-link" href="#" @click.prevent="goToPage(currentPage + 1)">сюда</a>
+              </li>
+
             </ul>
           </nav>
         </div>
-
+        <!-- end pagination -->
       </div>
     </div>
   </div>
