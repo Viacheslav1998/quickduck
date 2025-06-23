@@ -6,7 +6,6 @@ export default defineComponent({
   name: "SingleView",
   setup() {
     const item = ref(null);
-    const nav = ref(null);
     const preloader = ref(true);
     const route = useRoute();
 
@@ -24,14 +23,11 @@ export default defineComponent({
           }
         });
 
-        if(!response.ok) throw new Error("Ошибка загрузки данных навигации");
+        if (!response.ok) throw new Error("Ошибка загрузки данных навигации");
 
         const data = await response.json();
         nextNews.value = data.next;
         prevNews.value = data.prev;
-
-        console.log(nextNews);
-        console.log(prevNews);
 
       } catch(error) {
         console.log('Ошибка загрузки:', error);
@@ -49,8 +45,13 @@ export default defineComponent({
     {
       const url = `http://quickduck.com/api/news/${id}`;
       try {
-        const response = await fetch(url);
-        if(!response.ok) {
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        if (!response.ok) {
           throw new Error(`Статус ответа: ${response.status}`);
         }
         return await response.json(); 
@@ -73,23 +74,28 @@ export default defineComponent({
       });
     };
 
-    async function fetchItem(id) {
+    const fetchItem = async (id) => {
       preloader.value = true;
       item.value = await getItem(id);
-      nav.value = await newsNavigation(id);
+      await newsNavigation(id);
       preloader.value = false;
-    }
+    };
 
     onMounted(() => {
       fetchItem(route.params.id);
     });
 
-    watch(() => route.params.id, fetchItem, newsNavigation, {immediate: true});
+    watch(
+      () => route.params.id,
+      async (newId) => {
+        await fetchItem(newId);
+      },
+      { immediate: true }
+    );
 
     return {
       images,
       item,
-      nav,
       preloader,
       formatDate,
       formatTime,
