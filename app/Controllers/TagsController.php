@@ -2,51 +2,48 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\HTTP\ResponseInterface;
 use App\Controllers\BaseController;
-use App\Models\NewsModel;
 
 class TagsController extends BaseController
 {
-
-	protected $db;
-
-  /**
-   * get a model anywhere
-   */ 
-  public function __construct() 
-  {
-  	$this->db = \Config\Database::connect();
-  }
+	protected $modelName = \App\Models\NewsModel::class;
+	protected $format = 'json';
 
   /**
    * Get news by tags
-	 * return 
-	 * @param Array
-	 */
-	public function tagsFilter($tag = '') 
+   * return 
+   * @param Array
+   */
+	public function tagsFilter($tag = '', $perPage = 5) 
 	{
-		$builder = $this->db->table('news');
 
-		$query = $builder->like('tags', $tag, 'both')->get();
-		$articles = $query->getResult();
+		$news = $this->model
+		    ->like('tags', $tag, 'both')
+		    ->paginate($perPage);
 
-		if (empty($articles)) {
-			return $errors = [
-				"Ошибка", "Не найдено новостей по тегу $tag"
-			];
-		}
+		$pager =  \Config\Services::pager();
 
-		return $articles;
+		return [
+			'data' => $news, 
+			'pagination' => [
+				'currentPage' => $model->pager->getCurrentPage(),
+				'perPage'     => $model->pager->getPerPage(),
+				'total'       => $model->pager->getTotal(),
+				'pageCount'   => $model->pager->getPageCount()
+			]
+		]; 
 	} 
 
 	/**
 	 * Get news by tags
-   * return  
-   * @param JSON
-   */
+     * return  
+     * @param JSON
+     */
 	public function getTag($tag)
 	{
-		$news = $this->tagsFilter($tag);
+		$page = $this->request->getGet('page') ?? 1;
+		$news = $this->tagsFilter($tag, 5);
 		return $this->response->setJSON($news);
 	}
 
