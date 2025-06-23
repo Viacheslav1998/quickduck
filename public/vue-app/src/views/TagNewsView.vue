@@ -8,15 +8,18 @@ export default defineComponent ({
     const route = useRoute();
     const tag = ref(route.params.tag);
     const news = ref([]);
+    const currentPage = ref(1);
+    const totalPages = ref(1);
     const preloader = ref(true);
+
     const images = ref([
       { src: "/soc-icons/sm1.png", alt: "ico 1" },
       { src: "/soc-icons/sm2.png", alt: "ico 2" },
       { src: "/soc-icons/sm3.png", alt: "ico 3" },
     ]);
 
-    async function getTagNews(tag) {
-      const url = `http://quickduck.com/api/news/tags?tags=${tag}`;
+    async function getTagNews(tag, page = 1) {
+      const url = `http://quickduck.com/api/news/tags?tags=${tag}&page=${page}`;
       try { 
         const response = await fetch(url, {
           method: 'GET',
@@ -27,12 +30,24 @@ export default defineComponent ({
         if(!response.ok) {
           throw new Error(`Статус ответа: ${response.status}`);
         }
-        const news = await response.json();
-        return news || [];
+        const result = await response.json();
+        return result || {};
       } catch (error) {
         console.error('Ошибка: ', error.message);
-        return [];
+        return {};
       }
+    }
+
+    async function goToPage(page) {
+      if (page < 1 || page > totalPages.value || page === currentPage.value) return;
+
+      preloader.value = true;
+      currentPage.value = page;
+
+      const result = await getTagNews(tag.value, currentPage.value);
+      news.value = result.data || [];
+      totalPages.value = result.pagination?.pageCount || 1;
+      preloader.value = false;
     }
 
     const formatDate = (date) => {
@@ -49,14 +64,20 @@ export default defineComponent ({
     };
 
     onMounted(async() => {
-      news.value = await getTagNews(tag.value);
+      const result = await getTagNews(tag.value, currentPage.value);
+      news.value = result.data || [];
+      currentPage.value = result.pagination?.currentPage || 1;
+      totalPages.value = result.pagination?.pageCount || 1;
       preloader.value = false;
     });
 
     watch(() => route.params.tag, async (newTag) => {
       tag.value = newTag;
       preloader.value = true;
-      news.value = await getTagNews(newTag);
+      currentPage.value = 1;
+      const result = await getTagNews(newTag, currentPage.value);
+      news.value = result.data || [];
+      totalPages.value = result.pagination?.pageCount || 1;
       preloader.value = false;
     });
 
@@ -66,7 +87,10 @@ export default defineComponent ({
       preloader,
       formatDate,
       formatTime,
-      tag
+      tag,
+      currentPage, 
+      totalPages,
+      goToPage
     };
   },
 });
@@ -92,7 +116,7 @@ export default defineComponent ({
 
     <div class="wrapper-news" v-else>
 
-      <div v-if="news.length === 0">
+      <div v-if="Array.isArray(news) && news.length === 0">
         <h1>Данных нет</h1>
       </div>
 
@@ -156,27 +180,32 @@ export default defineComponent ({
             </div>
           </div>
         </div>
-
         <!-- pagination -->
         <div class="box-pagination">
           <nav aria-label="navigation custom-pagination">
             <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">туда</a>
+              <li class="page-item" :class="{ disabled: currentPage === 1 }">
+                <a class="page-link" href="#" @click.prevent="goToPage(currentPage - 1)">туда</a>
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">сюда</a>
+              
+              <li
+                v-for="page in totalPages"
+                :key="page"
+                class="page-item"
+                :class="{ active: currentPage === page }"
+              >
+                <a href="#" class="page-link" @click.prevent="goToPage(page)">{{ page }}</a>
+              </li>
+
+              <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+                <a class="page-link" href="#" @click.prevent="goToPage(currentPage + 1)">сюда</a>
               </li>
             </ul>
           </nav>
         </div>
+        <!-- end pagination -->
       </div>
-
     </div>
-
   </div>
 </template>
 
