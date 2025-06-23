@@ -16,7 +16,7 @@ export default defineComponent ({
     ]);
 
     async function getTagNews(tag) {
-      const url = `http://quickduck.com/tags/${tag}`;
+      const url = `http://quickduck.com/api/news/tags?tags=${tag}`;
       try { 
         const response = await fetch(url, {
           method: 'GET',

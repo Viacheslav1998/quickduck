@@ -2,50 +2,61 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\HTTP\ResponseInterface;
 use App\Controllers\BaseController;
+use App\Models\NewsModel;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class TagsController extends BaseController
 {
-	protected $modelName = \App\Models\NewsModel::class;
-	protected $format = 'json';
+    protected $model;
+    protected $format = 'json';
 
-  /**
-   * Get news by tags
-   * return 
-   * @param Array
-   */
+    public function __construct()
+    {
+       $this->model = new NewsModel();
+    }
+
+    /**
+     * @param string $tag
+     * @param int $perPage
+     * @return array
+     */
 	public function tagsFilter($tag = '', $perPage = 5) 
 	{
+		$page = $this->request->getGet('page') ?? 1;
 
 		$news = $this->model
 		    ->like('tags', $tag, 'both')
-		    ->paginate($perPage);
+		    ->paginate($perPage, 'default', $page);
 
-		$pager =  \Config\Services::pager();
+	    $pager = $this->model->pager;
 
 		return [
 			'data' => $news, 
 			'pagination' => [
-				'currentPage' => $model->pager->getCurrentPage(),
-				'perPage'     => $model->pager->getPerPage(),
-				'total'       => $model->pager->getTotal(),
-				'pageCount'   => $model->pager->getPageCount()
+				'currentPage' => $pager->getCurrentPage(),
+				'perPage'     => $pager->getPerPage(),
+				'total'       => $pager->getTotal(),
+				'pageCount'   => $pager->getPageCount()
 			]
 		]; 
 	} 
 
 	/**
-	 * Get news by tags
-     * return  
-     * @param JSON
+     * @return \CodeIgniter\HTTP\ResponseInterface
      */
-	public function getTag($tag)
+	public function getTag()
 	{
-		$page = $this->request->getGet('page') ?? 1;
-		$news = $this->tagsFilter($tag, 5);
-		return $this->response->setJSON($news);
-	}
+		$tag = $this->request->getGet('tags');
 
+		if (!$tag) {
+			return $this->response->setJSON([
+				'error' => 'Ошибка тега'
+			])->setStatusCode(400);
+		}
+
+		$data = $this->tagsFilter($tag);
+		return $this->response->setJSON($data);
+	}
 
 }
