@@ -8,32 +8,32 @@
 
 ## Установка
 
-### 1
+### шаг - 1
 ```bash
 
 composer install 
 composer update
 ```
 (тестировал сам работает)
-### 2
+### шаг - 2
 - Настрой свой `.env` / скопируй с файла .env.example.conf в свой .env
 
-### 3
+### шаг - 3
 - На сервере нужно указать папку `/public`, чтобы сайт корректно заработал [XAMPP]
 - вот тут C:\xampp\apache\conf\extra\httpd-vhosts.conf
 
-- <VirtualHost *:80>
--    ServerName quickduck.com
--    DocumentRoot "D:/xampp/htdocs/quickduck/public"
--    <Directory "D:/xampp/htdocs/quickduck/public">
-- 	Options Indexes FollowSymLinks MultiViews
--            	AllowOverride All
--            	Order allow,deny
--            	allow from all
--   </Directory>
--</VirtualHost>
+<VirtualHost *:80>
+   ServerName quickduck.com
+   DocumentRoot "D:/xampp/htdocs/quickduck/public"
+   <Directory "D:/xampp/htdocs/quickduck/public">
+	Options Indexes FollowSymLinks MultiViews
+           	AllowOverride All
+           	Order allow,deny
+           	allow from all
+  </Directory>
+</VirtualHost>
 
-### 4
+### шаг - 4
 - нужно создать в директории writable > cache а то ругается
 ---
 
@@ -46,7 +46,7 @@ composer update
 - `libcurl` — если будешь использовать HTTP\CURLRequest library
 
 ---
-### 5
+### шаг - 5
 ## Работа с фронтендом (VUE3)
 
 Поскольку у нас монолит и мы используем VUE3 — так вышло, такое бывает!
@@ -61,7 +61,7 @@ npm run dev
 ```
 
 ---
-### 6
+### шаг - 6
 ## Административная панель
 
 Чтобы управлять сайтом, нужна админка.  
