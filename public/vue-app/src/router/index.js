@@ -38,13 +38,13 @@ const router = createRouter({
     {
       path: '/:catchAll(.*)',
       name: 'NotFoundView',
-      component: NotFoundView,
+      component: NotFoundView
     },
     {
       path: '/tag/:tag',
       name: 'tagNews',
-      component: TagNewsView,
-    },
+      component: TagNewsView
+    }
   ]
 })
 

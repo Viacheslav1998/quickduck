@@ -1,9 +1,9 @@
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref } from 'vue'
 
-export default defineComponent ({
-  name: "NotFoundView",
-});
+export default defineComponent({
+  name: 'NotFoundView'
+})
 </script>
 
 <template>
@@ -16,10 +16,10 @@ export default defineComponent ({
           <h3>Переживать за это не стоит</h3>
           <p>
             Вероятно данной страницы не было не когда, быть может она была уничтожена, кто знает ?
-            <br>Но факт, ее нет.
+            <br />Но факт, ее нет.
           </p>
           <p>И как вы думаете - что я вам могу предложить ?</p>
-          <i>ну конечно же:</i><br><br>
+          <i>ну конечно же:</i><br /><br />
           <a href="/" type="button" class="btn btn-secondary">Вернутся</a>
         </div>
       </div>
@@ -49,5 +49,4 @@ export default defineComponent ({
   font-size: 20px;
   background-color: rgba(249, 252, 244, 0.9);
 }
-
 </style>

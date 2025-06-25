@@ -1,49 +1,47 @@
 <script>
-
-import { defineComponent, ref, onMounted, onUnmounted } from "vue";
+import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
 
 export default defineComponent({
-  name: "LoginView",
+  name: 'LoginView',
   setup() {
-    const wolf = ref(null);
-    const isPopupVisible = ref(false);
+    const wolf = ref(null)
+    const isPopupVisible = ref(false)
 
     const closePopup = () => {
-      isPopupVisible.value  = false;
+      isPopupVisible.value = false
     }
 
     const openPopup = () => {
-      isPopupVisible.value = true;
-    } 
+      isPopupVisible.value = true
+    }
 
     const handleMouseOver = (e) => {
-      if(wolf.value) {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        wolf.value.style.transform = `translate(-${x * 150}px, -${y * 150}px)`;
+      if (wolf.value) {
+        const x = e.clientX / window.innerWidth
+        const y = e.clientY / window.innerHeight
+        wolf.value.style.transform = `translate(-${x * 150}px, -${y * 150}px)`
       }
-    };
+    }
 
     onMounted(() => {
-      window.addEventListener("mousemove", handleMouseOver);
-    });
+      window.addEventListener('mousemove', handleMouseOver)
+    })
 
     onUnmounted(() => {
-      window.removeEventListener("mousemove", handleMouseOver);
-    });
+      window.removeEventListener('mousemove', handleMouseOver)
+    })
 
     return {
       wolf,
-      isPopupVisible, 
+      isPopupVisible,
       closePopup,
       openPopup
-    };
-  },
-});
+    }
+  }
+})
 </script>
 
 <template>
-
   <div class="container">
     <div class="begin mb-4">
       <h1>Войти</h1>
@@ -52,47 +50,54 @@ export default defineComponent({
       <div class="custom-login">
         <div class="custom-text-login d-flex justify-content-center pt-3">
           <div>
-            <p> <span style="color: darkorange; font-weight: bold;">Ну</span> ты заходи - если что</p>
+            <p><span style="color: darkorange; font-weight: bold">Ну</span> ты заходи - если что</p>
           </div>
           <div class="custom-icon" @click="openPopup">
-            <img src="/icons/wolf.png">
+            <img src="/icons/wolf.png" />
           </div>
         </div>
         <form action="#" class="p-4">
           <div class="form-group">
             <label for="email" class="custom-input">Введи свою Почту</label>
-            <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Помнишь своё имя ?">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              aria-describedby="email"
+              placeholder="Помнишь своё имя ?"
+            />
           </div>
           <div class="form-group">
             <label for="name" class="custom-input">Вводи свой Пароль</label>
-            <input type="password" class="form-control" id="password" aria-describedby="password" placeholder="Пароль это пол дела.">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              aria-describedby="password"
+              placeholder="Пароль это пол дела."
+            />
           </div>
           <button type="submit" class="btn btn-warning">Входи!</button>
         </form>
       </div>
     </div>
-    <div 
-      class="wrapper-box-poppup"
-      :class="{ 'popup-hidden' : !isPopupVisible }"
-    >
+    <div class="wrapper-box-poppup" :class="{ 'popup-hidden': !isPopupVisible }">
       <div class="close" @click="closePopup">
-        <img src="/poppup/close.png">
+        <img src="/poppup/close.png" />
       </div>
       <div class="box-elems">
         <div class="custom-fone">
-          <img src="/poppup/fone.png">
+          <img src="/poppup/fone.png" />
         </div>
         <div class="custom-wolf wolf-parallax" ref="wolf">
-          <img src="/poppup/wolf.png">
+          <img src="/poppup/wolf.png" />
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <style scoped>
-
 .login-box {
   background-image: url('../images/login-fone.jpg');
   background-size: contain;
@@ -138,7 +143,8 @@ export default defineComponent({
   margin: 0;
   padding: 0;
   font-size: 30px;
-  font-weight: lighter;}
+  font-weight: lighter;
+}
 
 .wrapper-box-poppup {
   display: inline;
@@ -162,7 +168,7 @@ export default defineComponent({
   position: relative;
   z-index: 15;
 }
-.custom-fone  {
+.custom-fone {
   overflow: hidden;
   margin: 20px;
   border-radius: 150px;
@@ -172,7 +178,9 @@ export default defineComponent({
   width: 100%;
   background-size: cover;
 }
-.custom-wolf {background-color: brown;}
+.custom-wolf {
+  background-color: brown;
+}
 .custom-wolf img {
   position: fixed;
   top: 50%;
@@ -187,7 +195,6 @@ export default defineComponent({
   background-size: cover;
   width: 110%;
   height: 110%;
-  transition: all 0.1s ease;  
+  transition: all 0.1s ease;
 }
-
 </style>
