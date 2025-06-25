@@ -22,16 +22,19 @@ composer update
 - На сервере нужно указать папку `/public`, чтобы сайт корректно заработал [XAMPP]
 - вот тут C:\xampp\apache\conf\extra\httpd-vhosts.conf
 
+```apache
 <VirtualHost *:80>
-   ServerName quickduck.com
-   DocumentRoot "D:/xampp/htdocs/quickduck/public"
-   <Directory "D:/xampp/htdocs/quickduck/public">
-	Options Indexes FollowSymLinks MultiViews
-           	AllowOverride All
-           	Order allow,deny
-           	allow from all
-  </Directory>
+    ServerName quickduck.com
+    DocumentRoot "D:/xampp/htdocs/quickduck/public"
+
+    <Directory "D:/xampp/htdocs/quickduck/public">
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    </Directory>
 </VirtualHost>
+```
 
 ### шаг - 4
 - нужно создать в директории writable > cache а то ругается
