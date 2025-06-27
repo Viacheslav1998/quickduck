@@ -222,7 +222,7 @@ export default defineComponent({
 
     <div class="alert alert-warning" role="alert">
       <h3 style="font-weight: 400">Внимание</h3>
-      Твои данные не кому не передаються - не ведись на скам (то-есть обман)!
+      Твои данные не кому не передаются - не ведись на скам (то-есть обман)!
     </div>
   </div>
 </template>
