@@ -4,6 +4,41 @@ import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
 export default defineComponent({
   name: 'LoginView',
   setup() {
+    const email = ref('')
+    const password = ref('')
+    const error = ref('')
+
+    const handleLogin = async () => {
+      error.value = ''
+      url = 'http://quickduck.com/auth/person/login'
+
+      try { 
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            email: email.value,
+            password: password.value
+          })
+        })
+
+        const result = await response.json();
+
+        if (response.ok) {
+          console.log('Успешно ! заходите', result)
+        } else {
+          error.value = result.message || 'Ошибка входа'
+        }
+      } catch (err) {
+        console.error(err);
+        error.value = 'Ошибка соединения'
+      }
+    }
+
+
     const wolf = ref(null)
     const isPopupVisible = ref(false)
 
@@ -32,6 +67,10 @@ export default defineComponent({
     })
 
     return {
+      email, 
+      password,
+      error,
+      handleLogin,
       wolf,
       isPopupVisible,
       closePopup,
@@ -56,10 +95,11 @@ export default defineComponent({
             <img src="/icons/wolf.png" />
           </div>
         </div>
-        <form action="#" class="p-4">
+        <form @submit.prevent="handleLogin" class="p-4">
           <div class="form-group">
             <label for="email" class="custom-input">Введи свою Почту</label>
             <input
+              v-model="email"
               type="email"
               class="form-control"
               id="email"
@@ -70,6 +110,7 @@ export default defineComponent({
           <div class="form-group">
             <label for="name" class="custom-input">Вводи свой Пароль</label>
             <input
+              v-model="password"
               type="password"
               class="form-control"
               id="password"
@@ -77,7 +118,8 @@ export default defineComponent({
               placeholder="Пароль это пол дела."
             />
           </div>
-          <button type="submit" class="btn btn-warning">Входи!</button>
+          <button type="button" class="btn btn-warning">Входи!</button>
+          <p v-if="error" style="color: red;">{{ error }}</p>
         </form>
       </div>
     </div>
