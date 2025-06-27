@@ -104,7 +104,7 @@ export default defineComponent({
               class="form-control"
               id="email"
               aria-describedby="email"
-              placeholder="Помнишь своё имя ?"
+              placeholder="Помнишь свою почту ?"
             />
           </div>
           <div class="form-group">
@@ -118,7 +118,7 @@ export default defineComponent({
               placeholder="Пароль это пол дела."
             />
           </div>
-          <button type="button" class="btn btn-warning">Входи!</button>
+          <button type="submit" class="btn btn-warning">Входи!</button>
           <p v-if="error" style="color: red;">{{ error }}</p>
         </form>
       </div>

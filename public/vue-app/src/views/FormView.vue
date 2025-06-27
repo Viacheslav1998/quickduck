@@ -18,6 +18,10 @@ export default defineComponent({
     // if there`s special code, it`s not required
     const secret = ref(1010)
 
+    const handleImage = (e) => {
+      imagen.value = e.target.files[0]
+    }
+
     const validatePerson = ({ name, email, password, pass_confirm, secret }) => {
       const errors = []
 
@@ -44,14 +48,11 @@ export default defineComponent({
       return errors
     }
 
-    const showAlert = (response) => {
-      let icon = response.status === 'error' ? 'error' : 'success'
-      let title = response.status === 'error' ? 'Ошибка' : 'успех'
-
+    const showAlert = ({ status, message }) => {
       Swal.fire({
-        title: title,
-        text: response.message,
-        icon: icon
+        title: status === 'error' ? 'Ошибка' : 'Успех',
+        text: message,
+        icon: status
       })
     }
 
@@ -66,6 +67,10 @@ export default defineComponent({
 
       // run validate
       const errors = validatePerson(personData)
+      if(error.length) {
+        showAlert({ status: 'error', message: errors.join('\n') })
+        return 
+      }
 
       // attention to errors
       if (errors.length > 0) {
@@ -86,7 +91,7 @@ export default defineComponent({
       })
 
       try {
-        const response = await fetch('http://quickduck.com/api/person', {
+        const response = await fetch('http://quickduck.com/auth/person', {
           method: 'POST',
           body: person
         })
@@ -140,7 +145,7 @@ export default defineComponent({
       <h1>Регистрация</h1>
     </div>
     <div class="custom-form">
-      <form @submit.prevent="createPerson">
+      <form @submit.prevent="handleRegister">
         <div class="form-group">
           <label for="name">Выше имя</label>
           <input
@@ -155,7 +160,7 @@ export default defineComponent({
         </div>
         <div class="form-group">
           <label for="name">Твоё изображение</label>
-          <input type="file" class="form-control" id="imagen" aria-describedby="imagen" />
+          <input @change="handleImage" type="file" class="form-control" id="imagen" aria-describedby="imagen" />
           <small id="imagen" class="form-text text-muted">Выбрать изображение - аватарку.</small>
         </div>
         <div class="form-group">
