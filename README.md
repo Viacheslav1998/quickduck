@@ -22,6 +22,11 @@ composer update
 - На сервере нужно указать папку `/public`, чтобы сайт корректно заработал [XAMPP]
 - вот тут C:\xampp\apache\conf\extra\httpd-vhosts.conf
 
+- не стоит забывать про C:\Windows\System32\drivers\etc\hosts [для windows]
+- изменения что бы локалка заработала 
+
+- sudo nano /etc/hosts [для linux]
+
 ```apache
 <VirtualHost *:80>
     ServerName quickduck.com
@@ -83,5 +88,4 @@ npm run dev
 По идее — готово!
 
 ## DEMO
-![home1](home1.png)
-![single](single.png)
+![single](duck-space.png)
