@@ -4,7 +4,7 @@ import { defineComponent, ref, computed, onMounted, onUnmounted } from 'vue';
 export default defineComponent({
   name: 'TestApplicationView',
   setup() {
-    
+
     const base = ref('1')
     const title = ref('just title for a current page')
 
@@ -14,18 +14,24 @@ export default defineComponent({
     const seconds = ref(0)
     let intervalId = null
 
-  
-
     const move = () => {
       console.log('you wanna make a move')
-      base.value++
       console.log(base.value)
+      base.value++
+      title.value = 'you wanna make a move';
     }
+
+    const fullName = computed(() => {
+      return `${firstName.value} ${lastName.value}`
+    })
 
     return {
       base,
       title,
-      move
+      move,
+      firstName,
+      lastName,
+      fullName
     }
   }
 })
@@ -73,7 +79,37 @@ export default defineComponent({
         <div class="col">6</div>
       </div>
       <div class="row m-1">
-        <div class="col bg-warning">asd</div>
+        <div class="col bg-warning">{{ title }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container ">
+    <div class="d-flex justify-content-center bg-dark mb-4">
+      <div class="bg-dark p-4 mb-4 text-center" style="width: 70%;">
+        <h2>Форма реактивного изменения</h2>
+        <form>
+          <div class="mb-3">
+            <label for="name" class="form-label">{{ firstName }}</label>
+            <input 
+              type="email"
+              v-model="firstName"
+              class="form-control"
+              id="firstName"
+            >
+          </div>
+          <div class="mb-3">
+            <label for="lname" class="form-label">{{ lastName }}</label>
+            <input
+              type="text"
+              v-model="lastName"
+              class="form-control"
+              id="lastName"
+            >
+          </div>
+          <div><h3>{{ fullName }}</h3></div>
+          <button type="button" class="btn btn-primary">даже не пытайся</button>
+        </form>
       </div>
     </div>
   </div>
