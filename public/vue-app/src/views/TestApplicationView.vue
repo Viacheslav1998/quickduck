@@ -36,8 +36,6 @@ export default defineComponent({
   }
 })
 
-
-
 </script>
 
 <template>
@@ -75,7 +73,7 @@ export default defineComponent({
         <div class="col">
           <h4>{{ base }}</h4>
         </div>
-        <div class="col">5</div>
+        <div class="col">сколько постов 5</div>
         <div class="col">6</div>
       </div>
       <div class="row m-1">
