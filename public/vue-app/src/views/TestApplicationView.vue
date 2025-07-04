@@ -119,9 +119,30 @@ export default defineComponent({
   </div>
 
   <div class="container text-center">
-    <Card> кнопка ?</Card>
+    <div class="d-flex justify-content-between mb-4 bg-dark py-4 px-2">
+      <Card>
+        <template #imagen>
+          <img src="..." class="card-img-top" alt="изображение не найдено">
+        </template>
+        <template #title>
+          <h5 class="card-title">карточка - слот</h5>
+        </template>
+        <template #text>
+          <p class="card-text"> Какой то текст для динамической карточки</p> 
+        </template>
+        <template #action>
+          <a href="#" class="btn btn-primary">перейти</a>
+        </template>
+      </Card>
+
+      <!-- вот этот слот - карта по умолчанию. -->
+      <Card />
+
+      <!-- вот этот слот - карта по умолчанию. -->
+      <Card />
+    </div>
   </div>
-  
+
 </template>
 
 <style scoped>

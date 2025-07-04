@@ -8,10 +8,12 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="d-flex justify-content-center mb-4">
-     <div class="row bg-dark w-100">
-        <div class="card" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
+  <div>
+     <div class="bg-dark w-100">
+        <div class="card text-dark" style="width: 18rem;">
+          <slot name="imagen">
+            <img src="..." class="card-img-top" alt="imagen not found">
+          </slot>
           <div class="card-body">
             <slot name="title">
               <h5 class="card-title">Card title</h5>
@@ -20,7 +22,7 @@ export default defineComponent({
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </slot>
            <slot name="actions">
-             <a href="#" class="btn btn-primary">Go somewhere</a>
+             <a href="#" class="btn btn-primary">перейти</a>
            </slot>       
           </div>
         </div>
