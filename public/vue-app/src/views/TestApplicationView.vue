@@ -1,8 +1,14 @@
 <script>
+import Card from '@/components/ui/Card.vue';
 import { defineComponent, ref, computed, onMounted, onUnmounted } from 'vue';
 
 export default defineComponent({
   name: 'TestApplicationView',
+
+  components: {
+    Card
+  },
+  
   setup() {
 
     const base = ref('1')
@@ -31,7 +37,7 @@ export default defineComponent({
       move,
       firstName,
       lastName,
-      fullName
+      fullName,
     }
   }
 })
@@ -111,6 +117,11 @@ export default defineComponent({
       </div>
     </div>
   </div>
+
+  <div class="container text-center">
+    <Card> кнопка ?</Card>
+  </div>
+  
 </template>
 
 <style scoped>
