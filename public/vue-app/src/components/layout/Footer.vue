@@ -54,7 +54,7 @@
             here is high technology
           </p>
         </div>
-        <div class="r-block col-sm m-1 text-center pt-5">
+        <div class="r-block col-sm m-1 text-center pt-5 dark-logo py-5">
           <div class="d-flex justify-content-center">
             <img src="/images/php.png" alt="php" />
           </div>
@@ -85,7 +85,10 @@ export default {
   padding: 20px;
   border-radius: 15px;
 }
-
+.dark-logo {
+  background-color: #181818;
+  border-radius: 50px;
+}
 .r-block {
   font-family: razed-light;
   font-size: 21px;

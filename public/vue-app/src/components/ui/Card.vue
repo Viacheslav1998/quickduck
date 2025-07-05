@@ -5,7 +5,6 @@ export default defineComponent({
   name: 'Card',
 
   setup() {
-
     onMounted(() => {
       console.log('complete card')
     })
