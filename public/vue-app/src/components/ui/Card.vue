@@ -1,8 +1,15 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 
 export default defineComponent({
   name: 'Card',
+
+  setup() {
+
+    onMounted(() => {
+      console.log('complete card')
+    })
+  }
 })
 
 </script>
@@ -22,7 +29,7 @@ export default defineComponent({
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </slot>
            <slot name="actions">
-             <a href="#" class="btn btn-primary">перейти</a>
+             <a href="#" class="btn btn-primary">next</a>
            </slot>       
           </div>
         </div>
@@ -30,6 +37,5 @@ export default defineComponent({
   </div>
  
 </template>
-
 <style>
 </style>

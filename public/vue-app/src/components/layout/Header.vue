@@ -25,6 +25,9 @@
           <li class="nav-item">
             <RouterLink class="nav-link" to="/login">Войти</RouterLink>
           </li>
+          <li class="nav-item">
+            <RouterLink class="nav-link" to="/test-app">Тестирование</RouterLink>
+          </li>
         </nav>
         <span class="navbar-text" title="вопросы или знания">Questions-Or-Knowledge</span>
       </div>

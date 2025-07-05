@@ -10,7 +10,6 @@ export default defineComponent({
   },
   
   setup() {
-
     const base = ref('1')
     const title = ref('just title for a current page')
 
@@ -29,6 +28,18 @@ export default defineComponent({
 
     const fullName = computed(() => {
       return `${firstName.value} ${lastName.value}`
+    })
+
+    onMounted(() => {   
+      setTimeout(() => {
+        console.log('start onmounted composition api')
+      }, 1000);   
+    })
+
+    onUnmounted(() => {
+      setTimeout(() => {
+        console.log('remove current event')
+      }, 1200)
     })
 
     return {
@@ -130,12 +141,12 @@ export default defineComponent({
         <template #text>
           <p class="card-text"> Какой то текст для динамической карточки</p> 
         </template>
-        <template #action>
-          <a href="#" class="btn btn-primary">перейти</a>
+        <template #actions>
+          <a href="#" class="btn btn-primary">перейти.</a>
         </template>
       </Card>
 
-      <!-- вот этот слот - карта по умолчанию. -->
+      <!-- вот этот слот - карта по умолчанию. если мы не указываем контент -->
       <Card />
 
       <!-- вот этот слот - карта по умолчанию. -->
