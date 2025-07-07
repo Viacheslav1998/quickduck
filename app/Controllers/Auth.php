@@ -36,12 +36,14 @@ class Auth extends Controller
 		$data = $this->request->getJSON();
 
 		$this->person->insert([
+			'name' => $data->name,
 			'email' => $data->email,
 			'password' => password_hash($this->password, PASSWORD_DEFAULT),
+			'secret' => $data->secret,
 			'role' => 'user'
 		]);
 
-		return $this->response->setJSON(['status' => 'registered']);
+		return $this->response->setJSON(['status' => 'Регистрация']);
 	}
 
 	public function logout()
