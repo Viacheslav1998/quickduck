@@ -25,15 +25,15 @@ class Cors implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if ($request->getMethod() === 'options')
-        {
-            $response = service('response');
+       $response = service('response');
 
-            return $response->setStatusCode(200)
-                 ->setHeader('Access-Control-Allow-Origin', '*')
-                 ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
-                 ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, X-Requested-With')
-                 ->setBody('');    
+       $response
+            ->setHeader('Access-Control-Allow-Origin', '*')
+            ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+            ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, X-Requested-With');
+
+        if ($request->getMethod() === 'options') {
+            return $response->setStatusCode(200)->setBody('');
         }
     }
 

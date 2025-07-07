@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\PersonModel;
 use CodeIgniter\Controller;
+use \Firebase\JWT\JWT;
 
 class Auth extends Controller 
 {
@@ -21,27 +22,35 @@ class Auth extends Controller
 		if (!isset($data->email, $data->password)) {
 			return $this->response->setJSON([
 				'status' => 'error',
-				'message' => 'неверные данные'
+				'message' => 'не верные данные'
 			])->setStatusCode(400);
 		}
 
 		$user = $this->person->where('email', $data->email)->first();
 
 		if ($user && password_verify($data->password, $user['password'])) {
-			
-			session()->set('user', [
-				'id'    => $user['id'],
-				'email' => $user['email'],
-				'role'  => $user['role'],
-			]);
+			$key = env('JWT_SECRET');
+		    $payload = [
+	            'iss' => "quickduck.com",
+	            'iat' => time(),
+	            'exp' => time() + 3600,
+	            'uid' => $user['id'],
+	            'email' => $user['email'],
+	            'role' => $user['role']
+	        ];
 
-			return $this->response->setJSON(['status' => 'success']);
+	        $jwt = JWT::encode($playload, $key, 'HS256');
+
+	        return $this->response->setJSON([
+	        	'status' => 'success',
+	        	'token'  => $jwt
+	        ]);
 		}
 
 		return $this->response->setJSON([
 			'status' => 'error',
-		    'message' => 'ошибка что то не так'
-		])->setStatusCode(401);
+			'message' => 'не верный логин или пароль'
+		])->setStatusCode(401);	
 	}
 
 	public function register()
