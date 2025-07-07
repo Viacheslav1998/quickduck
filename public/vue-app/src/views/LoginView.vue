@@ -10,7 +10,7 @@ export default defineComponent({
 
     const handleLogin = async () => {
       error.value = ''
-      let url = 'http://quickduck.com/auth/person/login'
+      let url = 'http://quickduck.com/auth/login'
 
       try { 
         const response = await fetch(url, {
@@ -18,7 +18,6 @@ export default defineComponent({
           headers: {
             'Content-Type': 'application/json'
           },
-          credentials: 'include',
           body: JSON.stringify({
             email: email.value,
             password: password.value
