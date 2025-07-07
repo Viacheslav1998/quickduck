@@ -17,18 +17,31 @@ class Auth extends Controller
 	public function login()
 	{
 		$data = $this->request->getJSON();
+
+		if (!isset($data->email, $data->password)) {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'message' => 'неверные данные'
+			])->setStatusCode(400);
+		}
+
 		$user = $this->person->where('email', $data->email)->first();
 
-		if ($user && password_verify($data->password, $user[$password])) {
+		if ($user && password_verify($data->password, $user['password'])) {
+			
 			session()->set('user', [
-				'id' => $user['id'],
+				'id'    => $user['id'],
 				'email' => $user['email'],
 				'role'  => $user['role'],
 			]);
+
 			return $this->response->setJSON(['status' => 'success']);
 		}
 
-		return $this->response->setJSON(['status' => 'error', 'message' => 'ошибка что то не так'])->setStatusCode(401);
+		return $this->response->setJSON([
+			'status' => 'error',
+		    'message' => 'ошибка что то не так'
+		])->setStatusCode(401);
 	}
 
 	public function register()
