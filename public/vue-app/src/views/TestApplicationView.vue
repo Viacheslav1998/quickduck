@@ -31,15 +31,14 @@ export default defineComponent({
     })
 
     onMounted(() => {   
-      setTimeout(() => {
-        console.log('start onmounted composition api')
-      }, 1000);   
+      intervalId = setInterval(() => {
+        seconds.value++
+      }, 1000) 
     })
 
     onUnmounted(() => {
-      setTimeout(() => {
-        console.log('remove current event')
-      }, 1200)
+      clearInterval(intervalId)
+      console.log('time out')
     })
 
     return {
@@ -49,6 +48,7 @@ export default defineComponent({
       firstName,
       lastName,
       fullName,
+      seconds
     }
   }
 })
@@ -83,7 +83,7 @@ export default defineComponent({
           <h4>VUE3</h4>
         </div>
         <div class="col bg-success">
-          <h4>Components</h4>
+          <h4> timer {{ seconds }} </h4>
         </div>
       </div>
       <div class="row m-1">
