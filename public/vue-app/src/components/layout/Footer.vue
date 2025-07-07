@@ -87,7 +87,7 @@ export default {
 }
 .dark-logo {
   background-color: #181818;
-  border-radius: 50px;
+  border-radius: 20px;
 }
 .r-block {
   font-family: razed-light;
