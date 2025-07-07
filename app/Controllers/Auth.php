@@ -17,7 +17,7 @@ class Auth extends Controller
 	public function login()
 	{
 		$data = $this->request->getJSON();
-		$user = $this->person->where('email', $data->email)->firts();
+		$user = $this->person->where('email', $data->email)->first();
 
 		if ($user && password_verify($data->password, $user[$password])) {
 			session()->set('user', [

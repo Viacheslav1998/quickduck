@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->setAutoRoute(false);
 
-$routes->options('(:any)', function () {
+$routes->options('/auth/(:any)', function () {
     return service('response')
       ->setStatusCode(200)
       ->setHeader('Access-Control-Allow-Origin', '*')
