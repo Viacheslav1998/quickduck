@@ -25,11 +25,15 @@ class Cors implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
+        $origin = $request->getHeaderLine('Origin');
+
         if ($request->getMethod() === 'options')
         {
             $response = service('response');
+            
             return $response->setStatusCode(200)
-                 ->setHeader('Access-Control-Allow-Origin', '*')
+                 ->setHeader('Access-Control-Allow-Origin', $origin)
+                 ->setHeader('Access-Control-Allow-Credentials', 'true')
                  ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
                  ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, X-Requested-With')
                  ->setBody('');    
@@ -50,8 +54,11 @@ class Cors implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        $response->setHeader('Access-Control-Allow-Origin', '*')
-        ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
-        ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, X-Requested-With');
+        $origin = $request->getHeaderLine('Origin');
+
+        $response->setHeader('Access-Control-Allow-Origin', $origin)
+            ->setHeader('Access-Control-Allow-Credentialsow', 'true')
+            ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+            ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, X-Requested-With');
     }
 }
