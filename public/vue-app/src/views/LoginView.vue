@@ -10,7 +10,7 @@ export default defineComponent({
 
     const handleLogin = async () => {
       error.value = ''
-      url = 'http://quickduck.com/auth/person/login'
+      let url = 'http://quickduck.com/auth/person/login'
 
       try { 
         const response = await fetch(url, {
