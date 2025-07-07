@@ -26,8 +26,8 @@ $routes->get('/api/news/tags', 'TagsController::getTag');
 $routes->get('/news/navigation/(:num)', 'NavigateNewsController::getNavigation/$1');
 
 // user/person 
-$routes->get('/auth/login', 'AuthController::login');
-$routes->post('/auth/register', 'AuthController::register');
+$routes->post('/auth/login', 'Auth::login');
+$routes->post('/auth/register', 'Auth::register');
 
 // Api CRUD
 $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $routes): void {
