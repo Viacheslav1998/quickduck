@@ -5,7 +5,16 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-// $routes->setAutoRoute(false);
+$routes->setAutoRoute(false);
+
+$routes->options('(:any)', function () {
+    return service('response')
+      ->setStatusCode(200)
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+      ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Request-With')
+      ->setBody('');
+});
 
 
 $routes->get('/', 'TestController::index');
@@ -34,9 +43,6 @@ $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $ro
     // upload
     $routes->post('update-imagen/(:num)', 'UploadController::updateImage/$1');
     $routes->post('current-update-image/(:num)', 'UploadController::currentUpdateImage/$1');
-    
-    // // persons
-    // $routes->resource('person', ['controller' => 'PersonController']);
 });
 
 
