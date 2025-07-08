@@ -39,7 +39,7 @@ class Auth extends Controller
 	            'role' => $user['role']
 	        ];
 
-	        $jwt = JWT::encode($playload, $key, 'HS256');
+	        $jwt = JWT::encode($payload, $key, 'HS256');
 
 	        return $this->response->setJSON([
 	        	'status' => 'success',

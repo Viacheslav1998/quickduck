@@ -28,9 +28,13 @@ export default defineComponent({
         const result = await response.json();
 
         if (response.ok) {
-          console.log('Успешно ! заходите', result)
+          localStorage.setItem('token', result.token)
+          console.log('токен успешно сохранен')
+          setTimeout(() => {
+            router.push('/')
+          }, 1200)
         } else {
-          error.value = result.message || 'Ошибка входа'
+          error.value = result.message || 'Ошибка входа - данные не верны или другая проблема!'
         }
       } catch (err) {
         console.error(err);
@@ -60,10 +64,12 @@ export default defineComponent({
 
     onMounted(() => {
       window.addEventListener('mousemove', handleMouseOver)
+      console.log('ты открыл window')
     })
 
     onUnmounted(() => {
       window.removeEventListener('mousemove', handleMouseOver)
+      console.log('ты закрыл window')
     })
 
     return {
