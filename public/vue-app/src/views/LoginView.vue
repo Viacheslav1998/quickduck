@@ -1,9 +1,12 @@
 <script>
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'LoginView',
   setup() {
+    const router = useRouter()
+
     const email = ref('')
     const password = ref('')
     const error = ref('')
@@ -64,12 +67,10 @@ export default defineComponent({
 
     onMounted(() => {
       window.addEventListener('mousemove', handleMouseOver)
-      console.log('ты открыл window')
     })
 
     onUnmounted(() => {
       window.removeEventListener('mousemove', handleMouseOver)
-      console.log('ты закрыл window')
     })
 
     return {
