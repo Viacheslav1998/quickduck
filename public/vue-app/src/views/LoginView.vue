@@ -1,10 +1,12 @@
 <script>
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router';
+import { useAuth } from '@/composables/useAuth'
 
 export default defineComponent({
   name: 'LoginView',
   setup() {
+    const { isGuest, isAdmin } = useAuth();
     const router = useRouter()
 
     const email = ref('')
@@ -65,12 +67,11 @@ export default defineComponent({
       }
     }
 
-    onMounted(async () => {
-      const token = localStorage.getItem('token')
-
-      if(!token) {
+    onMounted(() => {
+      
+      if (isGuest()) {
+        console.log('гость сработал поэтому редирект')
         router.push('/')
-        return
       }
 
       window.addEventListener('mousemove', handleMouseOver)
