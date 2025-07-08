@@ -65,7 +65,14 @@ export default defineComponent({
       }
     }
 
-    onMounted(() => {
+    onMounted(async () => {
+      const token = localStorage.getItem('token')
+
+      if(!token) {
+        router.push('/')
+        return
+      }
+
       window.addEventListener('mousemove', handleMouseOver)
     })
 
