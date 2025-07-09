@@ -1,8 +1,10 @@
 /**
  * check is role
- * default role = 'guest'  
+ * return token || default role = 'guest'  
  * use token
  * use LocalStorage
+ * 
+ * but you can use pinia ***
  */
 export function useAuth() {
   const getRole = () => {

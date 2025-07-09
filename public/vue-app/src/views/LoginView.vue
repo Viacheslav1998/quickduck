@@ -33,11 +33,13 @@ export default defineComponent({
         const result = await response.json();
 
         if (response.ok) {
+
           localStorage.setItem('token', result.token)
           console.log('токен успешно сохранен')
           setTimeout(() => {
             router.push('/')
           }, 1200)
+          
         } else {
           error.value = result.message || 'Ошибка входа - данные не верны или другая проблема!'
         }
@@ -69,7 +71,7 @@ export default defineComponent({
 
     onMounted(() => {
       
-      if (isGuest()) {
+      if (isAdmin()) {
         console.log('гость сработал поэтому редирект')
         router.push('/')
       }
@@ -89,7 +91,8 @@ export default defineComponent({
       wolf,
       isPopupVisible,
       closePopup,
-      openPopup
+      openPopup,
+      isGuest
     }
   }
 })
