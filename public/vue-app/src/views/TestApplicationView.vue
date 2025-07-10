@@ -1,5 +1,6 @@
 <script>
 import Card from '@/components/ui/Card.vue';
+import { useAuthStore } from '@/stores/authStore';
 import { defineComponent, ref, computed, onMounted, onUnmounted } from 'vue';
 
 export default defineComponent({
@@ -10,6 +11,8 @@ export default defineComponent({
   },
   
   setup() {
+    const auth = useAuthStore()
+    
     const base = ref('1')
     const title = ref('just title for a current page')
 
@@ -42,6 +45,7 @@ export default defineComponent({
     })
 
     return {
+      auth,
       base,
       title,
       move,
@@ -56,6 +60,14 @@ export default defineComponent({
 </script>
 
 <template>
+
+  <div class="container text-center">
+    <div class="mt-4 bg-danger">
+      <h3 class="pt-3">Добро пожаловать !</h3>
+      <p>твоя роль <span style="color: black; font-weight: bold;">[{{ auth.role }}]</span></p>
+      <p class="pb-3">если ты видишь роль (guest) то ты не можешь сдесь находится!</p>
+    </div>
+  </div>
 
   <div class="container text-center">
     <div class="begin-application my-4">
@@ -129,7 +141,10 @@ export default defineComponent({
     </div>
   </div>
 
-  <div class="container text-center">
+  <div 
+    class="container text-center"
+    v-show="auth.isAdmin"
+  >
     <div class="d-flex justify-content-between mb-4 bg-dark py-4 px-2">
       <Card>
         <template #imagen>
