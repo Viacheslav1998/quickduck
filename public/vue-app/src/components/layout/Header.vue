@@ -35,12 +35,12 @@
   </div>
   <!-- end navbar  -->
   <div class="container">
-    <div class="custom-container">
+    <div class="all-custom-container mob-custom-container custom-container">
       <div class="box-1">
         <img src="/images/m1.jpg" class="img-fluid" alt="img" />
       </div>
       <div class="box-2">
-        <h1 class="font-base display-5">
+        <h1 class="font-base">
           <span style="color: darkorange">QuickDuck.com</span>
           <br />
           <span style="font-family: tahoma; font-size: 21px">Добро пожаловать</span>
@@ -112,15 +112,16 @@ export default {
   font-family: razed-light;
   border-radius: 5px;
   padding: 50px;
-  margin: 50px;
+  margin: 50px 0 50px 0;
   background: rgba(4, 20, 35, 0.97);
 }
-.custom-container {
-  position: relative;
-  height: 720px;
-  background: silver;
-  overflow: hidden;
+
+.all-custom-container {
+   position: relative;
+   background: #041424;
+   overflow: hidden;
 }
+
 .box-1,
 .box-2 {
   width: 100%;
@@ -133,5 +134,15 @@ export default {
 }
 .box-2 {
   z-index: 10;
+}
+
+@media screen and (max-width:1123px ) {
+  .mob-custom-container { min-height: 270px; }
+  .font-base { font-size: 2.2em; } 
+}
+
+@media screen and (min-width: 1124px) {
+  .custom-container { height: 720px;}
+  .font-base { font-size: 3em; } 
 }
 </style>
