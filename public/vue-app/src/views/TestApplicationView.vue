@@ -65,7 +65,7 @@ export default defineComponent({
     <div class="mt-4 bg-danger">
       <h3 class="pt-3">Добро пожаловать !</h3>
       <p>твоя роль <span style="color: black; font-weight: bold;">[{{ auth.role }}]</span></p>
-      <p class="pb-3">если ты видишь роль (guest) то ты не можешь сдесь находится!</p>
+      <p class="pb-3">если ты видишь роль (guest) то ты не увидишь некоторый контент!</p>
     </div>
   </div>
 

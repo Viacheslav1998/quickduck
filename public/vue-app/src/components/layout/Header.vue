@@ -60,9 +60,11 @@
             Изучайте шаг за шагом, прокачивайте свои навыки и будьте в курсе последних трендов!
           </span>
         </p>
-        <div>
-          <button type="button" class="btn btn-dark btn-lg custom-button">Топ новостей</button>
-        </div>
+      </div>
+    </div>
+    <div class="container bg-dark mt-4">
+      <div class="p-3">
+        <button type="button" class="btn btn-secondary btn-lg custom-button text-warning">Топ новостей</button>
       </div>
     </div>
   </div>
