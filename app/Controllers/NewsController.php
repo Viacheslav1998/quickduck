@@ -33,9 +33,7 @@ class NewsController extends ResourceController
         'pageCount' => $pager->getPageCount()
       ]
     ]);
-
   }
-
 
   /**
    * Return the properties of a resource object.

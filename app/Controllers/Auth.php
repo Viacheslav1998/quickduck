@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\PersonModel;
 use CodeIgniter\Controller;
 use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
 
 class Auth extends Controller 
 {
@@ -16,10 +17,8 @@ class Auth extends Controller
 	}
 
 	public function me()
-	{
+	{	
 		$authHeader = $this->request->getHeaderLine('Authorization');
-		
-		dd($authHeader);
 
 		if (!$authHeader || !preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
 			return $this->response->setJSON([
@@ -106,13 +105,6 @@ class Auth extends Controller
 			'role' => 'user'
 		]);
 
-		return $this->response->setJSON(['status' => 'Регистрация']);
+		return $this->response->setJSON(['status' => 'Регистрация выполнена']);
 	}
-
-	public function logout()
-	{
-		session()->destroy();
-		return $this->response->setJSON(['status' => 'logged out']);
-	}
-	
 }

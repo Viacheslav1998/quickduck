@@ -1,4 +1,14 @@
 <template>
+  <div 
+    class="container"
+    v-if="isGuest"
+    @click="handleLogout"
+  >
+    <div class="bg-dark p-3">
+      <h3 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;">Если нужно выйти из системы</h3>
+      <button type="button" class="btn btn-sm btn-warning">выйти из системы</button>
+    </div>
+  </div>
   <div class="container">
     <div class="footer-fone p-3">
       <div class="row custom-footer d-flex justify-content-between">
@@ -67,8 +77,27 @@
 </template>
 
 <script>
+
+import { useAuthStore } from '@/stores/authStore';
+import { useRouter } from 'vue-router'
+
 export default {
-  name: 'Footer.vue'
+  name: 'Footer.vue',
+  setup() {
+    const auth = useAuthStore()
+    const isGuest = auth.isGuest
+    const router = useRouter()
+
+    function handleLogout() {
+      auth.logout()
+      router.push('/')
+    }
+
+    return {
+      isGuest,
+      handleLogout
+    }
+  }
 }
 </script>
 
