@@ -1,7 +1,7 @@
 <template>
   <div 
     class="container"
-    v-if="isGuest"
+    v-if="!isGuest"
     @click="handleLogout"
   >
     <div class="bg-dark p-3">

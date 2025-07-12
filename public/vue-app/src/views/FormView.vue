@@ -67,11 +67,7 @@ export default defineComponent({
 
       // run validate
       const errors = validatePerson(personData)
-      if(error.length) {
-        showAlert({ status: 'error', message: errors.join('\n') })
-        return 
-      }
-
+      
       // attention to errors
       if (errors.length > 0) {
         Swal.fire({
@@ -91,7 +87,7 @@ export default defineComponent({
       })
 
       try {
-        const response = await fetch('http://quickduck.com/auth/person', {
+        const response = await fetch('http://quickduck.com/auth/register', {
           method: 'POST',
           body: person
         })
@@ -145,7 +141,7 @@ export default defineComponent({
       <h1>Регистрация</h1>
     </div>
     <div class="custom-form">
-      <form @submit.prevent="handleRegister">
+      <form @submit.prevent="createPerson">
         <div class="form-group">
           <label for="name">Выше имя</label>
           <input
