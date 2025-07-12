@@ -28,8 +28,10 @@ $routes->get('/news/navigation/(:num)', 'NavigateNewsController::getNavigation/$
 // user/person 
 $routes->post('/auth/login', 'Auth::login');
 $routes->post('/auth/register', 'Auth::register');
+// auth api
+$routes->get('/api/me', 'Auth::me');
 
-// Api CRUD
+// Api CRUD Resources
 $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $routes): void {
     // news
     $routes->resource('news', ['controller' => 'NewsController']);

@@ -33,7 +33,6 @@ export default defineComponent({
         const result = await response.json()
 
         if (response.ok) {
-
           localStorage.setItem('token', result.token)
           console.log('токен успешно сохранен')
           setTimeout(() => {

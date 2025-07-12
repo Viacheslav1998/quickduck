@@ -15,6 +15,47 @@ class Auth extends Controller
 		$this->person = new PersonModel();
 	}
 
+	public function me()
+	{
+		$authHeader = $this->request->getHeaderLine('Authorization');
+		
+		dd($authHeader);
+
+		if (!$authHeader || !preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
+			return $this->response->setJSON([
+				'message' => 'Token not provided'
+			])->setStatusCode(401);
+		}
+
+		$token = $matches[1];
+		$key = getenv('JWT_SECRET');
+
+		try {
+			$decoded = JWT::decode($token, new Key($key, 'HS256'));
+
+			$user = $this->person->find($decoded->id);
+
+			if(!$user) {
+				return $this->response->setJSON([
+					'message' => 'User not found'
+				])->setStatusCode(404);
+			}
+
+			return $this->response->setJSON([
+				'user' => [
+					'id' => $user['id'],
+					'email' => $user['email'],
+					'role' => $user['role']
+				]
+			]);
+		} catch (\Exception $e) {
+			return $this->response->setJSON([
+				'message' => 'Invalid or expired token'
+			])->setStatusCode(401);
+		}
+
+	}
+
 	public function login()
 	{
 		$data = $this->request->getJSON();
