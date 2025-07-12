@@ -26,7 +26,7 @@ export default defineComponent({
       console.log('you wanna make a move')
       console.log(base.value)
       base.value++
-      title.value = 'you wanna make a move';
+      title.value = 'you wanna make a move'
     }
 
     const fullName = computed(() => {

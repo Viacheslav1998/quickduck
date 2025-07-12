@@ -6,7 +6,7 @@ import { useAuth } from '@/composables/useAuth'
 export default defineComponent({
   name: 'LoginView',
   setup() {
-    const { isGuest, isAdmin } = useAuth();
+    const { isGuest, isAdmin } = useAuth()
     const router = useRouter()
 
     const email = ref('')
@@ -30,7 +30,7 @@ export default defineComponent({
           })
         })
 
-        const result = await response.json();
+        const result = await response.json()
 
         if (response.ok) {
 
@@ -48,8 +48,6 @@ export default defineComponent({
         error.value = 'Ошибка соединения'
       }
     }
-
-
     const wolf = ref(null)
     const isPopupVisible = ref(false)
 
@@ -105,8 +103,8 @@ export default defineComponent({
     </div>
     <div class="login-box d-flex justify-content-center py-5 mb-2">
       <div class="custom-login">
-        <div class="custom-text-login d-flex justify-content-center pt-3">
-          <div>
+        <div class="custom-text-login d-flex justify-content-center pt-3 px-3">
+          <div class="">
             <p><span style="color: darkorange; font-weight: bold">Ну</span> ты заходи - если что</p>
           </div>
           <div class="custom-icon" @click="openPopup">
@@ -256,5 +254,10 @@ export default defineComponent({
   width: 110%;
   height: 110%;
   transition: all 0.1s ease;
+}
+
+@media only screen and (max-width: 767px) {
+  .custom-icon { display: none; }
+  .custom-login { width: 90%; }
 }
 </style>
