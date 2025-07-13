@@ -95,14 +95,26 @@ class Auth extends Controller
 
 	public function register()
 	{
-		$data = $this->request->getJSON();
+		$name = $this->request->getPost('name');
+		$email = $this->request->getPost('email');
+		$password = $this->request->getPost('password');
+		$secret = $this->request->getPost('secret');
+
+		// $imagen = $this->request->getFile('imagen');
+		// if($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
+		// 	$imagenName = $imagen->getRandomName();
+		// 	$imagen->move(WRITEPATH . 'uploads', $imagenName)
+		// } else {
+		//  $imagenName = null 
+		// }
 
 		$this->person->insert([
-			'name' => $data->name,
-			'email' => $data->email,
-			'password' => password_hash($this->password, PASSWORD_DEFAULT),
-			'secret' => $data->secret,
-			'role' => 'user'
+			'name' => $name, 
+			'email' => $email, 
+			'password' => password_hash($password, PASSWORD_DEFAULT),
+			'secret' => $secret,
+			'role' => 'user',
+			//'avatar' => $imagenName
 		]);
 
 		return $this->response->setJSON(['status' => 'Регистрация выполнена']);
