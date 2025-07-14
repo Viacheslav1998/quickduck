@@ -103,9 +103,9 @@ class Auth extends Controller
 		$imagen = $this->request->getFile('imagen');
 		if($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
 			$imagenName = $imagen->getRandomName();
-			$imagen->move(WRITEPATH . 'uploads', $imagenName)
+			$imagen->move(WRITEPATH . 'uploads', $imagenName);
 		} else {
-		 $imagenName = null 
+		 $imagenName = null;
 		}
 
 		$user = $this->person->where('email', $email)->first();
