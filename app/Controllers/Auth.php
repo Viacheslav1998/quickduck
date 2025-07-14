@@ -100,22 +100,31 @@ class Auth extends Controller
 		$password = $this->request->getPost('password');
 		$secret = $this->request->getPost('secret');
 
-		// $imagen = $this->request->getFile('imagen');
-		// if($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
-		// 	$imagenName = $imagen->getRandomName();
-		// 	$imagen->move(WRITEPATH . 'uploads', $imagenName)
-		// } else {
-		//  $imagenName = null 
-		// }
+		$imagen = $this->request->getFile('imagen');
+		if($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
+			$imagenName = $imagen->getRandomName();
+			$imagen->move(WRITEPATH . 'uploads', $imagenName)
+		} else {
+		 $imagenName = null 
+		}
 
-		$this->person->insert([
-			'name' => $name, 
-			'email' => $email, 
-			'password' => password_hash($password, PASSWORD_DEFAULT),
-			'secret' => $secret,
-			'role' => 'user',
-			//'avatar' => $imagenName
-		]);
+		$user = $this->person->where('email', $email)->first();
+
+		if($user) {
+			return $this->response->setJSON([
+				'status' => 'error',
+				'message' => 'Данный пользователь уже существует'
+			])->setStatusCode(409);
+		} else {
+			$this->person->insert([
+				'name' => $name, 
+				'email' => $email, 
+				'password' => password_hash($password, PASSWORD_DEFAULT),
+				'secret' => $secret,
+				'role' => 'user',
+				'avatar' => $imagenName
+			]);
+		}
 
 		return $this->response->setJSON(['status' => 'Регистрация выполнена']);
 	}

@@ -129,7 +129,8 @@ export default defineComponent({
       pass_confirm,
       imagen,
       secret,
-      validatePerson
+      validatePerson,
+      handleImage
     }
   }
 })
