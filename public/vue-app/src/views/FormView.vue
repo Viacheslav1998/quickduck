@@ -19,7 +19,8 @@ export default defineComponent({
     const secret = ref(1010)
 
     const handleImage = (e) => {
-      imagen.value = e.target.files[0]
+      const file = e.target.files[0]
+      imagen.value = file
     }
 
     const validatePerson = ({ name, email, password, pass_confirm, secret }) => {
@@ -85,6 +86,10 @@ export default defineComponent({
       Object.entries(personData).forEach(([key, value]) => {
         person.append(key, value)
       })
+
+      if(imagen.value) {
+        person.append('imagen', imagen.value)
+      }
 
       try {
         const response = await fetch('http://quickduck.com/auth/register', {
@@ -157,7 +162,7 @@ export default defineComponent({
         </div>
         <div class="form-group">
           <label for="name">Твоё изображение</label>
-          <input @change="handleImage" type="file" class="form-control" id="imagen" aria-describedby="imagen" />
+          <input @change="handleImage" type="file" class="form-control" id="imagen" ref="imagen" aria-describedby="imagen" />
           <small id="imagen" class="form-text text-muted">Выбрать изображение - аватарку.</small>
         </div>
         <div class="form-group">
