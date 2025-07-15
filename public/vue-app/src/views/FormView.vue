@@ -14,13 +14,14 @@ export default defineComponent({
     const password = ref('')
     const pass_confirm = ref('')
     const imagen = ref(null)
+    const file = ref(null)
 
     // if there`s special code, it`s not required
     const secret = ref(1010)
 
     const handleImage = (e) => {
-      const file = e.target.files[0]
-      imagen.value = file
+      const selectedFile = e.target.files[0]
+      file.value = selectedFile;
     }
 
     const validatePerson = ({ name, email, password, pass_confirm, secret }) => {
@@ -87,8 +88,8 @@ export default defineComponent({
         person.append(key, value)
       })
 
-      if(imagen.value) {
-        person.append('imagen', imagen.value)
+      if(file.value) {
+        person.append('imagen', file.value)
       }
 
       try {
@@ -162,7 +163,7 @@ export default defineComponent({
         </div>
         <div class="form-group">
           <label for="name">Твоё изображение</label>
-          <input @change="handleImage" type="file" class="form-control" id="imagen" ref="imagen" aria-describedby="imagen" />
+          <input @change="handleImage" type="file" class="form-control" id="imagen" aria-describedby="imagen" />
           <small id="imagen" class="form-text text-muted">Выбрать изображение - аватарку.</small>
         </div>
         <div class="form-group">
@@ -174,7 +175,7 @@ export default defineComponent({
             id="password"
             placeholder="Пароль - придумай, второй раз спрашивать не стану"
           />
-          <small id="password" class="form-text text-muted">Пароль- способ доступа</small>
+          <small id="password" class="form-text text-muted">Пароль - способ доступа</small>
         </div>
         <div class="form-group">
           <label for="pass_confirm">Повтори пароль</label>

@@ -104,6 +104,7 @@ class Auth extends Controller
 		if($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
 			$imagenName = $imagen->getRandomName();
 			$imagen->move(WRITEPATH . 'uploads', $imagenName);
+			log_message('info', 'Сохранили файл: '. $imagenName);
 		} else {
 		 $imagenName = null;
 		}
@@ -122,7 +123,7 @@ class Auth extends Controller
 				'password' => password_hash($password, PASSWORD_DEFAULT),
 				'secret' => $secret,
 				'role' => 'user',
-				'avatar' => $imagenName
+				'imagen' => $imagenName
 			]);
 		}
 
