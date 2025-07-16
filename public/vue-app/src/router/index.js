@@ -6,7 +6,9 @@ import LoginView from '../views/LoginView.vue'
 import SingleView from '../views/SingleView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import TagNewsView from '../views/TagNewsView.vue'
+import ProfileView from '../views/ProfileView.vue'
 import TestApplicationView from '../views/TestApplicationView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,6 +37,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: ProfileView
     },
     {
       path: '/news/:id',
