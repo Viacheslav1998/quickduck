@@ -20,6 +20,16 @@ export default defineComponent({
         <h4>Logo</h4>
         <p>sweeeeep</p>
       </div>
+      <div class="act-profile p-2">
+        <div class="comment">
+          <img src="" alt="">
+          <p>Комментарии: 200</p>
+        </div>
+        <div class="reating">
+          <img src="" alt="">
+          <p>Активность: 10</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +49,9 @@ export default defineComponent({
   height: 250px;
 }
 .context-profile {
+  background-color: #9457EB;
+}
+.act-profile {
   background-color: #9457EB;
 }
 </style>
