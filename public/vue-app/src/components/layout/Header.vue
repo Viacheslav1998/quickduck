@@ -62,7 +62,7 @@
         </p>
       </div>
     </div>
-    <div class="container bg-dark mt-4">
+    <div class="container dark mt-4">
       <div class="p-3">
         <button type="button" class="btn btn-secondary btn-lg custom-button text-warning">Топ новостей</button>
       </div>
@@ -134,6 +134,9 @@ export default {
 }
 .box-2 {
   z-index: 10;
+}
+.dark {
+  background-color: #262424;
 }
 
 @media screen and (max-width:1123px ) {

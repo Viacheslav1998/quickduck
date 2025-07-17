@@ -16,20 +16,26 @@ export default defineComponent({
       <div class="text-center ">
          <img src="/images/m4.jpg" class="logo shadow" alt="user" />
       </div>
-      <div class="context-profile text-center pt-5 pb-3">
+      <div class="context-profile text-center pt-5 pb-1">
         <h4>Logo</h4>
-        <p>sweeeeep</p>
+        <p>Астон Мартин</p>
       </div>
-      <div class="act-profile p-2">
-        <div class="comment">
-          <img src="" alt="">
-          <p>Комментарии: 200</p>
-        </div>
-        <div class="reating">
-          <img src="" alt="">
-          <p>Активность: 10</p>
+      <div class="act-profile d-flex justify-content-center">
+         <div class="p-2 d-flex flex-row text-center">
+          <div class="round shadow comment m-3 pt-2">
+            <img src="/profile/chat-bubble.png">
+            <p>Комментарии: 200</p>
+          </div>
+          <div class="round shadow reating m-3 pt-2">
+            <img src="/profile/electrocardiogram.png">
+            <p>Активность: 10</p>
+          </div>
         </div>
       </div>
+      <div class="logout text-center mt-4">
+        <button type="button" class="btn btn-warning btn-lg">Выход из системы</button>
+      </div>
+      <br>
     </div>
   </div>
 </template>
@@ -53,5 +59,16 @@ export default defineComponent({
 }
 .act-profile {
   background-color: #9457EB;
+}
+.round {
+  width: 150px;
+  border-bottom: 2px solid white;
+  border-left: 2px solid white;
+  border-radius: 10px;
+  background-color: #262424;
+}
+.round:hover {
+  border-bottom: 0px;
+  border-left: 0px;
 }
 </style>
