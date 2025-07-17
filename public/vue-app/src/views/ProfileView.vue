@@ -12,11 +12,12 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <div class="profile">
-      
+    <div class="profile-box">
+      imagen
     </div>
   </div>
 </template>
 
 <style scoped>
+
 </style>

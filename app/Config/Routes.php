@@ -16,6 +16,13 @@ $routes->options('/auth/(:any)', function () {
       ->setBody('');
 });
 
+// tests
+$routes->get('/test-match', 'TestRegularExpressionsController::testPregMatch');
+$routes->get('/test-response', 'TestRegularExpressionsController::testResponseMessage');
+$routes->get('/test-match-all', 'TestRegularExpressionsController::testPregMatchAll');
+$routes->get('/test-preg-replace', 'TestRegularExpressionsController::testPregReplace');
+$routes->get('/test-preg-split', 'TestRegularExpressionsController::testPregSplit');
+$routes->get('/test-preg-replace-callback', 'TestRegularExpressionsController::testPregReplaceCallback');
 
 $routes->get('/', 'TestController::index');
 //proxy
