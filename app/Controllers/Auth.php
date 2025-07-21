@@ -135,6 +135,6 @@ class Auth extends Controller
 
 		return $this->response->setJSON([
 			'status' => 'Регистрация выполнена'
-		])->setStatuscode(201);
+		])->setStatusCode(201);
 	}
 }
