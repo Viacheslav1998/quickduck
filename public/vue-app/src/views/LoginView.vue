@@ -2,6 +2,7 @@
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router';
 import { useAuth } from '@/composables/useAuth'
+import Swal from 'sweetalert2'
 
 export default defineComponent({
   name: 'LoginView',
@@ -12,6 +13,14 @@ export default defineComponent({
     const email = ref('')
     const password = ref('')
     const error = ref('')
+
+    const showAlert = ({ status, message }) => {
+      Swal.fire({
+        title: status === 'error' ? 'Ошибка' : 'Успех',
+        text: message,
+        icon: status
+      })
+    }
 
     const handleLogin = async () => {
       error.value = ''
@@ -34,17 +43,29 @@ export default defineComponent({
 
         if (response.ok) {
           localStorage.setItem('token', result.token)
-          console.log('токен успешно сохранен')
+          
+          showAlert({
+            status: 'success',
+            message: 'Ты зашел в систему!'
+          })
+
           setTimeout(() => {
             router.push('/')
-          }, 1200)
+          }, 2200)
           
         } else {
-          error.value = result.message || 'Ошибка входа - данные не верны или другая проблема!'
+          showAlert({
+            status: 'error',
+            message: error.value = result.message || 'Ошибка входа - данные не верны или другая проблема!'
+          })
         }
       } catch (err) {
+        showAlert({
+          status: 'error',
+          message: error.value
+        })
+
         console.error(err);
-        error.value = 'Ошибка соединения'
       }
     }
     const wolf = ref(null)
@@ -83,7 +104,6 @@ export default defineComponent({
     return {
       email, 
       password,
-      error,
       handleLogin,
       wolf,
       isPopupVisible,
@@ -134,7 +154,6 @@ export default defineComponent({
             />
           </div>
           <button type="submit" class="btn btn-warning">Входи!</button>
-          <p v-if="error" style="color: red;">{{ error }}</p>
         </form>
       </div>
     </div>
