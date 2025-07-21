@@ -82,7 +82,7 @@ class Auth extends Controller
 	        $jwt = JWT::encode($payload, $key, 'HS256');
 
 	        return $this->response->setJSON([
-	        	'status' => 'success',
+	        	'status' => 'Login Successful',
 	        	'token'  => $jwt
 	        ]);
 		}
@@ -104,7 +104,6 @@ class Auth extends Controller
 		if($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
 			$imagenName = $imagen->getRandomName();
 			$imagen->move(WRITEPATH . 'uploads', $imagenName);
-			log_message('info', 'Сохранили файл: '. $imagenName);
 		} else {
 		 $imagenName = null;
 		}
@@ -127,6 +126,8 @@ class Auth extends Controller
 			]);
 		}
 
-		return $this->response->setJSON(['status' => 'Регистрация выполнена']);
+		return $this->response->setJSON([
+			'status' => 'Регистрация выполнена'
+		])->setStatucCode(201);
 	}
 }
