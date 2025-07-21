@@ -33,7 +33,8 @@ class Cors implements FilterInterface
             ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, X-Requested-With');
 
         if ($request->getMethod() === 'options') {
-            return $response->setStatusCode(200)->setBody('');
+            http_response_code(200);
+            exit;
         }
     }
 

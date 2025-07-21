@@ -88,7 +88,7 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      
+
       if (isAdmin()) {
         console.log('гость сработал поэтому редирект')
         router.push('/')
