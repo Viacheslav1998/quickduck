@@ -39,7 +39,7 @@ export const useAuthStore = defineStore('auth', {
       try {
         console.log('[fetchMe] Пытаюсь обратиться с токеном:', token)
 
-        const res = await fetch('http://quickduck.com/api/me', {
+        const res = await fetch('http://quickduck.com/auth/api/me', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'

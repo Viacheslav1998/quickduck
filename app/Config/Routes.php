@@ -36,7 +36,7 @@ $routes->get('/news/navigation/(:num)', 'NavigateNewsController::getNavigation/$
 $routes->post('/auth/login', 'Auth::login');
 $routes->post('/auth/register', 'Auth::register');
 // auth api
-$routes->get('/api/me', 'Auth::me');
+$routes->get('/auth/api/me', 'Auth::me');
 
 // Api CRUD Resources
 $routes->group('api', ['filter' => 'cors'], static function (RouteCollection $routes): void {
