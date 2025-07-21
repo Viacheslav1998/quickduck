@@ -63,6 +63,7 @@ export default defineComponent({
 
     const createPerson = async () => {
       const personData = {
+        role: role.value,
         name: name.value,
         email: email.value,
         password: password.value,
@@ -158,7 +159,7 @@ export default defineComponent({
     <div class="custom-form">
       <form @submit.prevent="createPerson">
         <div>
-          <input type="hidden" v-model="role"/>
+          <input type="hidden" id="role" :value="role"/>
         </div>
         <div class="form-group">
           <label for="name">Выше имя</label>

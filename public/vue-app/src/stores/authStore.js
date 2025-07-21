@@ -31,8 +31,8 @@ export const useAuthStore = defineStore('auth', {
     async fetchMe() {
       const token = localStorage.getItem('token')
       
-      if (!token)  {
-        console.warn('[fetchMe] Токен не найден')
+      if (!token) {
+        console.warn('[fetchMe] Токен не найден в localStorage')
         return
       }
 
@@ -40,17 +40,20 @@ export const useAuthStore = defineStore('auth', {
         console.log('[fetchMe] Пытаюсь обратиться с токеном:', token)
 
         const res = await fetch('http://quickduck.com/auth/api/me', {
+          method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           }
         })
 
         console.log('[fetchMe] ответ получен:', res.status)
 
-        if (res.ok === 401) {
+        if (res.status === 401) {
           console.warn('[fetchMe] Токен невалиден, делаем logout')
-          throw new Error('Bad token')
+          this.logout()
+          return
         }
 
         if(!res.ok) {
@@ -60,11 +63,10 @@ export const useAuthStore = defineStore('auth', {
         
         const data = await res.json()
         console.log('[fetchMe] Пользователь получен: ', data)
-        this.setUserData(data.user, token)
 
+        this.setUserData(data.user, token)
       } catch (err) {
         console.error('[fetchMe] Ошибка запроса:', err.message)
-        // this.logout()
       }
     }
   }
