@@ -26,6 +26,8 @@ class Auth extends Controller
 			])->setStatusCode(401);
 		}
 
+		die();
+
 		$token = $matches[1];
 		$key = getenv('JWT_SECRET');
 

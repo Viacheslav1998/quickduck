@@ -29,7 +29,7 @@ class TagsController extends BaseController
 		    ->like('tags', $tag, 'both')
 		    ->paginate($perPage, 'default', $page);
 
-	    $pager = $this->model->pager;
+		$pager = $this->model->pager;
 
 		return [
 			'data' => $news, 

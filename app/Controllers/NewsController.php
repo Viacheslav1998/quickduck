@@ -18,6 +18,9 @@ class NewsController extends ResourceController
    */
   public function index()
   {
+
+    log_message('info', 'another message - you can see it right now');
+
     $page = $this->request->getGet('page') ?? 1;
     $perPage = 5;
 
@@ -108,7 +111,6 @@ class NewsController extends ResourceController
           'message' => 'Новость успешно обновлена'
         ]);
       } else {
-         log_message('error', 'Ошибка обновления новости с ID ' . $id . '. Данные: ' . json_encode($data));
         return $this->respond([
           'error' => 'Ошибки обновления'
         ], 500);
@@ -136,14 +138,16 @@ class NewsController extends ResourceController
 
         if (file_exists($imagePath)) {
           if (!unlink($imagePath)) {
-            log_message('error', 'Не удалось удалить изображение: ' . $imagePath);
             return $this->respond([
               'status' => 'error',
               'message' => 'Не удалось удалить изображение',
             ], 500);
           }
         } else {
-          log_message('error', 'Изображение не найдено: ' . $imagePath);
+          return $this->respond([
+            'status' => 'error',
+            'message' => 'Изображения нет',
+          ], 500);
         }
       }
 
