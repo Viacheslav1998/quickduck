@@ -20,12 +20,17 @@ class Auth extends Controller
 	{	
 		$authHeader = $this->request->getHeaderLine('Authorization');
 
+		log_message('info', 'just test require ' . $authHeader);
+
+		die();
+
 		if (!$authHeader || !preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
 			return $this->response->setJSON([
 				'message' => 'Token not provided'
 			])->setStatusCode(401);
 		}
 
+		log_message('info', 'auth-JWT-test ' . $matches[0]);
 		die();
 
 		$token = $matches[1];
@@ -130,6 +135,6 @@ class Auth extends Controller
 
 		return $this->response->setJSON([
 			'status' => 'Регистрация выполнена'
-		])->setStatucCode(201);
+		])->setStatuscode(201);
 	}
 }

@@ -18,9 +18,6 @@ class NewsController extends ResourceController
    */
   public function index()
   {
-
-    log_message('info', 'another message - you can see it right now');
-
     $page = $this->request->getGet('page') ?? 1;
     $perPage = 5;
 

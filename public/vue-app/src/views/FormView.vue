@@ -1,5 +1,6 @@
 <script>
 import { defineComponent, ref } from 'vue'
+import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2'
 
 export default defineComponent({
@@ -7,6 +8,7 @@ export default defineComponent({
   setup() {
     // checkbox IsShow
     const special = ref(false)
+    const router = useRouter()
 
     // person-form
     const name = ref('')
@@ -118,6 +120,10 @@ export default defineComponent({
           status: 'success',
           message: 'Пользователь зарегестрирован!'
         })
+
+        setTimeout(() => {
+          router.push('/login')
+        }, 1200)
       } catch (error) {
         showAlert({
           status: 'error',
