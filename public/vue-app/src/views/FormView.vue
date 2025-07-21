@@ -16,6 +16,7 @@ export default defineComponent({
     const password = ref('')
     const pass_confirm = ref('')
     const imagen = ref(null)
+    const role = ref('user')
     const file = ref(null)
 
     // if there`s special code, it`s not required
@@ -140,6 +141,7 @@ export default defineComponent({
       password,
       pass_confirm,
       imagen,
+      role,
       secret,
       validatePerson,
       handleImage
@@ -155,6 +157,9 @@ export default defineComponent({
     </div>
     <div class="custom-form">
       <form @submit.prevent="createPerson">
+        <div>
+          <input type="hidden" v-model="role"/>
+        </div>
         <div class="form-group">
           <label for="name">Выше имя</label>
           <input

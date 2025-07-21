@@ -99,6 +99,7 @@ class Auth extends Controller
 		$email = $this->request->getPost('email');
 		$password = $this->request->getPost('password');
 		$secret = $this->request->getPost('secret');
+		$role = $this->request->getPost('role');
 
 		$imagen = $this->request->getFile('imagen');
 		if($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
@@ -121,7 +122,7 @@ class Auth extends Controller
 				'email' => $email, 
 				'password' => password_hash($password, PASSWORD_DEFAULT),
 				'secret' => $secret,
-				'role' => 'user',
+				'role' => $role,
 				'imagen' => $imagenName
 			]);
 		}

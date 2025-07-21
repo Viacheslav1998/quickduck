@@ -12,7 +12,7 @@ class PersonModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'email', 'password', 'secret', 'imagen'];
+    protected $allowedFields    = ['name', 'email', 'password', 'secret', 'imagen', 'role'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
