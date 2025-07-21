@@ -32,7 +32,7 @@ class Auth extends Controller
 		try {
 			$decoded = JWT::decode($token, new Key($key, 'HS256'));
 
-			$user = $this->person->find($decoded->id);
+			$user = $this->person->find($decoded->uid);
 
 			if(!$user) {
 				return $this->response->setJSON([
