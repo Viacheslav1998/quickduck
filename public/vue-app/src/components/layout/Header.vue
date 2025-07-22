@@ -73,7 +73,7 @@
 
 <script>
 import { useAuthStore } from '@/stores/authStore';
-import { defineComponent, onMounted, computed } from 'vue'
+import { defineComponent, computed } from 'vue'
 
 
 export default defineComponent({
@@ -81,10 +81,6 @@ export default defineComponent({
   setup() {
     const auth = useAuthStore()
     const isGuest = computed(() => auth.isGuest)
-
-    onMounted(() => {
-      auth.fetchMe
-    })
     
     return {
       isGuest
