@@ -19,10 +19,10 @@
           <li class="nav-item">
             <RouterLink class="nav-link" to="/about">Автор</RouterLink>
           </li>
-          <li class="nav-item">
+          <li v-show="isGuest" class="nav-item">
             <RouterLink class="nav-link" to="/form">Регистрация</RouterLink>
           </li>
-          <li class="nav-item">
+          <li v-show="isGuest" class="nav-item">
             <RouterLink class="nav-link" to="/login">Войти</RouterLink>
           </li>
           <li class="nav-item">
@@ -72,9 +72,26 @@
 </template>
 
 <script>
-export default {
-  name: 'Header.vue'
-}
+import { useAuthStore } from '@/stores/authStore';
+import { defineComponent, onMounted, computed } from 'vue'
+
+
+export default defineComponent({
+  name: 'Header',
+  setup() {
+    const auth = useAuthStore()
+    const isGuest = computed(() => auth.isGuest)
+
+    onMounted(() => {
+      auth.fetchMe
+    })
+    
+    return {
+      isGuest
+    }
+  }
+})
+
 </script>
 
 <style scoped>
