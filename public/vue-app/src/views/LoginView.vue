@@ -1,19 +1,22 @@
 <script>
-import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
+import { defineComponent, ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router';
-import { useAuth } from '@/composables/useAuth'
+import { useAuthStore } from '../stores/authStore';
 import Swal from 'sweetalert2'
+
+
 
 export default defineComponent({
   name: 'LoginView',
   setup() {
-    const { isGuest, isAdmin } = useAuth()
+    const auth = useAuthStore();
     const router = useRouter()
+    const isUser = computed(() => auth.isUser)
 
     const email = ref('')
     const password = ref('')
     const error = ref('')
-
+    
     const showAlert = ({ status, message }) => {
       Swal.fire({
         title: status === 'error' ? 'Ошибка' : 'Успех',
@@ -88,9 +91,7 @@ export default defineComponent({
     }
 
     onMounted(() => {
-
-      if (isAdmin()) {
-        console.log('гость сработал поэтому редирект')
+      if (isUser.value) {
         router.push('/')
       }
 
@@ -108,8 +109,7 @@ export default defineComponent({
       wolf,
       isPopupVisible,
       closePopup,
-      openPopup,
-      isGuest
+      openPopup
     }
   }
 })
