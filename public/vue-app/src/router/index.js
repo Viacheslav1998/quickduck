@@ -30,19 +30,20 @@ const routes = [
   {
     path: '/form',
     name: 'form',
-    component: FormView
+    component: FormView,
+    meta: {requiresGuest: true}
   },
   {
     path: '/login',
     name: 'login',
     component: LoginView,
-    meta: { requiresGuest: true }  // Только для неавторизованных
+    meta: { requiresGuest: true } 
   },
   {
     path: '/profile',
     name: 'profile',
     component: ProfileView,
-    meta: { requiresAuth: true }   // Только для авторизованных
+    meta: { requiresAuth: true } 
   },
   {
     path: '/news/:id',

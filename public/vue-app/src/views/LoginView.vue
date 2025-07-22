@@ -1,7 +1,6 @@
 <script>
 import { defineComponent, ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/authStore'
 import Swal from 'sweetalert2'
 
 
@@ -9,9 +8,7 @@ import Swal from 'sweetalert2'
 export default defineComponent({
   name: 'LoginView',
   setup() {
-    const auth = useAuthStore()
     const router = useRouter()
-    const isUser = computed(() => auth.isUser)
 
     const email = ref('')
     const password = ref('')
@@ -91,10 +88,6 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      if (isUser.value) {
-        router.push('/')
-      }
-
       window.addEventListener('mousemove', handleMouseOver)
     })
 
