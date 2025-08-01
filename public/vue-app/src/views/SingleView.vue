@@ -2,6 +2,9 @@
 import { defineComponent, ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
+import CommentForm from '@/components/comments/CommentForm.vue'
+import CommentList from '@/components/comments/CommentList.vue'
+
 export default defineComponent({
   name: 'SingleView',
   setup() {
@@ -109,7 +112,7 @@ export default defineComponent({
       <div class="preloader-gif">
         <img src="/icons/anobus.gif" alt="загрузка" />
       </div>
-      <div style="text-align: center; color: burlywood">
+      <div style="text-align: center; color: burlywood;">
         <h3>Загрузка . . .</h3>
       </div>
     </div>
@@ -196,125 +199,13 @@ export default defineComponent({
 
     <!-- comments -->
     <div class="wrapper-comment my-2 pt-4">
-      <div class="comment-moment pb-1 pt-2 px-2">
-        <h5>Оставь свой комментарий:</h5>
-      </div>
-
-      <div class="space-comment-area">
-        <form @submit.prevent="createPerson">
-          <div class="reactions d-flex">
-            <div class="pt-1"><p>Среагировать:</p></div>
-          </div>
-          <div class="image-radio-group">
-            <label>
-              <input type="radio" name="smiley" value="/soc-icons/sm1.png" />
-              <img src="/soc-icons/sm1.png" alt="Smiley 1" />
-            </label>
-            <label>
-              <input type="radio" name="smiley" value="/soc-icons/sm2.png" />
-              <img src="/soc-icons/sm2.png" alt="Smiley 2" />
-            </label>
-            <label>
-              <input type="radio" name="smiley" value="/soc-icons/sm3.png" />
-              <img src="/soc-icons/sm3.png" alt="Smiley 3" />
-            </label>
-            <label>
-              <input type="radio" name="smiley" value="/soc-icons/sm4.png" />
-              <img src="/soc-icons/sm4.png" alt="Smiley 4" />
-            </label>
-            <label>
-              <input type="radio" name="smiley" value="/soc-icons/sm5.png" />
-              <img src="/soc-icons/sm5.png" alt="Smiley 5" />
-            </label>
-          </div>
-
-          <div class="person py-2">
-            <label>комментарий от: Николай</label>
-          </div>
-
-          <div class="form-group">
-            <textarea
-              class="form-control"
-              id="justCommentPerson"
-              rows="3"
-              placeholder="Например: Отличная статья, здесь много полезного"
-            ></textarea>
-          </div>
-
-          <button type="button" class="btn btn-info">Отправить комментарий</button>
-
-          <br />
-          <br />
-          <div style="height: 1px; background-color: silver"></div>
-          <br />
-
-          <div class="desk-for-person d-flex">
-            <div class="d-flex w-50">
-              <div><img class="ico-flames" src="/icons/flames.png" /></div>
-              <div class="text-flames">
-                <p>451</p>
-              </div>
-            </div>
-
-            <div class="blockq-wrapper w-50">
-              <blockquote class="blockquote text-right">
-                <p class="mb-0">Не стоит переживать о своих данных:</p>
-                <footer class="blockquote-footer">
-                  Конечно твоё имя будет видно,
-                  <cite title="Source Title" style="color: darkorange">но не почту.</cite>
-                </footer>
-              </blockquote>
-            </div>
-          </div>
-        </form>
-      </div>
-
+      <CommentForm />
       <div class="line"></div>
       <br />
 
-      <div class="comment-moment pb-1 pt-2 px-2 mb-4">
-        <h5>Блок для комментариев:</h5>
-      </div>
+      <CommentList />
 
-      <div class="wrapper-comments-persons">
-        <!-- показать последние 10 новостей -->
-
-        <div>
-          <p>Показаны последние 10 комментариев:</p>
-        </div>
-
-        <div class="media">
-          <img class="mr-3" src="/icons/user.png" alt="user" />
-          <div class="media-body">
-            <i>дата комментария: 2021-01-02</i>
-            <hr class="new1" />
-            <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis quaerat explicabo esse.
-            Labore fuga eligendi incidunt ea officia sapiente, deserunt aliquam ad laborum soluta
-            unde harum obcaecati repellendus perferendis aliquid!
-          </div>
-        </div>
-
-        <div class="media">
-          <img class="mr-3" src="/icons/avatar.png" alt="user" />
-          <div class="media-body">
-            <i>дата комментария: 2021-01-02</i>
-            <hr class="new1" />
-            <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
-            я считаю, что это отличная статья
-          </div>
-        </div>
-
-        <div class="media">
-          <img class="mr-3" src="/icons/user.png" alt="user" />
-          <div class="media-body">
-            <i>дата комментария: 2021-01-02</i>
-            <hr class="new1" />
-            <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
-            я считаю, что это отличная статья
-          </div>
-        </div>
-      </div>
+     
       <!-- end comments box -->
     </div>
     <!-- end wrapper content comments -->
