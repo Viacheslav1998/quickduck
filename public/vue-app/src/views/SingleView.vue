@@ -7,6 +7,10 @@ import CommentList from '@/components/comments/CommentList.vue'
 
 export default defineComponent({
   name: 'SingleView',
+  components: {
+    CommentForm,
+    CommentList
+  },
   setup() {
     const item = ref(null)
     const preloader = ref(true)
@@ -200,24 +204,17 @@ export default defineComponent({
     <!-- comments -->
     <div class="wrapper-comment my-2 pt-4">
       <CommentForm />
-      <div class="line"></div>
-      <br />
-
+      <div class="line"></div> <br />
       <CommentList />
-
-     
-      <!-- end comments box -->
     </div>
-    <!-- end wrapper content comments -->
   </div>
-  <!-- end container -->
 
   <div v-else>
     <h1>Новость не найдена</h1>
   </div>
 </template>
 
-<style scoped>
+<style>
 .begin-news {
   margin: 20px auto 10px auto;
   padding: 20px;
