@@ -192,7 +192,6 @@ export default defineComponent({
             <button type="button" class="btn btn-warning">Прошлая страница</button>
           </RouterLink>
         </div>
-
         <div>
           <RouterLink v-if="nextNews" :to="'/news/' + nextNews.id">
             <button type="button" class="btn btn-warning">Следующая страница</button>
@@ -275,6 +274,11 @@ hr.new1 {
 .space-comment-area,
 .wrapper-comments-persons {
   padding: 20px;
+}
+.guest {
+  background-color: rgb(152, 33, 24);
+  margin-left: 20px;
+  margin-right: 20px;
 }
 .comment-moment {
   background-color: darkslateblue;

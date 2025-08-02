@@ -17,7 +17,6 @@ export default defineComponent({
       </div>
 
       <div class="wrapper-comments-persons">
-        <!-- показать последние 10 новостей -->
 
         <div>
           <p>Показаны последние 10 комментариев:</p>
