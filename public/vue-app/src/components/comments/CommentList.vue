@@ -32,6 +32,7 @@ export default defineComponent({
         <div class="media">
           <img class="mr-3" src="/icons/user.png" alt="user" />
           <div class="media-body">
+            <h3>Вячеслав / mr-Corvski</h3>
             <i>дата комментария: 2021-01-02</i>
             <hr class="new1" />
             <h5 class="mt-0"><span>тема:</span> какая то новость</h5>

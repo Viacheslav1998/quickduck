@@ -56,7 +56,7 @@ export default defineComponent({
         </div>
 
         <div class="person py-2">
-          <label>комментарий от: Николай</label>
+          <label>я комментирую: </label>
         </div>
 
         <div class="form-group">
