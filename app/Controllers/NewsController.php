@@ -78,13 +78,13 @@ class NewsController extends ResourceController
         ]);
      } 
 
-      return $this->respond([
-          'status' => 'error',
-          'message' => 'Ошибка: Новость не добавлена!',
-          'errors' => $this->model->errors(), 
-      ], 400);
+     return $this->respond([
+        'status' => 'error',
+        'message' => 'Ошибка: Новость не добавлена!',
+        'errors' => $this->model->errors(), 
+     ], 400);
 
-    }
+   }
 
 
     /**

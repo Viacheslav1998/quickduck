@@ -18,7 +18,7 @@ class CommentsController extends BaseController
 
     public function index()
     {
-        //
+        // why?
     }
 
     public function store()
@@ -47,5 +47,5 @@ class CommentsController extends BaseController
     	])->setStatusCode(400);
     }
 
-    
+
 }
