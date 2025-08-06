@@ -13,7 +13,7 @@ class TagsController extends BaseController
 
     public function __construct()
     {
-       $this->model = new NewsModel();
+        $this->model = new NewsModel();
     }
 
     /**

@@ -12,7 +12,7 @@ class CommentsModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['post_name', 'person_name', 'comment', 'user_id', 'post_id', status, 'created_at'];
+    protected $allowedFields    = ['post_name', 'person_name', 'comment', 'user_id', 'post_id', 'status', 'created_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
