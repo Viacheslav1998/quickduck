@@ -28,30 +28,30 @@ export default defineComponent({
     </div>
 
     <div class="space-comment-area">
-      <form @submit.prevent="createPerson">
+      <form @submit.prevent="createComment">
         <div class="reactions d-flex">
           <div class="pt-1"><p>Среагировать:</p></div>
         </div>
         <div class="image-radio-group">
           <label>
             <input type="radio" name="smiley" value="/soc-icons/sm1.png" />
-            <img src="/soc-icons/sm1.png" alt="Smiley 1" />
+            <img src="/soc-icons/sm1.png" alt="seriously" />
           </label>
           <label>
             <input type="radio" name="smiley" value="/soc-icons/sm2.png" />
-            <img src="/soc-icons/sm2.png" alt="Smiley 2" />
+            <img src="/soc-icons/sm2.png" alt="surprise" />
           </label>
           <label>
             <input type="radio" name="smiley" value="/soc-icons/sm3.png" />
-            <img src="/soc-icons/sm3.png" alt="Smiley 3" />
+            <img src="/soc-icons/sm3.png" alt="Smile" />
           </label>
           <label>
             <input type="radio" name="smiley" value="/soc-icons/sm4.png" />
-            <img src="/soc-icons/sm4.png" alt="Smiley 4" />
+            <img src="/soc-icons/sm4.png" alt="big smile" />
           </label>
           <label>
             <input type="radio" name="smiley" value="/soc-icons/sm5.png" />
-            <img src="/soc-icons/sm5.png" alt="Smiley 5" />
+            <img src="/soc-icons/sm5.png" alt="angry" />
           </label>
         </div>
 

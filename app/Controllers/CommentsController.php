@@ -29,7 +29,8 @@ class CommentsController extends BaseController
     		'comment' => $this->request->getPost('comment'),
     		'user_id' => $this->request->getPost('user_id'),
     		'post_id' => $this->request->getPost('post_id'),
-    		'status' => $this->request->getPost('status')
+    		'status' => $this->request->getPost('status'),
+    		'reaction' => $this->request->getPost('reaction')
     	];
 
     	$comments = $this->model->insert($data);
