@@ -34,5 +34,18 @@ class CommentsController extends BaseController
 
     	$comments = $this->model->insert($data);
 
+    	if ($comments) {
+    		return $this->response->setJSON([
+    			'status' => 'success',
+    			'message' => 'Комментарий создан и отправлен на модерацию!' 
+    		]);
+    	}
+
+    	return $this->response->setJSON([
+    		'status' => 'error',
+    		'message' => 'Ошибка: не удалось записать комментарий!'
+    	])->setStatusCode(400);
     }
+
+    
 }
