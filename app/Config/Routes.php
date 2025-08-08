@@ -24,6 +24,10 @@ $routes->get('/test-preg-replace', 'TestRegularExpressionsController::testPregRe
 $routes->get('/test-preg-split', 'TestRegularExpressionsController::testPregSplit');
 $routes->get('/test-preg-replace-callback', 'TestRegularExpressionsController::testPregReplaceCallback');
 
+
+
+$routes->get('/test-r', 'CommentsController::test');
+
 $routes->get('/', 'TestController::index');
 //proxy
 $routes->get('/proxy/rates', 'ProxyController::fetchRates');

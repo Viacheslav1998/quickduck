@@ -1,18 +1,32 @@
 <script>
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/authStore';
 
 export default defineComponent({
   name: 'CommentForm',
   setup() {  
-    const auth = useAuthStore();
+    const auth = useAuthStore()
+    const staff = ref(null)
+
+    // post 
 
     onMounted(() => {
       // fetch -> get current person name
+
+      fetch('http://quickduck.com/test-r')
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          staff.value = data
+        })
+        .catch(error => {
+          console.error(error)
+        });
     })
 
     return {
-      auth
+      auth,
+      staff
     }
   }
 })
@@ -25,12 +39,20 @@ export default defineComponent({
   >
     <div class="comment-moment pb-1 pt-2 px-2">
       <h5>Оставь свой комментарий:</h5>
+      <h1>{{ staff }}</h1>
     </div>
 
     <div class="space-comment-area">
       <form @submit.prevent="createComment">
         <div class="reactions d-flex">
           <div class="pt-1"><p>Среагировать:</p></div>
+        </div>
+        <div>
+          <input type="text" v-model="post_name" value="post_name">
+          <input type="text" v-model="person_name" value="person_name">
+          <input type="text" v-model="user_id" value="user_id">
+          <input type="text" v-model="post_id" value="post_id">
+          <input type="text" v-model="status" value="status = published">
         </div>
         <div class="image-radio-group">
           <label>

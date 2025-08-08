@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('auth', {
       }
 
       try {
-        console.log('[fetchMe] Пытаюсь обратиться с токеном:', token)
+        // console.log('[fetchMe] Пытаюсь обратиться с токеном:', token)
 
         const res = await fetch('http://quickduck.com/auth/api/me', {
           method: 'GET',
@@ -48,7 +48,7 @@ export const useAuthStore = defineStore('auth', {
           }
         })
 
-        console.log('[fetchMe] ответ получен:', res.status)
+        // console.log('[fetchMe] ответ получен:', res.status)
 
         if (res.status === 401) {
           console.warn('[fetchMe] Токен невалиден, делаем logout')
@@ -60,10 +60,10 @@ export const useAuthStore = defineStore('auth', {
           console.warn('[fetchMe] Ответ не OK: ', res.status)
           throw new Error(`Ошибка запроса: ${res.status}`)
         }
-        
-        const data = await res.json()
-        console.log('[fetchMe] Пользователь получен: ', data)
 
+        const data = await res.json()
+        // console.log('[fetchMe] Пользователь получен: ', data)
+        
         this.setUserData(data.user, token)
       } catch (err) {
         console.error('[fetchMe] Ошибка запроса:', err.message)

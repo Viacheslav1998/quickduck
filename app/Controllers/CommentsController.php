@@ -49,4 +49,13 @@ class CommentsController extends BaseController
     }
 
 
+    public function test()
+    {
+    	return $this->response->setJSON([
+    		'status' => 'test',
+    		'message' => 'message like work this request/response'
+    	])->setStatusCode(201);
+    }
+
+
 }
