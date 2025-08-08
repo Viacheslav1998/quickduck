@@ -1,32 +1,33 @@
 <script>
 import { defineComponent, ref, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/authStore';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'CommentForm',
   setup() {  
     const auth = useAuthStore()
-    const staff = ref(null)
+    const router = useRouter()
+    let person_id = ref(null)
+    let person_name = ref(null)
 
-    // post 
+    const loginClick = (e) => {
+      router.push('/login')
+    }
 
     onMounted(() => {
-      // fetch -> get current person name
-
-      fetch('http://quickduck.com/test-r')
-        .then(response => response.json())
-        .then(data => {
-          console.log(data)
-          staff.value = data
-        })
-        .catch(error => {
-          console.error(error)
-        });
+      if(!auth.isGuest) {
+        person_id = auth.user.id
+        person_name = auth.user.name
+      }
+     
     })
 
     return {
       auth,
-      staff
+      person_id,
+      person_name,
+      loginClick
     }
   }
 })
@@ -39,7 +40,8 @@ export default defineComponent({
   >
     <div class="comment-moment pb-1 pt-2 px-2">
       <h5>Оставь свой комментарий:</h5>
-      <h1>{{ staff }}</h1>
+      <h1>{{ person_id }} - id </h1>
+      <h1>{{ person_name }} - имя</h1>
     </div>
 
     <div class="space-comment-area">
@@ -122,9 +124,9 @@ export default defineComponent({
   <div
     v-show="auth.isGuest"
   >
-    <div class="guest mb-4 pb-1 pt-2 px-2">
-      <h5>Что бы комментировать зайди в систему</h5>
-    </div>
+    <div class="guest mb-3 pb-1 pt-2 px-2">
+      <h5>Что бы комментировать <span><a style="color: orange; font-weight: 700; " href="#" @click.prevent="loginClick">Зайди</a></span> в систему</h5> 
+    </div>    
   </div>
 
 </template>
