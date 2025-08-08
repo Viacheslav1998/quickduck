@@ -25,6 +25,9 @@
           <li v-show="isGuest" class="nav-item">
             <RouterLink class="nav-link" to="/login">Войти</RouterLink>
           </li>
+          <li v-show="isUser" class="nav-item">
+            <RouterLink class="nav-link" to="/profile">Профиль</RouterLink>
+          </li>
           <li class="nav-item">
             <RouterLink class="nav-link" to="/test-app">Тестирование</RouterLink>
           </li>
@@ -81,9 +84,11 @@ export default defineComponent({
   setup() {
     const auth = useAuthStore()
     const isGuest = computed(() => auth.isGuest)
-    
+    const isUser = computed(() => auth.isUser)
+
     return {
-      isGuest
+      isGuest,
+      isUser
     }
   }
 })
