@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent, ref, onMounted, watch} from 'vue';
 import { useAuthStore } from '@/stores/authStore';
 import { useRouter } from 'vue-router';
 
@@ -16,12 +16,18 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      if(!auth.isGuest) {
-        person_id = auth.user.id
-        person_name = auth.user.name
-      }
-     
-    })
+      watch(() => auth.user, 
+      (newUser) => {
+        console.log(newUser)
+        if (newUser) {
+          person_id.value = newUser.id
+          person_name.value = newUser.name
+          console.log(person_name.value)
+        } else {
+          console.log("Пользователь не авторизован")
+        }
+      }, {immediate: true, deep: true});
+    });
 
     return {
       auth,
