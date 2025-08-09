@@ -36,12 +36,17 @@
                 title="vue"
               />
             </div>
+            
           </div>
           <i>работает над проектом: Вячеслав</i><br />
           <b style="color: darkorange">Компания: SilentStorm | 2024-2025</b><br />
           <i>ресурсы взяты с:</i><br />
           <b style="color: deepskyblue; font-family: Calibri">www.flaticon.com</b><br />
           <b style="color: tomato; font-family: Calibri">www.lottiefiles.com</b>
+          
+          <div class="d-flex justify-content-end mt-3 ">
+            <img src="/images/icode.png" alt="up" />
+          </div>  
         </div>
         <div class="c-block col-sm m-1">
           <h1>
