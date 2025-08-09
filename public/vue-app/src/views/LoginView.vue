@@ -48,7 +48,7 @@ export default defineComponent({
           })
 
           setTimeout(() => {
-            router.push('/')
+            router.push('/profile')
           }, 2200)
           
         } else {

@@ -18,11 +18,9 @@ export default defineComponent({
     onMounted(() => {
       watch(() => auth.user, 
       (newUser) => {
-        console.log(newUser)
         if (newUser) {
           person_id.value = newUser.id
           person_name.value = newUser.name
-          console.log(person_name.value)
         } else {
           console.log("Пользователь не авторизован")
         }
