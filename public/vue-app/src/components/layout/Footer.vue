@@ -36,7 +36,6 @@
                 title="vue"
               />
             </div>
-            
           </div>
           <i>работает над проектом: Вячеслав</i><br />
           <b style="color: darkorange">Компания: SilentStorm | 2024-2025</b><br />
