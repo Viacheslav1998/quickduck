@@ -1,11 +1,55 @@
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onMounted, watch } from 'vue'
+import { useAuthStore } from '@/stores/authStore'
+import { useRoute, useRouter } from 'vue-router'
+import Swal from 'sweetalert2'
 
 export default defineComponent({
   name: 'Profile',
   setup() {
-    const me = ref('user')
+    const person = ref(null)
+    const auth = useAuthStore()
+    const router = useRouter()
+
+    const showAlert = ({ status, message }) => {
+      Swal.fire({
+        title: status = 'Выход',
+        text: message,
+        icon: 'success'
+      })
+    }
+
+    const handleLogout = (e) => {
+      auth.logout()
+
+      showAlert({
+        status: 'Выход!',
+        message: 'Всего доброго, мы будем снова рады вас видеть в следующий раз'
+      })
+
+      setTimeout(() => {
+        router.push('/login')
+      }, 1200)
+    }
+
+    onMounted(() => {
+      watch(() => auth.user,
+      (newUser) => {
+        if (newUser) {
+          person.value = newUser.name
+        } else {
+          person.value = "Пользователь не найден"
+        }
+      }, {immediate: true, deep: true});
+    });
+
+   
+    return {
+      person,
+      handleLogout
+    }
   }
+  
 })
 
 </script>
@@ -17,8 +61,8 @@ export default defineComponent({
          <img src="/images/m4.jpg" class="logo shadow" alt="user" />
       </div>
       <div class="context-profile text-center pt-5 pb-1">
-        <h4>Logo</h4>
-        <p>Астон Мартин</p>
+        <h4>Здравствуй!</h4>
+        <p>{{ person }}</p>
       </div>
       <div class="act-profile d-flex justify-content-center">
          <div class="p-2 d-flex flex-row text-center">
@@ -33,7 +77,7 @@ export default defineComponent({
         </div>
       </div>
       <div class="logout text-center mt-4">
-        <button type="button" class="btn btn-warning btn-lg">Выход из системы</button>
+        <button type="button" class="btn btn-warning btn-lg" @click.prevent="handleLogout">Выход из системы</button>
       </div>
       <br>
     </div>
