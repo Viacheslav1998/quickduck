@@ -65,11 +65,14 @@
           </p>
         </div>
         <div class="r-block col-sm m-1 text-center pt-5 dark-logo py-5">
-          <div class="d-flex justify-content-center">
-            <img src="/images/php.png" alt="php" />
+          <div class="d-flex justify-content-center mb-3">
+            <img src="/images/up.png" alt="up" />
           </div>
-          <p>Custom-Style-HEre</p>
-          <p>TheCodeclub</p>
+          <p style="color: purple">Custom-Style-HEre</p>
+          <p style="color: orange">TheCodeclub</p>
+          <div class="d-flex justify-content-center mt-3 bg-warning">
+            <img src="/images/club.png" alt="up" />
+          </div>
         </div>
       </div>
     </div>
@@ -129,7 +132,6 @@ export default {
 }
 
 .r-block img {
-  border-radius: 50px;
   width: 100px;
   height: 100px;
   object-fit: cover;

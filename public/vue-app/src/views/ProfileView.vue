@@ -1,7 +1,7 @@
 <script>
 import { defineComponent, ref, onMounted, watch } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
 
 export default defineComponent({
