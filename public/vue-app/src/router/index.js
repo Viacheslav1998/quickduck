@@ -9,6 +9,7 @@ import SingleView from '../views/SingleView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import TagNewsView from '../views/TagNewsView.vue'
 import ProfileView from '../views/ProfileView.vue'
+import SecretView from '../views/SecretView.vue'
 import TestApplicationView from '../views/TestApplicationView.vue'
 
 const routes = [
@@ -43,6 +44,12 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: ProfileView,
+    meta: { requiresAuth: true } 
+  },
+  {
+    path: '/secret',
+    name: 'secret',
+    component: SecretView,
     meta: { requiresAuth: true } 
   },
   {
