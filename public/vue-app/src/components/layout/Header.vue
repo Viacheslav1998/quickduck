@@ -28,9 +28,6 @@
           <li v-show="isUser" class="nav-item">
             <RouterLink class="nav-link" to="/profile">Профиль</RouterLink>
           </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link" to="/test-app">Тестирование</RouterLink>
-          </li>
         </nav>
         <span class="navbar-text" title="вопросы или знания">Questions-Or-Knowledge</span>
       </div>

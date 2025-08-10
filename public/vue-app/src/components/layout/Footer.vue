@@ -43,11 +43,13 @@
                 выйти из системы
               </button>
               <img 
+                style="cursor: pointer;"
                 class="mx-2"
                 src="/images/brain.png"
                 @click="navigateToSecret"
               />
               <img 
+                style="cursor: pointer;"
                 src="/images/icode.png"
                 @click="navigateToTesting"
               />
