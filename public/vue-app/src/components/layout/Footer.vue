@@ -32,24 +32,27 @@
           <i>ресурсы взяты с:</i><br />
           <b style="color: deepskyblue; font-family: Calibri">www.flaticon.com</b><br />
           <b style="color: tomato; font-family: Calibri">www.lottiefiles.com</b>
-          
-          <div class="d-flex justify-content-between mt-3 ">
-            <button 
-              type="button"
-              class="btn btn-sm btn-warning"
-              @click="handleLogout"
-              v-show="isUser"
-            >
-              выйти из системы
-            </button>
-            <img 
-              class="mx-2"
-              src="/images/brain.png"
-              v-show="isUser"
-            />
-            <img src="/images/icode.png" />
+          <div class="d-flex justify-content-between mt-3">
+            <div v-show="isUser">
+              <button 
+                style="font-size: 16px; font-weight: 600;"
+                type="button"
+                class="btn btn-sm btn-warning py-3"
+                @click="handleLogout"
+              >
+                выйти из системы
+              </button>
+              <img 
+                class="mx-2"
+                src="/images/brain.png"
+                @click="navigateToSecret"
+              />
+              <img 
+                src="/images/icode.png"
+                @click="navigateToTesting"
+              />
+            </div>
           </div>  
-          
         </div>
         <div class="c-block col-sm m-1">
           <h1>
@@ -90,15 +93,15 @@
 <script>
 import { useAuthStore } from '@/stores/authStore';
 import { useRouter } from 'vue-router'
+import { computed } from 'vue';
 import Swal from 'sweetalert2'
 
 export default {
   name: 'Footer.vue',
   setup() {
     const auth = useAuthStore()
-    const isUser = auth.isUser
-    const isGuest = auth.isGuest
     const router = useRouter()
+    const isUser = computed(() => auth.isUser)
 
     const showAlert = ({ status, message }) => {
       Swal.fire({
@@ -106,6 +109,18 @@ export default {
         text: message,
         icon: 'success'
       })
+    }
+
+    function navigateToTesting() {
+      setTimeout(() => {
+        router.push('/test-app')
+      }, 700)
+    } 
+
+    function navigateToSecret() {
+      setTimeout(() => {
+        router.push('/secret')
+      }, 700)
     }
 
     function handleLogout() {
@@ -123,6 +138,8 @@ export default {
 
     return {
       isUser,
+      navigateToTesting,
+      navigateToSecret,
       handleLogout
     }
   }
