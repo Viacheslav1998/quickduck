@@ -1,7 +1,7 @@
 <template>
   <div 
     class="container"
-    v-if="!isGuest"
+   
     @click="handleLogout"
   >
     <div class="bg-dark p-3">
@@ -43,9 +43,12 @@
           <b style="color: deepskyblue; font-family: Calibri">www.flaticon.com</b><br />
           <b style="color: tomato; font-family: Calibri">www.lottiefiles.com</b>
           
-          <div class="d-flex justify-content-end mt-3 ">
-            <img src="/images/icode.png" alt="up" />
+          <div class="d-flex justify-content-between mt-3 ">
+            <button type="button" class="btn btn-sm btn-warning">выйти из системы</button>
+            <img class="mx-2" src="/images/brain.png" />
+            <img src="/images/icode.png" />
           </div>  
+          
         </div>
         <div class="c-block col-sm m-1">
           <h1>
@@ -84,9 +87,9 @@
 </template>
 
 <script>
-
 import { useAuthStore } from '@/stores/authStore';
 import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'Footer.vue',
@@ -95,10 +98,27 @@ export default {
     const isGuest = auth.isGuest
     const router = useRouter()
 
+    const showAlert = ({ status, message }) => {
+      Swal.fire({
+        title: status = 'Выход',
+        text: message,
+        icon: 'success'
+      })
+    }
+
     function handleLogout() {
       auth.logout()
-      router.push('/')
+      
+      showAlert({
+        status: 'Выход!',
+        message: 'Всего доброго, мы будем снова рады вас видеть в следующий раз'
+      })
+
+      setTimeout(() => {
+        router.push('/login')
+      }, 1200)
     }
+
 
     return {
       isGuest,
