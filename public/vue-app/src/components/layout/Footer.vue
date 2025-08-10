@@ -1,19 +1,9 @@
 <template>
-  <div 
-    class="container"
-   
-    @click="handleLogout"
-  >
-    <div class="bg-dark p-3">
-      <h3 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;">Если нужно выйти из системы</h3>
-      <button type="button" class="btn btn-sm btn-warning">выйти из системы</button>
-    </div>
-  </div>
   <div class="container">
     <div class="footer-fone p-3">
       <div class="row custom-footer d-flex justify-content-between">
         <div class="l-block col-sm m-1">
-          <h6>подвал</h6>
+          <h6 class="text-danger">подвал</h6>
           <b>Современные технологии разработки:</b><br />
           <div class="d-flex custom-box-icons">
             <div class="ico ci4">
@@ -44,8 +34,19 @@
           <b style="color: tomato; font-family: Calibri">www.lottiefiles.com</b>
           
           <div class="d-flex justify-content-between mt-3 ">
-            <button type="button" class="btn btn-sm btn-warning">выйти из системы</button>
-            <img class="mx-2" src="/images/brain.png" />
+            <button 
+              type="button"
+              class="btn btn-sm btn-warning"
+              @click="handleLogout"
+              v-show="isUser"
+            >
+              выйти из системы
+            </button>
+            <img 
+              class="mx-2"
+              src="/images/brain.png"
+              v-show="isUser"
+            />
             <img src="/images/icode.png" />
           </div>  
           
@@ -95,6 +96,7 @@ export default {
   name: 'Footer.vue',
   setup() {
     const auth = useAuthStore()
+    const isUser = auth.isUser
     const isGuest = auth.isGuest
     const router = useRouter()
 
@@ -119,9 +121,8 @@ export default {
       }, 1200)
     }
 
-
     return {
-      isGuest,
+      isUser,
       handleLogout
     }
   }
