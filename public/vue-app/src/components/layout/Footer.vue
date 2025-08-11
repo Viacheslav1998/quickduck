@@ -44,11 +44,12 @@
               </button>
               <img 
                 style="cursor: pointer;"
-                class="mx-2"
+                class="mx-2 nav-hover"
                 src="/images/brain.png"
                 @click="navigateToSecret"
               />
               <img 
+                class="nav-hover"
                 style="cursor: pointer;"
                 src="/images/icode.png"
                 @click="navigateToTesting"
@@ -208,7 +209,13 @@ export default {
   border-radius: 50px;
   height: 32px;
 }
-
+.nav-hover {
+  border-bottom: 2px solid #181818;
+  transition: border 0.8s ease;
+}
+.nav-hover:hover {
+  border-bottom: 2px solid rgb(52, 78, 198);
+}
 .c-block {
   border-radius: 20px;
   background-color: #181818;
