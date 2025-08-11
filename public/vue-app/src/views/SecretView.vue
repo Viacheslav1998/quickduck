@@ -6,7 +6,18 @@ export default defineComponent ({
   setup() {
     const answer = ref('no')
     const quest = ref('')
+    const word = 'поностальгировать'
+    const letters = word.split('')
 
+    // multicolored letters
+    const colors = [
+      'red', 'orange', 'gold', 'green', 'teal',
+      'blue', 'purple', 'pink', 'brown', 'crimson',
+      'darkorange', 'dodgerblue', 'violet', 'limegreen',
+      'indigo', 'darkred', 'deepskyblue'
+    ]
+
+    // combo-code-secret
     const conamiCode = [
       'ArrowUp', 'ArrowUp',
       'ArrowDown', 'ArrowDown',
@@ -25,7 +36,12 @@ export default defineComponent ({
         alert('GOOD GAME')
       }
     })    
+    // end combo-code
 
+    return {
+      letters,
+      colors
+    }
   }
 })
 </script>
@@ -33,13 +49,20 @@ export default defineComponent ({
 <template>
   <div class="container my-4">
     <div class="fone">
-      <img src="/images/duck.jpg" alt="duck\утка">
+      <h1>Секретная локация</h1>
+      <h3>но зачем...</h3>
     </div>
     <div class="content">
-      <div>
-        <h1>Секретная локация</h1>
-        <h3>но зачем...</h3>
-       <p class="font-weight-light h3">Любите ли вы поностальгировать?</p>
+        <div>
+          <p class="font-weight-light h3 m-3">Любите ли вы <span
+            v-for="(char, index) in letters"
+            :key="index"
+            :style="{ color: colors[index % colors.length] }"
+          >
+            {{ char }}
+          </span>?</p>
+          <div class="theme-choice">
+        </div>
       </div>
     </div>
   </div>
@@ -48,10 +71,24 @@ export default defineComponent ({
 
 
 <style scoped>
+.fone { 
+  background-image: url('../images/duck.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 500px;
+}
+
 .fone img {
   width: 100%;
   height: 700px;
   overflow: hidden;
   object-fit: cover;
+}
+
+.theme-choice {
+  background-image: url('../images/mr.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 800px;
 }
 </style>
