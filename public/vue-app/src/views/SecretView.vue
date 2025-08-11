@@ -1,27 +1,57 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent ({
   name: 'Secret',
   setup() {
+    const answer = ref('no')
+    const quest = ref('')
+
+    const conamiCode = [
+      'ArrowUp', 'ArrowUp',
+      'ArrowDown', 'ArrowDown',
+      'ArrowLeft', 'ArrowRight',
+      'ArrowLeft', 'ArrowRight',
+      "b", "a"
+    ]
+    
+    let input = []
+
+    window.addEventListener('keydown', (e) => {
+      input.push(e.key)
+      input = input.slice(-conamiCode.length)
+
+      if(JSON.stringify(input) === JSON.stringify(conamiCode)) {
+        alert('GOOD GAME')
+      }
+    })    
 
   }
 })
 </script>
 
 <template>
-  <div class="fone"></div>
-  <div class="content">
-    <h1>Секретная локация</h1>
-    <h3>но зачем...</h3>
-
-    <p>Иногда хотелось себя проверить в геймдеве</p>
-    <p>поэтому я решил сделать тайную локацию - по приколу</p>
-    <p>ну а вообще так же ради навыков - то что делаешь много раз откладывается в голове</p>
-    <p>это работает.. это называется дисциплина</p>
+  <div class="container my-4">
+    <div class="fone">
+      <img src="/images/duck.jpg" alt="duck\утка">
+    </div>
+    <div class="content">
+      <div>
+        <h1>Секретная локация</h1>
+        <h3>но зачем...</h3>
+       <p class="font-weight-light h3">Любите ли вы поностальгировать?</p>
+      </div>
+    </div>
   </div>
+  
 </template>
 
 
 <style scoped>
+.fone img {
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+  object-fit: cover;
+}
 </style>
