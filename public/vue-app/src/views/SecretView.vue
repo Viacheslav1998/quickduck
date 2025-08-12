@@ -6,6 +6,8 @@ export default defineComponent ({
   setup() {
     const word = 'поностальгировать'
     const letters = word.split('')
+    const showRejectBox = ref(false)
+    const hidden_content_reject = ref(null)
     const renderDomNeon = ref('')
     const renderDomCode = ref('')
 
@@ -39,13 +41,21 @@ export default defineComponent ({
     // end combo-code
 
     const handlerReject = () => {
-      alert('доступ запрещен')
+      showRejectBox.value = true
     }
+
+    const closeReject = () => {
+      showRejectBox.value = false
+    }
+
 
     return {
       letters,
       colors,
-      handlerReject
+      hidden_content_reject,
+      showRejectBox,
+      handlerReject,
+      closeReject
     }
   }
 })
@@ -69,6 +79,18 @@ export default defineComponent ({
         >
           {{ char }}
         </span>?</p>
+
+        <div ref="hidden_content_reject" class="d-flex justify-content-center align-items-center bg-dark">
+          <div
+            v-if="showRejectBox"
+            class="rejectBox showReject bg-danger d-flex justify-content-center p-2"
+            @click="closeReject"
+          >
+            <img src="/images/foxid.svg">
+            <p>ЛАДНО!</p>
+          </div>
+        </div>
+        
         <div class="theme-choice d-flex justify-content-center align-items-center ">
           <div class="Small shadow choice p-5">
             <span style="font-size: xx-large;" class="font-weight-light">Так ты учавствуешь ?</span>
@@ -110,5 +132,14 @@ export default defineComponent ({
 .choice {
   border-radius: 18px;
   background-color: rgba(0, 0, 0, 0.518);
+}
+.showReject {
+  position: fixed;
+  z-index: 10;
+  overflow: hidden;
+  background-color: white;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
 }
 </style>
