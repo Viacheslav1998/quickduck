@@ -31,7 +31,8 @@
           <b style="color: darkorange">Компания: SilentStorm | 2024-2025</b><br />
           <i>ресурсы взяты с:</i><br />
           <b style="color: deepskyblue; font-family: Calibri">www.flaticon.com</b><br />
-          <b style="color: tomato; font-family: Calibri">www.lottiefiles.com</b>
+          <b style="color: tomato; font-family: Calibri">www.lottiefiles.com</b><br />
+          <b style="color: darkseagreen; font-family: Calibri">www.freepik.com</b><br />
           <div class="d-flex justify-content-between mt-3">
             <div v-show="isUser">
               <button 
@@ -86,6 +87,13 @@
           <p style="color: orange">TheCodeclub</p>
           <div class="d-flex justify-content-center mt-3 bg-warning">
             <img src="/images/club.png" alt="up" />
+          </div>
+          <div class="mini">
+             <img 
+              style="cursor: pointer;"
+              src="/images/cup.jpg"
+              
+            />
           </div>
         </div>
       </div>
@@ -233,5 +241,15 @@ export default {
   color: rgb(222, 97, 52);
   border-radius: 20px;
   margin-left: 10px;
+}
+.mini {
+  margin-top: 25px;
+  text-align: end;
+}
+.mini img {
+  border-radius: 16px;
+  background-size: cover;
+  width: 70px;
+  height: 70px;
 }
 </style>

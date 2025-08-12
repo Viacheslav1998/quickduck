@@ -4,10 +4,10 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent ({
   name: 'Secret',
   setup() {
-    const answer = ref('no')
-    const quest = ref('')
     const word = 'поностальгировать'
     const letters = word.split('')
+    const renderDomNeon = ref('')
+    const renderDomCode = ref('')
 
     // multicolored letters
     const colors = [
@@ -38,9 +38,14 @@ export default defineComponent ({
     })    
     // end combo-code
 
+    const handlerReject = () => {
+      alert('доступ запрещен')
+    }
+
     return {
       letters,
-      colors
+      colors,
+      handlerReject
     }
   }
 })
@@ -64,9 +69,12 @@ export default defineComponent ({
         >
           {{ char }}
         </span>?</p>
-        <div class="theme-choice">
-          да - нет
-          кнопки - нажимаешь и комбинация - а потом пасхалка и на ней тоже пасхалка на скрытый роутер
+        <div class="theme-choice d-flex justify-content-center align-items-center ">
+          <div class="Small shadow choice p-5">
+            <span style="font-size: xx-large;" class="font-weight-light">Так ты учавствуешь ?</span>
+            <div class="btn btn-lg btn-warning m-2" @click="handlerAccept">Да</div>
+            <div class="btn btn-lg btn-dark m-2" @click="handlerReject">Нет</div>
+          </div>
         </div>
       </div>
     </div>
@@ -93,11 +101,14 @@ export default defineComponent ({
   overflow: hidden;
   object-fit: cover;
 }
-
 .theme-choice {
   background-image: url('../images/mr.jpg');
   background-size: cover;
   width: 100%;
   height: 800px;
+}
+.choice {
+  border-radius: 18px;
+  background-color: rgba(0, 0, 0, 0.518);
 }
 </style>
