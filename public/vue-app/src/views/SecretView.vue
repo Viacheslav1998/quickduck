@@ -80,14 +80,18 @@ export default defineComponent ({
           {{ char }}
         </span>?</p>
 
-        <div ref="hidden_content_reject" class="d-flex justify-content-center align-items-center bg-dark">
+        <div ref="hidden_content_reject">
           <div
             v-if="showRejectBox"
-            class="rejectBox showReject bg-danger d-flex justify-content-center p-2"
+            class="rejectBox showReject bg-danger d-flex justify-content-center align-items-center p-2"
             @click="closeReject"
           >
             <img src="/images/foxid.svg">
-            <p>ЛАДНО!</p>
+            <div>
+              <p class="display-4 font-fox">ЛАДНО!</p><br /><br />
+              <span class="font-fox m-2">не хочешь не надо!</span>
+            </div>
+            
           </div>
         </div>
         
@@ -134,12 +138,28 @@ export default defineComponent ({
   background-color: rgba(0, 0, 0, 0.518);
 }
 .showReject {
+  transform: 1s ease all;
+  border-radius: 20px;
   position: fixed;
-  z-index: 10;
-  overflow: hidden;
-  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  cursor: pointer;
   background-size: cover;
   width: 300px;
   height: 300px;
+  color: rgb(239, 235, 235);
+  background: #D1913C;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FFD194, #D1913C);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FFD194, #D1913C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.font-fox {
+  transform: 1s ease all;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.299);
+  background-color: blueviolet;
+  border-radius: 20px;
+  padding: 10px;
+  transform: rotate(-13deg);
 }
 </style>
