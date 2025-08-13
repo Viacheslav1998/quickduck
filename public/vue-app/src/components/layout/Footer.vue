@@ -88,13 +88,6 @@
           <div class="d-flex justify-content-center mt-3 bg-warning">
             <img src="/images/club.png" alt="up" />
           </div>
-          <div class="mini">
-             <img 
-              style="cursor: pointer;"
-              src="/images/cup.jpg"
-              
-            />
-          </div>
         </div>
       </div>
     </div>
@@ -197,7 +190,6 @@ export default {
   padding-top: 8px;
   padding-bottom: 8px;
   margin: 20px 0;
-
   -webkit-box-shadow: 0px 0px 36px 4px rgba(4, 106, 184, 0.3);
   -moz-box-shadow: 0px 0px 36px 4px rgba(4, 106, 184, 0.3);
   box-shadow: 0px 0px 36px 4px rgba(4, 106, 184, 0.3);
@@ -241,15 +233,5 @@ export default {
   color: rgb(222, 97, 52);
   border-radius: 20px;
   margin-left: 10px;
-}
-.mini {
-  margin-top: 25px;
-  text-align: end;
-}
-.mini img {
-  border-radius: 16px;
-  background-size: cover;
-  width: 70px;
-  height: 70px;
 }
 </style>

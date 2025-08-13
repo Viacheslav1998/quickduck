@@ -8,8 +8,6 @@ export default defineComponent ({
     const letters = word.split('')
     const showRejectBox = ref(false)
     const hidden_content_reject = ref(null)
-    const renderDomNeon = ref('')
-    const renderDomCode = ref('')
 
     // multicolored letters
     const colors = [
@@ -91,7 +89,7 @@ export default defineComponent ({
               <p class="display-4 font-fox">ЛАДНО!</p><br /><br />
               <span class="font-fox m-2">не хочешь не надо!</span>
             </div>
-            
+            <!-- не забудь про свою комбинацию -->
           </div>
         </div>
         
