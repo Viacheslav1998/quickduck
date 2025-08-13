@@ -7,7 +7,9 @@ export default defineComponent ({
     const word = 'поностальгировать'
     const letters = word.split('')
     const showRejectBox = ref(false)
+    const showAcceptBox = ref(false)
     const hidden_content_reject = ref(null)
+    const hidden_content_accept = ref(null)
 
     // multicolored letters
     const colors = [
@@ -38,22 +40,36 @@ export default defineComponent ({
     })    
     // end combo-code
 
+    // open poppup reject
     const handlerReject = () => {
       showRejectBox.value = true
     }
 
+    // close poppup reject
     const closeReject = () => {
       showRejectBox.value = false
     }
+    
+    // open poppup accept
+    const handlerAccept = () => {
+      showAcceptBox.value = true
+    }
 
+    // close poppup accept
+    const closeAccept = () => {
+      showAcceptBox.value = false
+    }
 
     return {
       letters,
       colors,
       hidden_content_reject,
+      hidden_content_accept,
       showRejectBox,
       handlerReject,
-      closeReject
+      closeReject,
+      handlerAccept,
+      closeAccept
     }
   }
 })
@@ -81,7 +97,7 @@ export default defineComponent ({
         <div ref="hidden_content_reject">
           <div
             v-if="showRejectBox"
-            class="rejectBox showReject bg-danger d-flex justify-content-center align-items-center p-2"
+            class="showReject d-flex justify-content-center align-items-center p-2"
             @click="closeReject"
           >
             <img src="/images/foxid.svg">
@@ -90,6 +106,18 @@ export default defineComponent ({
               <span class="font-fox m-2">не хочешь не надо!</span>
             </div>
             <!-- не забудь про свою комбинацию -->
+          </div>
+        </div>
+
+        <div ref="hidden_content_accept">
+          <div 
+            
+            class="showAccept d-flex justify-content-center align-items-center"
+          >
+          <div class="secret-imagen">
+
+          </div>
+          <!-- <img src="/images/ach.jpg"> -->
           </div>
         </div>
         
@@ -135,8 +163,29 @@ export default defineComponent ({
   border-radius: 18px;
   background-color: rgba(0, 0, 0, 0.518);
 }
+.showAccept {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(198, 198, 198, 0.559);
+  width: 100%;
+  height: 100%;
+  z-index: 30;
+}
+/* .showAccept img {
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+} */
+
+.secret-imagen {
+  width: 70%;
+  height: 80%;
+  background-image: url('/images/ach.jpg');
+  background-size: cover;
+}
+
 .showReject {
-  transform: 1s ease all;
   border-radius: 20px;
   position: fixed;
   top: 50%;
