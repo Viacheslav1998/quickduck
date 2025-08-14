@@ -114,10 +114,28 @@ export default defineComponent ({
             
             class="showAccept d-flex justify-content-center align-items-center"
           >
-          <div class="secret-imagen">
-
-          </div>
-          <!-- <img src="/images/ach.jpg"> -->
+            <div class="secret-imagen container d-flex justify-content-center p-4">
+              <div class="d-flex justify-content-center align-items-end">
+                <div class="text-center p-4 simfony">
+                  <h1>Только для компьютеров!</h1>
+                  <h2 class="text-warning">Вводи</h2>
+                  <h3 class="text-danger">Секретный код</h3>
+                  <p>ВЕРХ ВЕРХ ВНИЗ ВНИЗ ВЛЕВО ВПРАВО ВЛЕВО ВПРАВО A B</p>
+                  <div>
+                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i class="fa fa-4x pl-1" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">A</i>
+                    <i class="fa fa-4x pr-1" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">B</i>
+                  </div>
+                </div>  
+              </div>           
+            </div>
           </div>
         </div>
         
@@ -179,10 +197,16 @@ export default defineComponent ({
 } */
 
 .secret-imagen {
-  width: 70%;
-  height: 80%;
+  height: 100%;
   background-image: url('/images/ach.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
+}
+
+.simfony {
+  border-radius: 20px;
+  background-color: #343a40ec;
 }
 
 .showReject {
