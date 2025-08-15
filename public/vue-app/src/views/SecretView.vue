@@ -92,7 +92,7 @@ export default defineComponent ({
   <div class="container my-4">
 
     <div class="preloader d-flex justify-content-center" v-if="preloader">
-      <div class="wrapper-preloader">
+      <div class="wrapper-preloader d-flex justify-content-center align-items-center">
         <div class="preloader-gif">
           <img src="/icons/anobus.gif" alt="загрузка" />
         </div>
@@ -179,6 +179,15 @@ export default defineComponent ({
 
 
 <style scoped>
+.wrapper-preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 33;
+  background-color: rgba(83, 83, 83, 0.966);
+}
 .fone { 
   background-image: url('../images/duck.jpg');
   background-size: cover;
@@ -207,7 +216,6 @@ export default defineComponent ({
   background-color: rgba(0, 0, 0, 0.518);
 }
 .showAccept {
-   display: none!important;
   position: fixed;
   top: 0;
   left: 0;
@@ -216,14 +224,8 @@ export default defineComponent ({
   height: 100%;
   z-index: 30;
 }
-/* .showAccept img {
-  width: 70%;
-  height: 70%;
-  object-fit: cover;
-} */
 
 .secret-imagen {
-  display: none!important;
   height: 100%;
   background-image: url('/images/ach.jpg');
   background-position: center;
