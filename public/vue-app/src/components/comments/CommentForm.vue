@@ -44,8 +44,6 @@ export default defineComponent({
   >
     <div class="comment-moment pb-1 pt-2 px-2">
       <h5>Оставь свой комментарий:</h5>
-      <h1>{{ person_id }} - id </h1>
-      <h1>{{ person_name }} - имя</h1>
     </div>
 
     <div class="space-comment-area">
@@ -54,11 +52,11 @@ export default defineComponent({
           <div class="pt-1"><p>Среагировать:</p></div>
         </div>
         <div>
-          <input type="text" v-model="post_name" value="post_name">
-          <input type="text" v-model="person_name" value="person_name">
-          <input type="text" v-model="user_id" value="user_id">
-          <input type="text" v-model="post_id" value="post_id">
-          <input type="text" v-model="status" value="status = published">
+          <input type="hidden" v-model="post_name" value="post_name">
+          <input type="hidden" v-model="person_name" value="person_name">
+          <input type="hidden" v-model="person_id" value="user_id">
+          <input type="hidden" v-model="post_id" value="post_id">
+          <input type="hidden" v-model="status" value="published">
         </div>
         <div class="image-radio-group">
           <label>
@@ -89,6 +87,7 @@ export default defineComponent({
 
         <div class="form-group">
           <textarea
+            v-model="comment"
             class="form-control"
             id="justCommentPerson"
             rows="3"
