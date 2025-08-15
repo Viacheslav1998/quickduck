@@ -146,16 +146,16 @@ export default defineComponent ({
                   <h3 class="text-danger">Секретный код</h3>
                   <p>ВЕРХ ВЕРХ ВНИЗ ВНИЗ ВЛЕВО ВПРАВО ВЛЕВО ВПРАВО A B</p>
                   <div>
-                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i class="fa fa-4x pl-1" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">A</i>
-                    <i class="fa fa-4x pr-1" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">B</i>
+                    <i style="color: gold;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i style="color: green;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i style="color: teal;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i style="color: blue;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i style="color: purple;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i style="color: pink;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i style="color: brown;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i style="color: crimson;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i class="fa fa-4x pl-1" style="color: deeppink; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">A</i>
+                    <i class="fa fa-4x pr-1" style="color: orangered; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">B</i>
                   </div>
                 </div>  
               </div>           
