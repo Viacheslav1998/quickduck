@@ -62,7 +62,6 @@ export default defineComponent ({
     }
 
     const domReady = () => {
-      preloader.value = true
       setTimeout(() => {
         preloader.value = false
       }, 1200)
