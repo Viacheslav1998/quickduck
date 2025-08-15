@@ -53,11 +53,13 @@ export default defineComponent ({
     
     // open poppup accept
     const handlerAccept = () => {
+      document.body.style.overflow = 'hidden'
       showAcceptBox.value = true
     }
 
     // close poppup accept
     const closeAccept = () => {
+      document.body.style.overflow = 'scroll'
       showAcceptBox.value = false
     }
 
@@ -78,6 +80,7 @@ export default defineComponent ({
       hidden_content_reject,
       hidden_content_accept,
       showRejectBox,
+      showAcceptBox,
       handlerReject,
       closeReject,
       handlerAccept,
@@ -135,8 +138,9 @@ export default defineComponent ({
 
         <div ref="hidden_content_accept">
           <div 
-            
+            v-if="showAcceptBox"
             class="showAccept d-flex justify-content-center align-items-center"
+            @click="closeAccept"
           >
             <div class="secret-imagen container d-flex justify-content-center p-4">
               <div class="d-flex justify-content-center align-items-end">
@@ -146,15 +150,15 @@ export default defineComponent ({
                   <h3 class="text-danger">Секретный код</h3>
                   <p>ВЕРХ ВЕРХ ВНИЗ ВНИЗ ВЛЕВО ВПРАВО ВЛЕВО ВПРАВО A B</p>
                   <div>
-                    <i style="color: gold;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i style="color: green;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i style="color: teal;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i style="color: blue;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i style="color: purple;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i style="color: pink;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i style="color: brown;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i style="color: crimson;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
-                    <i class="fa fa-4x pl-1" style="color: deeppink; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">A</i>
+                    <i style="color: darkorange;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i style="color: orangered;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
+                    <i style="color: darkorange;" class="fa fa-arrow-up fa-4x pl-2 fa-rotate-180" aria-hidden="true"></i>
+                    <i style="color: orangered;" class="fa fa-arrow-up fa-4x pl-2 fa-rotate-180" aria-hidden="true"></i>
+                    <i style="color: darkorange;" class="fa fa-arrow-up fa-4x pl-2 fa-rotate-90" aria-hidden="true"></i>
+                    <i style="color: orangered;" class="fa fa-arrow-up fa-4x pl-2 fa-rotate-270" aria-hidden="true"></i>
+                    <i style="color: darkorange;" class="fa fa-arrow-up fa-4x pl-2 fa-rotate-90" aria-hidden="true"></i>
+                    <i style="color: orangered;" class="fa fa-arrow-up fa-4x pl-2 fa-rotate-270" aria-hidden="true"></i>
+                    <i class="fa fa-4x pl-1" style="color: darkorange; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">A</i>
                     <i class="fa fa-4x pr-1" style="color: orangered; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">B</i>
                   </div>
                 </div>  
@@ -218,7 +222,7 @@ export default defineComponent ({
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(198, 198, 198, 0.559);
+  background-color: #8648db;
   width: 100%;
   height: 100%;
   z-index: 30;
