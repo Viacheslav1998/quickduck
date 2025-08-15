@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 
 export default defineComponent ({
   name: 'Secret',
@@ -10,6 +10,7 @@ export default defineComponent ({
     const showAcceptBox = ref(false)
     const hidden_content_reject = ref(null)
     const hidden_content_accept = ref(null)
+    const preloader = ref(true)
 
     // multicolored letters
     const colors = [
@@ -60,7 +61,19 @@ export default defineComponent ({
       showAcceptBox.value = false
     }
 
+    const domReady = () => {
+      preloader.value = true
+      setTimeout(() => {
+        preloader.value = false
+      }, 1200)
+    }
+
+    onMounted(() => {
+      domReady()
+    })
+
     return {
+      preloader,
       letters,
       colors,
       hidden_content_reject,
@@ -77,6 +90,18 @@ export default defineComponent ({
 
 <template>
   <div class="container my-4">
+
+    <div class="preloader d-flex justify-content-center" v-if="preloader">
+      <div class="wrapper-preloader">
+        <div class="preloader-gif">
+          <img src="/icons/anobus.gif" alt="загрузка" />
+        </div>
+        <div style="text-align: center; color: burlywood">
+          <h3>Загрузка . . .</h3>
+        </div>
+      </div>
+    </div>
+
     <div class="fone d-flex justify-content-center align-items-center">
       <div class="fone-content p-4 text-center">
         <h1 class="display-4">Секретная локация</h1>
@@ -182,6 +207,7 @@ export default defineComponent ({
   background-color: rgba(0, 0, 0, 0.518);
 }
 .showAccept {
+   display: none!important;
   position: fixed;
   top: 0;
   left: 0;
@@ -197,6 +223,7 @@ export default defineComponent ({
 } */
 
 .secret-imagen {
+  display: none!important;
   height: 100%;
   background-image: url('/images/ach.jpg');
   background-position: center;
