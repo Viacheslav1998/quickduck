@@ -8,8 +8,10 @@ export default defineComponent ({
     const letters = word.split('')
     const showRejectBox = ref(false)
     const showAcceptBox = ref(false)
+    const showSecretBox = ref(false)
     const hidden_content_reject = ref(null)
     const hidden_content_accept = ref(null)
+    const hidden_secret_content = ref(null)
     const preloader = ref(true)
 
     // multicolored letters
@@ -36,7 +38,7 @@ export default defineComponent ({
       input = input.slice(-conamiCode.length)
 
       if(JSON.stringify(input) === JSON.stringify(conamiCode)) {
-        alert('GOOD GAME')
+        handlerSecret()
       }
     })    
     // end combo-code
@@ -63,6 +65,16 @@ export default defineComponent ({
       showAcceptBox.value = false
     }
 
+    // secret show box
+    const handlerSecret = () => {
+      showSecretBox.value = true
+    }
+
+    // secret close box
+    const closeSecretBox = () => {
+      showSecretBox.value = false
+    }
+
     const domReady = () => {
       setTimeout(() => {
         preloader.value = false
@@ -79,12 +91,16 @@ export default defineComponent ({
       colors,
       hidden_content_reject,
       hidden_content_accept,
+      hidden_secret_content,
       showRejectBox,
       showAcceptBox,
+      showSecretBox,
       handlerReject,
       closeReject,
       handlerAccept,
-      closeAccept
+      closeAccept,
+      handlerSecret,
+      closeSecretBox
     }
   }
 })
@@ -111,6 +127,7 @@ export default defineComponent ({
         <p style="font-size:large;" class="font-weight-light"> Многие любят игры а здесь еще есть и секреты</p>
       </div>
     </div>
+
     <div class="content">
       <div>
         <p class="font-weight-light h3 m-3">Любите ли вы <span
@@ -125,14 +142,33 @@ export default defineComponent ({
           <div
             v-if="showRejectBox"
             class="showReject d-flex justify-content-center align-items-center p-2"
-            @click="closeReject"
           >
             <img src="/images/foxid.svg">
             <div>
+              <div class="btn btn-danger mb-3" @click="closeReject">закрыть</div>
               <p class="display-4 font-fox">ЛАДНО!</p><br /><br />
               <span class="font-fox m-2">не хочешь не надо!</span>
             </div>
-            <!-- не забудь про свою комбинацию -->
+            <br></br>
+           
+          </div>
+        </div>
+
+        <div ref="hidden_secret_content">
+          <div 
+            v-if="showSecretBox"
+            class="success-code-secret d-flex justify-content-center align-items-center p-2"
+          >
+            <div class="success-code-imagen container d-flex justify-content-center p-4">
+              <div class="d-flex justify-content-center align-items-end">
+                <div class="text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                  <h2>Выполнено - ты молодец!</h2>
+                  <p>На этом все - можешь гордится собой</p>
+                  <i>А что ты хотел еще ?</i><br></br>
+                  <div class="btn btn-danger mt-2" @click="closeSecretBox">Закрыть</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -140,7 +176,6 @@ export default defineComponent ({
           <div 
             v-if="showAcceptBox"
             class="showAccept d-flex justify-content-center align-items-center"
-            @click="closeAccept"
           >
             <div class="secret-imagen container d-flex justify-content-center p-4">
               <div class="d-flex justify-content-center align-items-end">
@@ -148,7 +183,7 @@ export default defineComponent ({
                   <h1>Только для компьютеров!</h1>
                   <h2 class="text-warning">Вводи</h2>
                   <h3 class="text-danger">Секретный код</h3>
-                  <p>ВЕРХ ВЕРХ ВНИЗ ВНИЗ ВЛЕВО ВПРАВО ВЛЕВО ВПРАВО A B</p>
+                  <p>ВЕРХ ВЕРХ ВНИЗ ВНИЗ ВЛЕВО ВПРАВО ВЛЕВО ВПРАВО B A</p>
                   <div>
                     <i style="color: darkorange;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
                     <i style="color: orangered;" class="fa fa-arrow-up fa-4x pl-2" aria-hidden="true"></i>
@@ -158,8 +193,11 @@ export default defineComponent ({
                     <i style="color: orangered;" class="fa fa-arrow-up fa-4x pl-2 fa-rotate-270" aria-hidden="true"></i>
                     <i style="color: darkorange;" class="fa fa-arrow-up fa-4x pl-2 fa-rotate-90" aria-hidden="true"></i>
                     <i style="color: orangered;" class="fa fa-arrow-up fa-4x pl-2 fa-rotate-270" aria-hidden="true"></i>
-                    <i class="fa fa-4x pl-1" style="color: darkorange; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">A</i>
-                    <i class="fa fa-4x pr-1" style="color: orangered; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">B</i>
+                    <i class="fa fa-4x pl-1" style="color: darkorange; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">B</i>
+                    <i class="fa fa-4x pr-1" style="color: orangered; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">A</i>
+                  </div>
+                  <div class="btn btn-danger mt-3" @click="closeAccept">
+                    Выход
                   </div>
                 </div>  
               </div>           
@@ -226,6 +264,24 @@ export default defineComponent ({
   width: 100%;
   height: 100%;
   z-index: 30;
+}
+
+.success-code-secret {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #151410;
+  width: 100%;
+  height: 100%;
+  z-index: 34;
+}
+
+.success-code-imagen {
+  height: 100%;
+  background-image: url('/images/cat.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .secret-imagen {
