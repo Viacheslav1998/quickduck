@@ -6,16 +6,36 @@ import { useRouter } from 'vue-router';
 export default defineComponent({
   name: 'CommentForm',
   props: {
-    id: {
-      type: Number,
-      required: true
+    modelValue: {
+      type: Object,
+      require: true
     }
   },
-  setup() {  
+  emits: ["update:modelValue"],
+  setup(props, { emit }) {  
+    function updateField(field, value) {
+      emit("update:modelValue", {
+        ...props.modelValue,
+        [field]: field === "id" ? Number(value) : value
+      })
+    }
+    
     const auth = useAuthStore()
     const router = useRouter()
     let person_id = ref(null)
     let person_name = ref(null)
+
+    const status = ref('published')
+    const reaction = ref('')
+
+    // box smiles
+    const smileyOptions = [
+      { value: '/soc-icons/sm1.png', src: '/soc-icons/sm1.png', alt: 'seriously' },
+      { value: '/soc-icons/sm2.png', src: '/soc-icons/sm2.png', alt: 'surprise' },
+      { value: '/soc-icons/sm3.png', src: '/soc-icons/sm3.png', alt: 'smile' },
+      { value: '/soc-icons/sm4.png', src: '/soc-icons/sm4.png', alt: 'big smile' },
+      { value: '/soc-icons/sm5.png', src: '/soc-icons/sm5.png', alt: 'angry' }
+    ]
 
     const loginClick = (e) => {
       router.push('/login')
@@ -37,7 +57,11 @@ export default defineComponent({
       auth,
       person_id,
       person_name,
-      loginClick
+      status,
+      reaction,
+      smileyOptions,
+      loginClick,
+      updateField
     }
   }
 })
@@ -58,32 +82,31 @@ export default defineComponent({
           <div class="pt-1"><p>Среагировать:</p></div>
         </div>
         <div>
-          <input type="text" v-model="id">
-          <input type="text" v-model="person_name" value="person_name">
-          <input type="text" v-model="person_id" value="person_id">
-          <input type="text" v-model="post_id" value="post_id">
-          <input type="text" v-model="status" value="published">
+          <!-- post data -->
+          <input type="hidden" v-model="modelValue.name">
+          <input type="hidden" v-model="modelValue.id">
+          <!-- person data -->
+          <input type="hidden" v-model="person_id">
+          <input type="hidden" v-model="person_name">
+          <!-- publication status [published]-->
+          <input type="hidden" v-model="status">
         </div>
         <div class="image-radio-group">
-          <label>
-            <input type="radio" name="smiley" value="/soc-icons/sm1.png" />
-            <img src="/soc-icons/sm1.png" alt="seriously" />
-          </label>
-          <label>
-            <input type="radio" name="smiley" value="/soc-icons/sm2.png" />
-            <img src="/soc-icons/sm2.png" alt="surprise" />
-          </label>
-          <label>
-            <input type="radio" name="smiley" value="/soc-icons/sm3.png" />
-            <img src="/soc-icons/sm3.png" alt="Smile" />
-          </label>
-          <label>
-            <input type="radio" name="smiley" value="/soc-icons/sm4.png" />
-            <img src="/soc-icons/sm4.png" alt="big smile" />
-          </label>
-          <label>
-            <input type="radio" name="smiley" value="/soc-icons/sm5.png" />
-            <img src="/soc-icons/sm5.png" alt="angry" />
+
+          <label 
+            v-for="option in smileyOptions"
+            :key="option.value"
+          >
+            <input 
+              type="radio"
+              name="reaction"
+              v-model="reaction"
+              :value="option.value"
+            />
+            <img 
+              :src="option.src"
+              :alt="option.alt"
+            />
           </label>
         </div>
 

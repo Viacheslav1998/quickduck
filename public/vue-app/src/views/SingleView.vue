@@ -19,6 +19,9 @@ export default defineComponent({
     // navigation
     const nextNews = ref(null)
     const prevNews = ref(null)
+    
+    //obj
+    const formData = ref(null)
 
     const newsNavigation = async (id) => {
       try {
@@ -81,6 +84,7 @@ export default defineComponent({
     const fetchItem = async (id) => {
       preloader.value = true
       item.value = await getItem(id)
+      formData.value = { ...item.value }
       await newsNavigation(id)
       preloader.value = false
     }
@@ -104,7 +108,8 @@ export default defineComponent({
       formatDate,
       formatTime,
       prevNews,
-      nextNews
+      nextNews,
+      formData
     }
   }
 })
@@ -199,18 +204,15 @@ export default defineComponent({
         </div>
       </div>
     </div>
-
     <!-- comments -->
     <div class="wrapper-comment my-2 pt-4">
-      <!-- do it - with object way -->
       <CommentForm
-      
-        :id="item.id"
-        :post_name="item.name"
+        v-model="formData"
       />
       <div class="line"></div> <br />
       <CommentList />
     </div>
+    <!-- end comments -->
   </div>
 
   <div v-else>
