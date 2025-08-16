@@ -202,7 +202,12 @@ export default defineComponent({
 
     <!-- comments -->
     <div class="wrapper-comment my-2 pt-4">
-      <CommentForm />
+      <!-- do it - with object way -->
+      <CommentForm
+      
+        :id="item.id"
+        :post_name="item.name"
+      />
       <div class="line"></div> <br />
       <CommentList />
     </div>

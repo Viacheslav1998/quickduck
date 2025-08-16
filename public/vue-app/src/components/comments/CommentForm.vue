@@ -5,6 +5,12 @@ import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'CommentForm',
+  props: {
+    id: {
+      type: Number,
+      required: true
+    }
+  },
   setup() {  
     const auth = useAuthStore()
     const router = useRouter()
@@ -52,11 +58,11 @@ export default defineComponent({
           <div class="pt-1"><p>Среагировать:</p></div>
         </div>
         <div>
-          <input type="hidden" v-model="post_name" value="post_name">
-          <input type="hidden" v-model="person_name" value="person_name">
-          <input type="hidden" v-model="person_id" value="user_id">
-          <input type="hidden" v-model="post_id" value="post_id">
-          <input type="hidden" v-model="status" value="published">
+          <input type="text" v-model="id">
+          <input type="text" v-model="person_name" value="person_name">
+          <input type="text" v-model="person_id" value="person_id">
+          <input type="text" v-model="post_id" value="post_id">
+          <input type="text" v-model="status" value="published">
         </div>
         <div class="image-radio-group">
           <label>
