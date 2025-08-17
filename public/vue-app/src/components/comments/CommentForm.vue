@@ -41,19 +41,19 @@ export default defineComponent({
     const loginClick = (e) => {
       router.push('/login')
     }
-    
 
-    const url = "http://quickduck.com/postComment"
+    const url = "http://quickduck.com/auth/test-r"
 
     const postComment = async () => {
       try {
         const commentData = {
           post_name: props.modelValue.name,
-          person_name: person_id.value,
+          person_name: person_name.value,
           comment: comment.value,
           user_id: person_id.value,
           post_id: props.modelValue.id,
           status: status.value,
+          reaction: reaction.value
         }
 
         const response = await fetch(url, {
