@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, ref, onMounted, watch} from 'vue';
+import { defineComponent, ref, onMounted, watch } from 'vue';
 import { useAuthStore } from '@/stores/authStore';
 import { useRouter } from 'vue-router';
 
@@ -26,6 +26,7 @@ export default defineComponent({
     let person_name = ref(null)
 
     const status = ref('published')
+    const comment = ref('')
     const reaction = ref('')
 
     // box smiles
@@ -40,6 +41,39 @@ export default defineComponent({
     const loginClick = (e) => {
       router.push('/login')
     }
+    
+
+    const url = "http://quickduck.com/postComment"
+
+    const postComment = async () => {
+      try {
+        const commentData = {
+          post_name: props.modelValue.name,
+          person_name: person_id.value,
+          comment: comment.value,
+          user_id: person_id.value,
+          post_id: props.modelValue.id,
+          status: status.value,
+        }
+
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(commentData)
+        })
+
+        if (!response.ok) throw new Error('Ошибка сети')
+
+        const result = await response.json()
+        // alert
+        console.log('Success send: ', result)
+      } catch (error) {
+        // alert
+        console.error('Error send: ', error)       
+      }
+    } 
 
     onMounted(() => {
       watch(() => auth.user, 
@@ -58,10 +92,12 @@ export default defineComponent({
       person_id,
       person_name,
       status,
+      comment,
       reaction,
       smileyOptions,
       loginClick,
-      updateField
+      updateField,
+      postComment
     }
   }
 })
@@ -77,12 +113,12 @@ export default defineComponent({
     </div>
 
     <div class="space-comment-area">
-      <form @submit.prevent="createComment">
+      <form @submit.prevent="postComment">
         <div class="reactions d-flex">
           <div class="pt-1"><p>Среагировать:</p></div>
         </div>
         <div>
-          <!-- post data -->
+          <!-- post data need test - just or not data here -->
           <input type="hidden" v-model="modelValue.name">
           <input type="hidden" v-model="modelValue.id">
           <!-- person data -->
@@ -92,7 +128,6 @@ export default defineComponent({
           <input type="hidden" v-model="status">
         </div>
         <div class="image-radio-group">
-
           <label 
             v-for="option in smileyOptions"
             :key="option.value"
@@ -109,11 +144,9 @@ export default defineComponent({
             />
           </label>
         </div>
-
         <div class="person py-2">
           <label>я комментирую: </label>
         </div>
-
         <div class="form-group">
           <textarea
             v-model="comment"
@@ -123,8 +156,7 @@ export default defineComponent({
             placeholder="Например: Отличная статья, здесь много полезного"
           ></textarea>
         </div>
-
-        <button type="button" class="btn btn-info">Отправить комментарий</button>
+        <button type="submit" class="btn btn-info">Отправить комментарий</button>
 
         <br />
         <br />
@@ -138,7 +170,6 @@ export default defineComponent({
               <p>451</p>
             </div>
           </div>
-
           <div class="blockq-wrapper w-50">
             <blockquote class="blockquote text-right">
               <p class="mb-0">Не стоит переживать о своих данных:</p>
@@ -152,7 +183,6 @@ export default defineComponent({
       </form>
     </div>
   </div>
-
   <div
     v-show="auth.isGuest"
   >
@@ -160,5 +190,4 @@ export default defineComponent({
       <h5>Что бы комментировать <span><a style="color: orange; font-weight: 700; " href="#" @click.prevent="loginClick">Зайди</a></span> в систему</h5> 
     </div>    
   </div>
-
 </template>
