@@ -1,13 +1,15 @@
 <script>
-import Card from '@/components/ui/Card.vue';
 import { useAuthStore } from '@/stores/authStore';
 import { defineComponent, ref, computed, onMounted, onUnmounted } from 'vue';
 
+import TestComponent from '@/components/test/testComponent.vue';
+import Card from '@/components/ui/Card.vue';
+
 export default defineComponent({
   name: 'TestApplicationView',
-
   components: {
-    Card
+    Card,
+    TestComponent
   },
   
   setup() {
@@ -18,6 +20,11 @@ export default defineComponent({
 
     const firstName = ref('IVan')
     const lastName = ref('Petrov')
+
+    const cardTitle = ref('default dynamic title')
+    const alt = ref('alternative text')
+    const text = ref('default dynamic text')
+    const action = ref('default push')
 
     const seconds = ref(0)
     let intervalId = null
@@ -41,7 +48,7 @@ export default defineComponent({
 
     onUnmounted(() => {
       clearInterval(intervalId)
-      console.log('time out')
+      console.log('проверка что ты свалил отсюда и дом почтистился')
     })
 
     return {
@@ -52,7 +59,11 @@ export default defineComponent({
       firstName,
       lastName,
       fullName,
-      seconds
+      seconds,
+      cardTitle,
+      alt,
+      text,
+      action
     }
   }
 })
@@ -114,7 +125,7 @@ export default defineComponent({
   <div class="container ">
     <div class="d-flex justify-content-center bg-dark mb-4">
       <div class="bg-dark p-4 mb-4 text-center" style="width: 70%;">
-        <h2>Форма реактивного изменения</h2>
+        <h2>V-MODEL FORM</h2>
         <form>
           <div class="mb-3">
             <label for="name" class="form-label">{{ firstName }}</label>
@@ -143,8 +154,13 @@ export default defineComponent({
 
   <div 
     class="container text-center"
-    v-show="auth.isAdmin"
+    v-show="auth.isUser"
   >
+    <div class="container">
+      <h2>{{ auth.role }}: может видеть данный контент</h2>
+      <p class="text-warning display-4">примеры статических и динамических данных - понятных только в коде</p>
+      <i class="text-danger">1 и 2 карточки - статика но разная а  3я динамика</i>
+    </div>
     <div class="d-flex justify-content-between mb-4 bg-dark py-4 px-2">
       <Card>
         <template #imagen>
@@ -154,18 +170,26 @@ export default defineComponent({
           <h5 class="card-title">карточка - слот</h5>
         </template>
         <template #text>
-          <p class="card-text"> Какой то текст для динамической карточки</p> 
+          <p class="card-text">тут просто текст - даже не переменная</p> 
         </template>
         <template #actions>
           <a href="#" class="btn btn-primary">перейти.</a>
         </template>
       </Card>
 
-      <!-- вот этот слот - карта по умолчанию. если мы не указываем контент -->
-      <Card />
+      <Card
+        cardTitle="статичный пропс"
+        alt="изображение пока нет"
+        text="текст с пропса - статика"
+        action="нажать"
+      />
 
-      <!-- вот этот слот - карта по умолчанию. -->
-      <Card />
+      <Card
+        :card-title="cardTitle"
+        :alt="text"
+        :text="text"
+        :action="action"
+      />
     </div>
   </div>
 

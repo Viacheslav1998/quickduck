@@ -3,10 +3,18 @@ import { defineComponent, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'Card',
+  // props: [
+  //   title,
+  //   alt
+  //   text
+  //   action
+  // ],
   props: {
-    title: String
+    cardTitle: String,
+    alt: String, 
+    text: String,
+    action: String
   },
-
   setup() {
     onMounted(() => {
       console.log('complete card')
@@ -21,17 +29,17 @@ export default defineComponent({
     <div class="bg-dark w-100">
       <div class="card text-dark" style="width: 18rem;">
         <slot name="imagen">
-          <img src="..." class="card-img-top" alt="imagen not found">
+          <img src="..." class="card-img-top" alt="i don`t how work props here">
         </slot>
         <div class="card-body">
           <slot name="title">
-            <h5 class="card-title">Card title</h5>
+            <h5 class="card-title">{{ cardTitle }}</h5>
           </slot>
           <slot name="text"> 
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">{{ text }}</p>
           </slot>
           <slot name="actions">
-            <a href="#" class="btn btn-primary">next</a>
+            <a href="#" class="btn btn-primary">{{ action }}</a>
           </slot>       
         </div>
       </div>
