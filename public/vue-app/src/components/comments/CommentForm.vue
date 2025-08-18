@@ -42,7 +42,7 @@ export default defineComponent({
       router.push('/login')
     }
 
-    const url = "http://quickduck.com/auth/test-r"
+    const url = "http://quickduck.com/auth/post-comment"
 
     const postComment = async () => {
       try {

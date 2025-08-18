@@ -41,7 +41,7 @@ class Auth extends Controller
 			}
 
 			return $this->response->setJSON([
-				'user' => [
+					'user' => [
 					'id' => $user['id'],
 					'email' => $user['email'],
 					'role' => $user['role'],

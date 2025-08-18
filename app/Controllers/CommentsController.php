@@ -33,6 +33,10 @@ class CommentsController extends BaseController
     		'reaction' => $this->request->getPost('reaction')
     	];
 
+    	$data = $this->request->getJSON(true);
+    	dd($data);
+    
+
     	$comments = $this->model->insert($data);
 
     	if ($comments) {

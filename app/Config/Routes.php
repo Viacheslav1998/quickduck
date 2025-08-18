@@ -25,7 +25,7 @@ $routes->get('/test-preg-split', 'TestRegularExpressionsController::testPregSpli
 $routes->get('/test-preg-replace-callback', 'TestRegularExpressionsController::testPregReplaceCallback');
 
 
-$routes->post('/auth/test-r', 'CommentsController::test');
+$routes->post('/auth/post-comment', 'CommentsController::store');
 // $routes->get('/auth/test-r', 'CommentsController::test');
 
 $routes->get('/', 'TestController::index');
