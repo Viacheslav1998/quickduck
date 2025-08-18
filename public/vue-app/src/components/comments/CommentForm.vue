@@ -27,7 +27,7 @@ export default defineComponent({
 
     const status = ref('published')
     const comment = ref('')
-    const reaction = ref('')
+    const reaction = ref('/soc-icons/sm1.png')
 
     // box smiles
     const smileyOptions = [
@@ -45,6 +45,12 @@ export default defineComponent({
     const url = "http://quickduck.com/auth/post-comment"
 
     const postComment = async () => {
+
+      if(!comment.value || comment.value.trim() === '') {
+        alert('комментарий пустой!')
+        return;
+      }
+
       try {
         const commentData = {
           post_name: props.modelValue.name,

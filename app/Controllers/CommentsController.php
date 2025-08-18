@@ -23,20 +23,9 @@ class CommentsController extends BaseController
 
     public function store()
     {
-    	$data = [
-    		'post_name' => $this->request->getPost('post_name'),
-    		'person_name' => $this->request->getPost('person_name'),
-    		'comment' => $this->request->getPost('comment'),
-    		'user_id' => $this->request->getPost('user_id'),
-    		'post_id' => $this->request->getPost('post_id'),
-    		'status' => $this->request->getPost('status'),
-    		'reaction' => $this->request->getPost('reaction')
-    	];
-
     	$data = $this->request->getJSON(true);
-    	dd($data);
+    	// log_message('debug', 'received comment data:' . print_r($data, true));
     
-
     	$comments = $this->model->insert($data);
 
     	if ($comments) {
@@ -51,15 +40,5 @@ class CommentsController extends BaseController
     		'message' => 'Ошибка: не удалось записать комментарий!'
     	])->setStatusCode(400);
     }
-
-
-    public function test()
-    {
-    	return $this->response->setJSON([
-    		'status' => 'test',
-    		'message' => 'message like work this request/response'
-    	])->setStatusCode(201);
-    }
-
 
 }
