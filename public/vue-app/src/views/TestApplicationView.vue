@@ -11,7 +11,6 @@ export default defineComponent({
     Card,
     TestComponent
   },
-  
   setup() {
     const auth = useAuthStore()
     
@@ -76,7 +75,7 @@ export default defineComponent({
     <div class="mt-4 bg-danger">
       <h3 class="pt-3">Добро пожаловать !</h3>
       <p>твоя роль <span style="color: black; font-weight: bold;">[{{ auth.role }}]</span></p>
-      <p class="pb-3">если ты видишь роль (guest) то ты не увидишь некоторый контент!</p>
+      <p class="pb-3">если ты видишь роль (guest) то ты не увидишь некоторый контент! <br></br> поэтому надо зайти</p>
     </div>
   </div>
 
@@ -191,6 +190,12 @@ export default defineComponent({
         :action="action"
       />
     </div>
+  </div>
+
+  <div class="container text-center">
+    <TestComponent
+      @some-event="(n) => count += n"
+    />
   </div>
 
 </template>
