@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 
 export default defineComponent ({
   name: 'testComponent',
@@ -8,6 +8,18 @@ export default defineComponent ({
     const textTestComponent = ref('подключен тест компонент')
     const count = ref(0)
     const handleExample = ref('example')
+
+    const exampleValue = ref('example value')
+    console.log(exampleValue)
+    console.log(exampleValue.value)
+
+    const attrObjExample = {
+      id: 'example',
+      class: 'bg-warning m-3 p-3',
+      style: 'color: black; font-family: Calibri; font-size: 28px;'
+    }
+
+    const stateDefault = reactive({ count: 0 })
 
     // just example run event 
     const greet = (e) => {
@@ -29,6 +41,8 @@ export default defineComponent ({
       count,
       greet,
       say,
+      attrObjExample,
+      stateDefault
     }
   }
   
@@ -51,5 +65,12 @@ export default defineComponent ({
       <br></br>
       <div class="btn btn-info" @click.stop="greet">отобразить что и где вызвалось</div>
     </div>
+    <div v-bind="attrObjExample">
+      пример работы с атрибутами - класс и стиль работает через обьект
+      <br></br>
+      <i>а это "рективная" кнопка </i>
+      <div class="btn btn-danger" @click="stateDefault.count++"> {{ stateDefault.count }}</div>
+    </div>
+    <br></br>
   </div>
 </template>

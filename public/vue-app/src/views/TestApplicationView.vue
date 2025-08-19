@@ -47,7 +47,7 @@ export default defineComponent({
 
     onUnmounted(() => {
       clearInterval(intervalId)
-      console.log('проверка что ты свалил отсюда и дом почтистился')
+      console.log('проверка что ты свалил отсюда и дом почистился')
     })
 
     return {
