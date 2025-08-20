@@ -149,9 +149,9 @@ export default defineComponent({
           <span style="color: orange">{{ formatDate(item.created_at || item.updated_at) }}</span>
           <p>
             опублитковано в:
-            <span style="color: orangered">{{
-              formatTime(item.created_at || item.updated_at)
-            }}</span>
+            <span style="color: orangered">
+              {{ formatTime(item.created_at || item.updated_at) }}
+            </span>
           </p>
         </div>
         <div class="tags">

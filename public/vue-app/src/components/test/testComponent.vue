@@ -3,8 +3,8 @@ import { defineComponent, reactive, ref } from 'vue';
 
 export default defineComponent ({
   name: 'testComponent',
-  emits: ['someEvent'],
-  setup() {
+  emits: ['action'],
+  setup(_, {emit}) {
     const textTestComponent = ref('подключен тест компонент')
     const count = ref(0)
     const handleExample = ref('example')
@@ -19,7 +19,7 @@ export default defineComponent ({
       style: 'color: black; font-family: Calibri; font-size: 28px;'
     }
 
-    const stateDefault = reactive({ count: 0 })
+    const stateDefault = reactive({ count: 0, page: 0 })
 
     // just example run event 
     const greet = (e) => {
@@ -29,6 +29,10 @@ export default defineComponent ({
         alert(e.target.tagName)
         console.warn(e.target.tagName)
       }
+    }
+
+    function handleClick() {
+      emit('action', 'to do')
     }
 
     // another type func for example
@@ -42,7 +46,8 @@ export default defineComponent ({
       greet,
       say,
       attrObjExample,
-      stateDefault
+      stateDefault,
+      handleClick
     }
   }
   
@@ -54,10 +59,9 @@ export default defineComponent ({
   <div class="container bg-dark pt-1">
     <h2>{{ textTestComponent }}</h2>
     <p>смысл в этом компоненте будет заключатся в emit</p>
-    <div class="m-2 p-2 justify-content-start text-left">
+    <div class="m-2 p-2 text-left">
       <div 
         class="btn btn-success"
-        @click="$emit('someEvent', 1)"
       >
         Клик сработал 
       </div><br></br>
@@ -69,7 +73,10 @@ export default defineComponent ({
       пример работы с атрибутами - класс и стиль работает через обьект
       <br></br>
       <i>а это "рективная" кнопка </i>
-      <div class="btn btn-danger" @click="stateDefault.count++"> {{ stateDefault.count }}</div>
+      <div class="btn btn-danger" @click="stateDefault.page++"> {{ stateDefault.page }}</div>
+    </div>
+    <div class="text-left mx-3">
+      <div class="btn btn-success" @click="handleClick">Emit work ?</div>
     </div>
     <br></br>
   </div>

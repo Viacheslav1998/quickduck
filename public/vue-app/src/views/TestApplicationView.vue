@@ -39,6 +39,10 @@ export default defineComponent({
       return `${firstName.value} ${lastName.value}`
     })
 
+    function poppup() {
+      alert('asd')
+    }
+
     onMounted(() => {   
       intervalId = setInterval(() => {
         seconds.value++
@@ -62,7 +66,8 @@ export default defineComponent({
       cardTitle,
       alt,
       text,
-      action
+      action,
+      poppup
     }
   }
 })
@@ -194,7 +199,7 @@ export default defineComponent({
 
   <div class="container text-center">
     <TestComponent
-      @some-event="(n) => count += n"
+      @action="poppup"
     />
   </div>
 
