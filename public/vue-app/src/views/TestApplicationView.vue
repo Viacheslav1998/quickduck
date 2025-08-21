@@ -1,6 +1,6 @@
 <script>
 import { useAuthStore } from '@/stores/authStore';
-import { defineComponent, ref, computed, onMounted, onUnmounted } from 'vue';
+import { defineComponent, ref, computed, onMounted, onUnmounted, reactive } from 'vue';
 
 import TestComponent from '@/components/test/testComponent.vue';
 import Card from '@/components/ui/Card.vue';
@@ -25,6 +25,11 @@ export default defineComponent({
     const text = ref('default dynamic text')
     const action = ref('default push')
 
+    const persons = reactive({
+      isGuest: 'Данный пользователь не в сети',
+      isUser: 'Eugeny'
+    })
+
     const seconds = ref(0)
     let intervalId = null
 
@@ -39,8 +44,16 @@ export default defineComponent({
       return `${firstName.value} ${lastName.value}`
     })
 
+    function getUser() {
+      if(!auth.isGuest) {
+        alert(persons.isUser)
+        return
+      }
+      alert(persons.isGuest)
+    }
+
     function poppup() {
-      alert('asd')
+      alert('кастомное событие сработало')
     }
 
     onMounted(() => {   
@@ -67,7 +80,9 @@ export default defineComponent({
       alt,
       text,
       action,
-      poppup
+      poppup,
+      persons,
+      getUser
     }
   }
 })
@@ -200,6 +215,7 @@ export default defineComponent({
   <div class="container text-center">
     <TestComponent
       @action="poppup"
+      @get-user="getUser"
     />
   </div>
 

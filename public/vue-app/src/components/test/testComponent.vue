@@ -1,13 +1,19 @@
 <script>
-import { defineComponent, reactive, ref } from 'vue';
+import { computed, defineComponent, reactive, ref } from 'vue';
 
 export default defineComponent ({
   name: 'testComponent',
-  emits: ['action'],
+  emits: ['action', 'getUser'],
   setup(_, {emit}) {
     const textTestComponent = ref('подключен тест компонент')
     const count = ref(0)
     const handleExample = ref('example')
+    const firstName = ref('King')
+
+    const upperName = computed({
+      get: () => firstName.value.toUpperCase(),
+      set: val => firstName.value = val.toLowerCase()
+    })
 
     const exampleValue = ref('example value')
     console.log(exampleValue)
@@ -31,8 +37,14 @@ export default defineComponent ({
       }
     }
 
+    // just testing emits
     function handleClick() {
       emit('action', 'to do')
+    }
+
+    // handler get data user
+    function handleUser() {
+      emit('getUser')
     }
 
     // another type func for example
@@ -47,7 +59,10 @@ export default defineComponent ({
       say,
       attrObjExample,
       stateDefault,
-      handleClick
+      handleClick,
+      handleUser,
+      upperName,
+      firstName
     }
   }
   
@@ -77,6 +92,16 @@ export default defineComponent ({
     </div>
     <div class="text-left mx-3">
       <div class="btn btn-success" @click="handleClick">Emit work ?</div>
+    </div>
+    <div class="text-left mx-3 mt-3">
+      <div class="btn btn-danger btn-lg" @click="handleUser">Получить пользователя</div>
+    </div>
+    <div class="text-left mx-3 mt-3">
+      <h6>Пишешь с большой получаешь с маленькой</h6>
+      <div> 
+        <input v-model="upperName"><br></br>
+        <p>{{ firstName }}</p>
+      </div>
     </div>
     <br></br>
   </div>
