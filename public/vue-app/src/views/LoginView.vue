@@ -108,7 +108,7 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <div class="begin mb-4">
+    <div class="begin mb-4" id="log">
       <h1>Войти</h1>
     </div>
     <div class="login-box d-flex justify-content-center py-5 mb-2">

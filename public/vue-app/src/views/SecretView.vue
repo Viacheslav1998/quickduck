@@ -109,7 +109,7 @@ export default defineComponent ({
 <template>
   <div class="container my-4">
 
-    <div class="preloader d-flex justify-content-center" v-if="preloader">
+    <div class="preloader d-flex justify-content-center" id="secret" v-if="preloader">
       <div class="wrapper-preloader d-flex justify-content-center align-items-center">
         <div class="preloader-gif">
           <img src="/icons/anobus.gif" alt="загрузка" />

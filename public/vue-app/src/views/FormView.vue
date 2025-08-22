@@ -153,7 +153,7 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <div class="begin">
+    <div class="begin" id="reg">
       <h1>Регистрация</h1>
     </div>
     <div class="custom-form">

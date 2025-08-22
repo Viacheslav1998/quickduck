@@ -117,13 +117,13 @@ export default {
 
     function navigateToTesting() {
       setTimeout(() => {
-        router.push('/test-app')
+        router.push('/test-app#test')
       }, 700)
     } 
 
     function navigateToSecret() {
       setTimeout(() => {
-        router.push('/secret')
+        router.push('/secret#secret')
       }, 700)
     }
 

@@ -43,7 +43,6 @@ export default defineComponent({
       }, {immediate: true, deep: true});
     });
 
-   
     return {
       person,
       handleLogout
@@ -56,7 +55,7 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <div class="profile-box my-4">
+    <div class="profile-box my-4" id="person">
       <div class="text-center ">
          <img src="/images/m4.jpg" class="logo shadow" alt="user" />
       </div>

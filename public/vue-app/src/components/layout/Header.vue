@@ -20,13 +20,13 @@
             <RouterLink class="nav-link" to="/about#about-me">Автор</RouterLink>
           </li>
           <li v-show="isGuest" class="nav-item">
-            <RouterLink class="nav-link" to="/form">Регистрация</RouterLink>
+            <RouterLink class="nav-link" to="/form#reg">Регистрация</RouterLink>
           </li>
           <li v-show="isGuest" class="nav-item">
-            <RouterLink class="nav-link" to="/login">Войти</RouterLink>
+            <RouterLink class="nav-link" to="/login#log">Войти</RouterLink>
           </li>
           <li v-show="isUser" class="nav-item">
-            <RouterLink class="nav-link" to="/profile">Профиль</RouterLink>
+            <RouterLink class="nav-link" to="/profile#person">Профиль</RouterLink>
           </li>
         </nav>
         <span class="navbar-text" title="вопросы или знания">Questions-Or-Knowledge</span>

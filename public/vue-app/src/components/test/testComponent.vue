@@ -65,13 +65,12 @@ export default defineComponent ({
       firstName
     }
   }
-  
 })
 
 </script>
 
 <template>
-  <div class="container bg-dark pt-1">
+  <div class="container bg-dark pt-1" id="test">
     <h2>{{ textTestComponent }}</h2>
     <p>смысл в этом компоненте будет заключатся в emit</p>
     <div class="m-2 p-2 text-left">
