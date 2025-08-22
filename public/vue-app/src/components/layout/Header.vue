@@ -50,9 +50,25 @@
     <div class="mt-4">
       <v-carousel
         height="650"
-        progress="info"
+        show-arrows="hover"
+        cycle
+        progress="warning"
         hide-delimiters
       >
+        <template v-slot:prev="{ props }">
+          <v-btn
+            color="dark"
+            variant="elevated"
+            @click="props.onClick"
+          >туда</v-btn>
+        </template>
+        <template v-slot:next="{ props }">
+          <v-btn
+            color="dark"
+            variant="elevated"
+            @click="props.onClick"
+          >сюда</v-btn>
+        </template>
         <v-carousel-item
           v-for="item in slides" :key="item.slide"
         >
@@ -66,17 +82,29 @@
               <div class="pb-1 pt-2 pl-2 bg-dark">
                 <h4>{{ item.title }}</h4>
               </div>
-              <div class="pb-1 pt-2 pl-2 bg-dark">
-                <h4>{{ item.text }}</h4>
+              <div class="pt-3 pl-3 bg-dark">
+                <p>{{ item.text }}</p>
               </div>
             </div>
           </v-sheet>
         </v-carousel-item>
       </v-carousel>
     </div>
-    <div class="container dark mt-4">
-      <div class="p-3">
-        <button type="button" class="btn btn-secondary btn-lg custom-button text-warning">Топ новостей</button>
+    <div class="container dark mt-4 d-flex justify-content-center">
+      <div class="p-3 text-left">
+        <button type="button" class="btn btn-dark custom-button text-warning">Топ новостей</button>
+      </div>
+      <div class="p-3 text-left">
+        <button type="button" class="btn btn-dark custom-button text-warning">Техологии</button>
+      </div>
+      <div class="p-3 text-left">
+        <button type="button" class="btn btn-dark custom-button text-warning">Программирования</button>
+      </div>
+      <div class="p-3 text-left">
+        <button type="button" class="btn btn-dark custom-button text-warning">Новшества</button>
+      </div>
+      <div class="p-3 text-left">
+        <button type="button" class="btn btn-dark custom-button text-warning">платы</button>
       </div>
     </div>
   </div>
@@ -96,10 +124,10 @@ export default defineComponent({
     const isUser = computed(() => auth.isUser)
 
     const slides = [
-      {slide: '/public/slider/s1.jpg', title: 'заголовок', text: 'aks qwije isj aoisj doiajs doija sodij asoijd ioasj d'},
-      {slide: '/public/slider/s2.jpg', title: 'заголовок 2', text: 'aks qwije isj aoisj doiajs doija sodij asoijd ioasj d'},
-      {slide: '/public/slider/s3.jpg', title: 'заголовок 3', text: 'aks qwije isj aoisj doiajs doija sodij asoijd ioasj d'},
-      {slide: '/public/slider/s4.jpg', title: 'заголовок 4', text: 'aks qwije isj aoisj doiajs doija sodij asoijd ioasj d'},
+      {slide: '/public/slider/s1.jpg', title: 'Быстрый совет ...', text: 'сейчас дорогие котята мы узнаем почему нельзя использовать vuetify+bootstrap - потому что могут быть конфликты стилей'},
+      {slide: '/public/slider/s2.jpg', title: 'что делать если компьютер не спешит?', text: 'Узнай на сколько можно его прокачать, замени SSD, почисти ПО - например R-cleaner adwww'},
+      {slide: '/public/slider/s3.jpg', title: 'Код это жизнь - работа учеба... все ровно жизнь', text: 'нужно суметь подобрать под себя среду разработки IDE - есть и бесплатные хорошие варианты, Sublime-Text, notepad++, блокнот, aclipse, VSC'},
+      {slide: '/public/slider/s4.jpg', title: 'Ну какая же машина запустится без процессора - ОН ЧТО СЕРВЕРНЫЙ !?', text: 'процессор - запускает и работает как не странно с процессами - мощный процессор быстрые потоки, функционал, компилирование ..., но не всегда только процессор все может вывозить'},
     ]
 
     return {
