@@ -134,10 +134,10 @@ export default defineComponent({
 
     <nav aria-label="breadcrumb" class="pt-2">
       <div class="breacrumb-fone">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Домой</a></li>
-          <li class="breadcrumb-item"><a href="/">Рубрика</a></li>
-          <li class="breadcrumb-item active" aria-current="page">новости | игры | природа</li>
+        <ol class="breadcrumb bg-dark">
+          <li class="breadcrumb-item"><a class="b-link" href="/">Домой</a></li>
+          <li class="breadcrumb-item"><a class="b-link" href="/">Рубрика</a></li>
+          <li class="breadcrumb-item active custom-text-color" aria-current="page">новости | игры | природа</li>
         </ol>
       </div>
     </nav>
@@ -258,7 +258,12 @@ hr.new1 {
 .breadcrumb-item {
   color: white;
 }
-
+.custom-text-color {
+  color: white!important;
+}
+.b-link:hover {
+  color: orangered!important;
+}
 .wrapper-navi {
   background: url('../images/space3.jpg');
   background-size: cover;

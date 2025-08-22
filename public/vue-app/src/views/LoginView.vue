@@ -167,7 +167,7 @@ export default defineComponent({
 <style scoped>
 .login-box {
   background-image: url('../images/login-fone.jpg');
-  background-size: contain;
+  background-size: cover;
 }
 .custom-input {
   font-family: Arial;
