@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="about-title">
+    <div class="about-title" id="about-me">
       <h1>Страница обо мне</h1>
     </div>
     <div class="custom-description">

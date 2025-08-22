@@ -17,7 +17,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <nav class="navbar-nav mr-auto">
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/about">Автор</RouterLink>
+            <RouterLink class="nav-link" to="/about#about-me">Автор</RouterLink>
           </li>
           <li v-show="isGuest" class="nav-item">
             <RouterLink class="nav-link" to="/form">Регистрация</RouterLink>
@@ -124,10 +124,10 @@ export default defineComponent({
     const isUser = computed(() => auth.isUser)
 
     const slides = [
-      {slide: '/public/slider/s1.jpg', title: 'Быстрый совет ...', text: 'сейчас дорогие котята мы узнаем почему нельзя использовать vuetify+bootstrap - потому что могут быть конфликты стилей'},
-      {slide: '/public/slider/s2.jpg', title: 'что делать если компьютер не спешит?', text: 'Узнай на сколько можно его прокачать, замени SSD, почисти ПО - например R-cleaner adwww'},
-      {slide: '/public/slider/s3.jpg', title: 'Код это жизнь - работа учеба... все ровно жизнь', text: 'нужно суметь подобрать под себя среду разработки IDE - есть и бесплатные хорошие варианты, Sublime-Text, notepad++, блокнот, aclipse, VSC'},
-      {slide: '/public/slider/s4.jpg', title: 'Ну какая же машина запустится без процессора - ОН ЧТО СЕРВЕРНЫЙ !?', text: 'процессор - запускает и работает как не странно с процессами - мощный процессор быстрые потоки, функционал, компилирование ..., но не всегда только процессор все может вывозить'},
+      {slide: '/slider/s1.jpg', title: 'Быстрый совет ...', text: 'сейчас дорогие котята мы узнаем почему нельзя использовать vuetify+bootstrap - потому что могут быть конфликты стилей'},
+      {slide: '/slider/s2.jpg', title: 'что делать если компьютер не спешит?', text: 'Узнай на сколько можно его прокачать, замени SSD, почисти ПО - например R-cleaner adwww'},
+      {slide: '/slider/s3.jpg', title: 'Код это жизнь - работа учеба... все ровно жизнь', text: 'нужно суметь подобрать под себя среду разработки IDE - есть и бесплатные хорошие варианты, Sublime-Text, notepad++, блокнот, aclipse, VSC'},
+      {slide: '/slider/s4.jpg', title: 'Ну какая же машина запустится без процессора - ОН ЧТО СЕРВЕРНЫЙ !?', text: 'процессор - запускает и работает как не странно с процессами - мощный процессор быстрые потоки, функционал, компилирование ..., но не всегда только процессор все может вывозить'},
     ]
 
     return {
