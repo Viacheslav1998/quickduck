@@ -43,24 +43,36 @@
         <h1 class="font-base">
           <span style="color: darkorange">QuickDuck.com</span>
           <br />
-          <span style="font-family: tahoma; font-size: 21px">Добро пожаловать</span>
+          <span style="font-family: tahoma; font-size: 17px">Быстрый портал - свежайших технологий</span><br>
         </h1>
-        <p class="f h5">
-          Добро пожаловать! Здесь вы найдете полезную и актуальную информацию о мире IT и технологий.
-          <br /><br />
-          <span style="color: deepskyblue">Быстрая утка</span> расскажет о новинках из мира игр, гаджетов, технологий и программирования.
-          Мы публикуем свежие новости, обзоры, советы, шпаргалки и туториалы.
-          <br /><br />
-          Хотите разобраться в JavaScript, PHP или других языках? Понимать ООП, хуки, принципы работы алгоритмов и фреймворков? Мы поможем!
-          <br /><br />
-          <span style="color: coral; font-style: italic">
-            Легкий и понятный подход, объяснение сложных вещей простыми словами.
-          </span><br />
-          <span style="color: violet">
-            Изучайте шаг за шагом, прокачивайте свои навыки и будьте в курсе последних трендов!
-          </span>
-        </p>
       </div>
+    </div>
+    <div class="mt-4">
+      <v-carousel
+        height="650"
+        progress="info"
+        hide-delimiters
+      >
+        <v-carousel-item
+          v-for="item in slides" :key="item.slide"
+        >
+          <v-sheet
+            height="100%"
+          >
+            <div 
+              class="text-white fill-height d-flex flex-column justify-space-between custom-content-slider"
+              :style="{ backgroundImage: `url(${item.slide})` }"
+            >
+              <div class="pb-1 pt-2 pl-2 bg-dark">
+                <h4>{{ item.title }}</h4>
+              </div>
+              <div class="pb-1 pt-2 pl-2 bg-dark">
+                <h4>{{ item.text }}</h4>
+              </div>
+            </div>
+          </v-sheet>
+        </v-carousel-item>
+      </v-carousel>
     </div>
     <div class="container dark mt-4">
       <div class="p-3">
@@ -83,9 +95,17 @@ export default defineComponent({
     const isGuest = computed(() => auth.isGuest)
     const isUser = computed(() => auth.isUser)
 
+    const slides = [
+      {slide: '/public/slider/s1.jpg', title: 'заголовок', text: 'aks qwije isj aoisj doiajs doija sodij asoijd ioasj d'},
+      {slide: '/public/slider/s2.jpg', title: 'заголовок 2', text: 'aks qwije isj aoisj doiajs doija sodij asoijd ioasj d'},
+      {slide: '/public/slider/s3.jpg', title: 'заголовок 3', text: 'aks qwije isj aoisj doiajs doija sodij asoijd ioasj d'},
+      {slide: '/public/slider/s4.jpg', title: 'заголовок 4', text: 'aks qwije isj aoisj doiajs doija sodij asoijd ioasj d'},
+    ]
+
     return {
       isGuest,
-      isUser
+      isUser,
+      slides
     }
   }
 })
@@ -130,6 +150,10 @@ export default defineComponent({
   margin: 50px 0 50px 0;
   background: rgba(4, 20, 35, 0.97);
 }
+.custom-content-slider {
+  width: 100%;
+  background-size: cover;
+}
 
 .all-custom-container {
    position: relative;
@@ -141,7 +165,7 @@ export default defineComponent({
 .box-2 {
   width: 100%;
   top: 0;
-  height: 800px;
+  height: 300px;
   position: absolute;
 }
 .box-1 {
@@ -160,7 +184,7 @@ export default defineComponent({
 }
 
 @media screen and (min-width: 1124px) {
-  .custom-container { height: 720px;}
+  .custom-container { min-height: 320px;}
   .font-base { font-size: 3em; } 
 }
 </style>
