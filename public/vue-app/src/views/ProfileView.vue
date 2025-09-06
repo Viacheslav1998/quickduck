@@ -31,7 +31,7 @@ export default defineComponent({
         router.push('/login')
       }, 1200)
     }
-
+    
     onMounted(() => {
       watch(() => auth.user,
       (newUser) => {

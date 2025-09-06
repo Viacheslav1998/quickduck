@@ -18,7 +18,11 @@ class CommentsController extends BaseController
 
     public function index()
     {
-        // why?
+    	$data = $this->model->findAll();
+    	echo "<pre>";
+    	print_r($data);
+    	echo "</pre>";
+    	log_message('debug', 'getting data:'. print_r($data, true));
     }
 
     public function store()
