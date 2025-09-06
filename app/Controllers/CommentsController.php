@@ -16,7 +16,6 @@ class CommentsController extends BaseController
 	    $this->model = new CommentsModel();
 	}
 
-
 	/**
 	* get all comments
 	*/
@@ -29,49 +28,44 @@ class CommentsController extends BaseController
 
     /**
     * add a comment if one does not exits
-    * needed to refactor!!!
+    * needed to a little bit refactor
     */
     public function store()
     {
-    	// get data
-    	$current_user_id = $this->request->getJSON(true)['user_id'] ?? null;
-    	$post_id = $this->request->getJSON(true)['post_id'] ?? null;
 
-    	// data availability check
-    	if (!$current_user_id || !$post_id) {
+    	$data = $this->request->getJSON(true);
+
+    	$validation_result = $this->model->validateCommentData($data);
+    	if ($validation_result !== true) {
     		return $this->response->setJSON([
-    			'error' => 'не указан user_id или post_id'
+    			'error' => $validation_result
     		]);
     	}
 
-    	//  We are executing a request to check for the presence of a comment.
-    	$comment_count = $this->model
-    	                      ->where('user_id', $current_user_id)
-    	                      ->where('post_id', $post_id)
-    	                      ->countAllResults();
+    	$comment_count = $this->model->getCommentCount($data['user_id'], $data['post_id']);
+    	if ($comment_count > 0) {
+    		return $this->response->setJSON([
+    			'message' => 'Вы уже оставляли комментарий на эту новость'
+    		]);
+    	}
 
-    	// Did the user leave a comment?       
-        if ($comment_count > 0) {
-        	return $this->response->setJSON([
-        		'message' => 'Вы уже оставили свой комментарий к данному посту!'
-        	]);
-        }  
-
-    	$data = $this->request->getJSON(true);
-    
-    	$comments = $this->model->insert($data);
-
-    	if ($comments) {
+    	$insert_result = $this->model->insertComment($data);
+    	if ($insert_result) {
     		return $this->response->setJSON([
     			'status' => 'success',
-    			'message' => 'Комментарий создан и отправлен на модерацию!' 
+    			'message' => 'Комментарий создан и отправлен на модерацию'
     		]);
     	}
 
     	return $this->response->setJSON([
     		'status' => 'error',
-    		'message' => 'Ошибка: не удалось записать комментарий!'
+    		'message' => 'Ошибка: не удалось записать комментарий'
     	])->setStatusCode(400);
+    }
+
+    public function getComment()
+    {
+
     }
 
 }

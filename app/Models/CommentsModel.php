@@ -43,4 +43,32 @@ class CommentsModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+    // Methods
+    public function getCommentCount($user_id, $post_id)
+    {
+        return $this->db->table('comments')
+                    ->where('user_id', $user_id)
+                    ->where('post_id', $post_id)
+                    ->countAllResults();
+    }
+
+    public function insertComment($data)
+    {
+        $data['created_at'] = date('Y-m-d H:i:s');
+        return $this->db->table('comments')->insert($data);
+    }
+
+    public function validateCommentData($data)
+    {
+        if (empty($data['user_id']) || empty($data['post_id'])) {
+            return 'не указан user_id или post_id' ;
+        }
+        if (empty($data['comment'])) {
+            return 'комментарий не может быть пустым';
+        }
+
+        return true;
+    }
 }
