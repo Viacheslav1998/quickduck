@@ -2,6 +2,7 @@
 import { defineComponent, ref, onMounted, watch } from 'vue';
 import { useAuthStore } from '@/stores/authStore';
 import { useRouter } from 'vue-router';
+import Swal from 'sweetalert2';
 
 export default defineComponent({
   name: 'CommentForm',
@@ -24,6 +25,13 @@ export default defineComponent({
     const router = useRouter()
     let person_id = ref(null)
     let person_name = ref(null)
+
+   const showAlert = ({status, message}) => {
+      Swal.fire({
+        text: message,
+        icon: status
+      })
+    }
 
     const status = ref('published')
     const comment = ref('')
@@ -73,11 +81,22 @@ export default defineComponent({
         if (!response.ok) throw new Error('Ошибка сети')
 
         const result = await response.json()
-        // alert
-        console.log('Success send: ', result)
+
+        showAlert({
+          status: 'success',
+          message: result.message,
+        })
+
+        // console.log('Success send: ', result)
+
       } catch (error) {
-        // alert
-        console.error('Error send: ', error)       
+
+        showAlert({
+          status: 'error',
+          message: error.message,
+        })
+
+        // console.error('Error send: ', error)       
       }
     } 
 
