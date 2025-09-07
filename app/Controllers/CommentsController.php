@@ -63,9 +63,40 @@ class CommentsController extends BaseController
     	])->setStatusCode(400);
     }
 
+
+    /**
+    * getting only current comment
+    */
     public function getComment()
     {
+    	$data = $this->request->getJSON(true);
+    	$user_id = $data['user_id'] ?? null;
+    	$post_id = $data['post_id'] ?? null;
 
+    	$validation_result = $this->model->validateStaff($data);
+    	if ($validation_result !== true) {
+    		return $this->response->setJSON([
+    			'error' => $validation_result
+    		]);
+    	}
+
+    	$comment = $this->model->getCommentByUserAndPost($user_id, $post_id);
+
+    	var_dump($comment);
+
+    	die();
+
+    	if ($comment) {
+    		return $this->response->setJSON([
+    			'status' => 'success',
+    			'comment' => $comment
+    		]);
+    	}
+
+    	return $this->response->setJSON([
+    		'status' => 'error',
+    		'message' => 'Комментарий не найден'
+    	])->setStatusCode(404);
     }
 
 }

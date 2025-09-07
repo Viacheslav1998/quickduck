@@ -26,9 +26,11 @@ $routes->get('/test-preg-replace-callback', 'TestRegularExpressionsController::t
 
 $routes->get('/test-all-news', 'CommentsController::index');
 
-
+// comments
 $routes->post('/auth/post-comment', 'CommentsController::store');
-// $routes->get('/auth/test-r', 'CommentsController::test');
+$routes->get('/get-user-comment', 'CommentsController::getComment');
+
+
 
 $routes->get('/', 'TestController::index');
 //proxy

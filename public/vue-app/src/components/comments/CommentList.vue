@@ -7,6 +7,36 @@ export default defineComponent({
   setup() {
     const auth = useAuthStore()  
     
+    async function fetchData() {
+      try {
+        const response = await fetch('http://quickduck.com/get-user-comment');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const text = await response.text();
+        
+        // Проверка на пустой ответ
+        if (!text) {
+          throw new Error('Empty response');
+        }
+
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (jsonError) {
+          throw new Error('Invalid JSON format');
+        }
+
+        console.log(data);
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
+    }
+
+    fetchData();
+
     return {
       auth
     }
@@ -41,6 +71,7 @@ export default defineComponent({
             unde harum obcaecati repellendus perferendis aliquid!
           </div>
         </div>
+        
       </div>
 
       <div>

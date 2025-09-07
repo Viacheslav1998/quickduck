@@ -46,6 +46,8 @@ class CommentsModel extends Model
 
 
     // Methods
+
+    // get count comments
     public function getCommentCount($user_id, $post_id)
     {
         return $this->db->table('comments')
@@ -54,12 +56,23 @@ class CommentsModel extends Model
                     ->countAllResults();
     }
 
+    // get only one comment current user if exits
+    public function getCommentByUserAndPost($user_id, $post_id)
+    {
+        return $this->db->table('comments')
+                    ->where('user_id', $user_id)
+                    ->where('post_id', $post_id)
+                    ->get()
+                    ->getRowArray();
+    }
+
     public function insertComment($data)
     {
         $data['created_at'] = date('Y-m-d H:i:s');
         return $this->db->table('comments')->insert($data);
     }
 
+    // validate for all
     public function validateCommentData($data)
     {
         if (empty($data['user_id']) || empty($data['post_id'])) {
@@ -69,6 +82,15 @@ class CommentsModel extends Model
             return 'комментарий не может быть пустым';
         }
 
+        return true;
+    }
+
+    // only user and comment 
+    public function validateStaff($data)
+    {
+        if (!empty($data['user_id']) || !empty($data['post_id'])) {
+            return 'не указан user_id или post_id' ;
+        }
         return true;
     }
 }
