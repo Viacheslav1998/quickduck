@@ -85,12 +85,4 @@ class CommentsModel extends Model
         return true;
     }
 
-    // only user and comment 
-    public function validateStaff($data)
-    {
-        if (!empty($data['user_id']) || !empty($data['post_id'])) {
-            return 'не указан user_id или post_id' ;
-        }
-        return true;
-    }
 }

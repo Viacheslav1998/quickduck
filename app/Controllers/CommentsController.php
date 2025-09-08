@@ -17,7 +17,7 @@ class CommentsController extends BaseController
 	}
 
 	/**
-	* get all comments
+	* getting last 10 comments
 	*/
     public function index()
     {
@@ -32,7 +32,6 @@ class CommentsController extends BaseController
     */
     public function store()
     {
-
     	$data = $this->request->getJSON(true);
 
     	$validation_result = $this->model->validateCommentData($data);
@@ -70,21 +69,22 @@ class CommentsController extends BaseController
     public function getComment()
     {
     	$data = $this->request->getJSON(true);
+    	// проблема в получении данных нужно как то получить текущие данные 
+
     	$user_id = $data['user_id'] ?? null;
     	$post_id = $data['post_id'] ?? null;
 
-    	$validation_result = $this->model->validateStaff($data);
-    	if ($validation_result !== true) {
-    		return $this->response->setJSON([
-    			'error' => $validation_result
-    		]);
+    	var_dump($data);
+    	die();
+
+    	if (!$user_id || !$post_id) {
+    	  return $this->response->setJSON([
+    	  	'status' => 'error',
+    	  	'message' => 'user_id и post_id обязательны'
+    	  ])->setStatusCode(400);	
     	}
 
     	$comment = $this->model->getCommentByUserAndPost($user_id, $post_id);
-
-    	var_dump($comment);
-
-    	die();
 
     	if ($comment) {
     		return $this->response->setJSON([
