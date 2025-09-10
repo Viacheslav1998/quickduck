@@ -1,9 +1,12 @@
 <script>
 import { useAuthStore } from '@/stores/authStore';
+import { useTestUserId } from '@/stores/testUserId';
+
 import { defineComponent, ref, computed, onMounted, onUnmounted, reactive } from 'vue';
 
 import TestComponent from '@/components/test/testComponent.vue';
 import Card from '@/components/ui/Card.vue';
+
 
 export default defineComponent({
   name: 'TestApplicationView',
@@ -13,7 +16,8 @@ export default defineComponent({
   },
   setup() {
     const auth = useAuthStore()
-    
+    const currentId = useTestUserId()
+
     const base = ref('1')
     const title = ref('just title for a current page')
 

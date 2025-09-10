@@ -16,6 +16,7 @@ export default defineComponent({
     const preloader = ref(true)
     const route = useRoute()
 
+    const userId = ref(null)
     // navigation
     const nextNews = ref(null)
     const prevNews = ref(null)
@@ -84,6 +85,9 @@ export default defineComponent({
     const fetchItem = async (id) => {
       preloader.value = true
       item.value = await getItem(id)
+
+      userId.value = item.value.id
+      console.log(userId.value)
       formData.value = { ...item.value }
       await newsNavigation(id)
       preloader.value = false
@@ -109,7 +113,8 @@ export default defineComponent({
       formatTime,
       prevNews,
       nextNews,
-      formData
+      formData,
+      userId
     }
   }
 })
@@ -130,6 +135,7 @@ export default defineComponent({
   <div class="container" v-else-if="item">
     <div class="begin-news">
       <h1>{{ item.name }}</h1>
+      <p>WHOOOO IT IS {{ userId }}</p>
     </div>
 
     <nav aria-label="breadcrumb" class="pt-2">
@@ -210,7 +216,9 @@ export default defineComponent({
         v-model="formData"
       />
       <div class="line"></div> <br />
-      <CommentList />
+      <CommentList 
+        :test="userId"
+      />
     </div>
     <!-- end comments -->
   </div>

@@ -4,7 +4,14 @@ import { useAuthStore } from '@/stores/authStore'
 
 export default defineComponent({
   name: 'CommentList',
-  setup() {
+  props: {
+    userId: {
+      type: Number,
+      required: true
+    },
+  },
+  setup(props) {
+  
     const auth = useAuthStore()  
     
     async function fetchData() {
@@ -35,10 +42,10 @@ export default defineComponent({
       }
     }
 
-    fetchData();
+    // fetchData();
 
     return {
-      auth
+      auth,
     }
   }
 })
@@ -46,6 +53,7 @@ export default defineComponent({
 
 <template>
   <div>
+    <h1>получи и катись{{ userId }}</h1>
     <div class="comment-moment pb-1 pt-2 px-2 mb-4">
       <h5>Блок для комментариев:</h5>
     </div>

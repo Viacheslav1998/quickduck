@@ -1,6 +1,6 @@
 <script>
 import { defineComponent, ref } from 'vue'
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
 
 export default defineComponent({

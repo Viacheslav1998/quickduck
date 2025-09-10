@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { useAuthStore } from './stores/authStore.js'
+import { useTestUserId } from './stores/testUserId.js'
+
 
 import App from './App.vue'
 import router from './router'
@@ -31,6 +33,8 @@ app.use(VueSweetalert2)
 app.use(vuetify)
 
 const auth = useAuthStore()
+const currentId = useTestUserId()
+
 auth.fetchMe()
 
 app.mount('#app')
