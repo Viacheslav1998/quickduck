@@ -91,11 +91,11 @@
       </v-carousel>
     </div>
     <div class="dark mt-4 bg-dark d-flex justify-content-between flex-wrap">
-        <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-warning">Топ новостей</button></div>
-        <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-warning">Технологии</button></div>
-        <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-warning">Программирования</button></div>
-        <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-warning">Новшества</button></div>
-        <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-warning">Платы</button></div>
+      <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-grey">Топ новостей</button></div>
+      <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-grey">Технологии</button></div>
+      <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-grey">Программирования</button></div>
+      <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-grey">Новшества</button></div>
+      <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-grey">Платы</button></div>
     </div>
   </div>
   <!-- and header content -->
@@ -104,7 +104,6 @@
 <script>
 import { useAuthStore } from '@/stores/authStore';
 import { defineComponent, computed } from 'vue'
-
 
 export default defineComponent({
   name: 'Header',
