@@ -1,19 +1,25 @@
 <script>
-import { ref, onMounted, defineComponent } from 'vue'
+import { defineComponent, toRefs, watch} from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 
 export default defineComponent({
   name: 'CommentList',
   props: {
-    userId: {
+    postId: {
       type: Number,
       required: true
     },
+    userId: {
+      type: Number,
+      required: true
+    }
   },
   setup(props) {
+    const {userId, postId} = toRefs(props)
   
+
     const auth = useAuthStore()  
-    
+
     async function fetchData() {
       try {
         const response = await fetch('http://quickduck.com/get-user-comment');
@@ -23,8 +29,6 @@ export default defineComponent({
         }
 
         const text = await response.text();
-        
-        // Проверка на пустой ответ
         if (!text) {
           throw new Error('Empty response');
         }
@@ -41,8 +45,16 @@ export default defineComponent({
         console.error('Fetch error:', error);
       }
     }
-
     // fetchData();
+
+
+    
+    watch([userId, postId], ([newUser, newPost]) => {
+      if(newUser && newPost) {
+        console.log(newUser)
+        console.log(newPost)
+      }
+    }, {immediate: true}) 
 
     return {
       auth,
@@ -53,7 +65,7 @@ export default defineComponent({
 
 <template>
   <div>
-    <h1>получи и катись{{ userId }}</h1>
+    <h1>получи и катись</h1>
     <div class="comment-moment pb-1 pt-2 px-2 mb-4">
       <h5>Блок для комментариев:</h5>
     </div>

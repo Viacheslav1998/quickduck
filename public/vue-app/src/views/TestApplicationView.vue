@@ -1,6 +1,5 @@
 <script>
 import { useAuthStore } from '@/stores/authStore';
-import { useTestUserId } from '@/stores/testUserId';
 
 import { defineComponent, ref, computed, onMounted, onUnmounted, reactive } from 'vue';
 

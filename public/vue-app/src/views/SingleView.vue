@@ -15,13 +15,14 @@ export default defineComponent({
     const item = ref(null)
     const preloader = ref(true)
     const route = useRoute()
-
+    const postId = ref(null)
     const userId = ref(null)
+
     // navigation
     const nextNews = ref(null)
     const prevNews = ref(null)
     
-    //obj
+    // obj
     const formData = ref(null)
 
     const newsNavigation = async (id) => {
@@ -39,8 +40,13 @@ export default defineComponent({
         nextNews.value = data.next
         prevNews.value = data.prev
       } catch (error) {
-        console.log('Ошибка загрузки:', error)
+        console.error('Ошибка загрузки:', error)
       }
+    }
+
+    // to pass the id to the adjacent component
+    function setUserId(id) {
+      userId.value = id 
     }
 
     // screening of the last three Reaction
@@ -85,9 +91,7 @@ export default defineComponent({
     const fetchItem = async (id) => {
       preloader.value = true
       item.value = await getItem(id)
-
-      userId.value = item.value.id
-      console.log(userId.value)
+      postId.value = item.value.id
       formData.value = { ...item.value }
       await newsNavigation(id)
       preloader.value = false
@@ -114,7 +118,9 @@ export default defineComponent({
       prevNews,
       nextNews,
       formData,
-      userId
+      postId,
+      userId,
+      setUserId
     }
   }
 })
@@ -135,7 +141,6 @@ export default defineComponent({
   <div class="container" v-else-if="item">
     <div class="begin-news">
       <h1>{{ item.name }}</h1>
-      <p>WHOOOO IT IS {{ userId }}</p>
     </div>
 
     <nav aria-label="breadcrumb" class="pt-2">
@@ -214,10 +219,12 @@ export default defineComponent({
     <div class="wrapper-comment my-2 pt-4">
       <CommentForm
         v-model="formData"
+        @user-loaded="setUserId"
       />
       <div class="line"></div> <br />
       <CommentList 
-        :test="userId"
+        :postId
+        :userId
       />
     </div>
     <!-- end comments -->

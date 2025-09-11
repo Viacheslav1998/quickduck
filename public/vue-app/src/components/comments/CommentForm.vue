@@ -12,7 +12,7 @@ export default defineComponent({
       require: true
     }
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "user-loaded"],
   setup(props, { emit }) {  
     function updateField(field, value) {
       emit("update:modelValue", {
@@ -26,12 +26,14 @@ export default defineComponent({
     let person_id = ref(null)
     let person_name = ref(null)
 
-   const showAlert = ({status, message}) => {
+    const showAlert = ({status, message}) => {
       Swal.fire({
         text: message,
         icon: status
       })
     }
+
+   
 
     const status = ref('published')
     const comment = ref('')
@@ -106,6 +108,8 @@ export default defineComponent({
         if (newUser) {
           person_id.value = newUser.id
           person_name.value = newUser.name
+
+          emit("user-loaded", person_id.value)
         } else {
           console.log("Пользователь не авторизован")
         }
@@ -122,7 +126,7 @@ export default defineComponent({
       smileyOptions,
       loginClick,
       updateField,
-      postComment
+      postComment,
     }
   }
 })
