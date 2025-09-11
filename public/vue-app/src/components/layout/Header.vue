@@ -90,22 +90,12 @@
         </v-carousel-item>
       </v-carousel>
     </div>
-    <div class="container dark mt-4 d-flex justify-content-center">
-      <div class="p-3 text-left">
-        <button type="button" class="btn btn-dark custom-button text-warning">Топ новостей</button>
-      </div>
-      <div class="p-3 text-left">
-        <button type="button" class="btn btn-dark custom-button text-warning">Техологии</button>
-      </div>
-      <div class="p-3 text-left">
-        <button type="button" class="btn btn-dark custom-button text-warning">Программирования</button>
-      </div>
-      <div class="p-3 text-left">
-        <button type="button" class="btn btn-dark custom-button text-warning">Новшества</button>
-      </div>
-      <div class="p-3 text-left">
-        <button type="button" class="btn btn-dark custom-button text-warning">платы</button>
-      </div>
+    <div class="dark mt-4 bg-dark d-flex justify-content-between flex-wrap">
+        <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-warning">Топ новостей</button></div>
+        <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-warning">Технологии</button></div>
+        <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-warning">Программирования</button></div>
+        <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-warning">Новшества</button></div>
+        <div class="p-3 text-left"><button type="button" class="btn btn-dark custom-button text-warning">Платы</button></div>
     </div>
   </div>
   <!-- and header content -->

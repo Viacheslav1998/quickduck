@@ -48,7 +48,7 @@ export default defineComponent({
     // fetchData();
 
 
-    
+
     watch([userId, postId], ([newUser, newPost]) => {
       if(newUser && newPost) {
         console.log(newUser)
@@ -65,7 +65,6 @@ export default defineComponent({
 
 <template>
   <div>
-    <h1>получи и катись</h1>
     <div class="comment-moment pb-1 pt-2 px-2 mb-4">
       <h5>Блок для комментариев:</h5>
     </div>
