@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, toRefs, watch} from 'vue'
+import { defineComponent, toRefs, ref, watch} from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 
 export default defineComponent({
@@ -17,6 +17,8 @@ export default defineComponent({
   setup(props) {
     const {userId, postId} = toRefs(props)
     const auth = useAuthStore()  
+
+    const comments = ref(null)
 
     // person comment
     // all comments
@@ -39,12 +41,15 @@ export default defineComponent({
       })
 
       const answer = await result.json()
-      console.log('answer: ', answer)
+
+      comments.value = answer.comment
+      console.log(comments.id)
 
     }, {immediate: true}) 
 
     return {
       auth,
+      comments
     }
   }
 })
@@ -64,20 +69,17 @@ export default defineComponent({
         <div>
           <p>Твой комментарий</p>
         </div>
-
+        
         <div class="media">
           <img class="mr-3" src="/icons/user.png" alt="user" />
           <div class="media-body">
-            <h3>Вячеслав / mr-Corvski</h3>
-            <i>дата комментария: 2021-01-02</i>
+            <h3>{{ comments.person_name }}</h3>
+            <i>дата комментария: {{ comments.created_at }}</i>
             <hr class="new1" />
-            <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis quaerat explicabo esse.
-            Labore fuga eligendi incidunt ea officia sapiente, deserunt aliquam ad laborum soluta
-            unde harum obcaecati repellendus perferendis aliquid!
+            <h5 class="mt-0"><span>тема:</span>{{ comments.post_name }}</h5>
+            {{ comments.comment }}
           </div>
         </div>
-        
       </div>
 
       <div>
