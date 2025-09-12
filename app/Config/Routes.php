@@ -17,6 +17,7 @@ $routes->options('/auth/(:any)', function () {
 });
 
 // tests
+$routes->get('/', 'TestController::index');
 $routes->get('/test-match', 'TestRegularExpressionsController::testPregMatch');
 $routes->get('/test-response', 'TestRegularExpressionsController::testResponseMessage');
 $routes->get('/test-match-all', 'TestRegularExpressionsController::testPregMatchAll');
@@ -24,16 +25,20 @@ $routes->get('/test-preg-replace', 'TestRegularExpressionsController::testPregRe
 $routes->get('/test-preg-split', 'TestRegularExpressionsController::testPregSplit');
 $routes->get('/test-preg-replace-callback', 'TestRegularExpressionsController::testPregReplaceCallback');
 
+
+
+/**
+* COMMENTS
+* post-comment: add comment
+* person-comment: get person comment
+* test-all-news: get all comments
+*/
+$routes->post('/auth/post-comment', 'CommentsController::store');
+$routes->post('/auth/person-comment', 'CommentsController::getComment');
 $routes->get('/test-all-news', 'CommentsController::index');
 
-// comments
-$routes->post('/auth/post-comment', 'CommentsController::store');
-$routes->get('/get-user-comment', 'CommentsController::getComment');
 
-
-
-$routes->get('/', 'TestController::index');
-//proxy
+// proxy
 $routes->get('/proxy/rates', 'ProxyController::fetchRates');
 // news tags filters
 $routes->get('/api/news/tags', 'TagsController::getTag');
@@ -43,6 +48,7 @@ $routes->get('/news/navigation/(:num)', 'NavigateNewsController::getNavigation/$
 // user/person 
 $routes->post('/auth/login', 'Auth::login');
 $routes->post('/auth/register', 'Auth::register');
+
 // auth api
 $routes->get('/auth/api/me', 'Auth::me');
 

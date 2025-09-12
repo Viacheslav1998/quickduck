@@ -64,18 +64,14 @@ class CommentsController extends BaseController
 
 
     /**
-    * getting only current comment
+    * Getting comment current User
     */
     public function getComment()
     {
     	$data = $this->request->getJSON(true);
-    	// проблема в получении данных нужно как то получить текущие данные 
 
-    	$user_id = $data['user_id'] ?? null;
-    	$post_id = $data['post_id'] ?? null;
-
-    	var_dump($data);
-    	die();
+    	$user_id = $data['userId'] ?? null;
+    	$post_id = $data['postId'] ?? null;
 
     	if (!$user_id || !$post_id) {
     	  return $this->response->setJSON([

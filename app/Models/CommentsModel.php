@@ -72,7 +72,6 @@ class CommentsModel extends Model
         return $this->db->table('comments')->insert($data);
     }
 
-    // validate for all
     public function validateCommentData($data)
     {
         if (empty($data['user_id']) || empty($data['post_id'])) {

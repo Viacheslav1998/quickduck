@@ -24,38 +24,23 @@ export default defineComponent({
     // get last 3 amoji
     // show all comments current news
 
-    async function fetchData() {
-      try {
-        const response = await fetch('http://quickduck.com/get-user-comment');
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+    watch([userId, postId], async ([newUser, newPost]) => {
+      if (!newUser || !newPost ) return
 
-        const text = await response.text();
-        if (!text) {
-          throw new Error('Empty response');
-        }
-
-        let data;
-        try {
-          data = JSON.parse(text);
-        } catch (jsonError) {
-          throw new Error('Invalid JSON format');
-        }
-
-        console.log(data);
-      } catch (error) {
-        console.error('Fetch error:', error);
+      const payload = {
+        userId: newUser, 
+        postId: newPost
       }
-    }
-    // fetchData();
 
-    watch([userId, postId], ([newUser, newPost]) => {
-      if(newUser && newPost) {
-        console.log(newUser)
-        console.log(newPost)
-      }
+      const result = await fetch('http://quickduck.com/auth/person-comment', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      })
+
+      const answer = await result.json()
+      console.log('answer: ', answer)
+
     }, {immediate: true}) 
 
     return {
