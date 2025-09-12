@@ -16,9 +16,13 @@ export default defineComponent({
   },
   setup(props) {
     const {userId, postId} = toRefs(props)
-  
-
     const auth = useAuthStore()  
+
+    // person comment
+    // all comments
+    // get all eyes current news
+    // get last 3 amoji
+    // show all comments current news
 
     async function fetchData() {
       try {
@@ -46,8 +50,6 @@ export default defineComponent({
       }
     }
     // fetchData();
-
-
 
     watch([userId, postId], ([newUser, newPost]) => {
       if(newUser && newPost) {

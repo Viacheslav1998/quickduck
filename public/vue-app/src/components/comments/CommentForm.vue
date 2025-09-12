@@ -33,8 +33,6 @@ export default defineComponent({
       })
     }
 
-   
-
     const status = ref('published')
     const comment = ref('')
     const reaction = ref('/soc-icons/sm1.png')
