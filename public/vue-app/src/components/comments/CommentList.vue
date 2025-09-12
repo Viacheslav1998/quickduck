@@ -20,7 +20,6 @@ export default defineComponent({
 
     const comments = ref(null)
 
-    // person comment
     // all comments
     // get all eyes current news
     // get last 3 amoji
@@ -41,9 +40,7 @@ export default defineComponent({
       })
 
       const answer = await result.json()
-
       comments.value = answer.comment
-      console.log(comments.id)
 
     }, {immediate: true}) 
 
@@ -62,15 +59,14 @@ export default defineComponent({
     </div>
 
     <div class="wrapper-comments-persons">
-      <!-- проверка если есть комментарий -->
       <div
         v-show="auth.isUser"
       >
         <div>
           <p>Твой комментарий</p>
         </div>
-        
-        <div class="media">
+
+        <div class="media" v-if="comments">
           <img class="mr-3" src="/icons/user.png" alt="user" />
           <div class="media-body">
             <h3>{{ comments.person_name }}</h3>
@@ -79,6 +75,9 @@ export default defineComponent({
             <h5 class="mt-0"><span>тема:</span>{{ comments.post_name }}</h5>
             {{ comments.comment }}
           </div>
+        </div>
+        <div class="media" v-else>
+          <p class="m-0">Ты еще не оставил сюда комментарий</p>
         </div>
       </div>
 
