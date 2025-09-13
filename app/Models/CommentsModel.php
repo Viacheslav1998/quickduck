@@ -70,7 +70,7 @@ class CommentsModel extends Model
     public function getLastTenCommentsById($post_id)
     {
         return $this->db->table('comments')
-                    ->where('user_id', $user_id)
+                    ->where('post_id', $post_id)
                     ->order_by('comment_id', 'DESC')
                     ->limit(10)
                     ->get();

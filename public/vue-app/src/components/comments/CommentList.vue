@@ -11,7 +11,7 @@ export default defineComponent({
     },
     userId: {
       type: Number,
-      required: true
+      default: null
     }
   },
   setup(props) {
@@ -28,24 +28,30 @@ export default defineComponent({
     // show all comments current news
 
     watch([userId, postId], async ([newUser, newPost]) => {
-      if (!newUser || !newPost ) return
+      if (!newPost) return
 
       const payload = {
-        userId: newUser, 
+        userId: newUser ?? null, 
         postId: newPost
       }
 
-      const result = await fetch('http://quickduck.com/auth/person-comment', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload)
-      })
+      try {
+        if(newUser) {
+          const result = await fetch('http://quickduck.com/auth/person-comment', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+          })
 
-      const answer = await result.json()
-      comments.value = answer.comment
+          const answer = await result.json()
+          comments.value = answer.comment
+        }
 
-      // load all comments current news
-      loadCurrentComments(newPost)
+        // load all comments current news
+        loadCurrentComments(newPost)
+      } catch(e) {
+        console.error('Ошибка при загрузке комменатриев', e)
+      }
     }, {immediate: true}) 
 
     async function loadCurrentComments(postId) {
@@ -72,7 +78,6 @@ export default defineComponent({
       } finally {
         loadingAll.value = false
       }
-
     }
 
     return {
