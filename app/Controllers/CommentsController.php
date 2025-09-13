@@ -95,4 +95,43 @@ class CommentsController extends BaseController
     	])->setStatusCode(404);
     }
 
+    public function getLastComments()
+    {
+    	$data = $this->request->getJSON(true);
+    	
+    	$postId = $data['postId'] ?? null;
+
+    	echo json_encode([
+    		'status' => 'success',
+    		'postId' => $postId,
+    		'comments' => 'asdasdasd'
+    	]);
+
+    	exit;
+
+    	$post_id = $data['postId'] ?? null;
+
+    	if ($post_id) {
+    		return $this->response->setJSON([
+    			'status' => 'error',
+    			'message' => 'не найден id текущего поста'
+    		])->setStatusCode(400);
+    	}
+
+    	$comments = $this->model->getLastTenCommentsById($post_id);
+
+			if ($comments) {
+				return $this->response->setJSON([
+					'status' => 'success',
+					'comments' => $comments
+				]);
+			}
+
+			return $this->response->setJSON([
+				'status' => 'error',
+				'message' => 'К данной новости комментарии не найдены, но ты можешь быть первым!'
+			])->setStatusCode(404);
+
+    }
+
 }

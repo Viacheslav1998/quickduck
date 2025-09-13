@@ -31,12 +31,13 @@ $routes->get('/test-preg-replace-callback', 'TestRegularExpressionsController::t
 * COMMENTS
 * post-comment: add comment
 * person-comment: get person comment
-* test-all-news: get all comments
+* test-all-comments: get all comments
+* get-ten-last-comments: get 10 last comments
 */
 $routes->post('/auth/post-comment', 'CommentsController::store');
 $routes->post('/auth/person-comment', 'CommentsController::getComment');
-$routes->get('/test-all-news', 'CommentsController::index');
-
+// $routes->get('/test-all-comments', 'CommentsController::index');
+$routes->post('/auth/get-ten-last-comments', 'CommentsController::getLastComments');
 
 // proxy
 $routes->get('/proxy/rates', 'ProxyController::fetchRates');

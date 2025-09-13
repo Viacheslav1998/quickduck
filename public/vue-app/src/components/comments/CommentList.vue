@@ -19,6 +19,8 @@ export default defineComponent({
     const auth = useAuthStore()  
 
     const comments = ref(null)
+    const last_comments = ref(null)
+    const loadingAll = ref(null)
 
     // all comments
     // get all eyes current news
@@ -42,7 +44,36 @@ export default defineComponent({
       const answer = await result.json()
       comments.value = answer.comment
 
+      // load all comments current news
+      loadCurrentComments(newPost)
     }, {immediate: true}) 
+
+    async function loadCurrentComments(postId) {
+      loadingAll.value = true
+
+      try {
+        const result = await fetch('http://quickduck.com/auth/get-ten-last-comments', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ postId })
+        })
+
+        const answer = await result.json()
+
+        console.log(answer)
+        last_comments.value = answer.comments || []
+
+      } catch (e) {
+        console.error('ошибка загрузки комментариев', e)
+        last_comments.value = []
+      } finally {
+        loadingAll.value = false
+      }
+
+    }
 
     return {
       auth,

@@ -66,6 +66,16 @@ class CommentsModel extends Model
                     ->getRowArray();
     }
 
+    // get last 10 comments current id post
+    public function getLastTenCommentsById($post_id)
+    {
+        return $this->db->table('comments')
+                    ->where('user_id', $user_id)
+                    ->order_by('comment_id', 'DESC')
+                    ->limit(10)
+                    ->get();
+    }
+
     public function insertComment($data)
     {
         $data['created_at'] = date('Y-m-d H:i:s');
