@@ -107,7 +107,7 @@ export default defineComponent({
           <p>Твой комментарий</p>
         </div>
 
-        <div class="media" v-if="comments">
+        <div class="media custom-comment" v-if="comments">
           <img class="mr-3" src="/icons/user.png" alt="user" />
           <div class="media-body">
             <h3>{{ comments.person_name }}</h3>
@@ -149,7 +149,7 @@ export default defineComponent({
           </div>
         </div>
 
-        <div v-else class="bg-indigo p-2" style="font-weight: bold;">
+        <div v-else class="bg-indigo p-4" style="font-weight: bold;">
           Данных нет будь первым и напиши комментарий сам
         </div>
       </div>
@@ -169,5 +169,9 @@ export default defineComponent({
   }
   @keyframes spin {
     to { transform: rotate(360deg); }
+  }
+
+  .custom-comment {
+    background-color: #483d8b;
   }
 </style>
