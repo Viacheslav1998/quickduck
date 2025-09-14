@@ -19,8 +19,8 @@ export default defineComponent({
     const auth = useAuthStore()  
 
     const comments = ref(null)
-    const last_comments = ref(null)
-    const loadingAll = ref(null)
+    const last_comments = ref([])
+    const loading_all = ref(null)
 
     // all comments
     // get all eyes current news
@@ -55,7 +55,7 @@ export default defineComponent({
     }, {immediate: true}) 
 
     async function loadCurrentComments(postId) {
-      loadingAll.value = true
+      loading_all.value = true
 
       try {
         const result = await fetch('http://quickduck.com/auth/get-ten-last-comments', {
@@ -73,22 +73,21 @@ export default defineComponent({
           return last_comments.value = answer.comments || []
         }
 
-        last_comments.value = null     
-
-        console.log(last_comments)
+        last_comments.value = []     
 
       } catch (e) {
         console.error('ошибка загрузки комментариев', e)
         last_comments.value = []
       } finally {
-        loadingAll.value = false
+        loading_all.value = false
       }
     }
 
     return {
       auth,
       comments,
-      last_comments
+      last_comments,
+      loading_all
     }
   }
 })
@@ -123,13 +122,14 @@ export default defineComponent({
         </div>
       </div>
 
-      <div v-if="last_comments">
-        <p>Показаны последние 10 комментариев:</p>
-      </div>
-      
+
       <div
-        v-if="last_comments"
+        v-if="last_comments.length"
       >
+        <div>
+          <p>Показаны последние 10 комментариев:</p>
+        </div>
+        
         <div 
           class="media"
           v-for="stuff_comments in last_comments"
@@ -144,6 +144,7 @@ export default defineComponent({
           </div>
         </div>
       </div>
+
       <div v-else>
         Данных нет будь первым и напиши комментарий сам
       </div>

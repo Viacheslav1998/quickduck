@@ -102,7 +102,6 @@ class CommentsController extends BaseController
 
     	if (!$post_id) {
     		return $this->response->setJSON([
-    			'status' => 'error',
     			'message' => 'не найден id текущего поста'
     		])->setStatusCode(400);
     	}
@@ -111,12 +110,13 @@ class CommentsController extends BaseController
 
 			if ($comments) {
 				return $this->response->setJSON([
-					'status' => 'success',
 					'comments' => $comments
 				]);
 			}
 
-			return $this->response->setJSON([ null ])->setStatusCode(404);
+			return $this->response->setJSON([
+		    'comments' => []
+			])->setStatusCode(200);
 
     }
 
