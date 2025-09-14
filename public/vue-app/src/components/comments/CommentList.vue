@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, toRefs, ref, watch, compile} from 'vue'
+import { defineComponent, toRefs, ref, watch, compile, resolveComponent} from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 
 export default defineComponent({
@@ -22,7 +22,6 @@ export default defineComponent({
     const last_comments = ref([])
     const loading_all = ref(null)
 
-    // all comments
     // get all eyes current news
     // get last 3 amoji
     // show all comments current news
@@ -50,15 +49,16 @@ export default defineComponent({
         // load all comments current news
         loadCurrentComments(newPost)
       } catch(e) {
-        console.error('Ошибка при загрузке комменатриев', e)
+        console.error('Ошибка при загрузке комментариев', e)
       }
     }, {immediate: true}) 
 
     async function loadCurrentComments(postId) {
       loading_all.value = true
-
       try {
-        const result = await fetch('http://quickduck.com/auth/get-ten-last-comments', {
+          // emulation
+          await new Promise(resolve => setTimeout(resolve, 2000))
+          const result = await fetch('http://quickduck.com/auth/get-ten-last-comments', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -121,37 +121,53 @@ export default defineComponent({
           <p class="m-0">Ты еще не оставил сюда комментарий</p>
         </div>
       </div>
-
-
-      <div
-        v-if="last_comments.length"
-      >
-        <div>
-          <p>Показаны последние 10 комментариев:</p>
-        </div>
-        
-        <div 
-          class="media"
-          v-for="stuff_comments in last_comments"
-        >
-          <img class="mr-3" src="/icons/user.png" alt="user" />
-          <div class="media-body">
-            <h3>{{ stuff_comments.person_name }}</h3>
-            <p>дата комментария: {{ stuff_comments.created_at }}</p>
-            <hr class="new1" />
-            <h5 class="mt-0"><span>тема:</span> {{ stuff_comments.post_name }}</h5>
-            <p>{{ stuff_comments.comment }}</p>
-          </div>
-        </div>
+      <div v-if="loading_all" class="fn flex justify-center p-4">
+        <div style="font-weight: bold; color: rgb(59, 55, 55); font-size: 18px;">Загрузка комментариев</div><br></br>
+        <div class="spinner"></div>
       </div>
 
       <div v-else>
-        Данных нет будь первым и напиши комментарий сам
+        <div
+          v-if="last_comments.length"
+        >
+          <div>
+            <p>Показаны последние 10 комментариев:</p>
+          </div>
+          
+          <div 
+            class="media"
+            v-for="stuff_comments in last_comments"
+          >
+            <img class="mr-3" src="/icons/user.png" alt="user" />
+            <div class="media-body">
+              <h3>{{ stuff_comments.person_name }}</h3>
+              <p>дата комментария: {{ stuff_comments.created_at }}</p>
+              <hr class="new1" />
+              <h5 class="mt-0"><span>тема:</span> {{ stuff_comments.post_name }}</h5>
+              <p>{{ stuff_comments.comment }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div v-else class="bg-indigo p-2" style="font-weight: bold;">
+          Данных нет будь первым и напиши комментарий сам
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-  
+  .fn { background-color: orange;}
+  .spinner {
+    border: 4px solid rgba(250, 250, 250, 0.605);
+    border-left-color: #1111ffee;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
 </style>
