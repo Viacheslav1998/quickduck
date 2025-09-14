@@ -98,20 +98,9 @@ class CommentsController extends BaseController
     public function getLastComments()
     {
     	$data = $this->request->getJSON(true);
-    	
-    	$postId = $data['postId'] ?? null;
-
-    	echo json_encode([
-    		'status' => 'success',
-    		'postId' => $postId,
-    		'comments' => 'asdasdasd'
-    	]);
-
-    	exit;
-
     	$post_id = $data['postId'] ?? null;
 
-    	if ($post_id) {
+    	if (!$post_id) {
     		return $this->response->setJSON([
     			'status' => 'error',
     			'message' => 'не найден id текущего поста'

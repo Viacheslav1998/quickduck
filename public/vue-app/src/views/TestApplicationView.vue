@@ -15,7 +15,6 @@ export default defineComponent({
   },
   setup() {
     const auth = useAuthStore()
-    const currentId = useTestUserId()
 
     const base = ref('1')
     const title = ref('just title for a current page')
@@ -47,6 +46,7 @@ export default defineComponent({
       return `${firstName.value} ${lastName.value}`
     })
 
+    // testing get auth person
     function getUser() {
       if(!auth.isGuest) {
         alert(persons.isUser)
@@ -58,6 +58,29 @@ export default defineComponent({
     function poppup() {
       alert('кастомное событие сработало')
     }
+
+    // test short code
+    function testValue(val) {
+      console.dir('тестируем значение: ', val)
+
+      if (!val) {
+        // сработает тк данные пустые
+        console.log('!val = true -> возвращаем, дальше код не выполняется')
+        return
+      }
+
+      console.log('!val код продолжает выполнятся')
+    }
+
+    testValue(null)
+    testValue(undefined)
+    testValue('')
+    testValue(0)
+    testValue(false)
+
+    testValue(123)
+    testValue('hi')
+
 
     onMounted(() => {   
       intervalId = setInterval(() => {

@@ -71,9 +71,10 @@ class CommentsModel extends Model
     {
         return $this->db->table('comments')
                     ->where('post_id', $post_id)
-                    ->order_by('comment_id', 'DESC')
+                    ->orderBy('created_at', 'DESC')
                     ->limit(10)
-                    ->get();
+                    ->get()
+                    ->getResultArray();
     }
 
     public function insertComment($data)
