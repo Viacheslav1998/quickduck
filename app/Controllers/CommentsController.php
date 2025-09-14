@@ -116,10 +116,7 @@ class CommentsController extends BaseController
 				]);
 			}
 
-			return $this->response->setJSON([
-				'status' => 'error',
-				'message' => 'К данной новости комментарии не найдены, но ты можешь быть первым!'
-			])->setStatusCode(404);
+			return $this->response->setJSON([ null ])->setStatusCode(404);
 
     }
 

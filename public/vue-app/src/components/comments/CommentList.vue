@@ -1,5 +1,5 @@
 <script>
-import { defineComponent, toRefs, ref, watch} from 'vue'
+import { defineComponent, toRefs, ref, watch, compile} from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 
 export default defineComponent({
@@ -69,8 +69,13 @@ export default defineComponent({
 
         const answer = await result.json()
 
-        console.log(answer)
-        last_comments.value = answer.comments || []
+        if( answer ) {
+          return last_comments.value = answer.comments || []
+        }
+
+        last_comments.value = null     
+
+        console.log(last_comments)
 
       } catch (e) {
         console.error('ошибка загрузки комментариев', e)
@@ -82,7 +87,8 @@ export default defineComponent({
 
     return {
       auth,
-      comments
+      comments,
+      last_comments
     }
   }
 })
@@ -98,7 +104,7 @@ export default defineComponent({
       <div
         v-show="auth.isUser"
       >
-        <div>
+        <div v-if="comments" >
           <p>Твой комментарий</p>
         </div>
 
@@ -117,40 +123,29 @@ export default defineComponent({
         </div>
       </div>
 
-      <div>
+      <div v-if="last_comments">
         <p>Показаны последние 10 комментариев:</p>
       </div>
-
-      <div class="media">
-        <img class="mr-3" src="/icons/user.png" alt="user" />
-        <div class="media-body">
-          <i>дата комментария: 2021-01-02</i>
-          <hr class="new1" />
-          <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis quaerat explicabo esse.
-          Labore fuga eligendi incidunt ea officia sapiente, deserunt aliquam ad laborum soluta
-          unde harum obcaecati repellendus perferendis aliquid!
+      
+      <div
+        v-if="last_comments"
+      >
+        <div 
+          class="media"
+          v-for="stuff_comments in last_comments"
+        >
+          <img class="mr-3" src="/icons/user.png" alt="user" />
+          <div class="media-body">
+            <h3>{{ stuff_comments.person_name }}</h3>
+            <p>дата комментария: {{ stuff_comments.created_at }}</p>
+            <hr class="new1" />
+            <h5 class="mt-0"><span>тема:</span> {{ stuff_comments.post_name }}</h5>
+            <p>{{ stuff_comments.comment }}</p>
+          </div>
         </div>
       </div>
-
-      <div class="media">
-        <img class="mr-3" src="/icons/avatar.png" alt="user" />
-        <div class="media-body">
-          <i>дата комментария: 2021-01-02</i>
-          <hr class="new1" />
-          <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
-          я считаю, что это отличная статья
-        </div>
-      </div>
-
-      <div class="media">
-        <img class="mr-3" src="/icons/user.png" alt="user" />
-        <div class="media-body">
-          <i>дата комментария: 2021-01-02</i>
-          <hr class="new1" />
-          <h5 class="mt-0"><span>тема:</span> какая то новость</h5>
-          я считаю, что это отличная статья
-        </div>
+      <div v-else>
+        Данных нет будь первым и напиши комментарий сам
       </div>
     </div>
   </div>
